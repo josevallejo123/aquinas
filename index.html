@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F2F4F1">
-<title>Aquinas Coaching</title>
+<title>Lighthouse Prep</title>
 <meta name="description" content="SAT preparation and college guidance for students applying to selective colleges. Online across the US, delivered by the coaches.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -199,6 +199,7 @@ section{padding:64px 0}
 .dash-student .mono{width:40px;height:40px;font-size:17px;background:var(--denim)}
 .dash-student b{display:block;font-size:16px}
 .dash-student span{font-size:13.5px;color:var(--ink-3)}
+.dash-student .nw{white-space:nowrap}
 .sample-tag{grid-area:tag;font-size:12.5px;font-weight:600;color:var(--ink-3);border:1px solid var(--line-2);padding:4px 10px;border-radius:999px;white-space:nowrap}
 .seg{grid-area:seg;display:flex;background:var(--wash);border-radius:14px;padding:4px;gap:2px}
 .seg button{flex:1;border:0;background:none;min-height:44px;padding:6px 8px;border-radius:10px;font-size:13px;font-weight:600;line-height:1.2;color:var(--ink-2);cursor:pointer;transition:background-color .2s,color .2s,box-shadow .2s}
@@ -330,19 +331,7 @@ section{padding:64px 0}
 .mx-cell.f .no{background:#a9c3bf}
 .mx-row.ft{display:none}
 .mx-row.ft .btn{width:100%;padding-inline:12px;font-size:15px}
-.offers-h{font-size:22px;margin:48px 0 16px}
-.offer.match{outline-color:var(--gold)}
-.offers{display:grid;gap:12px}
-.offer{border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;background:var(--paper);transition:border-color .25s,outline-color .3s;outline:2.5px solid transparent;outline-offset:3px}
-.offer-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin-bottom:8px}
-.offer h4{font-size:20px;font-variation-settings:"opsz" 24}
-.offer .p{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--teal);white-space:nowrap}
-.offer .p small{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink-3);margin-left:4px}
-.offer p{font-size:15px;color:var(--ink-2);margin:0}
-.founding{margin-top:22px;border-radius:var(--r);padding:16px 18px;background:var(--gold-l);color:#5a3f0b;font-size:15px;display:flex;align-items:flex-start;gap:12px}
-.founding svg{flex:none;margin-top:1px}
-.founding b{color:var(--gold-ink)}
-.fine{margin-top:26px;display:grid;gap:4px;font-size:14.5px;color:var(--ink-3)}
+.fine{margin-top:32px;display:grid;gap:4px;font-size:14.5px;color:var(--ink-3)}
 .fine b{color:var(--ink-2)}
 
 /* ============ founders ============ */
@@ -495,11 +484,7 @@ footer .brand-name span{color:#8d9e9a}
   .mx-num{font-size:24px}
   .mx-row.pr .mx-num{font-size:30px}
   .mx-row.ft{display:grid;border-top:0;padding:8px 0 4px}
-  .offers-h{font-size:24px;margin:64px 0 20px}
-  .offers{grid-template-columns:1fr 1fr;gap:18px}
-  .offer{padding:22px 24px}
-  .founding{align-items:center;padding:18px 22px;margin-top:28px}
-  .fine{grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+  .fine{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:40px}
   .founders-grid{margin-top:48px}
   .bio{grid-template-columns:110px minmax(0,1fr);gap:28px;padding:32px}
   .bio > div:not(.portrait){display:block}
@@ -586,8 +571,6 @@ footer .brand-name span{color:#8d9e9a}
   .mx-row.pr .mx-num{font-size:40px;font-variation-settings:"opsz" 72;letter-spacing:-.02em}
   .keystone{font-size:13px;padding:5px 13px}
   .mx-row.ft{padding:12px 0 6px}
-  .offers-h{margin-top:80px}
-  .offer:hover{border-color:var(--line-2)}
   .founders-grid{grid-template-columns:1fr 1fr;gap:24px}
   .standards-grid{grid-template-columns:.8fr 1.2fr;gap:72px}
   .faq{padding-top:40px}
@@ -610,13 +593,13 @@ footer .brand-name span{color:#8d9e9a}
 
 <header class="nav" id="nav">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Aquinas Coaching, back to top">
+    <a class="brand" href="#top" aria-label="Lighthouse Prep, back to top">
       <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true">
         <path d="M17 1.5 L32 6.5 V19 C32 28 25.5 33.8 17 36.5 C8.5 33.8 2 28 2 19 V6.5 Z" fill="#1E5660"/>
         <path d="M17 4.6 L29 8.6 V19 C29 26.2 23.8 31 17 33.4 C10.2 31 5 26.2 5 19 V8.6 Z" fill="none" stroke="#C9973A" stroke-width=".9" opacity=".85"/>
-        <text x="17" y="25.5" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="17" font-weight="500" fill="#F2F4F1">A</text>
+        <text x="17" y="25.5" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="17" font-weight="500" fill="#F2F4F1">L</text>
       </svg>
-      <span class="brand-name">Aquinas <span>Coaching</span></span>
+      <span class="brand-name">Lighthouse <span>Prep</span></span>
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks"><i aria-hidden="true"></i><span class="sr" id="menuTxt">Menu</span></button>
     <ul class="nav-links" id="navLinks">
@@ -655,7 +638,7 @@ footer .brand-name span{color:#8d9e9a}
       </div>
     </div>
     <div class="hero-lead">
-      <div class="voice"><span class="mono" aria-hidden="true">A</span><p>Allan has taught the SAT for more than ten years and has coached over 300 students with a proven lesson plan he built himself. It teaches the material the test covers and the strategy for handling it under the clock.</p></div>
+      <div class="voice"><span class="mono" aria-hidden="true">A</span><p>Allan has taught the SAT and ACT for more than ten years and has coached over 300 students with a proven lesson plan he built himself. It teaches the material the test covers and the strategy for handling it under the clock.</p></div>
       <div class="voice jon"><span class="mono j" aria-hidden="true">J</span><p>Jon is a former McKinsey consultant, a Wharton graduate and a former US Navy officer who guides students through college lists, essays and interviews.</p></div>
       <div class="voice both"><svg width="34" height="22" viewBox="0 0 34 22" aria-hidden="true"><circle cx="12" cy="11" r="8.5" fill="none" stroke="#1E5660" stroke-width="1.7"/><circle cx="22" cy="11" r="8.5" fill="none" stroke="#A6452E" stroke-width="1.7"/></svg><p>Every family works with both of them on one shared plan, and parents can see progress every week.</p></div>
     </div>
@@ -674,7 +657,7 @@ footer .brand-name span{color:#8d9e9a}
 <!-- CREDENTIALS -->
 <div class="creds" aria-label="At a glance">
   <ul>
-    <li><span><b>10+ years</b> teaching the SAT</span></li>
+    <li><span><b>10+ years</b> teaching the SAT and ACT</span></li>
     <li><span>Average jump of <b>+350 points</b> per student</span></li>
   </ul>
 </div>
@@ -706,7 +689,7 @@ footer .brand-name span{color:#8d9e9a}
     <div class="split-head">
       <div class="eyebrow">How we divide the work</div>
       <h2>One coach handles the test and the other handles the application.</h2>
-      <p class="lead" style="margin-top:16px">Many families end up hiring a test tutor and an admissions consultant who never speak to each other. At Aquinas, Allan and Jon share one plan for your student and talk about their progress every week.</p>
+      <p class="lead" style="margin-top:16px">Many families end up hiring a test tutor and an admissions consultant who never speak to each other. At Lighthouse Prep, Allan and Jon share one plan for your student and talk about their progress every week.</p>
     </div>
     <div class="split-grid">
       <article class="lane">
@@ -766,12 +749,12 @@ footer .brand-name span{color:#8d9e9a}
       <div class="dash-bar">
         <div class="dash-student">
           <div class="mono">M</div>
-          <div><b>Maya R.</b><span>11th grade &middot; SAT in March</span></div>
+          <div><b>Maya R.</b><span>11th grade &middot; <span class="nw">Aiming for Yale</span></span></div>
         </div>
         <div class="seg" role="group" aria-label="Family goal">
-          <button aria-pressed="false" data-goal="min">Admission minimum</button>
-          <button aria-pressed="true" data-goal="sch">Scholarship cutoff</button>
-          <button aria-pressed="false" data-goal="top">Most competitive</button>
+          <button aria-pressed="false" data-goal="sch">Alabama scholarship</button>
+          <button aria-pressed="true" data-goal="yale">Yale admission</button>
+          <button aria-pressed="false" data-goal="top">Top of Yale's range</button>
         </div>
         <span class="sample-tag">Sample data</span>
       </div>
@@ -780,8 +763,8 @@ footer .brand-name span{color:#8d9e9a}
         <div class="kpis">
           <div class="card kpi"><small>Latest practice test</small><b>1390</b><div class="sub">up 130 from diagnostic</div></div>
           <div class="card kpi"><small>Projected on test day</small><b>1440 to 1480</b><div class="sub">based on the last 3 tests</div></div>
-          <div class="card kpi"><small>Target</small><b id="kTarget">1470</b><div class="sub" id="kGap">goal: scholarship cutoff</div></div>
-          <div class="card kpi status"><small>Status</small><b><span class="pill amber" id="kStatus">Close</span></b><div class="sub" id="kStatusSub">projection within 30 points of target</div></div>
+          <div class="card kpi"><small>Target</small><b id="kTarget">1500</b><div class="sub" id="kGap">goal: Yale admission</div></div>
+          <div class="card kpi status"><small>Status</small><b><span class="pill amber" id="kStatus">Close</span></b><div class="sub" id="kStatusSub">projection within 60 points of target</div></div>
         </div>
 
         <div class="dash-rail" id="rail">
@@ -953,35 +936,9 @@ footer .brand-name span{color:#8d9e9a}
       </div>
     </div>
 
-    <h3 class="offers-h">Other programs</h3>
-    <div class="offers">
-      <div class="offer" data-prog="grp">
-        <div class="offer-top"><h4>SAT Small Group</h4><span class="p">$2,200<small> per student</small></span></div>
-        <p>The Accelerator curriculum taught live by Allan to three or four students. 24 hours over 8 to 12 weeks, four practice tests and a parent dashboard for each family.</p>
-      </div>
-      <div class="offer" data-prog="int">
-        <div class="offer-top"><h4>Interview Intensive</h4><span class="p">$1,100</span></div>
-        <p>Three 60-minute mock interviews with Jon, recorded review and written feedback. Popular with seniors from November to March.</p>
-      </div>
-      <div class="offer" data-prog="fp">
-        <div class="offer-top"><h4>Final-Push Intensive</h4><span class="p">$1,800</span></div>
-        <p>Eight hours with Allan over three to five weeks before a specific test date, plus two timed practice tests.</p>
-      </div>
-      <div class="offer" data-prog="car">
-        <div class="offer-top"><h4>Career Clarity Sprint</h4><span class="p">$950</span></div>
-        <p>An interests and strengths assessment, three sessions with Jon and a written map of majors and careers worth exploring.</p>
-      </div>
-    </div>
-
-    <div class="founding">
-      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M11 2l2.6 5.6 6 .7-4.5 4.1 1.2 6L11 15.4 5.7 18.4l1.2-6L2.4 8.3l6-.7z" fill="#C9973A"/></svg>
-      <span><b>Founding families:</b> the first 20 families to enroll before December 31, 2026 receive 15% off their first program, in exchange for permission to share an anonymized case study.</span>
-    </div>
-
     <div class="fine">
       <p><b>The +100 point promise.</b> Every program includes it. If your student completes the full plan and improves by fewer than 100 points from the diagnostic to an official SAT, we add 8 hours of tutoring at no cost.</p>
-      <p><b>Payment.</b> Pay in full and save 5%, or split any program into three payments. Hourly sessions are available afterward at $205 with Allan and $245 with Jon, with a two-hour minimum.</p>
-      <p><b>What we never promise.</b> No one can honestly guarantee admission to a particular college, and we will not pretend otherwise.</p>
+      <p><b>Payment.</b> Pay in full and save 5%, or split any program into three payments.</p>
     </div>
   </div>
 </section>
@@ -996,10 +953,10 @@ footer .brand-name span{color:#8d9e9a}
         <div class="portrait" aria-hidden="true">A</div>
         <div>
           <h3>Allan</h3>
-          <div class="role">Co-founder, SAT lead</div>
-          <p>Allan is an education professional who has spent more than a decade preparing students for the SAT. He teaches strategy as seriously as content: how to pace each module, which questions to skip, and how to guess well when time runs short.</p>
-          <p>His students review real test questions every week, because that is where most of the improvement happens. He is known for showing students what their best section would mean across a full test, which gives them a realistic target to work toward.</p>
-          <div class="tags"><span>10+ years teaching the SAT</span><span>Certified FL DOE Educator</span><span>Digital SAT</span></div>
+          <div class="role">Co-founder, test prep lead</div>
+          <p>Allan spent six years teaching in the classroom and has prepared students for the SAT and ACT for more than ten years. His students gain an average of more than 300 points from their first practice test to their official score.</p>
+          <p>He is also a certified advanced strength and conditioning coach and a nationally qualified strength athlete, and he has coached many athletes to success in their sport. At home, he spends his time with his wife, their dog and 14 reptiles.</p>
+          <div class="tags"><span>10+ years teaching the SAT and ACT</span><span>6 years in the classroom</span><span>Certified FL DOE Educator</span></div>
         </div>
       </article>
       <article class="bio jon-b">
@@ -1007,8 +964,8 @@ footer .brand-name span{color:#8d9e9a}
         <div>
           <h3>Jon</h3>
           <div class="role">Co-founder, college and career lead</div>
-          <p>Jon is a graduate of the Wharton School at the University of Pennsylvania and a former consultant at McKinsey &amp; Company. He also served as an officer in the US Navy.</p>
-          <p>He works with students on college lists, activities and essays, and prepares them for interviews with colleges, scholarship committees and service academy boards. He also helps families think carefully about majors and careers at a time when many jobs are changing.</p>
+          <p>Jon is a graduate of the Wharton School at the University of Pennsylvania, a former consultant at McKinsey &amp; Company and a former officer in the US Navy. He works with students on college lists and essays, prepares them for interviews with colleges, scholarship committees and service academy boards, and helps families think through majors and careers.</p>
+          <p>Jon is a new father. In his free time he enjoys 3D printing and snowboarding, and he recently finished a hike through Patagonia.</p>
           <div class="tags"><span>Wharton, University of Pennsylvania</span><span>Former McKinsey</span><span>Former US Navy officer</span></div>
         </div>
       </article>
@@ -1045,11 +1002,11 @@ footer .brand-name span{color:#8d9e9a}
     <div class="acc" id="acc">
       <div class="acc-item"><button class="acc-q" aria-expanded="true">Are sessions online?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Yes. Every session runs on video, so we work with families anywhere in the US and schedule around your time zone. Sessions are recorded only if a parent gives consent.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false">How long is each session?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>SAT sessions with Allan run one hour. Jon's strategy and interview sessions usually run 45 to 60 minutes.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false">When should my student start?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Most students begin in the fall or winter of junior year and aim for spring test dates. Seniors can still benefit from a Final-Push Intensive or interview preparation, and ninth and tenth graders can start with a lighter plan.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">When should my student start?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Our programs are designed to begin 12 weeks before your student's first test. We can adjust them to fit a shorter or longer window, depending on what your student needs.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you guarantee admission or a specific result?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>No, and we would be cautious of anyone who does. We promise a clear plan, expert time and honest progress reports. Every program includes the +100 point promise, with its full terms listed under Programs.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you help with the ACT?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Our programs are built around the digital SAT. If the diagnostic suggests the ACT would suit your student better, we will tell you and help you decide what to do next.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you help with the ACT?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Yes. Allan has taught the ACT for more than ten years. Most of our students take the digital SAT, but if the diagnostic suggests the ACT would suit your student better, we will tell you and build the plan around it.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false">Will you write my child's essays?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>No. We help students work out what they want to say and give feedback on their drafts, but every word they submit is their own.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false">How does payment work?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>You can pay in full and save 5%, or split any program into three payments. Hourly sessions are available for returning students once a program is complete.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">How does payment work?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>You can pay in full and save 5%, or split any program into three payments.</p></div></div></div>
     </div>
   </div>
 </section>
@@ -1094,7 +1051,7 @@ footer .brand-name span{color:#8d9e9a}
   <div class="wrap">
     <div class="foot-top">
       <div>
-        <span class="brand-name">Aquinas <span>Coaching</span></span>
+        <span class="brand-name">Lighthouse <span>Prep</span></span>
         <p class="foot-tag">SAT preparation and college guidance for students across the United States.</p>
       </div>
       <ul class="foot-links">
@@ -1109,8 +1066,8 @@ footer .brand-name span{color:#8d9e9a}
     </div>
     <div class="legalese">
       <p>SAT&reg; is a trademark registered by the College Board, which is not affiliated with, and does not endorse, this website. ACT&reg; is a registered trademark of ACT Education Corp.</p>
-      <p>Aquinas Coaching is not affiliated with or endorsed by McKinsey &amp; Company, the University of Pennsylvania or the US Navy. Credentials are listed for background only.</p>
-      <p>&copy; <span id="yr">2026</span> Aquinas Coaching. All rights reserved.</p>
+      <p>Lighthouse Prep is not affiliated with or endorsed by McKinsey &amp; Company, the University of Pennsylvania or the US Navy. Credentials are listed for background only.</p>
+      <p>&copy; <span id="yr">2026</span> Lighthouse Prep. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -1155,10 +1112,10 @@ footer .brand-name span{color:#8d9e9a}
 
   /* method stepper */
   const steps = [
-    {t:'Diagnose', p:'We begin with a full-length practice test or a recent PSAT or SAT report, along with a conversation with the student and parents about goals. Allan looks at which question types are costing points and how long each one takes.', d:[['Time','About one week'],['You receive','A breakdown of missed questions by type and timing']]},
-    {t:'Plan', p:'Within a day of the review, your family receives a written plan. The target depends on what matters most to you, whether that is the minimum for a particular school, a scholarship cutoff or the strongest possible result for a competitive application.', d:[['Time','Within 24 hours of the review'],['You receive','A target, a test date and a weekly schedule']]},
-    {t:'Train', p:'Sessions last one hour. The first few cover strategy and content with guided practice. After that, most of the time goes to reviewing test questions the student has already attempted, since that is where the biggest gains usually come from.', d:[['Time','8 to 12 weeks for most students'],['You receive','A session note and updated dashboard after every lesson']]},
-    {t:'Prove', p:'Timed sections and full practice tests show whether the work is holding up under test conditions. Allan often has a student take one section under ideal conditions and shows what that level would mean across the whole test, which gives everyone a realistic sense of what is possible.', d:[['Time','A full practice test every two to three weeks'],['You receive','A projected range and timing data per question']]},
+    {t:'Diagnose', p:'We begin with a full-length practice test along with a conversation with the student and parents about goals. Allan looks at which question types are costing points and how long each one takes.', d:[['Time','Follow-up scheduled within 24 hours'],['You receive','A customized lesson plan based on the results']]},
+    {t:'Plan', p:'At the follow-up, your family receives a written plan. The lesson plan is built to reinforce the areas where your student struggled most. The final goal depends on what matters most to you, whether that is the minimum for a particular school, a scholarship cutoff or the strongest possible result for a competitive application.', d:[['Time','At the follow-up'],['You receive','A target, a test date and a weekly schedule']]},
+    {t:'Train', p:'Sessions last one hour. The first few cover strategy and content with guided practice. After that, most of the time goes to reviewing test questions the student has already attempted, since that is where the biggest gains usually come from. Students receive new assignments after every session, based on where they are struggling.', d:[['Time','8 to 12 weeks for most students'],['You receive','Session notes, new assignments and an updated dashboard after every lesson']]},
+    {t:'Prove', p:'Timed sections and full practice tests show whether the work is holding up under test conditions. Students take a full practice test every two to three weeks to set benchmarks and adjust strategy.', d:[['Time','A full practice test every two to three weeks'],['You receive','A projected range and plan updates based on the results']]},
     {t:'Present', p:'Once testing is on track, Jon’s work takes the lead: the college list, activities, essays and interviews. Students practice talking about themselves with specifics and confidence, and the plan shifts toward application deadlines.', d:[['Time','Junior spring through senior fall'],['You receive','Mock interview recordings with written feedback']]}
   ];
   const panel = document.getElementById('stepPanel');
@@ -1187,7 +1144,7 @@ footer .brand-name span{color:#8d9e9a}
   ];
   const yMin=1200, yMax=1600, nX=7, R=16, T=16, B=32; // 5 tests + gap + test day
   const svg = document.getElementById('chart'), chartWrap = svg.parentNode, tip = document.getElementById('tip');
-  let W=640, H=270, L=46, xs, ys, tgt, curGoal='sch', lastW=0;
+  let W=640, H=270, L=46, xs, ys, tgt, curGoal='yale', lastW=0;
   function hideTip(){ tip.classList.remove('show'); svg.querySelectorAll('.pt').forEach(p=>p.classList.remove('on')); }
   function showTip(c){
     const i = c.dataset.i;
@@ -1240,9 +1197,9 @@ footer .brand-name span{color:#8d9e9a}
 
   /* dashboard: goals */
   const goals = {
-    min:{v:1350,name:'admission minimum',pill:'green',status:'On track',sub:'projection is above the target'},
-    sch:{v:1470,name:'scholarship cutoff',pill:'amber',status:'Close',sub:'projection within 30 points of target'},
-    top:{v:1530,name:'most competitive',pill:'red',status:'Stretch',sub:'needs more weeks or a later test date'}
+    sch:{v:1420,name:'Alabama Presidential Scholarship',pill:'green',status:'On track',sub:'projection is above the cutoff'},
+    yale:{v:1500,name:'Yale admission',pill:'amber',status:'Close',sub:'projection within 60 points of target'},
+    top:{v:1560,name:'top of Yale\'s range',pill:'red',status:'Stretch',sub:'needs more weeks or a later test date'}
   };
   const segBtns = document.querySelectorAll('.seg button');
   function setGoal(k, instant){
@@ -1320,17 +1277,17 @@ footer .brand-name span{color:#8d9e9a}
 
   /* program fit helper */
   const fitGrade = document.getElementById('fitGrade'), fitGoal = document.getElementById('fitGoal'), fitOut = document.getElementById('fitOut');
-  const progNames = {acc:'the SAT Accelerator',aq:'the Flagship Program',pre:'the Premier Program',grp:'the SAT Small Group',int:'the Interview Intensive',fp:'the Final-Push Intensive',car:'the Career Clarity Sprint'};
+  const progNames = {acc:'the SAT Accelerator',aq:'the Flagship Program',pre:'the Premier Program'};
   function fit(){
     const gr = fitGrade.value, go = fitGoal.value;
     document.querySelectorAll('[data-prog]').forEach(el=>el.classList.remove('match'));
     if(!go){ fitOut.innerHTML='Pick a grade and a need to see where most families in your position start.'; return; }
     let k, why;
-    if(go==='sat'){ k = gr==='12' ? 'fp' : 'acc'; why = gr==='12' ? 'Seniors usually have one or two sittings left, so a short, focused block before a specific date works best.' : 'It gives your student 20 focused hours with Allan and a clear target date.'; }
+    if(go==='sat'){ k='acc'; why = gr==='12' ? 'Seniors usually have one or two sittings left, so we fit the 20 hours with Allan around a specific test date.' : 'It gives your student 20 focused hours with Allan and a clear target date.'; }
     else if(go==='both'){ k = gr==='9' ? 'acc' : 'aq'; why = gr==='9' ? 'For younger students we usually start with the SAT and add application work in junior year.' : 'It combines Allan’s SAT work with Jon’s college list, essay and interview preparation.'; }
     else if(go==='full'){ k='pre'; why='It adds more time with both coaches, three recorded mock interviews and an introduction to a professional in a field your student is exploring.'; }
-    else if(go==='int'){ k='int'; why='Three recorded mock interviews with Jon and written feedback after each one.'; }
-    else { k='car'; why='It helps your student connect interests to majors and careers before building a college list.'; }
+    else if(go==='int'){ k='aq'; why='It includes interview preparation with Jon and a recorded mock interview with written feedback.'; }
+    else { k='pre'; why='It includes career guidance with Jon and an introduction to a professional in a field your student is exploring.'; }
     document.querySelectorAll('[data-prog="'+k+'"]').forEach(el=>el.classList.add('match'));
     fitOut.innerHTML = 'Most families in your position start with <b>'+progNames[k]+'</b>. '+why;
   }
