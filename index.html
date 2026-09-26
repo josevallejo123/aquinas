@@ -281,12 +281,13 @@ section{padding:112px 0}
 .tier .btn{justify-content:center}
 .tier.flag .btn{background:var(--paper);color:var(--teal-d)}
 .tier.flag .btn:hover{background:var(--ochre-l)}
-.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:22px}
+.offers{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:22px}
 .offer{border:1px solid var(--stone);border-radius:var(--r);padding:22px 24px;background:transparent;transition:background .25s,outline-color .3s;outline:2.5px solid transparent;outline-offset:3px}
 .offer:hover{background:var(--paper)}
 .offer-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
 .offer h4{font-size:20px;font-variation-settings:"SOFT" 60,"opsz" 24}
-.offer .p{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--teal)}
+.offer .p{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--teal);white-space:nowrap}
+.offer .p small{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink-3);margin-left:4px}
 .offer p{font-size:15px;color:var(--ink-2);margin:0}
 .fine{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;font-size:14px;color:var(--ink-3)}
 .fine b{color:var(--ink-2)}
@@ -477,7 +478,7 @@ footer .brand-name span{color:#8d9a96}
     <div>
       <div class="eyebrow reveal">SAT preparation and college guidance</div>
       <h1 class="reveal d1">Careful SAT prep and college guidance from two founders who know your student <em class="accent">by name.</em></h1>
-      <p class="lead reveal d2">Allan has taught the SAT for more than ten years. Jon is a former McKinsey consultant, a Wharton graduate and a former US Navy officer who guides students through college lists, essays and interviews. Every family works with both of them on one shared plan, and parents can see progress every week.</p>
+      <p class="lead reveal d2">Allan has taught the SAT for more than ten years and has coached over 300 students with a proven lesson plan he built himself. It teaches the material the test covers and the strategy for handling it under the clock. Jon is a former McKinsey consultant, a Wharton graduate and a former US Navy officer who guides students through college lists, essays and interviews. Every family works with both of them on one shared plan, and parents can see progress every week.</p>
       <div class="hero-ctas reveal d3">
         <a class="btn btn-primary" href="#consult">Book a free consult <span class="arr" aria-hidden="true">&rarr;</span></a>
         <a class="btn btn-ghost" href="#dashboard">Try the parent dashboard</a>
@@ -705,8 +706,8 @@ footer .brand-name span{color:#8d9a96}
       <article class="tier reveal d1" data-prog="acc">
         <h3>SAT Accelerator</h3>
         <p class="for">For students whose main need is a stronger SAT result.</p>
-        <div class="price">$5,900</div>
-        <div class="rate">About $246 an hour</div>
+        <div class="price">$4,400</div>
+        <div class="rate">About $183 an hour</div>
         <ul>
           <li>24 hours of one-on-one work with Allan over 8 to 12 weeks</li>
           <li>4 full-length practice tests with error analysis</li>
@@ -720,11 +721,11 @@ footer .brand-name span{color:#8d9a96}
         <span class="badge">Flagship</span>
         <h3>The Aquinas Program</h3>
         <p class="for">For juniors and rising seniors applying to selective colleges.</p>
-        <div class="price">$11,500</div>
-        <div class="rate">About $303 an hour</div>
+        <div class="price">$7,600</div>
+        <div class="rate">About $224 an hour</div>
         <ul>
           <li>30 hours of SAT preparation with Allan</li>
-          <li>8 hours with Jon on the college list, activities, essay planning and career direction</li>
+          <li>4 hours with Jon on the college list, activities, essay planning and career direction</li>
           <li>3 mock interviews with recorded feedback</li>
           <li>Joint kickoff and mid-point review with both founders</li>
           <li>Dashboard, weekly updates and priority scheduling</li>
@@ -734,10 +735,10 @@ footer .brand-name span{color:#8d9a96}
       <article class="tier reveal d3" data-prog="pre">
         <h3>Premier</h3>
         <p class="for">For families who want full support through application season.</p>
-        <div class="price"><small>from</small>$19,500</div>
+        <div class="price"><small>from</small>$12,900</div>
         <div class="rate">Limited to 10 families a year</div>
         <ul>
-          <li>40 hours with Allan and 15 hours with Jon</li>
+          <li>40 hours with Allan and 8 hours with Jon</li>
           <li>Application season strategy and deadline planning</li>
           <li>Questions answered within 48 hours between sessions</li>
           <li>Quarterly family reviews</li>
@@ -748,16 +749,20 @@ footer .brand-name span{color:#8d9a96}
     </div>
 
     <div class="offers">
-      <div class="offer reveal d1" data-prog="int">
-        <div class="offer-top"><h4>Interview Intensive</h4><span class="p">$1,450</span></div>
+      <div class="offer reveal d1" data-prog="grp">
+        <div class="offer-top"><h4>SAT Small Group</h4><span class="p">$2,200<small> per student</small></span></div>
+        <p>The Accelerator curriculum taught live by Allan to three or four students. 24 hours over 8 to 12 weeks, four practice tests and a parent dashboard for each family.</p>
+      </div>
+      <div class="offer reveal d2" data-prog="int">
+        <div class="offer-top"><h4>Interview Intensive</h4><span class="p">$1,100</span></div>
         <p>Three 60-minute mock interviews with Jon, recorded review and written feedback. Popular with seniors from November to March.</p>
       </div>
-      <div class="offer reveal d2" data-prog="fp">
-        <div class="offer-top"><h4>Final-Push Intensive</h4><span class="p">$2,400</span></div>
+      <div class="offer reveal d1" data-prog="fp">
+        <div class="offer-top"><h4>Final-Push Intensive</h4><span class="p">$1,800</span></div>
         <p>Eight hours with Allan over three to five weeks before a specific test date, plus two timed practice tests.</p>
       </div>
-      <div class="offer reveal d3" data-prog="car">
-        <div class="offer-top"><h4>Career Clarity Sprint</h4><span class="p">$1,250</span></div>
+      <div class="offer reveal d2" data-prog="car">
+        <div class="offer-top"><h4>Career Clarity Sprint</h4><span class="p">$950</span></div>
         <p>An interests and strengths assessment, three sessions with Jon and a written map of majors and careers worth exploring.</p>
       </div>
     </div>
@@ -769,7 +774,7 @@ footer .brand-name span{color:#8d9a96}
 
     <div class="fine">
       <p><b>The +100 point promise.</b> If your student completes the full Accelerator plan and improves by fewer than 100 points from the diagnostic to an official SAT, we add 8 hours of tutoring at no cost.</p>
-      <p><b>Payment.</b> Pay in full and save 5%, or split any program into three payments. Hourly sessions are available afterward at $275 with Allan and $325 with Jon, with a two-hour minimum.</p>
+      <p><b>Payment.</b> Pay in full and save 5%, or split any program into three payments. Hourly sessions are available afterward at $205 with Allan and $245 with Jon, with a two-hour minimum.</p>
       <p><b>What we never promise.</b> No one can honestly guarantee admission to a particular college, and we will not pretend otherwise.</p>
     </div>
   </div>
@@ -1067,7 +1072,7 @@ footer .brand-name span{color:#8d9a96}
 
   /* program fit helper */
   const fitGrade = document.getElementById('fitGrade'), fitGoal = document.getElementById('fitGoal'), fitOut = document.getElementById('fitOut');
-  const progNames = {acc:'the SAT Accelerator',aq:'The Aquinas Program',pre:'Premier',int:'the Interview Intensive',fp:'the Final-Push Intensive',car:'the Career Clarity Sprint'};
+  const progNames = {acc:'the SAT Accelerator',aq:'The Aquinas Program',pre:'Premier',grp:'the SAT Small Group',int:'the Interview Intensive',fp:'the Final-Push Intensive',car:'the Career Clarity Sprint'};
   function fit(){
     const gr = fitGrade.value, go = fitGoal.value;
     document.querySelectorAll('[data-prog]').forEach(el=>el.classList.remove('match'));
