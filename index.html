@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aquinas Coaching</title>
+<meta name="description" content="SAT preparation and college guidance for students applying to selective colleges. Online across the US, delivered by the founders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1B2629; --ink-2:#44524f; --ink-3:#6b7773;
+  --teal:#1E5660; --teal-d:#143F47; --teal-l:#dcebea;
+  --brick:#A6452E; --brick-d:#8a3824;
+  --ochre:#D6A23E; --ochre-l:#f6e7c4;
+  --denim:#7FA2BC;
+  --cream:#F7F2E8; --paper:#FFFDF8; --stone:#E7E0D2; --stone-2:#d8cfbd;
+  --green:#3C7A57; --amber:#C0862A; --red:#A6452E;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:12px; --r-lg:18px;
+  --shadow:0 1px 2px rgba(27,38,41,.05),0 8px 24px -12px rgba(27,38,41,.18);
+  --shadow-lg:0 2px 4px rgba(27,38,41,.05),0 24px 48px -20px rgba(27,38,41,.28);
+  --wrap:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17.5px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;font-variation-settings:"SOFT" 60,"opsz" 96;letter-spacing:-.015em;line-height:1.12;margin:0}
+h2{font-size:clamp(30px,4vw,46px)}
+h3{font-size:22px;font-variation-settings:"SOFT" 60,"opsz" 36}
+p{margin:0 0 1em}
+em.accent{font-style:italic;color:var(--brick);font-variation-settings:"SOFT" 100,"opsz" 96}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+.eyebrow{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:currentColor;opacity:.7}
+.lead{font-size:19px;color:var(--ink-2);max-width:62ch}
+section{padding:112px 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2.5px solid var(--ochre);outline-offset:3px;border-radius:6px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s}
+.btn-primary{background:var(--teal);color:#fff;box-shadow:0 6px 16px -8px rgba(30,86,96,.7)}
+.btn-primary:hover{background:var(--teal-d);transform:translateY(-1px)}
+.btn-ghost{border-color:var(--stone-2);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--ink);background:var(--paper)}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(3px)}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,box-shadow .3s,padding .3s;padding:18px 0}
+.nav.scrolled{background:rgba(247,242,232,.86);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);box-shadow:0 1px 0 var(--stone);padding:10px 0}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand-name{font-family:var(--serif);font-size:21px;font-weight:500;font-variation-settings:"SOFT" 50,"opsz" 36;letter-spacing:-.01em}
+.brand-name span{color:var(--ink-3);font-weight:400}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;margin:0;padding:0}
+.nav-links a{text-decoration:none;font-size:15.5px;font-weight:500;color:var(--ink-2);position:relative}
+.nav-links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1.5px;background:var(--brick);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.nav-links a:not(.btn):hover{color:var(--ink)}
+.nav-links a:not(.btn):hover::after{transform:scaleX(1)}
+.nav-links .btn{padding:10px 18px;font-size:15px;color:#fff}
+.menu-btn{display:none;background:none;border:1.5px solid var(--stone-2);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer}
+
+/* hero */
+.hero{padding:150px 0 90px;position:relative}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 500px at 85% 20%,rgba(214,162,62,.13),transparent 60%),radial-gradient(700px 500px at 0% 90%,rgba(30,86,96,.08),transparent 60%);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;position:relative}
+.hero h1{font-size:clamp(38px,4.6vw,60px);font-weight:450;margin-bottom:26px}
+.hero .lead{margin-bottom:34px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:34px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14.5px;color:var(--ink-3)}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.hero-meta span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ochre)}
+.hero-figure{position:relative}
+.hero-photo{border-radius:28px 28px 28px 120px;overflow:hidden;aspect-ratio:4/5;box-shadow:var(--shadow-lg);position:relative}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:28% 50%;transform:scale(1.04);transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.loaded .hero-photo img{transform:scale(1)}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(20,63,71,.25))}
+.float-card{position:absolute;background:var(--paper);border-radius:14px;box-shadow:var(--shadow-lg);padding:14px 16px;font-size:14px;border:1px solid rgba(231,224,210,.8)}
+.float-card small{display:block;color:var(--ink-3);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.fc-week{left:-44px;bottom:64px;width:240px}
+.fc-proj{right:-26px;top:44px}
+.fc-proj b{font-family:var(--serif);font-size:26px;font-weight:500;font-variation-settings:"opsz" 36;display:block;line-height:1.1}
+.mini-bar{height:6px;background:var(--stone);border-radius:9px;overflow:hidden;margin:8px 0 8px}
+.mini-bar i{display:block;height:100%;width:75%;background:var(--teal);border-radius:9px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.green{color:var(--green);background:#e2efe6}
+.pill.amber{color:#94651a;background:#f7ebd2}
+.pill.red{color:var(--brick);background:#f4e1db}
+
+/* credential strip */
+.creds{padding:0;border-top:1px solid var(--stone);border-bottom:1px solid var(--stone);background:var(--paper)}
+.creds ul{list-style:none;margin:0 auto;padding:24px 32px;max-width:var(--wrap);display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:12px 56px}
+.creds li + li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ochre);margin-left:-32px;margin-right:22px}
+.creds li{font-family:var(--serif);font-size:19px;white-space:nowrap;font-variation-settings:"SOFT" 40,"opsz" 24;color:var(--ink-2);display:flex;align-items:center;gap:10px}
+.creds li b{font-weight:600;color:var(--teal)}
+
+/* why now */
+.why .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:72px;align-items:start}
+.why h2{margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{padding:10px 16px;border-radius:999px;background:var(--paper);border:1px solid var(--stone);font-size:15.5px;font-weight:500;transition:border-color .2s,transform .2s,background .2s}
+.chip:hover{border-color:var(--teal);transform:translateY(-2px)}
+.chip.soon{border-style:dashed;color:var(--ink-2)}
+.chip.soon::after{content:" from 2027-28";font-size:12.5px;color:var(--ink-3)}
+.chip-note{font-size:14px;color:var(--ink-3);margin-top:18px}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:34px}
+.stat{padding:20px 22px;border-radius:var(--r);background:var(--teal-l)}
+.stat b{font-family:var(--serif);font-size:34px;font-weight:500;font-variation-settings:"opsz" 72;color:var(--teal-d);display:block;line-height:1.1;margin-bottom:6px}
+.stat span{font-size:14.5px;color:var(--ink-2);line-height:1.45;display:block}
+
+/* split */
+.split{background:var(--paper);border-top:1px solid var(--stone);border-bottom:1px solid var(--stone)}
+.split-head{max-width:760px;margin-bottom:56px}
+.split-head h2{margin-bottom:18px}
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.lane{border-radius:var(--r-lg);padding:36px;background:var(--cream);border:1px solid var(--stone);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.lane:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.lane::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
+.lane.jon::before{background:var(--brick)}
+.lane-top{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.mono{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:21px;font-weight:500;color:#fff;background:var(--teal);flex:none}
+.jon .mono{background:var(--brick)}
+.lane-top small{display:block;font-size:13px;color:var(--ink-3);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.ticks{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.ticks li{position:relative;padding-left:30px;color:var(--ink-2);line-height:1.5}
+.ticks li::before{content:"";position:absolute;left:0;top:5px;width:17px;height:17px;border-radius:50%;background:var(--teal-l) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%231E5660' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat}
+.jon .ticks li::before{background-color:#f4e1db;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%23A6452E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.joint{margin-top:28px;padding:20px 24px;border-radius:var(--r);border:1px dashed var(--stone-2);font-size:16px;color:var(--ink-2);display:flex;gap:14px;align-items:center}
+.joint svg{flex:none}
+
+/* method */
+.method-grid{display:grid;grid-template-columns:.55fr 1.45fr;gap:64px;align-items:start;margin-top:48px}
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:6px;position:relative}
+.steps::before{content:"";position:absolute;left:23px;top:24px;bottom:24px;width:1.5px;background:var(--stone-2)}
+.step-btn{width:100%;display:flex;align-items:center;gap:18px;padding:10px 14px 10px 0;background:none;border:0;cursor:pointer;text-align:left;border-radius:12px;position:relative}
+.step-num{width:47px;height:47px;border-radius:50%;display:grid;place-items:center;background:var(--cream);border:1.5px solid var(--stone-2);font-family:var(--serif);font-size:18px;font-weight:500;transition:all .25s;flex:none}
+.step-name{font-family:var(--serif);font-size:24px;font-variation-settings:"SOFT" 60,"opsz" 36;color:var(--ink-3);transition:color .25s}
+.step-btn:hover .step-name{color:var(--ink)}
+.step-btn[aria-selected="true"] .step-num{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 0 0 6px var(--teal-l)}
+.step-btn[aria-selected="true"] .step-name{color:var(--ink)}
+.step-panel{background:var(--paper);border:1px solid var(--stone);border-radius:var(--r-lg);padding:40px;box-shadow:var(--shadow);min-height:330px}
+.step-panel .who{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);margin-bottom:12px}
+.step-panel h3{font-size:30px;margin-bottom:16px}
+.step-panel p{color:var(--ink-2)}
+.step-panel .detail{margin-top:22px;padding-top:20px;border-top:1px solid var(--stone);display:grid;grid-template-columns:auto 1fr;gap:12px 16px;font-size:15.5px;color:var(--ink-2)}
+.step-panel .detail b{color:var(--ink);font-weight:600}
+.fade-swap{animation:swap .35s ease}
+@keyframes swap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* dashboard */
+.dash-sec{background:var(--teal-d);color:#eef3f1;position:relative;overflow:hidden}
+.dash-sec::before{content:"";position:absolute;inset:0;background:radial-gradient(800px 400px at 90% 0%,rgba(214,162,62,.16),transparent 60%),radial-gradient(600px 400px at 0% 100%,rgba(127,162,188,.14),transparent 60%);pointer-events:none}
+.dash-sec .eyebrow{color:var(--ochre)}
+.dash-sec h2{color:#fff}
+.dash-sec .lead{color:#c7d6d3}
+.dash-head{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap;margin-bottom:44px;position:relative}
+.dash-head h2{margin-bottom:14px}
+.dash{background:var(--cream);color:var(--ink);border-radius:22px;box-shadow:0 40px 80px -30px rgba(0,0,0,.5);overflow:hidden;position:relative}
+.dash-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;background:var(--paper);border-bottom:1px solid var(--stone);flex-wrap:wrap}
+.dash-student{display:flex;align-items:center;gap:12px}
+.dash-student .mono{width:40px;height:40px;font-size:17px;background:var(--denim)}
+.dash-student b{display:block;font-size:16px}
+.dash-student span{font-size:13.5px;color:var(--ink-3)}
+.sample-tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--stone-2);padding:4px 10px;border-radius:999px}
+.seg{display:inline-flex;background:var(--stone);border-radius:999px;padding:4px;gap:2px}
+.seg button{border:0;background:none;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600;color:var(--ink-2);cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
+.seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.dash-body{padding:24px;display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{background:var(--paper);border:1px solid var(--stone);border-radius:var(--r);padding:20px}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.card-h h4{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.kpis{grid-column:span 12;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.kpi small{display:block;font-size:13px;color:var(--ink-3);font-weight:500;margin-bottom:4px}
+.kpi b{font-family:var(--serif);font-size:32px;font-weight:500;font-variation-settings:"opsz" 72;line-height:1.1;display:block}
+.kpi .sub{font-size:13.5px;color:var(--ink-3);margin-top:4px}
+.kpi.status b{font-size:22px;margin-top:6px}
+.chart-card{grid-column:span 8;position:relative}
+.chart-wrap{position:relative}
+#chart{width:100%;height:auto;display:block;overflow:visible}
+#chart .grid line{stroke:var(--stone);stroke-width:1}
+#chart .grid text{fill:var(--ink-3);font-size:11px;font-family:var(--sans)}
+#chart .xl text{fill:var(--ink-3);font-size:11px;font-family:var(--sans)}
+#chart .line{fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+#chart .proj{fill:none;stroke:var(--teal);stroke-width:2;stroke-dasharray:5 6;opacity:.7}
+#chart .band{fill:var(--denim);opacity:.22}
+#chart .target{stroke:var(--ochre);stroke-width:2;stroke-dasharray:2 5;stroke-linecap:round;transition:transform .5s cubic-bezier(.3,.7,.2,1)}
+#chart .target-lbl{transition:transform .5s cubic-bezier(.3,.7,.2,1)}
+#chart .target-lbl rect{fill:var(--ochre)}
+#chart .target-lbl text{fill:#3c2a06;font-size:11px;font-weight:600;font-family:var(--sans)}
+#chart .pt{fill:var(--paper);stroke:var(--teal);stroke-width:2.5;cursor:pointer;transition:r .15s}
+#chart .pt:hover,#chart .pt.on{r:7}
+.draw .line{stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 1.6s .1s ease forwards}
+.draw .proj,.draw .band,.draw .pt{opacity:0;animation:fadein .6s 1.4s ease forwards}
+.draw .pt{animation-delay:calc(.3s + var(--i) * .25s)}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadein{to{opacity:1}}
+.draw .proj{animation-name:fadeproj}
+@keyframes fadeproj{to{opacity:.7}}
+.draw .band{animation-name:fadeband}
+@keyframes fadeband{to{opacity:.22}}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:13px;padding:8px 11px;border-radius:8px;white-space:nowrap;transform:translate(-50%,calc(-100% - 12px));opacity:0;transition:opacity .15s}
+.tip b{font-family:var(--serif);font-size:17px;font-weight:500;margin-right:6px}
+.tip.show{opacity:1}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--ink-3);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:16px;height:3px;border-radius:2px;background:var(--teal);display:inline-block}
+.legend i.b{height:10px;background:rgba(127,162,188,.4)}
+.legend i.t{background:var(--ochre)}
+.week-card{grid-column:span 4;display:flex;flex-direction:column}
+.ring-row{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.ring{width:62px;height:62px;flex:none}
+.ring circle{fill:none;stroke-width:7}
+.ring .bg{stroke:var(--stone)}
+.ring .fg{stroke:var(--teal);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset .5s ease}
+.ring-row b{font-family:var(--serif);font-size:22px;font-weight:500;display:block;line-height:1.2}
+.ring-row span{font-size:13.5px;color:var(--ink-3)}
+.tasks{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+.task label{display:flex;gap:11px;align-items:flex-start;padding:9px 8px;border-radius:9px;cursor:pointer;font-size:14.5px;line-height:1.4;transition:background .2s}
+.task label:hover{background:var(--cream)}
+.task input{appearance:none;-webkit-appearance:none;width:19px;height:19px;border:1.5px solid var(--stone-2);border-radius:6px;flex:none;margin:1px 0 0;cursor:pointer;display:grid;place-items:center;transition:all .2s;background:var(--paper)}
+.task input:checked{background:var(--teal);border-color:var(--teal)}
+.task input:checked::after{content:"";width:9px;height:5px;border:2px solid #fff;border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
+.task input:checked + span{color:var(--ink-3)}
+.task small{display:block;color:var(--ink-3);font-size:12.5px;text-decoration:none}
+.skills-card{grid-column:span 7}
+.skills{display:grid;gap:6px}
+.skill{display:grid;grid-template-columns:1fr 1.1fr 40px;gap:14px;align-items:center;padding:7px 10px;margin:0 -10px;border-radius:9px;border:0;background:none;cursor:pointer;text-align:left;font-size:14.5px;transition:background .2s}
+.skill:hover{background:var(--cream)}
+.skill[aria-pressed="true"]{background:var(--teal-l)}
+.skill .nm{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;min-width:0}
+.skill .nm em{white-space:nowrap;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--brick);background:#f4e1db;border-radius:5px;padding:1px 6px}
+.skill .track{display:block;height:8px;background:var(--stone);border-radius:9px;overflow:hidden}
+.skill .fill{display:block;height:100%;border-radius:9px;background:var(--teal);width:0;transition:width 1s cubic-bezier(.2,.7,.2,1)}
+.skill.rw .fill{background:var(--denim)}
+.skill .pc{font-weight:600;font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+.sec-lbl{font-size:12px;font-weight:600;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin:6px 0 2px}
+.drill{margin-top:14px;padding:14px 16px;border-radius:10px;background:var(--cream);font-size:14.5px;color:var(--ink-2);min-height:70px}
+.drill b{color:var(--ink)}
+.side-col{grid-column:span 5;display:grid;gap:18px;align-content:start}
+.timing b.big{font-family:var(--serif);font-size:30px;font-weight:500;color:var(--brick);display:block;line-height:1.1;margin-bottom:6px}
+.timing p{font-size:14.5px;color:var(--ink-2);margin:0}
+.dots{display:flex;gap:5px;margin:10px 0 12px;flex-wrap:wrap}
+.dots i{width:14px;height:14px;border-radius:4px;background:var(--stone)}
+.dots i.ok{background:var(--teal)}
+.note p{font-size:14.5px;color:var(--ink-2);margin:0 0 8px}
+.note .by{font-size:12.5px;color:var(--ink-3)}
+.dash-foot{position:relative;margin-top:26px;font-size:14.5px;color:#b8cbc7;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* programs */
+.prog-head{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+.prog-head h2{margin-bottom:16px}
+.fit{background:var(--paper);border:1px solid var(--stone);border-radius:var(--r-lg);padding:18px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:15px}
+.fit label{font-weight:600;color:var(--ink-2)}
+.fit select{font:inherit;font-size:15px;padding:9px 34px 9px 12px;border-radius:10px;border:1px solid var(--stone-2);background:var(--cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231B2629' stroke-width='1.6'/%3E%3C/svg%3E") right 12px center/11px no-repeat;appearance:none;-webkit-appearance:none;color:var(--ink);cursor:pointer}
+.fit-out{flex-basis:100%;font-size:14.5px;color:var(--ink-2);min-height:22px}
+.fit-out b{color:var(--teal)}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.tier{background:var(--paper);border:1px solid var(--stone);border-radius:var(--r-lg);padding:34px 30px;display:flex;flex-direction:column;position:relative;transition:transform .3s,box-shadow .3s,border-color .3s,outline-color .3s;outline:2.5px solid transparent;outline-offset:3px}
+.tier:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.tier.flag{background:var(--teal);color:#eef3f1;border-color:var(--teal)}
+.tier.flag .for,.tier.flag li{color:#d1e0dd}
+.tier.flag h3{color:#fff}
+.tier.match,.offer.match{outline-color:var(--ochre)}
+.badge{position:absolute;top:-13px;left:30px;background:var(--ochre);color:#3c2a06;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.tier h3{font-size:26px;margin-bottom:6px}
+.tier .for{font-size:15px;color:var(--ink-3);margin-bottom:22px;min-height:48px}
+.price{font-family:var(--serif);font-size:44px;font-weight:450;font-variation-settings:"opsz" 144;line-height:1;margin-bottom:6px}
+.price small{font-family:var(--sans);font-size:15px;font-weight:500;opacity:.7;margin-right:4px}
+.rate{font-size:13.5px;opacity:.7;margin-bottom:24px}
+.tier ul{list-style:none;margin:0 0 28px;padding:22px 0 0;border-top:1px solid rgba(128,128,128,.25);display:grid;gap:11px;font-size:15px;color:var(--ink-2);flex:1}
+.tier li{padding-left:22px;position:relative;line-height:1.45}
+.tier li::before{content:"";position:absolute;left:2px;top:9px;width:8px;height:8px;border-radius:2px;background:var(--ochre);transform:rotate(45deg)}
+.tier .btn{justify-content:center}
+.tier.flag .btn{background:var(--paper);color:var(--teal-d)}
+.tier.flag .btn:hover{background:var(--ochre-l)}
+.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:22px}
+.offer{border:1px solid var(--stone);border-radius:var(--r);padding:22px 24px;background:transparent;transition:background .25s,outline-color .3s;outline:2.5px solid transparent;outline-offset:3px}
+.offer:hover{background:var(--paper)}
+.offer-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+.offer h4{font-size:20px;font-variation-settings:"SOFT" 60,"opsz" 24}
+.offer .p{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--teal)}
+.offer p{font-size:15px;color:var(--ink-2);margin:0}
+.fine{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;font-size:14px;color:var(--ink-3)}
+.fine b{color:var(--ink-2)}
+.founding{margin-top:30px;border-radius:var(--r);padding:18px 22px;background:var(--ochre-l);color:#5a3f0b;font-size:15.5px;display:flex;align-items:center;gap:14px}
+.founding svg{flex:none}
+.founding span{flex:1}
+.founding b{color:#3c2a06}
+
+/* founders */
+.founders{background:var(--paper);border-top:1px solid var(--stone);border-bottom:1px solid var(--stone)}
+.founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.bio{display:grid;grid-template-columns:120px 1fr;gap:28px;padding:34px;border-radius:var(--r-lg);border:1px solid var(--stone);background:var(--cream)}
+.portrait{width:120px;height:150px;border-radius:60px 60px 14px 14px;display:grid;place-items:center;font-family:var(--serif);font-size:54px;font-weight:400;color:#fff;background:linear-gradient(160deg,var(--teal),var(--teal-d));position:relative;overflow:hidden}
+.jon-b .portrait{background:linear-gradient(160deg,var(--brick),#7c311f)}
+.portrait::after{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.28);border-radius:52px 52px 9px 9px}
+.bio h3{font-size:28px;margin-bottom:4px}
+.bio .role{font-size:14px;font-weight:600;color:var(--brick);letter-spacing:.04em;margin-bottom:16px}
+.bio p{color:var(--ink-2);font-size:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.tags span{font-size:13px;font-weight:500;padding:5px 11px;border-radius:999px;background:var(--paper);border:1px solid var(--stone)}
+
+/* standards */
+.standards .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:72px}
+.std-list{display:grid;grid-template-columns:1fr 1fr;gap:30px 36px}
+.std h4{font-family:var(--sans);font-size:17px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.std h4 i{width:28px;height:28px;border-radius:8px;background:var(--teal-l);display:grid;place-items:center;font-style:normal;font-family:var(--serif);font-size:14px;color:var(--teal);font-weight:600}
+.std p{font-size:15.5px;color:var(--ink-2);margin:0}
+
+/* faq */
+.faq{padding-top:40px}
+.faq .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:72px}
+.acc{border-top:1px solid var(--stone-2)}
+.acc-item{border-bottom:1px solid var(--stone-2)}
+.acc-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;background:none;border:0;cursor:pointer;text-align:left;font-family:var(--serif);font-size:21px;font-variation-settings:"SOFT" 60,"opsz" 24;font-weight:500}
+.acc-q .pm{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--stone-2);flex:none;position:relative;transition:transform .3s,background .3s,border-color .3s}
+.acc-q .pm::before,.acc-q .pm::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.5px;background:var(--ink);transform:translate(-50%,-50%)}
+.acc-q .pm::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .3s}
+.acc-q[aria-expanded="true"] .pm{background:var(--teal);border-color:var(--teal)}
+.acc-q[aria-expanded="true"] .pm::before,.acc-q[aria-expanded="true"] .pm::after{background:#fff}
+.acc-q[aria-expanded="true"] .pm::after{transform:translate(-50%,-50%) rotate(0)}
+.acc-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.acc-a > div{overflow:hidden}
+.acc-a p{color:var(--ink-2);padding:0 50px 22px 0;margin:0}
+.acc-q[aria-expanded="true"] + .acc-a{grid-template-rows:1fr}
+
+/* consult */
+.consult{padding-bottom:120px}
+.consult-box{background:var(--teal-d);color:#eef3f1;border-radius:28px;padding:64px;display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;position:relative;overflow:hidden}
+.consult-box::before{content:"";position:absolute;width:520px;height:520px;right:-180px;top:-240px;border-radius:50%;border:1px solid rgba(214,162,62,.25);box-shadow:0 0 0 60px rgba(214,162,62,.04),0 0 0 120px rgba(214,162,62,.03)}
+.consult-box h2{color:#fff;margin-bottom:18px}
+.consult-box .eyebrow{color:var(--ochre)}
+.consult-box .lead{color:#c7d6d3;font-size:17.5px}
+.consult-list{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:12px;font-size:15.5px;color:#d9e5e2}
+.consult-list li{display:flex;gap:12px;align-items:flex-start}
+.consult-list li b{font-family:var(--serif);color:var(--ochre);font-weight:500;width:18px;flex:none}
+form.cf{background:var(--paper);color:var(--ink);border-radius:var(--r-lg);padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:span 2}
+.field label{font-size:13.5px;font-weight:600;color:var(--ink-2)}
+.field input,.field select,.field textarea{font:inherit;font-size:15.5px;padding:12px 14px;border-radius:10px;border:1px solid var(--stone-2);background:var(--cream);color:var(--ink);transition:border-color .2s,box-shadow .2s,background .2s;width:100%}
+.field select{appearance:none;-webkit-appearance:none;background:var(--cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231B2629' stroke-width='1.6'/%3E%3C/svg%3E") right 14px center/11px no-repeat;padding-right:36px}
+.field textarea{resize:vertical;min-height:92px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-l);background:var(--paper)}
+.cf .btn{grid-column:span 2;justify-content:center;padding:15px}
+.cf .legal{grid-column:span 2;font-size:12.5px;color:var(--ink-3);margin:0;text-align:center}
+.thanks{position:absolute;inset:0;background:var(--paper);border-radius:var(--r-lg);display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px}
+.thanks.show{display:flex;animation:swap .4s ease}
+.thanks .seal{width:64px;height:64px;border-radius:50%;background:var(--teal-l);display:grid;place-items:center;margin-bottom:18px}
+.thanks h3{font-size:28px;margin-bottom:10px}
+.thanks p{color:var(--ink-2);max-width:40ch}
+.thanks small{color:var(--ink-3);font-size:12.5px}
+
+/* footer */
+footer{background:var(--ink);color:#aab6b2;padding:64px 0 40px;font-size:14.5px}
+.foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.1)}
+footer .brand-name{color:#fff}
+footer .brand-name span{color:#8d9a96}
+.foot-links{display:flex;gap:28px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.foot-links a{text-decoration:none;color:#cfd8d5}
+.foot-links a:hover{color:#fff}
+.foot-tag{margin-top:14px;max-width:38ch}
+.legalese{padding-top:26px;font-size:12.5px;color:#7f8c88;display:grid;gap:8px}
+
+/* reveal */
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+.js .reveal.d1{transition-delay:.08s}.js .reveal.d2{transition-delay:.16s}.js .reveal.d3{transition-delay:.24s}
+
+/* responsive */
+@media (max-width:1024px){
+  .hero .wrap{grid-template-columns:1fr;gap:56px}
+  .hero-figure{max-width:560px;margin:0 auto;width:100%}
+  .why .wrap,.method-grid,.standards .wrap,.faq .wrap{grid-template-columns:1fr;gap:40px}
+  .chart-card,.week-card{grid-column:span 12}
+  .skills-card,.side-col{grid-column:span 12}
+  .side-col{grid-template-columns:1fr 1fr}
+  .tiers{grid-template-columns:1fr;max-width:560px}
+  .offers{grid-template-columns:1fr}
+  .fine{grid-template-columns:1fr}
+  .founders-grid{grid-template-columns:1fr}
+  .consult-box{grid-template-columns:1fr;padding:48px;gap:40px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:720px){
+  body{font-size:16.5px}
+  .wrap{padding:0 16px}
+  section{padding:80px 0}
+  .creds ul{padding:18px 16px;flex-direction:column;gap:8px}
+  .creds li{font-size:17px;white-space:normal;text-align:center}
+  .creds li + li::before{display:none}
+  .menu-btn{display:inline-block}
+  .nav-links{display:none;position:absolute;top:100%;left:16px;right:16px;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border:1px solid var(--stone);border-radius:14px;padding:8px;box-shadow:var(--shadow-lg)}
+  .nav-links.open{display:flex}
+  .nav-links a{display:block;padding:12px 12px}
+  .nav-links a:not(.btn)::after{display:none}
+  .nav-links .btn{margin-top:6px;justify-content:center}
+  .nav{background:rgba(247,242,232,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .hero{padding:104px 0 64px}
+  .hero .wrap{gap:36px}
+  .hero-figure{order:-1}
+  .hero-photo{aspect-ratio:5/4;border-radius:20px 20px 20px 70px}
+  .hero-photo img{object-position:30% 40%}
+  .fc-week{left:12px;bottom:-26px;width:212px;padding:12px 14px}
+  .fc-proj{right:10px;top:12px;padding:10px 13px}
+  .fc-proj b{font-size:21px}
+  .hero-ctas .btn{flex:1 1 auto;justify-content:center}
+  .stat-row{grid-template-columns:1fr}
+  .split-grid{grid-template-columns:1fr}
+  .lane{padding:26px 22px}
+  .step-panel{padding:26px 22px;min-height:0}
+  .step-name{font-size:20px}
+  .dash-body{padding:14px;gap:14px}
+  .dash-bar{padding:14px}
+  .seg{width:100%}
+  .seg button{flex:1;padding:8px 6px;font-size:13px}
+  .kpis{gap:14px}
+  .kpi b{font-size:26px}
+  .side-col{grid-template-columns:1fr}
+  .skill{grid-template-columns:1fr 70px 36px;gap:10px;font-size:13.5px}
+  .skill .nm em{display:none}
+  .bio{grid-template-columns:1fr;padding:26px 22px;gap:20px}
+  .portrait{width:84px;height:104px;font-size:40px}
+  .std-list{grid-template-columns:1fr}
+  .acc-q{font-size:18.5px}
+  .acc-a p{padding-right:0}
+  .consult-box{padding:32px 20px;border-radius:20px}
+  form.cf{grid-template-columns:1fr;padding:22px 18px}
+  .field.full,.cf .btn,.cf .legal{grid-column:span 1}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+  .draw .line{stroke-dashoffset:0}
+  .draw .proj{opacity:.7}.draw .band{opacity:.22}.draw .pt{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Aquinas Coaching, back to top">
+      <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true">
+        <path d="M17 1.5 L32 6.5 V19 C32 28 25.5 33.8 17 36.5 C8.5 33.8 2 28 2 19 V6.5 Z" fill="#1E5660"/>
+        <path d="M17 4.6 L29 8.6 V19 C29 26.2 23.8 31 17 33.4 C10.2 31 5 26.2 5 19 V8.6 Z" fill="none" stroke="#D6A23E" stroke-width=".9" opacity=".8"/>
+        <text x="17" y="25.5" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="17" font-weight="500" fill="#F7F2E8">A</text>
+      </svg>
+      <span class="brand-name">Aquinas <span>Coaching</span></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#method">Method</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#founders">Founders</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a class="btn btn-primary" href="#consult">Book a consult</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow reveal">SAT preparation and college guidance</div>
+      <h1 class="reveal d1">Careful SAT prep and college guidance from two founders who know your student <em class="accent">by name.</em></h1>
+      <p class="lead reveal d2">Allan has taught the SAT for more than ten years. Jon is a former McKinsey consultant, a Wharton graduate and a former US Navy officer who guides students through college lists, essays and interviews. Every family works with both of them on one shared plan, and parents can see progress every week.</p>
+      <div class="hero-ctas reveal d3">
+        <a class="btn btn-primary" href="#consult">Book a free consult <span class="arr" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-ghost" href="#dashboard">Try the parent dashboard</a>
+      </div>
+      <div class="hero-meta reveal d3">
+        <span>Online, anywhere in the US</span>
+        <span>Published prices</span>
+        <span>The founders teach every session</span>
+      </div>
+    </div>
+    <div class="hero-figure reveal d1">
+      <div class="hero-photo">
+        <img src="hero.jpg" alt="A smiling student sitting on campus steps with her laptop" width="1000" height="667">
+      </div>
+      <div class="float-card fc-proj" aria-hidden="true">
+        <small>Projected range</small>
+        <b>1440 to 1480</b>
+      </div>
+      <div class="float-card fc-week" aria-hidden="true">
+        <small>Maya's week</small>
+        <div style="display:flex;justify-content:space-between;font-weight:600"><span>3 of 4 tasks done</span><span>75%</span></div>
+        <div class="mini-bar"><i></i></div>
+        <span class="pill green">On track for March</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<div class="creds" aria-label="At a glance">
+  <ul>
+    <li><b>10+ years</b> teaching the SAT</li>
+    <li>Average jump of <b>+350 points</b> per student</li>
+  </ul>
+</div>
+
+<!-- WHY NOW -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow reveal">Why this matters now</div>
+      <h2 class="reveal d1">Test scores matter again at the most selective colleges.</h2>
+      <p class="lead reveal d2">Over the past two years, many of the most selective universities in the country have brought back their SAT or ACT requirement. For students applying for fall 2027 entry, a strong result is once again part of the baseline rather than a bonus.</p>
+    </div>
+    <div>
+      <div class="chips reveal d1" aria-label="Colleges that require SAT or ACT scores">
+        <span class="chip">Harvard</span><span class="chip">Yale</span><span class="chip">Penn</span><span class="chip">Brown</span><span class="chip">Dartmouth</span><span class="chip">Cornell</span><span class="chip">MIT</span><span class="chip">Stanford</span><span class="chip">Caltech</span><span class="chip">Johns Hopkins</span><span class="chip">Georgetown</span><span class="chip">UT Austin</span><span class="chip soon">Princeton</span><span class="chip soon">Columbia</span>
+      </div>
+      <p class="chip-note reveal d2">Testing required for fall 2027 entry. Princeton and Columbia begin requiring scores with the 2027-28 admissions cycle. Policies change, so we confirm each school's current rules with every family.</p>
+      <div class="stat-row">
+        <div class="stat reveal d2"><b>2 million+</b><span>students in the class of 2025 took the SAT, the first time above two million since 2020.</span></div>
+        <div class="stat reveal d3"><b>92%</b><span>of Yale's fall 2026 entering class submitted a test score.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT -->
+<section class="split" id="approach">
+  <div class="wrap">
+    <div class="split-head">
+      <div class="eyebrow reveal">How we divide the work</div>
+      <h2 class="reveal d1">One founder handles the test and the other handles the application.</h2>
+      <p class="lead reveal d2">Many families end up hiring a test tutor and an admissions consultant who never speak to each other. At Aquinas, Allan and Jon share one plan for your student and talk about their progress every week.</p>
+    </div>
+    <div class="split-grid">
+      <article class="lane reveal d1">
+        <div class="lane-top"><div class="mono">A</div><div><small>The SAT</small><h3>Allan</h3></div></div>
+        <ul class="ticks">
+          <li>A diagnostic practice test that shows which question types cost points and how long each one takes</li>
+          <li>One-hour sessions that open with a few strategy lessons and then focus on weekly review of real test questions</li>
+          <li>Pacing and guessing strategy, including when to let a hard question go and move on</li>
+          <li>Full-length practice tests broken down by question type and time spent on each question</li>
+        </ul>
+      </article>
+      <article class="lane jon reveal d2">
+        <div class="lane-top"><div class="mono">J</div><div><small>The application</small><h3>Jon</h3></div></div>
+        <ul class="ticks">
+          <li>A balanced college list built around your student's goals, results and budget</li>
+          <li>Activities and essay planning, always in the student's own words</li>
+          <li>Mock interviews for alumni, scholarship, honors college and service academy panels</li>
+          <li>Conversations about majors and careers, so the college choice connects to what comes after</li>
+        </ul>
+      </article>
+    </div>
+    <div class="joint reveal">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="9.5" cy="13" r="7.5" fill="none" stroke="#1E5660" stroke-width="1.6"/><circle cx="16.5" cy="13" r="7.5" fill="none" stroke="#A6452E" stroke-width="1.6"/></svg>
+      <span>Flagship families get a joint kickoff and a mid-point review with both founders, so the test plan and the application plan stay in step.</span>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="method" id="method">
+  <div class="wrap">
+    <div class="eyebrow reveal">Our method</div>
+    <h2 class="reveal d1" style="max-width:760px">A clear sequence, from the first practice test to the last interview.</h2>
+    <div class="method-grid">
+      <ol class="steps reveal d1" role="tablist" aria-label="Method steps">
+        <li><button class="step-btn" role="tab" aria-selected="true" aria-controls="stepPanel" data-step="0"><span class="step-num">1</span><span class="step-name">Diagnose</span></button></li>
+        <li><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="1"><span class="step-num">2</span><span class="step-name">Plan</span></button></li>
+        <li><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="2"><span class="step-num">3</span><span class="step-name">Train</span></button></li>
+        <li><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="3"><span class="step-num">4</span><span class="step-name">Prove</span></button></li>
+        <li><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="4"><span class="step-num">5</span><span class="step-name">Present</span></button></li>
+      </ol>
+      <div class="step-panel reveal d2" id="stepPanel" role="tabpanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="dash-sec" id="dashboard">
+  <div class="wrap">
+    <div class="dash-head">
+      <div>
+        <div class="eyebrow reveal">The parent dashboard</div>
+        <h2 class="reveal d1">See exactly where your student stands each week.</h2>
+        <p class="lead reveal d2">Every family gets a private dashboard that Allan and Jon update after each session. The version below uses sample data for a made-up student, so feel free to click around.</p>
+      </div>
+    </div>
+
+    <div class="dash reveal d1" id="dash">
+      <div class="dash-bar">
+        <div class="dash-student">
+          <div class="mono">M</div>
+          <div><b>Maya R.</b><span>11th grade &middot; SAT in March</span></div>
+        </div>
+        <div class="seg" role="group" aria-label="Family goal">
+          <button aria-pressed="false" data-goal="min">Admission minimum</button>
+          <button aria-pressed="true" data-goal="sch">Scholarship cutoff</button>
+          <button aria-pressed="false" data-goal="top">Most competitive</button>
+        </div>
+        <span class="sample-tag">Sample data</span>
+      </div>
+
+      <div class="dash-body">
+        <div class="kpis">
+          <div class="card kpi"><small>Latest practice test</small><b>1390</b><div class="sub">up 130 from diagnostic</div></div>
+          <div class="card kpi"><small>Projected on test day</small><b>1440 to 1480</b><div class="sub">based on the last 3 tests</div></div>
+          <div class="card kpi"><small>Target</small><b id="kTarget">1470</b><div class="sub" id="kGap">goal: scholarship cutoff</div></div>
+          <div class="card kpi status"><small>Status</small><b><span class="pill amber" id="kStatus">Close</span></b><div class="sub" id="kStatusSub">projection within 30 points of target</div></div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="card-h"><h4>Practice test results</h4><span style="font-size:13px;color:var(--ink-3)">Hover or tap a point</span></div>
+          <div class="chart-wrap">
+            <svg id="chart" viewBox="0 0 640 270" role="img" aria-label="Line chart of practice test results rising from 1260 in September to 1390 in December, with a projected range of 1440 to 1480 by the March test date."></svg>
+            <div class="tip" id="tip"></div>
+          </div>
+          <div class="legend"><span><i></i>Practice tests</span><span><i class="b"></i>Projected range</span><span><i class="t"></i>Family target</span></div>
+        </div>
+
+        <div class="card week-card">
+          <div class="card-h"><h4>This week's plan</h4></div>
+          <div class="ring-row">
+            <svg class="ring" viewBox="0 0 62 62" aria-hidden="true"><circle class="bg" cx="31" cy="31" r="26"/><circle class="fg" id="ring" cx="31" cy="31" r="26"/></svg>
+            <div><b id="ringTxt">3 of 4 done</b><span>about 2 hours left</span></div>
+          </div>
+          <ul class="tasks" id="tasks">
+            <li class="task"><label><input type="checkbox" checked data-min="40"><span>Review 15 missed Advanced Math questions<small>40 min</small></span></label></li>
+            <li class="task"><label><input type="checkbox" checked data-min="32"><span>Timed Reading and Writing module<small>32 min</small></span></label></li>
+            <li class="task"><label><input type="checkbox" checked data-min="30"><span>Geometry formula sheet and 10 mixed questions<small>30 min</small></span></label></li>
+            <li class="task"><label><input type="checkbox" data-min="134"><span>Full practice test, Saturday morning<small>2 hr 14 min</small></span></label></li>
+          </ul>
+        </div>
+
+        <div class="card skills-card">
+          <div class="card-h"><h4>Skill map</h4><span style="font-size:13px;color:var(--ink-3)">Select a skill</span></div>
+          <div class="skills" id="skills"></div>
+          <div class="drill" id="drill" aria-live="polite"></div>
+        </div>
+
+        <div class="side-col">
+          <div class="card timing">
+            <div class="card-h"><h4>Timing insight</h4></div>
+            <b class="big">2 of 11</b>
+            <div class="dots" aria-hidden="true"><i class="ok"></i><i class="ok"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p>Maya answered only 2 of 11 Advanced Math questions correctly when she spent more than 45 seconds on them. From now on she makes her best guess at 45 seconds, flags the question and comes back if time allows.</p>
+          </div>
+          <div class="card note">
+            <div class="card-h"><h4>Latest session note</h4></div>
+            <p>Good week. Maya is setting up quadratics correctly before solving, which fixed most of her careless errors. Next session we move to circle questions.</p>
+            <div class="by">Allan &middot; Tuesday</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dash-foot">
+      <span>Parents also receive a one-screen summary every Friday.</span>
+      <a href="#consult" style="color:#fff;font-weight:600">Ask us for a live walkthrough &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="wrap">
+    <div class="prog-head">
+      <div style="max-width:620px">
+        <div class="eyebrow reveal">Programs and pricing</div>
+        <h2 class="reveal d1">Straightforward programs with the prices listed up front.</h2>
+        <p class="lead reveal d2">Most premium firms hide their pricing until a sales call. We would rather you know the numbers before we speak.</p>
+      </div>
+      <div class="fit reveal d2" id="fit">
+        <label for="fitGrade">Grade</label>
+        <select id="fitGrade">
+          <option value="9">9th or 10th</option>
+          <option value="11" selected>11th</option>
+          <option value="12">12th</option>
+        </select>
+        <label for="fitGoal">Main need</label>
+        <select id="fitGoal">
+          <option value="">Choose one</option>
+          <option value="sat">Mostly the SAT</option>
+          <option value="both">SAT and applications</option>
+          <option value="full">Full support through applications</option>
+          <option value="int">Interview preparation</option>
+          <option value="career">Choosing a major or career</option>
+        </select>
+        <div class="fit-out" id="fitOut">Pick a grade and a need to see where most families in your position start.</div>
+      </div>
+    </div>
+
+    <div class="tiers">
+      <article class="tier reveal d1" data-prog="acc">
+        <h3>SAT Accelerator</h3>
+        <p class="for">For students whose main need is a stronger SAT result.</p>
+        <div class="price">$5,900</div>
+        <div class="rate">About $246 an hour</div>
+        <ul>
+          <li>24 hours of one-on-one work with Allan over 8 to 12 weeks</li>
+          <li>4 full-length practice tests with error analysis</li>
+          <li>Parent dashboard and a weekly update</li>
+          <li>One strategy call with Jon</li>
+          <li>The +100 point promise (terms below)</li>
+        </ul>
+        <a class="btn btn-ghost" href="#consult">Talk to us about this</a>
+      </article>
+      <article class="tier flag reveal d2" data-prog="aq">
+        <span class="badge">Flagship</span>
+        <h3>The Aquinas Program</h3>
+        <p class="for">For juniors and rising seniors applying to selective colleges.</p>
+        <div class="price">$11,500</div>
+        <div class="rate">About $303 an hour</div>
+        <ul>
+          <li>30 hours of SAT preparation with Allan</li>
+          <li>8 hours with Jon on the college list, activities, essay planning and career direction</li>
+          <li>3 mock interviews with recorded feedback</li>
+          <li>Joint kickoff and mid-point review with both founders</li>
+          <li>Dashboard, weekly updates and priority scheduling</li>
+        </ul>
+        <a class="btn" href="#consult">Book a consult <span class="arr" aria-hidden="true">&rarr;</span></a>
+      </article>
+      <article class="tier reveal d3" data-prog="pre">
+        <h3>Premier</h3>
+        <p class="for">For families who want full support through application season.</p>
+        <div class="price"><small>from</small>$19,500</div>
+        <div class="rate">Limited to 10 families a year</div>
+        <ul>
+          <li>40 hours with Allan and 15 hours with Jon</li>
+          <li>Application season strategy and deadline planning</li>
+          <li>Questions answered within 48 hours between sessions</li>
+          <li>Quarterly family reviews</li>
+          <li>Everything in The Aquinas Program</li>
+        </ul>
+        <a class="btn btn-ghost" href="#consult">Ask about availability</a>
+      </article>
+    </div>
+
+    <div class="offers">
+      <div class="offer reveal d1" data-prog="int">
+        <div class="offer-top"><h4>Interview Intensive</h4><span class="p">$1,450</span></div>
+        <p>Three 60-minute mock interviews with Jon, recorded review and written feedback. Popular with seniors from November to March.</p>
+      </div>
+      <div class="offer reveal d2" data-prog="fp">
+        <div class="offer-top"><h4>Final-Push Intensive</h4><span class="p">$2,400</span></div>
+        <p>Eight hours with Allan over three to five weeks before a specific test date, plus two timed practice tests.</p>
+      </div>
+      <div class="offer reveal d3" data-prog="car">
+        <div class="offer-top"><h4>Career Clarity Sprint</h4><span class="p">$1,250</span></div>
+        <p>An interests and strengths assessment, three sessions with Jon and a written map of majors and careers worth exploring.</p>
+      </div>
+    </div>
+
+    <div class="founding reveal">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M11 2l2.6 5.6 6 .7-4.5 4.1 1.2 6L11 15.4 5.7 18.4l1.2-6L2.4 8.3l6-.7z" fill="#D6A23E"/></svg>
+      <span><b>Founding families:</b> the first 20 families to enroll before December 31, 2026 receive 15% off their first program, in exchange for permission to share an anonymized case study.</span>
+    </div>
+
+    <div class="fine">
+      <p><b>The +100 point promise.</b> If your student completes the full Accelerator plan and improves by fewer than 100 points from the diagnostic to an official SAT, we add 8 hours of tutoring at no cost.</p>
+      <p><b>Payment.</b> Pay in full and save 5%, or split any program into three payments. Hourly sessions are available afterward at $275 with Allan and $325 with Jon, with a two-hour minimum.</p>
+      <p><b>What we never promise.</b> No one can honestly guarantee admission to a particular college, and we will not pretend otherwise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDERS -->
+<section class="founders" id="founders">
+  <div class="wrap">
+    <div class="eyebrow reveal">The founders</div>
+    <h2 class="reveal d1" style="max-width:720px">You work directly with the two of us, not a rotating bench of tutors.</h2>
+    <div class="founders-grid">
+      <article class="bio reveal d1">
+        <div class="portrait" aria-hidden="true">A</div>
+        <div>
+          <h3>Allan</h3>
+          <div class="role">Co-founder, SAT lead</div>
+          <p>Allan is an education professional who has spent more than a decade preparing students for the SAT. He teaches strategy as seriously as content: how to pace each module, which questions to skip, and how to guess well when time runs short.</p>
+          <p>His students review real test questions every week, because that is where most of the improvement happens. He is known for showing students what their best section would mean across a full test, which gives them a realistic target to work toward.</p>
+          <div class="tags"><span>10+ years teaching the SAT</span><span>Certified FL DOE Educator</span><span>Digital SAT</span></div>
+        </div>
+      </article>
+      <article class="bio jon-b reveal d2">
+        <div class="portrait" aria-hidden="true">J</div>
+        <div>
+          <h3>Jon</h3>
+          <div class="role">Co-founder, college and career lead</div>
+          <p>Jon is a graduate of the Wharton School at the University of Pennsylvania and a former consultant at McKinsey &amp; Company. He also served as an officer in the US Navy.</p>
+          <p>He works with students on college lists, activities and essays, and prepares them for interviews with colleges, scholarship committees and service academy boards. He also helps families think carefully about majors and careers at a time when many jobs are changing.</p>
+          <div class="tags"><span>Wharton, University of Pennsylvania</span><span>Former McKinsey</span><span>Former US Navy officer</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STANDARDS -->
+<section class="standards" id="standards">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow reveal">Our standards</div>
+      <h2 class="reveal d1">What families can count on from us.</h2>
+    </div>
+    <div class="std-list">
+      <div class="std reveal d1"><h4><i>1</i>The student's own words</h4><p>We never write essays or interview answers. We help students find what they want to say and give honest feedback on their drafts.</p></div>
+      <div class="std reveal d2"><h4><i>2</i>Honest claims</h4><p>We do not guarantee admission, and any results we publish come with a clear explanation of how they were measured.</p></div>
+      <div class="std reveal d1"><h4><i>3</i>Prices in the open</h4><p>Every program price is listed on this page. Discounts are rare and always stated in writing.</p></div>
+      <div class="std reveal d2"><h4><i>4</i>Founders do the work</h4><p>Allan and Jon teach every session themselves. Your student is never handed off to someone you have not met.</p></div>
+      <div class="std reveal d1"><h4><i>5</i>Parents stay in control</h4><p>Accounts belong to parents, sessions are recorded only with consent, and there are no public profiles or student feeds.</p></div>
+      <div class="std reveal d2"><h4><i>6</i>Real practice material</h4><p>We teach from our own question sets and official practice tests, and we keep College Board content out of every AI tool we use.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow reveal">Questions</div>
+      <h2 class="reveal d1">Common questions from parents.</h2>
+      <p class="lead reveal d2" style="margin-top:16px">If yours is not answered here, ask us on a consult call.</p>
+    </div>
+    <div class="acc reveal d1" id="acc">
+      <div class="acc-item"><button class="acc-q" aria-expanded="true">Are sessions online?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Yes. Every session runs on video, so we work with families anywhere in the US and schedule around your time zone. Sessions are recorded only if a parent gives consent.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">How long is each session?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>SAT sessions with Allan run one hour. Jon's strategy and interview sessions usually run 45 to 60 minutes.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">When should my student start?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Most students begin in the fall or winter of junior year and aim for spring test dates. Seniors can still benefit from a Final-Push Intensive or interview preparation, and ninth and tenth graders can start with a lighter plan.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you guarantee admission or a specific result?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>No, and we would be cautious of anyone who does. We promise a clear plan, expert time and honest progress reports. The SAT Accelerator includes the +100 point promise, with its full terms listed under Programs.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you help with the ACT?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Our programs are built around the digital SAT. If the diagnostic suggests the ACT would suit your student better, we will tell you and help you decide what to do next.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">Will you write my child's essays?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>No. We help students work out what they want to say and give feedback on their drafts, but every word they submit is their own.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">How does payment work?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>You can pay in full and save 5%, or split any program into three payments. Hourly sessions are available for returning students once a program is complete.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSULT -->
+<section class="consult" id="consult">
+  <div class="wrap">
+    <div class="consult-box">
+      <div style="position:relative">
+        <div class="eyebrow">Get started</div>
+        <h2>Book a free 20-minute consult.</h2>
+        <p class="lead">Tell us a little about your student and we will reply within one business day to find a time. Your student is welcome to join the call. Hearing their goals in their own words helps us build a better plan.</p>
+        <ul class="consult-list">
+          <li><b>1</b><span>A short call about your student's goals and timeline</span></li>
+          <li><b>2</b><span>A free review of a recent PSAT, SAT or practice test</span></li>
+          <li><b>3</b><span>A written plan within 24 hours of the review</span></li>
+        </ul>
+      </div>
+      <form class="cf" id="cf" novalidate>
+        <div class="field"><label for="fName">Parent name</label><input id="fName" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="fEmail">Email</label><input id="fEmail" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="fGrade">Student's grade</label>
+          <select id="fGrade" name="grade"><option>9th</option><option>10th</option><option selected>11th</option><option>12th</option></select></div>
+        <div class="field"><label for="fGoal">Main goal</label>
+          <select id="fGoal" name="goal"><option>Admission minimum</option><option>Scholarship cutoff</option><option selected>Selective colleges</option><option>Interview preparation</option><option>Not sure yet</option></select></div>
+        <div class="field full"><label for="fMsg">Anything we should know? <span style="font-weight:400;color:var(--ink-3)">(optional)</span></label><textarea id="fMsg" name="msg" placeholder="Recent scores, target colleges, test dates"></textarea></div>
+        <button class="btn btn-primary" type="submit">Request a consult <span class="arr" aria-hidden="true">&rarr;</span></button>
+        <p class="legal">Our services are for students 13 and older, with a parent's consent. We only use your details to reply to you.</p>
+        <div class="thanks" id="thanks" role="status">
+          <div class="seal"><svg width="28" height="28" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.4" fill="none" stroke="#1E5660" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 id="thanksH">Thank you.</h3>
+          <p>We will be in touch within one business day to set up a time that works for your family.</p>
+          <small>Preview only: this form is not yet connected, so nothing was sent.</small>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <span class="brand-name">Aquinas <span>Coaching</span></span>
+        <p class="foot-tag">SAT preparation and college guidance for students across the United States.</p>
+      </div>
+      <ul class="foot-links">
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#founders">Founders</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Safeguarding</a></li>
+      </ul>
+    </div>
+    <div class="legalese">
+      <p style="margin:0">SAT&reg; is a trademark registered by the College Board, which is not affiliated with, and does not endorse, this website. ACT&reg; is a registered trademark of ACT Education Corp.</p>
+      <p style="margin:0">Aquinas Coaching is not affiliated with or endorsed by McKinsey &amp; Company, the University of Pennsylvania or the US Navy. Credentials are listed for background only.</p>
+      <p style="margin:0">&copy; <span id="yr">2026</span> Aquinas Coaching. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.addEventListener('load', () => document.body.classList.add('loaded'));
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* nav */
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+  const menuBtn = document.getElementById('menuBtn'), links = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.textContent = open ? 'Close' : 'Menu';
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); menuBtn.textContent = 'Menu';
+  }));
+
+  /* reveal */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* method stepper */
+  const steps = [
+    {t:'Diagnose', p:'We begin with a full-length practice test or a recent PSAT or SAT report, along with a conversation with the student and parents about goals. Allan looks at which question types are costing points and how long each one takes.', d:[['Time','About one week'],['You receive','A breakdown of missed questions by type and timing']]},
+    {t:'Plan', p:'Within a day of the review, your family receives a written plan. The target depends on what matters most to you, whether that is the minimum for a particular school, a scholarship cutoff or the strongest possible result for a competitive application.', d:[['Time','Within 24 hours of the review'],['You receive','A target, a test date and a weekly schedule']]},
+    {t:'Train', p:'Sessions last one hour. The first few cover strategy and content with guided practice. After that, most of the time goes to reviewing test questions the student has already attempted, since that is where the biggest gains usually come from.', d:[['Time','8 to 12 weeks for most students'],['You receive','A session note and updated dashboard after every lesson']]},
+    {t:'Prove', p:'Timed sections and full practice tests show whether the work is holding up under test conditions. Allan often has a student take one section under ideal conditions and shows what that level would mean across the whole test, which gives everyone a realistic sense of what is possible.', d:[['Time','A full practice test every two to three weeks'],['You receive','A projected range and timing data per question']]},
+    {t:'Present', p:'Once testing is on track, Jon’s work takes the lead: the college list, activities, essays and interviews. Students practice talking about themselves with specifics and confidence, and the plan shifts toward application deadlines.', d:[['Time','Junior spring through senior fall'],['You receive','Mock interview recordings with written feedback']]}
+  ];
+  const panel = document.getElementById('stepPanel');
+  const stepBtns = document.querySelectorAll('.step-btn');
+  function showStep(i, animate){
+    const s = steps[i];
+    panel.innerHTML = '<div class="'+(animate?'fade-swap':'')+'"><div class="who">Step '+(i+1)+'</div><h3>'+s.t+'</h3><p>'+s.p+'</p><div class="detail">'+s.d.map(r=>'<b>'+r[0]+'</b><span>'+r[1]+'</span>').join('')+'</div></div>';
+    stepBtns.forEach((b,j)=>{ b.setAttribute('aria-selected', j===i); b.tabIndex = j===i?0:-1; });
+  }
+  stepBtns.forEach((b,i)=>{
+    b.addEventListener('click',()=>showStep(i,true));
+    b.addEventListener('keydown',e=>{
+      if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();const n=(i+1)%5;showStep(n,true);stepBtns[n].focus();}
+      if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();const n=(i+4)%5;showStep(n,true);stepBtns[n].focus();}
+    });
+  });
+  showStep(0,false);
+
+  /* dashboard: chart */
+  const tests = [
+    {x:'Sep 14',label:'Diagnostic',v:1260},
+    {x:'Oct 5',label:'Practice test 2',v:1300},
+    {x:'Oct 26',label:'Practice test 3',v:1330},
+    {x:'Nov 16',label:'Practice test 4',v:1370},
+    {x:'Dec 7',label:'Practice test 5',v:1390}
+  ];
+  const W=640,H=270,L=46,R=18,T=16,B=34, yMin=1200,yMax=1600;
+  const nX = 7; // 5 tests + gap + test day
+  const xs = i => L + i*((W-L-R)/(nX-1));
+  const ys = v => T + (1-(v-yMin)/(yMax-yMin))*(H-T-B);
+  const svg = document.getElementById('chart');
+  let g = '<g class="grid">';
+  for(let v=1200; v<=1600; v+=100){ g += '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+ys(v)+'" y2="'+ys(v)+'"/><text x="'+(L-10)+'" y="'+(ys(v)+4)+'" text-anchor="end">'+v+'</text>'; }
+  g += '</g><g class="xl">';
+  tests.forEach((t,i)=>{ g += '<text x="'+xs(i)+'" y="'+(H-10)+'" text-anchor="middle">'+t.x+'</text>'; });
+  g += '<text x="'+xs(6)+'" y="'+(H-10)+'" text-anchor="middle" style="font-weight:600;fill:#1B2629">Test day</text></g>';
+  const last = tests[tests.length-1], lx = xs(4), ly = ys(last.v);
+  g += '<polygon class="band" points="'+lx+','+ly+' '+xs(6)+','+ys(1480)+' '+xs(6)+','+ys(1440)+'"/>';
+  g += '<line class="proj" x1="'+lx+'" y1="'+ly+'" x2="'+xs(6)+'" y2="'+ys(1460)+'"/>';
+  g += '<g id="tgt"><line class="target" x1="'+L+'" x2="'+(W-R)+'" y1="0" y2="0"/><g class="target-lbl"><rect x="'+(L+6)+'" y="-10" width="92" height="20" rx="10"/><text x="'+(L+52)+'" y="4" text-anchor="middle" id="tgtTxt">Target 1470</text></g></g>';
+  g += '<polyline class="line" points="'+tests.map((t,i)=>xs(i)+','+ys(t.v)).join(' ')+'"/>';
+  tests.forEach((t,i)=>{ g += '<circle class="pt" style="--i:'+i+'" cx="'+xs(i)+'" cy="'+ys(t.v)+'" r="5" tabindex="0" data-i="'+i+'" aria-label="'+t.label+', '+t.x+': '+t.v+'"/>'; });
+  g += '<circle class="pt" style="--i:6" cx="'+xs(6)+'" cy="'+ys(1460)+'" r="5" tabindex="0" data-i="p" aria-label="Projected on test day: 1440 to 1480"/>';
+  svg.innerHTML = g;
+  const tgt = svg.querySelector('#tgt');
+  const tip = document.getElementById('tip');
+  function showTip(c){
+    const i = c.dataset.i;
+    const r = svg.getBoundingClientRect(), s = r.width / W;
+    tip.innerHTML = i==='p' ? '<b>1440 to 1480</b>Projected on test day' : '<b>'+tests[i].v+'</b>'+tests[i].label+' &middot; '+tests[i].x;
+    tip.style.left = (c.cx.baseVal.value*s)+'px';
+    tip.style.top = (c.cy.baseVal.value*s)+'px';
+    tip.classList.add('show'); svg.querySelectorAll('.pt').forEach(p=>p.classList.toggle('on',p===c));
+  }
+  function hideTip(){ tip.classList.remove('show'); svg.querySelectorAll('.pt').forEach(p=>p.classList.remove('on')); }
+  svg.querySelectorAll('.pt').forEach(c=>{
+    c.addEventListener('mouseenter',()=>showTip(c)); c.addEventListener('focus',()=>showTip(c));
+    c.addEventListener('click',()=>showTip(c));
+    c.addEventListener('mouseleave',hideTip); c.addEventListener('blur',hideTip);
+  });
+  const chartIO = new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ if(!reduce) svg.classList.add('draw'); chartIO.disconnect(); } }); },{threshold:.35});
+  svg.classList.add('pre'); chartIO.observe(svg);
+
+  /* dashboard: goals */
+  const goals = {
+    min:{v:1350,name:'admission minimum',pill:'green',status:'On track',sub:'projection is above the target'},
+    sch:{v:1470,name:'scholarship cutoff',pill:'amber',status:'Close',sub:'projection within 30 points of target'},
+    top:{v:1530,name:'most competitive',pill:'red',status:'Stretch',sub:'needs more weeks or a later test date'}
+  };
+  const segBtns = document.querySelectorAll('.seg button');
+  function setGoal(k){
+    const gl = goals[k];
+    segBtns.forEach(b=>b.setAttribute('aria-pressed', b.dataset.goal===k));
+    document.getElementById('kTarget').textContent = gl.v;
+    document.getElementById('kGap').textContent = 'goal: '+gl.name;
+    const st = document.getElementById('kStatus'); st.className = 'pill '+gl.pill; st.textContent = gl.status;
+    document.getElementById('kStatusSub').textContent = gl.sub;
+    tgt.style.transform = 'translateY('+ys(gl.v)+'px)';
+    document.getElementById('tgtTxt').textContent = 'Target '+gl.v;
+  }
+  segBtns.forEach(b=>b.addEventListener('click',()=>setGoal(b.dataset.goal)));
+  tgt.style.transition = 'transform .5s cubic-bezier(.3,.7,.2,1)';
+  setGoal('sch');
+
+  /* dashboard: skills */
+  const skills = [
+    {s:'Reading and Writing',n:'Craft and Structure',m:72,d:'Words in context and the purpose of a sentence. Ten vocabulary-in-context questions a day, each checked against the full passage rather than the single line.'},
+    {s:'Reading and Writing',n:'Information and Ideas',m:68,p:3,d:'Inference and data questions. Maya tends to pick answers that are true but not supported. This week she underlines the exact evidence before choosing.'},
+    {s:'Reading and Writing',n:'Standard English Conventions',m:81,d:'Punctuation and verb agreement. Nearly mastered, so this gets a short weekly refresher of eight mixed questions.'},
+    {s:'Reading and Writing',n:'Expression of Ideas',m:77,d:'Transitions and combining notes. Twelve transition questions, sorted by the relationship each one signals.'},
+    {s:'Math',n:'Algebra',m:84,d:'Linear equations and systems. A strength. Kept warm with timed sets so speed stays high for Module 2.'},
+    {s:'Math',n:'Advanced Math',m:63,p:1,d:'Nonlinear functions and equivalent expressions. This is the biggest opportunity: 15 review questions this week, setting up each quadratic before solving.'},
+    {s:'Math',n:'Problem-Solving and Data Analysis',m:79,d:'Percentages, rates and reading tables. Mostly careless misses, so the drill is a quick units check on every answer.'},
+    {s:'Math',n:'Geometry and Trigonometry',m:58,p:2,d:'Circles and right triangles. Most misses come from formula recall, so the plan is a one-page reference sheet and ten mixed questions.'}
+  ];
+  const skWrap = document.getElementById('skills'), drill = document.getElementById('drill');
+  let lastSec = '';
+  skills.forEach((k,i)=>{
+    if(k.s!==lastSec){ const h=document.createElement('div'); h.className='sec-lbl'; h.textContent=k.s; skWrap.appendChild(h); lastSec=k.s; }
+    const b = document.createElement('button');
+    b.className = 'skill'+(k.s.startsWith('Reading')?' rw':''); b.setAttribute('aria-pressed','false');
+    b.innerHTML = '<span class="nm">'+k.n+(k.p?' <em>PRIORITY '+k.p+'</em>':'')+'</span><span class="track"><span class="fill" data-w="'+k.m+'"></span></span><span class="pc">'+k.m+'%</span>';
+    b.addEventListener('click',()=>selectSkill(i));
+    skWrap.appendChild(b);
+  });
+  const skBtns = skWrap.querySelectorAll('.skill');
+  function selectSkill(i){
+    skBtns.forEach((b,j)=>b.setAttribute('aria-pressed', j===i));
+    drill.innerHTML = '<b>'+skills[i].n+' &middot; '+skills[i].m+'% mastery.</b> '+skills[i].d;
+  }
+  selectSkill(5);
+  const skIO = new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ skWrap.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%'); skIO.disconnect(); } }); },{threshold:.15});
+  skIO.observe(skWrap);
+
+  /* dashboard: tasks */
+  const ring = document.getElementById('ring'), C = 2*Math.PI*26;
+  ring.style.strokeDasharray = C;
+  const boxes = document.querySelectorAll('#tasks input');
+  function updRing(){
+    const done = [...boxes].filter(b=>b.checked);
+    const left = [...boxes].filter(b=>!b.checked).reduce((a,b)=>a+ +b.dataset.min,0);
+    ring.style.strokeDashoffset = C*(1-done.length/boxes.length);
+    document.getElementById('ringTxt').textContent = done.length===boxes.length ? 'All done this week' : done.length+' of '+boxes.length+' done';
+    const h = Math.floor(left/60), m = left%60;
+    ring.parentNode.nextElementSibling.querySelector('span').textContent = left===0 ? 'Nice work, Maya' : 'about '+(h?h+' hr ':'')+(m?m+' min ':'')+'left';
+  }
+  boxes.forEach(b=>b.addEventListener('change',updRing)); updRing();
+
+  /* program fit helper */
+  const fitGrade = document.getElementById('fitGrade'), fitGoal = document.getElementById('fitGoal'), fitOut = document.getElementById('fitOut');
+  const progNames = {acc:'the SAT Accelerator',aq:'The Aquinas Program',pre:'Premier',int:'the Interview Intensive',fp:'the Final-Push Intensive',car:'the Career Clarity Sprint'};
+  function fit(){
+    const gr = fitGrade.value, go = fitGoal.value;
+    document.querySelectorAll('[data-prog]').forEach(el=>el.classList.remove('match'));
+    if(!go){ fitOut.innerHTML='Pick a grade and a need to see where most families in your position start.'; return; }
+    let k, why;
+    if(go==='sat'){ k = gr==='12' ? 'fp' : 'acc'; why = gr==='12' ? 'Seniors usually have one or two sittings left, so a short, focused block before a specific date works best.' : 'It gives your student 24 focused hours with Allan and a clear target date.'; }
+    else if(go==='both'){ k = gr==='9' ? 'acc' : 'aq'; why = gr==='9' ? 'For younger students we usually start with the SAT and add application work in junior year.' : 'It combines Allan’s SAT work with Jon’s college list, essay and interview preparation.'; }
+    else if(go==='full'){ k='pre'; why='It covers both founders through the whole application season, with questions answered between sessions.'; }
+    else if(go==='int'){ k='int'; why='Three recorded mock interviews with Jon and written feedback after each one.'; }
+    else { k='car'; why='It helps your student connect interests to majors and careers before building a college list.'; }
+    document.querySelectorAll('[data-prog="'+k+'"]').forEach(el=>el.classList.add('match'));
+    fitOut.innerHTML = 'Most families in your position start with <b>'+progNames[k]+'</b>. '+why;
+  }
+  fitGrade.addEventListener('change',fit); fitGoal.addEventListener('change',fit);
+
+  /* accordion */
+  document.querySelectorAll('.acc-q').forEach(q=>q.addEventListener('click',()=>{
+    q.setAttribute('aria-expanded', q.getAttribute('aria-expanded')!=='true');
+  }));
+
+  /* form */
+  const cf = document.getElementById('cf');
+  cf.addEventListener('submit',e=>{
+    e.preventDefault();
+    const fName = document.getElementById('fName'), fEmail = document.getElementById('fEmail');
+    const name = fName.value.trim(), email = fEmail.value.trim();
+    let bad = null;
+    if(!name) bad = fName; else if(!/^\S+@\S+\.\S+$/.test(email)) bad = fEmail;
+    if(bad){ bad.focus(); bad.style.borderColor='var(--brick)'; setTimeout(()=>bad.style.borderColor='',1600); return; }
+    document.getElementById('thanksH').textContent = 'Thank you, '+name.split(' ')[0]+'.';
+    document.getElementById('thanks').classList.add('show');
+  });
+})();
+</script>
+</body>
+</html>
