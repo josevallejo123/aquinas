@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F2F4F1">
 <title>Aquinas Coaching</title>
-<meta name="description" content="SAT preparation and college guidance for students applying to selective colleges. Online across the US, delivered by the founders.">
+<meta name="description" content="SAT preparation and college guidance for students applying to selective colleges. Online across the US, delivered by the coaches.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="hero.jpg" fetchpriority="high">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
 <style>
 /* ============ tokens ============ */
 :root{
@@ -20,7 +20,7 @@
   --denim:#7FA2BC;
   --bg:#F2F4F1; --paper:#FFFFFF; --wash:#E7ECE9; --line:#DCE2DE; --line-2:#C3CCC7;
   --green:#3C7A57; --amber:#94651A;
-  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
   --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --r-sm:10px; --r:14px; --r-lg:20px;
   --arch:50% 50% 16px 16px / 36% 36% 16px 16px;
@@ -37,9 +37,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font
 img{max-width:100%;display:block}
 a{color:inherit}
 button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
-h1,h2,h3,h4{font-family:var(--serif);font-weight:500;font-variation-settings:"SOFT" 30,"opsz" 96;letter-spacing:-.018em;line-height:1.1;margin:0;text-wrap:balance}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 72;letter-spacing:-.018em;line-height:1.1;margin:0;text-wrap:balance}
 h2{font-size:clamp(30px,2.2vw + 22px,50px);line-height:1.06}
-h3{font-size:22px;font-variation-settings:"SOFT" 30,"opsz" 36}
+h3{font-size:22px;font-variation-settings:"opsz" 36}
 p{margin:0 0 1em;text-wrap:pretty}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
 .eyebrow{font-size:15px;font-weight:600;color:var(--teal);display:flex;align-items:center;gap:10px;margin-bottom:14px}
@@ -66,7 +66,7 @@ section{padding:64px 0}
 .nav .wrap{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:44px}
 .brand svg{width:30px;height:34px}
-.brand-name{font-family:var(--serif);font-size:20px;font-weight:500;font-variation-settings:"SOFT" 30,"opsz" 36;letter-spacing:-.01em}
+.brand-name{font-family:var(--serif);font-size:20px;font-weight:500;font-variation-settings:"opsz" 36;letter-spacing:-.01em}
 .brand-name span{color:var(--ink-3);font-weight:400}
 .menu-btn{width:44px;height:44px;border-radius:12px;border:1px solid var(--line-2);background:var(--paper);cursor:pointer;display:grid;place-items:center;padding:0}
 .menu-btn i,.menu-btn i::before,.menu-btn i::after{display:block;width:18px;height:1.8px;border-radius:2px;background:var(--ink);transition:transform .25s var(--ease),background-color .2s}
@@ -87,8 +87,8 @@ section{padding:64px 0}
 .hero{padding:calc(var(--nav-h) + 28px) 0 56px}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"copy" "fig" "lead" "ctas" "meta"}
 .hero-copy{grid-area:copy;margin-bottom:28px}
-.hero h1{font-size:clamp(36px,3vw + 25px,62px);font-weight:430;font-variation-settings:"SOFT" 20,"opsz" 144;line-height:1.04;letter-spacing:-.028em}
-.hero h1 em{font-style:italic;font-variation-settings:"SOFT" 100,"opsz" 144}
+.hero h1{font-size:clamp(34px,2.6vw + 24px,56px);font-weight:430;font-variation-settings:"opsz" 72;line-height:1.04;letter-spacing:-.022em}
+.hero h1 em{font-style:italic;font-variation-settings:"opsz" 72}
 .hero-figure{grid-area:fig;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;margin:0 2px 36px}
 .hero-photo{grid-column:1/-1;grid-row:1;position:relative;aspect-ratio:6/5;border-radius:var(--arch);overflow:hidden;background:var(--wash);outline:1px solid rgba(201,151,58,.6);outline-offset:7px}
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:28% 42%}
@@ -131,7 +131,7 @@ section{padding:64px 0}
 /* ============ credential strip ============ */
 .creds{background:var(--paper);border-block:1px solid var(--line)}
 .creds ul{list-style:none;margin:0 auto;max-width:var(--wrap);padding:18px var(--gutter);display:grid;gap:8px}
-.creds li{font-family:var(--serif);font-size:17px;font-variation-settings:"SOFT" 30,"opsz" 24;color:var(--ink-2);display:flex;align-items:flex-start;gap:12px}
+.creds li{font-family:var(--serif);font-size:17px;font-variation-settings:"opsz" 24;color:var(--ink-2);display:flex;align-items:flex-start;gap:12px}
 .creds li::before{content:"";width:7px;height:7px;background:var(--gold);transform:rotate(45deg);flex:none;margin-top:.62em}
 .creds li b{font-weight:600;color:var(--teal)}
 
@@ -139,7 +139,7 @@ section{padding:64px 0}
 .why-grid{display:grid;gap:36px}
 .why h2{margin-bottom:18px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-family:var(--serif);font-size:16px;font-variation-settings:"SOFT" 30,"opsz" 24;padding:7px 13px;border-radius:var(--r-sm);background:var(--paper);border:1px solid var(--line)}
+.chip{font-family:var(--serif);font-size:16px;font-variation-settings:"opsz" 24;padding:7px 13px;border-radius:var(--r-sm);background:var(--paper);border:1px solid var(--line)}
 .chip.soon{border-style:dashed;border-color:var(--line-2);background:transparent;color:var(--ink-2)}
 .chip.soon::after{content:" from 2027-28";font-family:var(--sans);font-size:12.5px;color:var(--ink-3)}
 .chip-note{font-size:14.5px;color:var(--ink-3);margin-top:16px}
@@ -309,7 +309,7 @@ section{padding:64px 0}
 .badge{position:absolute;top:-12px;left:22px;background:var(--gold);color:var(--gold-ink);font-size:13px;font-weight:700;padding:4px 12px;border-radius:999px}
 .tier h3{font-size:26px;margin-bottom:6px}
 .tier .for{font-size:15px;color:var(--ink-3);margin-bottom:18px}
-.price{font-family:var(--serif);font-size:42px;font-weight:450;font-variation-settings:"opsz" 144;line-height:1;margin-bottom:6px;letter-spacing:-.02em}
+.price{font-family:var(--serif);font-size:42px;font-weight:450;font-variation-settings:"opsz" 72;line-height:1;margin-bottom:6px;letter-spacing:-.02em}
 .price small{font-family:var(--sans);font-size:15px;font-weight:500;opacity:.75;margin-right:4px;letter-spacing:0}
 .rate{font-size:14px;opacity:.75;margin-bottom:20px}
 .tier ul{list-style:none;margin:0 0 24px;padding:20px 0 0;border-top:1px solid rgba(128,128,128,.25);display:grid;gap:10px;font-size:15px;color:var(--ink-2);flex:1}
@@ -321,7 +321,7 @@ section{padding:64px 0}
 .offers{display:grid;gap:12px;margin-top:18px}
 .offer{border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;background:var(--paper);transition:border-color .25s,outline-color .3s;outline:2.5px solid transparent;outline-offset:3px}
 .offer-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin-bottom:8px}
-.offer h4{font-size:20px;font-variation-settings:"SOFT" 30,"opsz" 24}
+.offer h4{font-size:20px;font-variation-settings:"opsz" 24}
 .offer .p{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--teal);white-space:nowrap}
 .offer .p small{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink-3);margin-left:4px}
 .offer p{font-size:15px;color:var(--ink-2);margin:0}
@@ -360,7 +360,7 @@ section{padding:64px 0}
 .faq .lead{margin-top:14px}
 .acc{border-top:1px solid var(--line-2)}
 .acc-item{border-bottom:1px solid var(--line-2)}
-.acc-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;padding:16px 0;background:none;border:0;cursor:pointer;text-align:left;font-family:var(--serif);font-size:18.5px;font-variation-settings:"SOFT" 30,"opsz" 24;font-weight:500;line-height:1.3}
+.acc-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;padding:16px 0;background:none;border:0;cursor:pointer;text-align:left;font-family:var(--serif);font-size:18.5px;font-variation-settings:"opsz" 24;font-weight:500;line-height:1.3}
 .acc-q .pm{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line-2);flex:none;position:relative;transition:background-color .3s,border-color .3s}
 .acc-q .pm::before,.acc-q .pm::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.5px;background:var(--ink);transform:translate(-50%,-50%)}
 .acc-q .pm::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .3s}
@@ -534,7 +534,7 @@ footer .brand-name span{color:#8d9e9a}
   .steps::before{left:22px;right:auto;top:24px;bottom:24px;width:1.5px;height:auto}
   .step-btn{flex-direction:row;gap:18px;padding:8px 14px 8px 0;text-align:left}
   .step-num{width:46px;height:46px}
-  .step-name{font-family:var(--serif);font-size:24px;font-weight:500;font-variation-settings:"SOFT" 30,"opsz" 36}
+  .step-name{font-family:var(--serif);font-size:24px;font-weight:500;font-variation-settings:"opsz" 36}
   .step-panel{padding:40px;min-height:330px}
   .step-panel h3{font-size:32px}
   .dash-head{margin-bottom:44px}
@@ -578,7 +578,7 @@ footer .brand-name span{color:#8d9e9a}
       <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true">
         <path d="M17 1.5 L32 6.5 V19 C32 28 25.5 33.8 17 36.5 C8.5 33.8 2 28 2 19 V6.5 Z" fill="#1E5660"/>
         <path d="M17 4.6 L29 8.6 V19 C29 26.2 23.8 31 17 33.4 C10.2 31 5 26.2 5 19 V8.6 Z" fill="none" stroke="#C9973A" stroke-width=".9" opacity=".85"/>
-        <text x="17" y="25.5" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="17" font-weight="500" fill="#F2F4F1">A</text>
+        <text x="17" y="25.5" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="17" font-weight="500" fill="#F2F4F1">A</text>
       </svg>
       <span class="brand-name">Aquinas <span>Coaching</span></span>
     </a>
@@ -587,7 +587,7 @@ footer .brand-name span{color:#8d9e9a}
       <li><a href="#method">Method</a></li>
       <li><a href="#dashboard">Dashboard</a></li>
       <li><a href="#programs">Programs</a></li>
-      <li><a href="#founders">Founders</a></li>
+      <li><a href="#founders">Coaches</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a class="btn btn-primary" href="#consult">Book a consult</a></li>
     </ul>
@@ -601,7 +601,7 @@ footer .brand-name span{color:#8d9e9a}
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="eyebrow">SAT preparation and college guidance</div>
-      <h1>Careful SAT prep and college guidance from two founders who know your student <em class="accent">by name.</em></h1>
+      <h1>Careful SAT prep and college guidance from two coaches who know your student <em class="accent">by name.</em></h1>
     </div>
     <div class="hero-figure">
       <div class="hero-photo">
@@ -630,7 +630,7 @@ footer .brand-name span{color:#8d9e9a}
     <div class="hero-meta">
       <span>Online, anywhere in the US</span>
       <span>Published prices</span>
-      <span>The founders teach every session</span>
+      <span>The coaches teach every session</span>
     </div>
   </div>
 </section>
@@ -669,7 +669,7 @@ footer .brand-name span{color:#8d9e9a}
   <div class="wrap">
     <div class="split-head">
       <div class="eyebrow">How we divide the work</div>
-      <h2>One founder handles the test and the other handles the application.</h2>
+      <h2>One coach handles the test and the other handles the application.</h2>
       <p class="lead" style="margin-top:16px">Many families end up hiring a test tutor and an admissions consultant who never speak to each other. At Aquinas, Allan and Jon share one plan for your student and talk about their progress every week.</p>
     </div>
     <div class="split-grid">
@@ -683,7 +683,7 @@ footer .brand-name span{color:#8d9e9a}
         </ul>
       </article>
       <article class="lane jon">
-        <div class="lane-top"><div class="mono">J</div><div><small>The application</small><h3>Jon</h3></div></div>
+        <div class="lane-top"><div class="mono">J</div><div><small>The application &amp; the future</small><h3>Jon</h3></div></div>
         <ul class="ticks">
           <li>A balanced college list built around your student's goals, results and budget</li>
           <li>Activities and essay planning, always in the student's own words</li>
@@ -694,7 +694,7 @@ footer .brand-name span{color:#8d9e9a}
     </div>
     <div class="joint">
       <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="9.5" cy="13" r="7.5" fill="none" stroke="#1E5660" stroke-width="1.6"/><circle cx="16.5" cy="13" r="7.5" fill="none" stroke="#A6452E" stroke-width="1.6"/></svg>
-      <span>Flagship families get a joint kickoff and a mid-point review with both founders, so the test plan and the application plan stay in step.</span>
+      <span>Flagship families get a joint kickoff and a mid-point review with both coaches, so the test plan and the application plan stay in step.</span>
     </div>
   </div>
 </section>
@@ -856,7 +856,7 @@ footer .brand-name span{color:#8d9e9a}
           <li>30 hours of SAT preparation with Allan</li>
           <li>4 hours with Jon on the college list, activities, essay planning and career direction</li>
           <li>3 mock interviews with recorded feedback</li>
-          <li>Joint kickoff and mid-point review with both founders</li>
+          <li>Joint kickoff and mid-point review with both coaches</li>
           <li>Dashboard, weekly updates and priority scheduling</li>
         </ul>
         <a class="btn" href="#consult">Book a consult <span class="arr" aria-hidden="true">&rarr;</span></a>
@@ -912,7 +912,7 @@ footer .brand-name span{color:#8d9e9a}
 <!-- FOUNDERS -->
 <section class="founders" id="founders">
   <div class="wrap">
-    <div class="eyebrow">The founders</div>
+    <div class="eyebrow">The coaches</div>
     <h2>You work directly with the two of us, not a rotating bench of tutors.</h2>
     <div class="founders-grid">
       <article class="bio">
@@ -950,7 +950,7 @@ footer .brand-name span{color:#8d9e9a}
       <div class="std"><h4><i aria-hidden="true">1</i>The student's own words</h4><p>We never write essays or interview answers. We help students find what they want to say and give honest feedback on their drafts.</p></div>
       <div class="std"><h4><i aria-hidden="true">2</i>Honest claims</h4><p>We do not guarantee admission, and any results we publish come with a clear explanation of how they were measured.</p></div>
       <div class="std"><h4><i aria-hidden="true">3</i>Prices in the open</h4><p>Every program price is listed on this page. Discounts are rare and always stated in writing.</p></div>
-      <div class="std"><h4><i aria-hidden="true">4</i>Founders do the work</h4><p>Allan and Jon teach every session themselves. Your student is never handed off to someone you have not met.</p></div>
+      <div class="std"><h4><i aria-hidden="true">4</i>Coaches do the work</h4><p>Allan and Jon teach every session themselves. Your student is never handed off to someone you have not met.</p></div>
       <div class="std"><h4><i aria-hidden="true">5</i>Parents stay in control</h4><p>Accounts belong to parents, sessions are recorded only with consent, and there are no public profiles or student feeds.</p></div>
       <div class="std"><h4><i aria-hidden="true">6</i>Real practice material</h4><p>We teach from our own question sets and official practice tests, and we keep College Board content out of every AI tool we use.</p></div>
     </div>
@@ -1023,7 +1023,7 @@ footer .brand-name span{color:#8d9e9a}
       <ul class="foot-links">
         <li><a href="#programs">Programs</a></li>
         <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#founders">Founders</a></li>
+        <li><a href="#founders">Coaches</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#">Privacy</a></li>
         <li><a href="#">Terms</a></li>
@@ -1251,7 +1251,7 @@ footer .brand-name span{color:#8d9e9a}
     let k, why;
     if(go==='sat'){ k = gr==='12' ? 'fp' : 'acc'; why = gr==='12' ? 'Seniors usually have one or two sittings left, so a short, focused block before a specific date works best.' : 'It gives your student 24 focused hours with Allan and a clear target date.'; }
     else if(go==='both'){ k = gr==='9' ? 'acc' : 'aq'; why = gr==='9' ? 'For younger students we usually start with the SAT and add application work in junior year.' : 'It combines Allan’s SAT work with Jon’s college list, essay and interview preparation.'; }
-    else if(go==='full'){ k='pre'; why='It covers both founders through the whole application season, with questions answered between sessions.'; }
+    else if(go==='full'){ k='pre'; why='It covers both coaches through the whole application season, with questions answered between sessions.'; }
     else if(go==='int'){ k='int'; why='Three recorded mock interviews with Jon and written feedback after each one.'; }
     else { k='car'; why='It helps your student connect interests to majors and careers before building a college list.'; }
     document.querySelectorAll('[data-prog="'+k+'"]').forEach(el=>el.classList.add('match'));

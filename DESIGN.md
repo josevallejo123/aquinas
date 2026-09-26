@@ -6,7 +6,7 @@ Single-file site: [index.html](index.html) — inline `<style>`, no build step, 
 
 ## Tokens (CSS vars in `:root`)
 - Colors: `--ink` #14272B (text), `--ink-2`/`--ink-3` (muted), `--teal` #1E5660 (primary/Allan), `--teal-d`, `--evergreen` #0E3439 (dark sections: dashboard, consult), `--teal-l` (tinted panels), `--brick` #A6452E (Jon only), `--brick-l`, `--gold` #C9973A (markers, highlights, outlines), `--gold-l`, `--denim`, `--bg` #F2F4F1 (page — cool mist, not cream), `--paper` #FFF (cards), `--wash` (tracks/segmented bg), `--line`/`--line-2` (borders), `--green`/`--amber` (status pills)
-- Fonts: `--serif` = Fraunces (headings, numbers, chips, brand), `--sans` = Instrument Sans (body/UI)
+- Fonts: `--serif` = Newsreader (headings, numbers, chips, brand; replaced Fraunces in Sept 2026 because its hooked "f" and curly "4" read as too quirky), `--sans` = Instrument Sans (body/UI)
 - Radius: `--r-sm` 10, `--r` 14, `--r-lg` 20. `--arch` = arched-window radius (hero photo). Shadows: `--shadow`, `--shadow-lg`. Easing: `--ease`
 - Layout: `--wrap` 1200px, `--gutter` 20px mobile / 32px ≥720, `--nav-h` 64px mobile / 76px ≥880
 
@@ -14,8 +14,8 @@ Single-file site: [index.html](index.html) — inline `<style>`, no build step, 
 - **The arch** is the brand motif (collegiate window): hero photo uses `--arch` with a 1px gold `outline` offset; founder portraits use the same arch shape. Reuse it for any new hero-level image; don't add other decorative shapes.
 - **Gold diamond** (7px rotated square) is the only list/marker glyph: eyebrows, hero meta, credential strip, tier bullets.
 - Eyebrows are **sentence case** (no uppercase/tracking anywhere on the site) — the same applies to small labels, badges and card headings.
-- Fraunces: `font-variation-settings:"SOFT" 20–30,"opsz" 96–144` for display; lower opsz for small serif text. Vary opsz, not weight.
-- Two-founder color coding: **teal = Allan**, **brick = Jon**. Hero lead is split into `.voice` blocks (A / J monograms + shared-plan line with the two-ring icon) — keep that structure if hero copy changes.
+- Newsreader: `font-variation-settings:"opsz" 72` (axis max) for display, `"opsz" 24–36` for small serif text. Vary opsz, not weight. It sets larger than Fraunces did, so size headings down rather than up.
+- Two-coach color coding: **teal = Allan**, **brick = Jon**. Hero lead is split into `.voice` blocks (A / J monograms + shared-plan line with the two-ring icon) — keep that structure if hero copy changes.
 - Buttons: pill (`999px`), min-height 48px. `.btn-primary` (teal) vs `.btn-ghost` (outline). No new shapes.
 - Sections: `padding` 64 → 88 → 112px by breakpoint; content in `.wrap`. Anchored sections clear the fixed nav via `scroll-padding-top`.
 - Status pills (`.pill.green/.amber/.red`) are the only semantic color usage.
@@ -39,3 +39,6 @@ Single-file site: [index.html](index.html) — inline `<style>`, no build step, 
 - Match existing patterns above before inventing new colors, fonts, radii, or shadows.
 - Keep everything inline in `index.html` unless the user asks to split into a real build (Next.js migration is a separate, larger task — confirm before restructuring).
 - Verify at 375 / 768 / 1440 widths before shipping.
+
+## Copy conventions
+- Allan and Jon are referred to as **coaches** in site copy (nav "Coaches", "two coaches", "both coaches"). Their role titles still read "Co-founder, …". The section anchor stays `#founders`.
