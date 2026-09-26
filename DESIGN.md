@@ -27,11 +27,12 @@ Single-file site: [index.html](index.html) — inline `<style>`, no build step, 
 - Hero order on phones: headline → arched photo (float cards sit below its edge) → founder voices → CTAs.
 - Dashboard: KPIs in a 2×2 grid, remaining cards in a horizontal scroll-snap rail (`.dash-rail`, 88% cards, dot indicator). ≥720 the rail becomes `display:contents` and the 12-col grid takes over.
 - Chart SVG renders at its container's real pixel width (re-renders on resize) so labels stay legible; points have 18px invisible hit circles.
-- Method stepper is a horizontal 1–5 row on phones, vertical list ≥1024. Flagship tier is shown first on phones (`order:-1`).
+- Method stepper is a horizontal 1–5 row on phones, vertical list ≥1024.
+- Pricing is a comparison matrix (`.mx`, ARIA table roles on divs). One CSS grid; each `.mx-row` is a `subgrid` so columns align. The Flagship column is `.mx-band` (absolutely positioned in its grid area, so it doesn't block auto-placement) capped by an arched teal `.mx-head.f` with a gold `.keystone` badge. Keep `--rows` on `.mx` equal to the number of `.mx-row`s. Phones: 3 value columns, row label spans above the values, CTA row hidden (sticky CTA covers it). ≥720: label column + 3 columns, CTA row shown. Fit helper outlines the matching `.mx-head` via `.match`.
 - All touch targets ≥44px; form inputs/selects are 16px to prevent iOS zoom.
 
 ## Content/UX rules
-- Prices are always visible per [CLAUDE.md](../CLAUDE.md) rule 3 — never gate behind "call for pricing" (except Premier, which shows "from $12,900").
+- Prices are always visible per [CLAUDE.md](../CLAUDE.md) rule 3 — never gate behind "call for pricing".
 - No outcome guarantees in copy (CLAUDE.md rule 1) — check any new headline/testimonial copy against this.
 - Keep WCAG 2.1 AA contrast (ink-3 on bg ≈ 5:1; gold is never used for body text on light backgrounds).
 

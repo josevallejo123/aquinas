@@ -300,25 +300,39 @@ section{padding:64px 0}
 .fit select,.field select{appearance:none;-webkit-appearance:none;font:inherit;font-size:16px;min-height:46px;padding:10px 36px 10px 12px;border-radius:10px;border:1px solid var(--line-2);background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2314272B' stroke-width='1.6'/%3E%3C/svg%3E") right 13px center/11px no-repeat;color:var(--ink);cursor:pointer;width:100%}
 .fit-out{grid-column:1/-1;font-size:14.5px;color:var(--ink-2);min-height:22px}
 .fit-out b{color:var(--teal)}
-.tiers{display:grid;gap:18px;padding-top:12px}
-.tier{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 22px;display:flex;flex-direction:column;position:relative;transition:box-shadow .3s,border-color .3s,outline-color .3s;outline:2.5px solid transparent;outline-offset:3px}
-.tier.flag{order:-1;background:var(--teal);color:#eef3f1;border-color:var(--teal)}
-.tier.flag .for,.tier.flag li{color:#d4e2df}
-.tier.flag h3{color:#fff}
-.tier.match,.offer.match{outline-color:var(--gold)}
-.badge{position:absolute;top:-12px;left:22px;background:var(--gold);color:var(--gold-ink);font-size:13px;font-weight:700;padding:4px 12px;border-radius:999px}
-.tier h3{font-size:26px;margin-bottom:6px}
-.tier .for{font-size:15px;color:var(--ink-3);margin-bottom:18px}
-.price{font-family:var(--serif);font-size:42px;font-weight:450;font-variation-settings:"opsz" 72;line-height:1;margin-bottom:6px;letter-spacing:-.02em}
-.price small{font-family:var(--sans);font-size:15px;font-weight:500;opacity:.75;margin-right:4px;letter-spacing:0}
-.rate{font-size:14px;opacity:.75;margin-bottom:20px}
-.tier ul{list-style:none;margin:0 0 24px;padding:20px 0 0;border-top:1px solid rgba(128,128,128,.25);display:grid;gap:10px;font-size:15px;color:var(--ink-2);flex:1}
-.tier li{padding-left:22px;position:relative;line-height:1.45}
-.tier li::before{content:"";position:absolute;left:2px;top:8px;width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
-.tier .btn{width:100%}
-.tier.flag .btn{background:var(--paper);color:var(--teal-d)}
-.tier.flag .btn:hover{background:var(--gold-l)}
-.offers{display:grid;gap:12px;margin-top:18px}
+/* comparison matrix: one grid, rows are subgrids so every column lines up.
+   The Flagship column is a tinted band capped with the brand arch. */
+.mx{--arch-h:52px;--rise:28px;position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(var(--rows),auto);column-gap:6px;margin:calc(var(--rise) + 20px) -8px 0;padding:0 8px 14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg)}
+.mx-band{position:absolute;grid-column:2/3;grid-row:1/-1;inset:calc(var(--rise) * -1) 0 -4px;background:var(--teal-l);border-radius:50% 50% var(--r) var(--r) / var(--arch-h) var(--arch-h) var(--r) var(--r);outline:1px solid rgba(201,151,58,.6);outline-offset:4px}
+.mx-row{grid-column:1/-1;display:grid;grid-template-columns:subgrid;align-items:center;row-gap:10px;position:relative;z-index:1;padding:14px 0;border-top:1px solid rgba(20,39,43,.09)}
+.mx-row.brk{border-top-color:rgba(20,39,43,.2)}
+.mx-row.hd{border-top:0;padding:0;align-items:stretch}
+.mx-corner{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mx-head{padding:30px 4px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;border-radius:var(--r);outline:2.5px solid transparent;outline-offset:2px;transition:outline-color .3s}
+.mx-head h3{font-size:17px;font-variation-settings:"opsz" 36;line-height:1.12}
+.mx-head p{display:none;margin:0;font-size:14px;line-height:1.45;color:var(--ink-3)}
+.mx-head.f{position:relative;margin-top:calc(var(--rise) * -1);padding-top:calc(30px + var(--rise));background:var(--teal);border-radius:50% 50% 0 0 / var(--arch-h) var(--arch-h) 0 0}
+.mx-head.f h3{color:#fff}
+.mx-head.f p{color:#d4e2df}
+.mx-head.match{outline-color:var(--gold)}
+.keystone{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--gold-ink);font-size:12.5px;font-weight:700;line-height:1.2;padding:5px 11px;border-radius:999px;white-space:nowrap;box-shadow:0 0 0 3px var(--paper)}
+.mx-lbl{grid-column:1/-1;font-size:15px;font-weight:600;line-height:1.3;color:var(--ink);padding-left:2px}
+.mx-lbl small{display:block;font-size:13px;font-weight:500;color:var(--ink-3);margin-top:2px}
+.mx-lbl small.a{color:var(--teal)}
+.mx-lbl small.j{color:var(--brick)}
+.mx-cell{display:grid;place-items:center;min-height:28px;text-align:center}
+.mx-num{font-family:var(--serif);font-size:21px;font-weight:500;font-variation-settings:"opsz" 36;line-height:1;letter-spacing:-.01em;color:var(--ink);font-variant-numeric:lining-nums}
+.mx-cell.f .mx-num{color:var(--teal-d);font-weight:600}
+.mx-row.pr .mx-num{font-size:22px}
+.yes{width:24px;height:24px;border-radius:50%;background:var(--teal-l) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%231E5660' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.mx-cell.f .yes{background-color:var(--teal);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%23fff' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.no{width:14px;height:2px;border-radius:2px;background:var(--line-2)}
+.mx-cell.f .no{background:#a9c3bf}
+.mx-row.ft{display:none}
+.mx-row.ft .btn{width:100%;padding-inline:12px;font-size:15px}
+.offers-h{font-size:22px;margin:48px 0 16px}
+.offer.match{outline-color:var(--gold)}
+.offers{display:grid;gap:12px}
 .offer{border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;background:var(--paper);transition:border-color .25s,outline-color .3s;outline:2.5px solid transparent;outline-offset:3px}
 .offer-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin-bottom:8px}
 .offer h4{font-size:20px;font-variation-settings:"opsz" 24}
@@ -468,9 +482,21 @@ footer .brand-name span{color:#8d9e9a}
   .legend{font-size:13px}
   .dash-foot{flex-direction:row;justify-content:space-between;align-items:center;flex-wrap:wrap}
   .fit{padding:18px 20px}
-  .tiers{max-width:640px}
-  .tier{padding:32px 30px}
-  .offers{grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  .mx{--arch-h:64px;--rise:32px;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));column-gap:12px;margin-inline:0;padding:0 20px 14px}
+  .mx-band{grid-column:3/4;bottom:-6px;outline-offset:5px}
+  .mx-row{padding:16px 0}
+  .mx-row.hd{padding:0}
+  .mx-corner{position:static;width:auto;height:auto;overflow:visible;clip:auto}
+  .mx-head{padding:36px 8px 22px;gap:8px}
+  .mx-head.f{padding-top:calc(36px + var(--rise))}
+  .mx-head h3{font-size:21px}
+  .mx-head p{display:block;font-size:13.5px}
+  .mx-lbl{grid-column:1;padding-left:4px}
+  .mx-num{font-size:24px}
+  .mx-row.pr .mx-num{font-size:30px}
+  .mx-row.ft{display:grid;border-top:0;padding:8px 0 4px}
+  .offers-h{font-size:24px;margin:64px 0 20px}
+  .offers{grid-template-columns:1fr 1fr;gap:18px}
   .offer{padding:22px 24px}
   .founding{align-items:center;padding:18px 22px;margin-top:28px}
   .fine{grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
@@ -546,11 +572,21 @@ footer .brand-name span{color:#8d9e9a}
   .side-col{grid-column:span 5;grid-template-columns:1fr;gap:16px}
   .prog-head{display:flex;justify-content:space-between;align-items:end;gap:48px;margin-bottom:44px}
   .fit{width:420px;flex:none}
-  .tiers{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:none;align-items:stretch}
-  .tier.flag{order:0}
-  .tier .for{min-height:48px}
-  .tier:hover{box-shadow:var(--shadow-lg);border-color:var(--line-2)}
-  .tier.flag:hover{border-color:var(--teal)}
+  .mx{--arch-h:84px;--rise:36px;grid-template-columns:minmax(0,1.25fr) repeat(3,minmax(0,1fr));column-gap:20px;padding:0 32px 18px}
+  .mx-band{bottom:-8px;outline-offset:7px}
+  .mx-row{padding:18px 0}
+  .mx-row.hd{padding:0}
+  .mx-head{padding:44px 20px 28px}
+  .mx-head.f{padding-top:calc(44px + var(--rise))}
+  .mx-head h3{font-size:26px}
+  .mx-head p{font-size:14.5px;max-width:24ch}
+  .mx-lbl{font-size:16px}
+  .mx-lbl small{font-size:13.5px}
+  .mx-num{font-size:26px}
+  .mx-row.pr .mx-num{font-size:40px;font-variation-settings:"opsz" 72;letter-spacing:-.02em}
+  .keystone{font-size:13px;padding:5px 13px}
+  .mx-row.ft{padding:12px 0 6px}
+  .offers-h{margin-top:80px}
   .offer:hover{border-color:var(--line-2)}
   .founders-grid{grid-template-columns:1fr 1fr;gap:24px}
   .standards-grid{grid-template-columns:.8fr 1.2fr;gap:72px}
@@ -831,52 +867,93 @@ footer .brand-name span{color:#8d9e9a}
       </div>
     </div>
 
-    <div class="tiers">
-      <article class="tier" data-prog="acc">
-        <h3>SAT Accelerator</h3>
-        <p class="for">For students whose main need is a stronger SAT result.</p>
-        <div class="price">$4,400</div>
-        <div class="rate">About $183 an hour</div>
-        <ul>
-          <li>24 hours of one-on-one work with Allan over 8 to 12 weeks</li>
-          <li>4 full-length practice tests with error analysis</li>
-          <li>Parent dashboard and a weekly update</li>
-          <li>One strategy call with Jon</li>
-          <li>The +100 point promise (terms below)</li>
-        </ul>
-        <a class="btn btn-ghost" href="#consult">Talk to us about this</a>
-      </article>
-      <article class="tier flag" data-prog="aq">
-        <span class="badge">Flagship</span>
-        <h3>The Aquinas Program</h3>
-        <p class="for">For juniors and rising seniors applying to selective colleges.</p>
-        <div class="price">$7,600</div>
-        <div class="rate">About $224 an hour</div>
-        <ul>
-          <li>30 hours of SAT preparation with Allan</li>
-          <li>4 hours with Jon on the college list, activities, essay planning and career direction</li>
-          <li>3 mock interviews with recorded feedback</li>
-          <li>Joint kickoff and mid-point review with both coaches</li>
-          <li>Dashboard, weekly updates and priority scheduling</li>
-        </ul>
-        <a class="btn" href="#consult">Book a consult <span class="arr" aria-hidden="true">&rarr;</span></a>
-      </article>
-      <article class="tier" data-prog="pre">
-        <h3>Premier</h3>
-        <p class="for">For families who want full support through application season.</p>
-        <div class="price"><small>from</small>$12,900</div>
-        <div class="rate">Limited to 10 families a year</div>
-        <ul>
-          <li>40 hours with Allan and 8 hours with Jon</li>
-          <li>Application season strategy and deadline planning</li>
-          <li>Questions answered within 48 hours between sessions</li>
-          <li>Quarterly family reviews</li>
-          <li>Everything in The Aquinas Program</li>
-        </ul>
-        <a class="btn btn-ghost" href="#consult">Ask about availability</a>
-      </article>
+    <div class="mx" role="table" aria-label="Compare programs" style="--rows:12">
+      <div class="mx-band" aria-hidden="true"></div>
+      <div class="mx-row hd" role="row">
+        <div class="mx-corner" role="columnheader"><span class="sr">Included</span></div>
+        <div class="mx-head" role="columnheader" data-prog="acc">
+          <h3>SAT Accelerator</h3>
+          <p>For students whose main need is a stronger SAT score.</p>
+        </div>
+        <div class="mx-head f" role="columnheader" data-prog="aq">
+          <span class="keystone">Recommended</span>
+          <h3>Flagship Program</h3>
+          <p>For juniors and rising seniors applying to selective colleges.</p>
+        </div>
+        <div class="mx-head" role="columnheader" data-prog="pre">
+          <h3>Premier Program</h3>
+          <p>For families who want the most time with both coaches.</p>
+        </div>
+      </div>
+      <div class="mx-row pr" role="row">
+        <div class="mx-lbl" role="rowheader">Price</div>
+        <div class="mx-cell" role="cell"><span class="mx-num">$4,400</span></div>
+        <div class="mx-cell f" role="cell"><span class="mx-num">$7,600</span></div>
+        <div class="mx-cell" role="cell"><span class="mx-num">$9,200</span></div>
+      </div>
+      <div class="mx-row" role="row">
+        <div class="mx-lbl" role="rowheader">Coaching hours<small>One-on-one, online</small></div>
+        <div class="mx-cell" role="cell"><span class="mx-num">20</span></div>
+        <div class="mx-cell f" role="cell"><span class="mx-num">40</span></div>
+        <div class="mx-cell" role="cell"><span class="mx-num">50</span></div>
+      </div>
+      <div class="mx-row brk" role="row">
+        <div class="mx-lbl" role="rowheader">SAT preparation<small class="a">With Allan</small></div>
+        <div class="mx-cell" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+        <div class="mx-cell f" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+        <div class="mx-cell" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+      </div>
+      <div class="mx-row" role="row">
+        <div class="mx-lbl" role="rowheader">Essay review<small class="j">With Jon</small></div>
+        <div class="mx-cell" role="cell"><span class="no"><span class="sr">Not included</span></span></div>
+        <div class="mx-cell f" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+        <div class="mx-cell" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+      </div>
+      <div class="mx-row" role="row">
+        <div class="mx-lbl" role="rowheader">Interview preparation<small class="j">With Jon</small></div>
+        <div class="mx-cell" role="cell"><span class="no"><span class="sr">Not included</span></span></div>
+        <div class="mx-cell f" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+        <div class="mx-cell" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+      </div>
+      <div class="mx-row" role="row">
+        <div class="mx-lbl" role="rowheader">Career guidance<small class="j">With Jon</small></div>
+        <div class="mx-cell" role="cell"><span class="no"><span class="sr">Not included</span></span></div>
+        <div class="mx-cell f" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+        <div class="mx-cell" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+      </div>
+      <div class="mx-row brk" role="row">
+        <div class="mx-lbl" role="rowheader">Parent and student dashboard<small>Weekly plans and progress</small></div>
+        <div class="mx-cell" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+        <div class="mx-cell f" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+        <div class="mx-cell" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+      </div>
+      <div class="mx-row" role="row">
+        <div class="mx-lbl" role="rowheader">The +100 point promise<small>Terms below</small></div>
+        <div class="mx-cell" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+        <div class="mx-cell f" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+        <div class="mx-cell" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+      </div>
+      <div class="mx-row" role="row">
+        <div class="mx-lbl" role="rowheader">Recorded mock interviews<small>With written feedback</small></div>
+        <div class="mx-cell" role="cell"><span class="no"><span class="sr">None</span></span></div>
+        <div class="mx-cell f" role="cell"><span class="mx-num">1</span></div>
+        <div class="mx-cell" role="cell"><span class="mx-num">3</span></div>
+      </div>
+      <div class="mx-row" role="row">
+        <div class="mx-lbl" role="rowheader">Introduction to an industry professional<small>In a field your student is exploring</small></div>
+        <div class="mx-cell" role="cell"><span class="no"><span class="sr">Not included</span></span></div>
+        <div class="mx-cell f" role="cell"><span class="no"><span class="sr">Not included</span></span></div>
+        <div class="mx-cell" role="cell"><span class="yes"><span class="sr">Included</span></span></div>
+      </div>
+      <div class="mx-row ft" role="row">
+        <div class="mx-cell" role="cell"></div>
+        <div class="mx-cell" role="cell"><a class="btn btn-ghost" href="#consult" aria-label="Book a consult about the SAT Accelerator">Book a consult</a></div>
+        <div class="mx-cell f" role="cell"><a class="btn btn-primary" href="#consult" aria-label="Book a consult about the Flagship Program">Book a consult</a></div>
+        <div class="mx-cell" role="cell"><a class="btn btn-ghost" href="#consult" aria-label="Book a consult about the Premier Program">Book a consult</a></div>
+      </div>
     </div>
 
+    <h3 class="offers-h">Other programs</h3>
     <div class="offers">
       <div class="offer" data-prog="grp">
         <div class="offer-top"><h4>SAT Small Group</h4><span class="p">$2,200<small> per student</small></span></div>
@@ -902,7 +979,7 @@ footer .brand-name span{color:#8d9e9a}
     </div>
 
     <div class="fine">
-      <p><b>The +100 point promise.</b> If your student completes the full Accelerator plan and improves by fewer than 100 points from the diagnostic to an official SAT, we add 8 hours of tutoring at no cost.</p>
+      <p><b>The +100 point promise.</b> Every program includes it. If your student completes the full plan and improves by fewer than 100 points from the diagnostic to an official SAT, we add 8 hours of tutoring at no cost.</p>
       <p><b>Payment.</b> Pay in full and save 5%, or split any program into three payments. Hourly sessions are available afterward at $205 with Allan and $245 with Jon, with a two-hour minimum.</p>
       <p><b>What we never promise.</b> No one can honestly guarantee admission to a particular college, and we will not pretend otherwise.</p>
     </div>
@@ -969,7 +1046,7 @@ footer .brand-name span{color:#8d9e9a}
       <div class="acc-item"><button class="acc-q" aria-expanded="true">Are sessions online?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Yes. Every session runs on video, so we work with families anywhere in the US and schedule around your time zone. Sessions are recorded only if a parent gives consent.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false">How long is each session?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>SAT sessions with Allan run one hour. Jon's strategy and interview sessions usually run 45 to 60 minutes.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false">When should my student start?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Most students begin in the fall or winter of junior year and aim for spring test dates. Seniors can still benefit from a Final-Push Intensive or interview preparation, and ninth and tenth graders can start with a lighter plan.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you guarantee admission or a specific result?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>No, and we would be cautious of anyone who does. We promise a clear plan, expert time and honest progress reports. The SAT Accelerator includes the +100 point promise, with its full terms listed under Programs.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you guarantee admission or a specific result?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>No, and we would be cautious of anyone who does. We promise a clear plan, expert time and honest progress reports. Every program includes the +100 point promise, with its full terms listed under Programs.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you help with the ACT?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Our programs are built around the digital SAT. If the diagnostic suggests the ACT would suit your student better, we will tell you and help you decide what to do next.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false">Will you write my child's essays?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>No. We help students work out what they want to say and give feedback on their drafts, but every word they submit is their own.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false">How does payment work?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>You can pay in full and save 5%, or split any program into three payments. Hourly sessions are available for returning students once a program is complete.</p></div></div></div>
@@ -1243,15 +1320,15 @@ footer .brand-name span{color:#8d9e9a}
 
   /* program fit helper */
   const fitGrade = document.getElementById('fitGrade'), fitGoal = document.getElementById('fitGoal'), fitOut = document.getElementById('fitOut');
-  const progNames = {acc:'the SAT Accelerator',aq:'The Aquinas Program',pre:'Premier',grp:'the SAT Small Group',int:'the Interview Intensive',fp:'the Final-Push Intensive',car:'the Career Clarity Sprint'};
+  const progNames = {acc:'the SAT Accelerator',aq:'the Flagship Program',pre:'the Premier Program',grp:'the SAT Small Group',int:'the Interview Intensive',fp:'the Final-Push Intensive',car:'the Career Clarity Sprint'};
   function fit(){
     const gr = fitGrade.value, go = fitGoal.value;
     document.querySelectorAll('[data-prog]').forEach(el=>el.classList.remove('match'));
     if(!go){ fitOut.innerHTML='Pick a grade and a need to see where most families in your position start.'; return; }
     let k, why;
-    if(go==='sat'){ k = gr==='12' ? 'fp' : 'acc'; why = gr==='12' ? 'Seniors usually have one or two sittings left, so a short, focused block before a specific date works best.' : 'It gives your student 24 focused hours with Allan and a clear target date.'; }
+    if(go==='sat'){ k = gr==='12' ? 'fp' : 'acc'; why = gr==='12' ? 'Seniors usually have one or two sittings left, so a short, focused block before a specific date works best.' : 'It gives your student 20 focused hours with Allan and a clear target date.'; }
     else if(go==='both'){ k = gr==='9' ? 'acc' : 'aq'; why = gr==='9' ? 'For younger students we usually start with the SAT and add application work in junior year.' : 'It combines Allan’s SAT work with Jon’s college list, essay and interview preparation.'; }
-    else if(go==='full'){ k='pre'; why='It covers both coaches through the whole application season, with questions answered between sessions.'; }
+    else if(go==='full'){ k='pre'; why='It adds more time with both coaches, three recorded mock interviews and an introduction to a professional in a field your student is exploring.'; }
     else if(go==='int'){ k='int'; why='Three recorded mock interviews with Jon and written feedback after each one.'; }
     else { k='car'; why='It helps your student connect interests to majors and careers before building a college list.'; }
     document.querySelectorAll('[data-prog="'+k+'"]').forEach(el=>el.classList.add('match'));
