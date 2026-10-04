@@ -1515,7 +1515,7 @@ footer .brand-name span{color:#8d9e9a}
     });
   });
   document.addEventListener('click', e => { if (!e.target.closest('.sc-src li')) items.forEach(li => setOpen(li, false)); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') items.forEach(li => { if (li.matches('.open, :hover, :focus-within')) { setOpen(li, false); li.classList.add('shut'); } }); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') items.forEach(li => { if (li.matches('.open, :hover, :focus-within')) { setOpen(li, false); if (li.matches(':hover, :focus-within')) li.classList.add('shut'); } }); });
 })();
 </script>
 </body>
