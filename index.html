@@ -11,8 +11,10 @@
 <meta name="description" content="SAT preparation and college guidance for students applying to selective colleges. Online across the US, delivered by the coaches.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="hero.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="media/hero-desktop.webp" type="image/webp" fetchpriority="high" media="(min-aspect-ratio: 751/1000)">
+<link rel="preload" as="image" href="media/hero-phone.webp" type="image/webp" fetchpriority="high" media="(max-aspect-ratio: 3/4)">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
 <style>
 /* ============ tokens ============ */
 /* The logo's one ink (navy #10273E, hue 210) is the page's ink: text, primary buttons and every
@@ -30,9 +32,6 @@
   --chart-hi:var(--brand-2); --chart-2:var(--brand-3); --chart-total:var(--brand); --chart-muted:#A7B5C4; --chart-ref:var(--accent-d);
   --scrim:var(--brand-deep);
   --focus:var(--brand-2);
-  /* until the logo and hero land in the next commit, the old nav and hero rules read these old names */
-  --teal:var(--brand-2); --teal-d:var(--brand); --teal-l:var(--brand-tint); --evergreen:var(--brand);
-  --brick:var(--jon); --brick-l:var(--jon-l); --gold:var(--accent); --gold-ink:var(--brand); --denim:var(--brand-3);
   --serif:"Newsreader",Georgia,"Times New Roman",serif;
   --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --fs-h1:clamp(36px,3vw + 24px,64px); --fs-h2:clamp(30px,2.2vw + 22px,50px); --fs-h3:22px;
@@ -82,15 +81,19 @@ section{padding:64px 0}
 .btn:hover .arr{transform:translateX(3px)}
 
 /* ============ nav ============ */
-.nav{position:fixed;inset:0 0 auto;z-index:50;background:rgba(242,244,241,.9);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
-.nav.scrolled{border-bottom-color:var(--line)}
+/* Solid (fog glass, navy logo) by default; transparent with the light logo while the hero's
+   video is under it (.over, kept by an IntersectionObserver; needs the .js class set in <head>) */
+.nav{position:fixed;inset:0 0 auto;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid var(--line);transition:background-color .3s,border-color .3s}
+.js .nav.over{background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:transparent;--focus:var(--accent)}
 .nav .wrap{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:44px}
-.brand svg{width:30px;height:34px}
-.brand-name{font-family:var(--serif);font-size:20px;font-weight:500;font-variation-settings:"opsz" 36;letter-spacing:-.01em}
-.brand-name span{color:var(--ink-3);font-weight:400}
-.menu-btn{width:44px;height:44px;border-radius:12px;border:1px solid var(--line-2);background:var(--paper);cursor:pointer;display:grid;place-items:center;padding:0}
-.menu-btn i,.menu-btn i::before,.menu-btn i::after{display:block;width:18px;height:1.8px;border-radius:2px;background:var(--ink);transition:transform .25s var(--ease),background-color .2s}
+.brand{display:grid;align-items:center;text-decoration:none;min-height:44px}
+.brand picture{grid-area:1/1;transition:opacity .3s}
+.brand img{height:36px;width:auto}
+.brand .logo-rev,.js .nav.over .brand .logo-navy{opacity:0}
+.js .nav.over .brand .logo-rev{opacity:1}
+.menu-btn{width:44px;height:44px;border-radius:12px;border:1px solid var(--edge);background:var(--paper);cursor:pointer;display:grid;place-items:center;padding:0;transition:background-color .3s,border-color .3s}
+.js .nav.over .menu-btn{background:color-mix(in srgb,var(--scrim) 50%,transparent);border-color:color-mix(in srgb,var(--on-dark) 70%,transparent);--menu-ink:var(--on-dark)}
+.menu-btn i,.menu-btn i::before,.menu-btn i::after{display:block;width:18px;height:1.8px;border-radius:2px;background:var(--menu-ink,var(--ink));transition:transform .25s var(--ease),background-color .2s}
 .menu-btn i{position:relative}
 .menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0}
 .menu-btn i::before{top:-6px}.menu-btn i::after{top:6px}
@@ -102,52 +105,62 @@ section{padding:64px 0}
 .nav-links a:not(.btn){display:flex;align-items:center;min-height:52px;padding:0 14px;font-size:17px;font-weight:500;text-decoration:none;border-radius:10px}
 .nav-links a:not(.btn):active{background:var(--bg)}
 .nav-links li:not(:last-child):not(:nth-last-child(2)){border-bottom:1px solid var(--line)}
-.nav-links .btn{width:100%;margin-top:8px;color:#fff}
+.nav-links{--focus:var(--brand-2)}
+.nav-links .btn{width:100%;margin-top:8px;color:var(--on-dark)}
 
-/* ============ hero ============ */
-.hero{padding:calc(var(--nav-h) + 28px) 0 56px}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"copy" "fig" "lead" "ctas" "meta"}
-.hero-copy{grid-area:copy;margin-bottom:28px}
-.hero h1{font-size:clamp(34px,2.6vw + 24px,56px);font-weight:430;font-variation-settings:"opsz" 72;line-height:1.04;letter-spacing:-.022em}
+/* ============ hero: a full-bleed video stage, then the coaches' voices on fog ============ */
+.hero{padding:0}
+.hero-stage{position:relative;isolation:isolate;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:calc(var(--nav-h) + 96px);color:var(--on-dark);--focus:var(--accent)}
+.hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--scrim)}
+.hero-media img,.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* the scrim, sized so every line over the video passes AA on both posters (numbers in DESIGN.md):
+   a band under the nav and a light overall calm here, plus a shade that follows the copy block
+   (.hero-grid::before), so it covers the text however many lines it wraps to */
+.hero-media::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,color-mix(in srgb,var(--scrim) 70%,transparent),color-mix(in srgb,var(--scrim) 58%,transparent) var(--nav-h),transparent calc(var(--nav-h) + 80px)),
+  linear-gradient(color-mix(in srgb,var(--scrim) 14%,transparent),color-mix(in srgb,var(--scrim) 14%,transparent))}
+.hero-grid{position:relative;width:100%;display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"copy" "ctas" "meta" "cards"}
+.hero-grid::before{content:"";position:absolute;z-index:-1;top:-180px;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);background:linear-gradient(0deg,color-mix(in srgb,var(--scrim) 84%,transparent),color-mix(in srgb,var(--scrim) 76%,transparent) calc(100% - 180px),transparent);pointer-events:none}
+.hero-copy{grid-area:copy;margin-bottom:26px}
+.hero .eyebrow{color:var(--on-dark)}
+.hero h1{font-size:var(--fs-h1);font-weight:470;font-variation-settings:"opsz" 72;line-height:1.04;letter-spacing:-.022em;max-width:15em;text-shadow:0 1px 28px color-mix(in srgb,var(--scrim) 45%,transparent)}
 .hero h1 em{font-style:italic;font-variation-settings:"opsz" 72}
-.hero-figure{grid-area:fig;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;margin:0 2px 36px}
-.hero-photo{grid-column:1/-1;grid-row:1;position:relative;aspect-ratio:6/5;border-radius:var(--arch);overflow:hidden;background:var(--wash);outline:1px solid rgba(201,151,58,.6);outline-offset:7px}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:28% 42%}
-.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(14,52,57,.28))}
-.float-card{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow-lg);padding:12px 14px;font-size:14px;line-height:1.35;border:1px solid var(--line);position:relative;z-index:2}
+.hero-ctas{grid-area:ctas;display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.hero-meta{grid-area:meta;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14.5px;color:var(--on-dark)}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.hero-meta span::before{content:"";width:6px;height:6px;background:var(--accent);transform:rotate(45deg)}
+/* the float cards (D1) hang over the stage's bottom edge on phones and tablets */
+.hero-cards{grid-area:cards;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:8px;margin:28px 0 -58px;color:var(--ink)}
+.float-card{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow-lg);padding:12px;font-size:14px;line-height:1.35;border:1px solid var(--line);position:relative;z-index:2}
 .float-card small{display:block;color:var(--ink-3);font-size:12.5px;font-weight:600;margin-bottom:5px}
-.fc-week{grid-column:1;grid-row:2;margin:-46px 0 0 8px;align-self:start;padding-inline:12px}
-.fc-proj{grid-column:2;grid-row:2;margin:-46px 8px 0 0;align-self:start;padding-inline:12px}
+.fc-week{grid-column:1;grid-row:1}
+.fc-proj{grid-column:2;grid-row:1}
 .fc-proj b{font-family:var(--serif);font-size:18px;font-weight:500;font-variation-settings:"opsz" 36;display:block;line-height:1.1;white-space:nowrap}
 .fc-row{display:flex;justify-content:space-between;gap:8px;font-weight:600;font-size:13px;white-space:nowrap}
 .mini-bar{height:6px;background:var(--wash);border-radius:9px;overflow:hidden;margin:7px 0 8px}
-.mini-bar i{display:block;height:100%;width:75%;background:var(--teal);border-radius:9px}
+.mini-bar i{display:block;height:100%;width:75%;background:var(--brand-2);border-radius:9px}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
 .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
-.pill.green{color:var(--green);background:#e2efe6}
-.pill.amber{color:var(--amber);background:#f7ebd2}
-.pill.red{color:var(--brick);background:var(--brick-l)}
-.hero-lead{grid-area:lead;display:grid;gap:18px;margin-bottom:28px}
+.pill.green{color:var(--green);background:var(--green-l)}
+.pill.amber{color:var(--amber);background:var(--amber-l)}
+.pill.red{color:var(--red);background:var(--red-l)}
+/* pause/play for the looping video (WCAG 2.2.2); shown once JS can drive it */
+.hero-toggle{position:absolute;z-index:2;top:calc(var(--nav-h) + 12px);right:max(var(--gutter),env(safe-area-inset-right));width:44px;height:44px;padding:0;border-radius:50%;border:1px solid color-mix(in srgb,var(--on-dark) 85%,transparent);background:color-mix(in srgb,var(--scrim) 75%,transparent);color:var(--on-dark);cursor:pointer;display:none;place-items:center;transition:background-color .2s}
+.js .hero-toggle{display:grid}
+.hero-toggle:hover{background:var(--scrim)}
+.hero-toggle svg{width:16px;height:16px;fill:currentColor}
+.hero-toggle .i-play,.hero-toggle.paused .i-pause{display:none}
+.hero-toggle.paused .i-play{display:inline}
+/* sentinel: the stage minus the nav's height; it leaves the viewport when the stage's bottom edge passes under the nav */
+.hero-end{position:absolute;left:0;top:0;bottom:var(--nav-h);width:1px;pointer-events:none}
+.hero-lead{display:grid;gap:18px;padding-top:calc(58px + 34px);padding-bottom:56px}
 .voice{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;align-items:start;align-content:start}
 .voice .mono{width:34px;height:34px;font-size:16px;margin-top:2px}
 .voice p{margin:0;color:var(--ink-2)}
 .voice.both p{color:var(--ink);font-weight:500}
-.voice.both svg{margin-top:3px}
-.hero-ctas{grid-area:ctas;display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
-.hero-meta{grid-area:meta;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14.5px;color:var(--ink-3)}
-.hero-meta span{display:inline-flex;align-items:center;gap:8px}
-.hero-meta span::before{content:"";width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
-
-/* hero load sequence: the page's one orchestrated moment */
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes settle{from{transform:scale(1.06)}to{transform:scale(1)}}
-.hero-copy{animation:rise .8s var(--ease) both}
-.hero-photo{animation:rise .9s .08s var(--ease) both}
-.hero-photo img{animation:settle 1.6s var(--ease) both}
-.fc-week{animation:rise .7s .55s var(--ease) both}
-.fc-proj{animation:rise .7s .7s var(--ease) both}
-.hero-lead{animation:rise .8s .18s var(--ease) both}
-.hero-ctas,.hero-meta{animation:rise .8s .28s var(--ease) both}
+.voice.both svg{margin-top:3px;fill:none;stroke-width:1.7}
+.voice.both .ring-a{stroke:var(--allan)}
+.voice.both .ring-j{stroke:var(--jon)}
 
 /* ============ credential strip ============ */
 .creds{background:var(--paper);border-block:1px solid var(--line)}
@@ -483,9 +496,6 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
 .foot-tag{margin:18px 0 0;max-width:38ch}
 .legalese{padding-top:24px;font-size:12.5px;color:var(--on-dark-3);display:grid;gap:8px}
 .legalese p{margin:0}
-/* until the footer logo lands in the next commit */
-footer .brand-name{color:var(--on-dark)}
-footer .brand-name span{color:var(--on-dark-3)}
 
 /* ============ mobile sticky CTA ============ */
 .mcta{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px max(16px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-top:1px solid var(--line);transform:translateY(110%);visibility:hidden;transition:transform .3s var(--ease),visibility 0s .3s}
@@ -498,13 +508,14 @@ footer .brand-name span{color:var(--on-dark-3)}
   :root{--gutter:32px;--arch:50% 50% 20px 20px / 40% 40% 20px 20px}
   body{font-size:17px}
   section{padding:88px 0}
-  .hero{padding:calc(var(--nav-h) + 48px) 0 72px}
-  .hero-figure{max-width:560px;width:100%;justify-self:center;margin-bottom:48px}
-  .hero-photo{aspect-ratio:5/4}
+  .hero-stage{padding-top:calc(var(--nav-h) + 140px)}
   .hero-ctas{flex-direction:row;flex-wrap:wrap}
-  .hero-lead{grid-template-columns:1fr 1fr;column-gap:28px;row-gap:22px}
-  .voice{grid-template-columns:1fr;gap:12px;border-top:2px solid var(--teal);padding-top:16px}
-  .voice.jon{border-top-color:var(--brick)}
+  .hero-cards{grid-template-columns:auto auto;justify-content:start;gap:12px}
+  .float-card{padding:14px 16px}
+  .hero-toggle{top:auto;bottom:24px}
+  .hero-lead{grid-template-columns:1fr 1fr;column-gap:28px;row-gap:22px;padding-top:calc(58px + 48px);padding-bottom:72px}
+  .voice{grid-template-columns:1fr;gap:12px;border-top:2px solid var(--allan);padding-top:16px}
+  .voice.jon{border-top-color:var(--jon)}
   .voice.both{grid-column:1/-1;grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--line-2)}
   .creds ul{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 56px;padding-block:22px}
   .creds li{font-size:19px}
@@ -583,14 +594,15 @@ footer .brand-name span{color:var(--on-dark-3)}
 @media (min-width:880px){
   :root{--nav-h:76px}
   .menu-btn{display:none}
-  .brand svg{width:34px;height:38px}
-  .brand-name{font-size:21px}
-  .nav-links{position:static;flex-direction:row;align-items:center;gap:14px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;opacity:1;visibility:visible;transform:none;transition:none}
+  .brand img{height:40px}
+  .nav-links{position:static;flex-direction:row;align-items:center;gap:14px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;opacity:1;visibility:visible;transform:none;transition:none;--focus:inherit}
   .nav-links li:not(:last-child):not(:nth-last-child(2)){border:0}
   .nav-links a{white-space:nowrap}
-  .nav-links a:not(.btn){min-height:auto;padding:6px 0;font-size:15.5px;color:var(--ink-2);position:relative;border-radius:0}
-  .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--brick);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+  .nav-links a:not(.btn){min-height:auto;padding:6px 0;font-size:15.5px;color:var(--ink-2);position:relative;border-radius:0;transition:color .3s}
+  .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
   .nav-links a:not(.btn):hover{color:var(--ink)}
+  .js .nav.over .nav-links a:not(.btn),.js .nav.over .nav-links a:not(.btn):hover{color:var(--on-dark)}
+  .js .nav.over .nav-links .btn-primary{background:var(--accent);color:var(--brand);box-shadow:none}
   .nav-links a:not(.btn):hover::after{transform:scaleX(1)}
   .nav-links .btn{width:auto;margin:0;min-height:42px;padding:10px 18px;font-size:15px}
   .mcta{display:none}
@@ -602,18 +614,25 @@ footer .brand-name span{color:var(--on-dark-3)}
   .nav-links{gap:30px}
   section{padding:112px 0}
   .lead{font-size:19px}
-  .hero{padding:calc(var(--nav-h) + 64px) 0 96px}
-  .hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-areas:"copy fig" "lead fig" "ctas fig" "meta fig";grid-template-rows:auto auto auto 1fr;column-gap:80px}
-  .hero-copy{margin-bottom:36px}
-  .hero-figure{display:block;position:relative;max-width:none;margin:0;align-self:center}
-  .hero-photo{aspect-ratio:4/5;outline-offset:12px}
-  .float-card{position:absolute;margin:0;padding:14px 16px}
+  /* the copy holds the lower left; the cards float to its right, inside the stage */
+  .hero-stage{padding-bottom:88px}
+  .hero-grid::before{display:none}
+  .hero-media::after{background:
+    linear-gradient(180deg,color-mix(in srgb,var(--scrim) 70%,transparent),color-mix(in srgb,var(--scrim) 58%,transparent) var(--nav-h),transparent calc(var(--nav-h) + 80px)),
+    linear-gradient(90deg,color-mix(in srgb,var(--scrim) 84%,transparent),color-mix(in srgb,var(--scrim) 74%,transparent) 44%,color-mix(in srgb,var(--scrim) 34%,transparent) 64%,color-mix(in srgb,var(--scrim) 8%,transparent) 84%),
+    linear-gradient(0deg,color-mix(in srgb,var(--scrim) 50%,transparent),transparent 45%)}
+  .hero-grid{grid-template-columns:minmax(0,1fr) 300px;grid-template-areas:"copy cards" "ctas cards" "meta cards";column-gap:64px}
+  .hero-copy{margin-bottom:34px}
+  .hero-ctas{margin-bottom:24px}
+  .hero-cards{display:block;position:relative;margin:0}
+  .float-card{position:absolute}
   .fc-row{font-size:14px}
-  .fc-week{left:-56px;bottom:56px;width:236px}
-  .fc-proj{right:-28px;top:30%}
+  .fc-proj{right:0;top:0}
+  .fc-week{left:-24px;bottom:0;width:236px}
   .fc-proj b{font-size:26px}
-  .hero-lead{margin-bottom:34px}
-  .hero-ctas{margin-bottom:26px}
+  .hero-toggle{bottom:28px;right:max(var(--gutter),calc((100% - var(--wrap)) / 2 + var(--gutter)))}
+  .hero-lead{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;padding-top:64px;padding-bottom:80px}
+  .voice.both{grid-column:auto}
   .sc-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-rows:auto 1fr;grid-template-areas:"head fig" "more fig";gap:32px 72px;align-items:start}
   .earn .sc-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-rows:auto auto;grid-template-areas:"head head" "fig more";row-gap:44px}
   .earn .sc-head{max-width:780px}
@@ -674,15 +693,11 @@ footer .brand-name span{color:var(--on-dark-3)}
 </head>
 <body>
 
-<header class="nav" id="nav">
+<header class="nav over" id="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Lighthouse Prep, back to top">
-      <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true">
-        <path d="M17 1.5 L32 6.5 V19 C32 28 25.5 33.8 17 36.5 C8.5 33.8 2 28 2 19 V6.5 Z" fill="#1E5660"/>
-        <path d="M17 4.6 L29 8.6 V19 C29 26.2 23.8 31 17 33.4 C10.2 31 5 26.2 5 19 V8.6 Z" fill="none" stroke="#C9973A" stroke-width=".9" opacity=".85"/>
-        <text x="17" y="25.5" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="17" font-weight="500" fill="#F2F4F1">L</text>
-      </svg>
-      <span class="brand-name">Lighthouse <span>Prep</span></span>
+      <picture class="logo-navy"><source type="image/webp" srcset="brand/logo-horizontal-navy.webp 1x, brand/logo-horizontal-navy@2x.webp 2x"><img src="brand/logo-horizontal-navy.png" srcset="brand/logo-horizontal-navy@2x.png 2x" alt="Lighthouse Prep" width="177" height="40"></picture>
+      <picture class="logo-rev"><source type="image/webp" srcset="brand/logo-horizontal-reverse.webp 1x, brand/logo-horizontal-reverse@2x.webp 2x"><img src="brand/logo-horizontal-reverse.png" srcset="brand/logo-horizontal-reverse@2x.png 2x" alt="" width="177" height="40"></picture>
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks"><i aria-hidden="true"></i><span class="sr" id="menuTxt">Menu</span></button>
     <ul class="nav-links" id="navLinks">
@@ -700,41 +715,51 @@ footer .brand-name span{color:var(--on-dark-3)}
 <main id="top">
 
 <!-- HERO -->
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <div class="eyebrow">SAT preparation and college guidance</div>
-      <h1>Careful SAT prep and college guidance from two coaches who know your student <em class="accent">by name.</em></h1>
+<section class="hero" id="hero">
+  <div class="hero-stage on-dark">
+    <div class="hero-media" aria-hidden="true">
+      <picture>
+        <source media="(max-aspect-ratio: 3/4)" srcset="media/hero-phone.webp" type="image/webp">
+        <source media="(max-aspect-ratio: 3/4)" srcset="media/hero-phone.jpg">
+        <source srcset="media/hero-desktop.webp" type="image/webp">
+        <img class="hero-poster" src="media/hero-desktop.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+      </picture>
+      <video class="hero-video" id="heroVideo" muted playsinline loop autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
     </div>
-    <div class="hero-figure">
-      <div class="hero-photo">
-        <img src="hero.jpg" alt="A smiling student sitting on campus steps with her laptop" width="1000" height="667" fetchpriority="high">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">SAT preparation and college guidance</div>
+        <h1>Careful SAT prep and college guidance from two coaches who know your student <em class="accent">by name.</em></h1>
       </div>
-      <div class="float-card fc-proj" aria-hidden="true">
-        <small>Projected range</small>
-        <b>1440 to 1480</b>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#consult">Book a free consult <span class="arr" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-ghost" href="#dashboard">Try the parent dashboard</a>
       </div>
-      <div class="float-card fc-week" aria-hidden="true">
-        <small>Maya's week</small>
-        <div class="fc-row"><span>3 of 4 tasks done</span><span>75%</span></div>
-        <div class="mini-bar"><i></i></div>
-        <span class="pill green">On track for March</span>
+      <div class="hero-meta">
+        <span>Online, anywhere in the US</span>
+        <span>Published prices</span>
+        <span>The coaches teach every session</span>
+      </div>
+      <div class="hero-cards">
+        <div class="float-card fc-proj" aria-hidden="true">
+          <small>Projected range</small>
+          <b>1440 to 1480</b>
+        </div>
+        <div class="float-card fc-week" aria-hidden="true">
+          <small>Maya's week</small>
+          <div class="fc-row"><span>3 of 4 tasks done</span><span>75%</span></div>
+          <div class="mini-bar"><i></i></div>
+          <span class="pill green">On track for March</span>
+        </div>
       </div>
     </div>
-    <div class="hero-lead">
-      <div class="voice"><span class="mono" aria-hidden="true">A</span><p>Allan has taught the SAT and ACT for more than ten years and has coached over 200 students with a proven lesson plan he built himself. It teaches the material the test covers and the strategy for handling it under the clock.</p></div>
-      <div class="voice jon"><span class="mono j" aria-hidden="true">J</span><p>Jon is an ex-McKinsey consultant, Wharton graduate, and veteran US Navy officer who guides students through future career paths, essays and interviews.</p></div>
-      <div class="voice both"><svg width="34" height="22" viewBox="0 0 34 22" aria-hidden="true"><circle cx="12" cy="11" r="8.5" fill="none" stroke="#1E5660" stroke-width="1.7"/><circle cx="22" cy="11" r="8.5" fill="none" stroke="#A6452E" stroke-width="1.7"/></svg><p>Every family works with both of them on one shared plan, and parents can see progress every week.</p></div>
-    </div>
-    <div class="hero-ctas">
-      <a class="btn btn-primary" href="#consult">Book a free consult <span class="arr" aria-hidden="true">&rarr;</span></a>
-      <a class="btn btn-ghost" href="#dashboard">Try the parent dashboard</a>
-    </div>
-    <div class="hero-meta">
-      <span>Online, anywhere in the US</span>
-      <span>Published prices</span>
-      <span>The coaches teach every session</span>
-    </div>
+    <button class="hero-toggle paused" id="heroToggle" type="button" aria-label="Play background video"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="i-pause" d="M4 2.5h2.8v11H4zM9.2 2.5H12v11H9.2z"/><path class="i-play" d="M4.5 2.5 13 8l-8.5 5.5z"/></svg></button>
+    <span class="hero-end" aria-hidden="true"></span>
+  </div>
+  <div class="wrap hero-lead">
+    <div class="voice"><span class="mono" aria-hidden="true">A</span><p>Allan has taught the SAT and ACT for more than ten years and has coached over 200 students with a proven lesson plan he built himself. It teaches the material the test covers and the strategy for handling it under the clock.</p></div>
+    <div class="voice jon"><span class="mono j" aria-hidden="true">J</span><p>Jon is an ex-McKinsey consultant, Wharton graduate, and veteran US Navy officer who guides students through future career paths, essays and interviews.</p></div>
+    <div class="voice both"><svg width="34" height="22" viewBox="0 0 34 22" aria-hidden="true"><circle class="ring-a" cx="12" cy="11" r="8.5"/><circle class="ring-j" cx="22" cy="11" r="8.5"/></svg><p>Every family works with both of them on one shared plan, and parents can see progress every week.</p></div>
   </div>
 </section>
 
@@ -1175,7 +1200,7 @@ footer .brand-name span{color:var(--on-dark-3)}
   <div class="wrap">
     <div class="foot-top">
       <div>
-        <span class="brand-name">Lighthouse <span>Prep</span></span>
+        <picture class="foot-logo"><source type="image/webp" srcset="brand/logo-stacked-reverse.webp 1x, brand/logo-stacked-reverse@2x.webp 2x"><img src="brand/logo-stacked-reverse.png" srcset="brand/logo-stacked-reverse@2x.png 2x" alt="Lighthouse Prep" width="122" height="120" loading="lazy"></picture>
         <p class="foot-tag">SAT preparation and college guidance for students across the United States.</p>
       </div>
       <ul class="foot-links">
@@ -1202,20 +1227,23 @@ footer .brand-name span{color:var(--on-dark-3)}
 
 <script>
 (function(){
-  document.documentElement.classList.add('js');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  /* nav */
+  /* nav: transparent with the light logo while the hero's video is under it, solid once the
+     stage's bottom edge passes under the nav (or while the menu is open) */
   const nav = document.getElementById('nav');
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
-  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+  let overHero = true;
+  const navState = () => nav.classList.toggle('over', overHero && !document.body.classList.contains('menu-open'));
+  new IntersectionObserver(([e]) => { overHero = e.isIntersecting; navState(); })
+    .observe(document.querySelector('.hero-end'));
   const menuBtn = document.getElementById('menuBtn'), links = document.getElementById('navLinks'), menuTxt = document.getElementById('menuTxt');
   function setMenu(open){
     links.classList.toggle('open', open);
     menuBtn.setAttribute('aria-expanded', open);
     menuTxt.textContent = open ? 'Close' : 'Menu';
     document.body.classList.toggle('menu-open', open);
+    navState();
   }
   menuBtn.addEventListener('click', () => setMenu(!links.classList.contains('open')));
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
@@ -1233,6 +1261,23 @@ footer .brand-name span{color:var(--on-dark-3)}
   }, {threshold:0});
   mcta.inert = true;
   ctaWatch.forEach((v, el) => ctaIO.observe(el));
+
+  /* hero video. For now the source is picked by the viewport's shape (the phone file is a
+     portrait crop) and reduced motion skips autoplay; Prompt 3 replaces this with the full
+     loading strategy. The button pauses and plays the loop (WCAG 2.2.2). */
+  const heroVideo = document.getElementById('heroVideo'), heroToggle = document.getElementById('heroToggle');
+  const heroSrc = 'media/hero-' + (matchMedia('(max-aspect-ratio: 3/4)').matches ? 'phone' : 'desktop') + '.mp4';
+  function setToggle(playing){
+    heroToggle.classList.toggle('paused', !playing);
+    heroToggle.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
+  }
+  heroVideo.addEventListener('play', () => setToggle(true));
+  heroVideo.addEventListener('pause', () => setToggle(false));
+  if (reduce) heroVideo.removeAttribute('autoplay'); else heroVideo.src = heroSrc;
+  heroToggle.addEventListener('click', () => {
+    if (!heroVideo.getAttribute('src')) heroVideo.src = heroSrc;
+    if (heroVideo.paused) heroVideo.play().catch(() => setToggle(false)); else heroVideo.pause();
+  });
 
   /* method stepper */
   const steps = [
