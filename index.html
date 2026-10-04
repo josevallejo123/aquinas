@@ -179,13 +179,25 @@ section{padding:64px 0}
 .sc-find > span{display:block;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
 .sc-link{display:inline-flex;align-items:center;min-height:44px;margin-top:10px;font-weight:600;color:var(--teal);text-underline-offset:3px}
 .sc-link:hover{color:var(--teal-d)}
-.sc-src{font-size:13.5px;line-height:1.5;color:var(--ink-3);border-top:1px solid var(--line);padding-top:20px}
-.sc-src p{max-width:80ch;margin:0 0 12px}
-.sc-src b{color:var(--ink-2)}
-.sc-src ol{margin:0;padding-left:1.4em;display:grid;gap:10px}
-.sc-src li{padding-left:2px}
-.sc-src a{color:var(--ink-2);text-underline-offset:2px;overflow-wrap:anywhere}
-.sc-src a:hover{color:var(--ink)}
+/* sources: one line each; method details open on hover, keyboard focus or a tap on the number */
+.sc-src{border-top:1px solid var(--line);padding-top:14px;font-size:13px;line-height:1.45}
+.sc-src-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;margin-bottom:2px}
+.sc-src-h b{font-size:13.5px;font-weight:600;color:var(--ink-2)}
+.sc-src-h span{font-size:12.5px;color:var(--ink-3)}
+.sc-src ol{list-style:none;margin:0;padding:0;display:grid;justify-items:start}
+.sc-src li{position:relative;display:flex;align-items:center;gap:10px;max-width:100%}
+.sc-num{position:relative;flex:none;width:20px;height:20px;padding:0;border-radius:50%;border:1px solid var(--line-2);background:var(--paper);font:600 11px/1 var(--sans);color:var(--ink-2);cursor:pointer;display:grid;place-items:center;transition:background-color .15s,border-color .15s,color .15s}
+.sc-num::after{content:"";position:absolute;inset:-12px}
+.sc-src li > a{padding:12px 0;color:var(--ink-2);text-decoration-thickness:1px;text-underline-offset:2px;overflow-wrap:anywhere}
+.sc-src li > a:hover{color:var(--ink)}
+.sc-pop{position:absolute;left:0;bottom:calc(100% - 4px);z-index:5;width:min(460px,calc(100vw - 2 * var(--gutter)));padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:var(--shadow);color:var(--ink-2);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s var(--ease),visibility 0s .15s}
+.sc-pop::after{content:"";position:absolute;left:0;right:0;top:100%;height:12px}
+.sc-pop p{margin:0}
+.sc-pop a{color:inherit;text-underline-offset:2px}
+.sc-src li.down .sc-pop{bottom:auto;top:calc(100% - 4px);transform:translateY(-4px)}
+.sc-src li.down .sc-pop::after{top:auto;bottom:100%}
+.sc-src li:is(:hover,.open,:has(:focus-visible)):not(.shut) .sc-num{background:var(--teal);border-color:var(--teal);color:#fff}
+.sc-src li:is(:hover,.open,:has(:focus-visible)):not(.shut) .sc-pop{opacity:1;visibility:visible;transform:none;transition:opacity .15s,transform .15s var(--ease)}
 .stat-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
 .stat{padding:16px;border-radius:var(--r);background:var(--teal-l)}
 .stat b{font-family:var(--serif);font-size:27px;font-weight:500;font-variation-settings:"opsz" 72;color:var(--teal-d);display:block;line-height:1.1;margin-bottom:6px;letter-spacing:-.01em}
@@ -482,7 +494,6 @@ footer .brand-name span{color:#8d9e9a}
   .sc .stat-row{grid-template-columns:1fr 1fr}
   .sc-find{padding:22px 24px 20px}
   .sc-find p{font-size:21px}
-  .sc-src ol{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}
   .stat-row{gap:16px}
   .stat{padding:20px 22px}
   .stat b{font-size:34px}
@@ -637,6 +648,8 @@ footer .brand-name span{color:#8d9e9a}
 
 @media (hover:none){
   .btn:hover .arr{transform:none}
+  .sc-src li:hover:not(.open) .sc-num{background:var(--paper);border-color:var(--line-2);color:var(--ink-2)}
+  .sc-src li:hover:not(.open) .sc-pop{opacity:0;visibility:hidden;transform:translateY(4px)}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -732,7 +745,7 @@ footer .brand-name span{color:#8d9e9a}
       <figcaption><b>University of Alabama automatic awards, four-year total</b><span>For out-of-state students entering in fall 2027 with at least a 3.5 GPA, by SAT score from one test date<sup class="sc-ref"><span class="sr">Source </span>1</sup></span></figcaption>
       <div class="sc-plot"><svg class="sc-chart" id="aidChart" viewBox="0 0 340 236" role="img" aria-label="Bar chart of four-year automatic awards by SAT score: under 1200, none; 1200, $24,000; 1260, $32,000; 1300, $40,000; 1330, $60,000; 1360, $96,000; 1420, $112,000. The 1420 award is $72,000 more than the 1300 award. A dotted line marks $9,200, the price of our most complete program."></svg></div>
       <p class="sc-key"><svg width="24" height="4" viewBox="0 0 24 4" aria-hidden="true"><line x1="2" x2="22" y1="2" y2="2"/></svg><span>The dotted line marks $9,200, the full price of our most complete program.<sup class="sc-ref"><span class="sr">Source </span>3</sup></span></p>
-      <p class="sc-cap">Awards also require admission and official scores sent by December 4, 2026. Keeping one for all four years takes a 3.0 college GPA.<sup class="sc-ref"><span class="sr">Source </span>1</sup></p>
+      <p class="sc-cap">Awards also require admission and official scores sent by December 4, 2026. Keeping one takes a 3.0 college GPA, and no score guarantees an award.<sup class="sc-ref"><span class="sr">Source </span>1</sup></p>
       <details class="sc-table">
         <summary>Show the award table</summary>
         <table>
@@ -758,11 +771,11 @@ footer .brand-name span{color:#8d9e9a}
       <a class="sc-link" href="#programs">Compare the three programs and prices &rarr;</a>
     </div>
     <div class="sc-src">
-      <p><b>Sources and method.</b> Awards also depend on admission. Every college sets and changes its own rules each year, and some base merit aid on GPA alone, so a higher score does not guarantee any scholarship.</p>
+      <div class="sc-src-h"><b>Sources</b><span>Hover or tap a number for details</span></div>
       <ol>
-        <li><a href="https://afford.ua.edu/scholarships/out-of-state-freshman/" target="_blank" rel="noopener">University of Alabama, 2027 out-of-state and international freshman automatic merit scholarships<span class="sr"> (opens in a new tab)</span></a> and <a href="https://afford.ua.edu/scholarships/policies/" target="_blank" rel="noopener">scholarship renewal policies<span class="sr"> (opens in a new tab)</span></a> (afford.ua.edu). Scores must come from one test date; UA does not superscore for these awards. Four-year totals assume the award is kept for all eight semesters. Retrieved October 3, 2026.</li>
-        <li><a href="https://go.okstate.edu/scholarships-financial-aid/types-of-aid/scholarships-and-grants/freshman-scholarships/out-of-state-scholarships/" target="_blank" rel="noopener">Oklahoma State University, out-of-state scholarships 2027-2028<span class="sr"> (opens in a new tab)</span></a> (go.okstate.edu), University Assured awards at a 3.75 GPA or higher: $9,000 a year with no score, $15,000 a year with a 1420 or higher. Retrieved October 3, 2026.</li>
-        <li><a href="#programs">Lighthouse Prep programs and prices</a>, listed in full under Programs on this page.</li>
+        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src1" aria-label="Details for source 1">1</button><a href="https://afford.ua.edu/scholarships/out-of-state-freshman/" target="_blank" rel="noopener">University of Alabama, 2027 out-of-state automatic merit scholarships<span class="sr"> (opens in a new tab)</span></a><div class="sc-pop" id="src1"><p>For out-of-state students with a 3.5 GPA entering in fall 2027. Scores must come from one test date (no superscoring) and arrive by December 4, 2026. Four-year totals assume the award is kept for all eight semesters, which takes a 3.0 college GPA under the <a href="https://afford.ua.edu/scholarships/policies/" target="_blank" rel="noopener">renewal policies<span class="sr"> (opens in a new tab)</span></a>. Awards also depend on admission, and colleges change their rules each year. Retrieved October 3, 2026.</p></div></li>
+        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src2" aria-label="Details for source 2">2</button><a href="https://go.okstate.edu/scholarships-financial-aid/types-of-aid/scholarships-and-grants/freshman-scholarships/out-of-state-scholarships/" target="_blank" rel="noopener">Oklahoma State University, out-of-state scholarships 2027-28<span class="sr"> (opens in a new tab)</span></a><div class="sc-pop" id="src2"><p>University Assured awards for out-of-state students with a 3.75 GPA or higher: $9,000 a year with no score and $15,000 a year with a 1420 or higher. Some colleges base merit aid on GPA alone. Retrieved October 3, 2026.</p></div></li>
+        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src3" aria-label="Details for source 3">3</button><a href="#programs">Lighthouse Prep programs and prices</a><div class="sc-pop" id="src3"><p>All three programs are listed with full prices under Programs on this page.</p></div></li>
       </ol>
     </div>
   </div>
@@ -804,11 +817,11 @@ footer .brand-name span{color:#8d9e9a}
       <a class="sc-link" href="#consult">Get a free review of your student's latest score &rarr;</a>
     </div>
     <div class="sc-src">
-      <p><b>Sources and method.</b> Each bar is the median, across the colleges in that group, of each college's own median earnings. Colleges with higher averages also enroll more students from higher-income families and more science and engineering majors.</p>
+      <div class="sc-src-h"><b>Sources</b><span>Hover or tap a number for details</span></div>
       <ol start="4">
-        <li><a href="https://collegescorecard.ed.gov/data/" target="_blank" rel="noopener">U.S. Department of Education, College Scorecard, most recent institution-level data<span class="sr"> (opens in a new tab)</span></a> (collegescorecard.ed.gov), updated June 10, 2026; Lighthouse Prep analysis of 954 four-year colleges. Average SAT is for students admitted in fall 2024. Earnings are for federally aided students who started in 2009-10 or 2010-11, measured in 2020 and 2021 among those working and not in school, and include students who did not graduate. The gap also appears among students from families earning $30,000 or less ($50,000 vs. $78,208). It shrinks by about 40% after adjusting for family income, Pell share, majors and public or private control.</li>
-        <li><a href="https://www.nber.org/papers/w7322" target="_blank" rel="noopener">Dale and Krueger, <i>Quarterly Journal of Economics</i>, 2002<span class="sr"> (opens in a new tab)</span></a> and <a href="https://www.nber.org/papers/w17159" target="_blank" rel="noopener"><i>Journal of Human Resources</i>, 2014<span class="sr"> (opens in a new tab)</span></a> (nber.org). Among students admitted to similar colleges, the earnings premium for attending the higher-SAT college falls to about zero for most groups.</li>
-        <li><a href="https://opportunityinsights.org/paper/collegeadmissions/" target="_blank" rel="noopener">Chetty, Deming and Friedman, "Diversifying Society's Leaders?", <i>Quarterly Journal of Economics</i>, 2026<span class="sr"> (opens in a new tab)</span></a> (opportunityinsights.org). Covers applicants to Ivy-Plus colleges. Scores predict later outcomes; the study does not show that raising a score raises earnings.</li>
+        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src4" aria-label="Details for source 4">4</button><a href="https://collegescorecard.ed.gov/data/" target="_blank" rel="noopener">U.S. Department of Education, College Scorecard data<span class="sr"> (opens in a new tab)</span></a><div class="sc-pop" id="src4"><p>Updated June 10, 2026; Lighthouse Prep analysis of 954 four-year colleges. Each bar is the median of the colleges&rsquo; own median earnings. Average SAT is for students admitted in fall 2024. Earnings are for federally aided students who started in 2009-10 or 2010-11, measured in 2020 and 2021 among those working and not in school, including students who did not graduate, in 2022 dollars. Higher-SAT colleges also enroll more students from higher-income families and more science and engineering majors; adjusting for those shrinks the gap by about 40%. Among students from families earning $30,000 or less, the medians are $50,000 vs. $78,208.</p></div></li>
+        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src5" aria-label="Details for source 5">5</button><a href="https://www.nber.org/papers/w7322" target="_blank" rel="noopener">Dale and Krueger, <i>Quarterly Journal of Economics</i>, 2002<span class="sr"> (opens in a new tab)</span></a><div class="sc-pop" id="src5"><p>Among students admitted to similar colleges, the earnings premium for attending the higher-SAT college falls to about zero for most groups. A <a href="https://www.nber.org/papers/w17159" target="_blank" rel="noopener">2014 follow-up in the <i>Journal of Human Resources</i><span class="sr"> (opens in a new tab)</span></a> found the same pattern with later data.</p></div></li>
+        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src6" aria-label="Details for source 6">6</button><a href="https://opportunityinsights.org/paper/collegeadmissions/" target="_blank" rel="noopener">Chetty, Deming and Friedman, <i>Quarterly Journal of Economics</i>, 2026<span class="sr"> (opens in a new tab)</span></a><div class="sc-pop" id="src6"><p>&ldquo;Diversifying Society&rsquo;s Leaders?&rdquo; Covers applicants to Ivy-Plus colleges, using tax records linked to SAT and ACT scores. Scores predict later outcomes; the study does not show that raising a score raises earnings.</p></div></li>
       </ol>
     </div>
   </div>
@@ -1479,6 +1492,30 @@ footer .brand-name span{color:#8d9e9a}
     if ('ResizeObserver' in window) new ResizeObserver(() => draw(s)).observe(s.svg.parentNode);
     else window.addEventListener('resize', () => draw(s));
   });
+})();
+</script>
+<script>
+/* scores sections: source details open on hover, keyboard focus or a tap on the number; Escape closes */
+(function(){
+  const items = [...document.querySelectorAll('.sc-src li')], nav = document.getElementById('nav');
+  function place(li){
+    const pop = li.querySelector('.sc-pop'), r = li.getBoundingClientRect(), above = r.top - nav.offsetHeight - 8;
+    li.classList.toggle('down', above < pop.offsetHeight && innerHeight - r.bottom > above);
+  }
+  function setOpen(li, open){ li.classList.toggle('open', open); li.querySelector('.sc-num').setAttribute('aria-expanded', open); }
+  items.forEach(li => {
+    li.addEventListener('mouseenter', () => place(li));
+    li.addEventListener('focusin', () => place(li));
+    li.addEventListener('mouseleave', () => li.classList.remove('shut'));
+    li.addEventListener('focusout', e => { if (!li.contains(e.relatedTarget)) { li.classList.remove('shut'); setOpen(li, false); } });
+    li.querySelector('.sc-num').addEventListener('click', () => {
+      const open = !li.classList.contains('open');
+      items.forEach(o => { if (o !== li) setOpen(o, false); });
+      place(li); li.classList.remove('shut'); setOpen(li, open);
+    });
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('.sc-src li')) items.forEach(li => setOpen(li, false)); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') items.forEach(li => { if (li.matches('.open, :hover, :focus-within')) { setOpen(li, false); li.classList.add('shut'); } }); });
 })();
 </script>
 </body>
