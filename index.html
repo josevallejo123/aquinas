@@ -86,11 +86,13 @@ section{padding:64px 0}
 .nav{position:fixed;inset:0 0 auto;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid var(--line);transition:background-color .3s,border-color .3s}
 .js .nav.over{background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:transparent;--focus:var(--accent)}
 .nav .wrap{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:grid;align-items:center;text-decoration:none;min-height:44px}
-.brand picture{grid-area:1/1;transition:opacity .3s}
-.brand img{height:36px;width:auto}
-.brand .logo-rev,.js .nav.over .brand .logo-navy{opacity:0}
-.js .nav.over .brand .logo-rev{opacity:1}
+/* logo (Gate 2: option B): the vector three-stripe symbol beside the wordmark set live in the
+   sans, in spaced capitals at the artwork's proportions. Both take currentColor: navy on the
+   solid nav, white over the hero */
+.brand{--logo-h:36px;display:flex;align-items:center;gap:calc(var(--logo-h) * .36);min-height:44px;text-decoration:none;color:var(--ink);transition:color .3s}
+.js .nav.over .brand{color:var(--on-dark)}
+.brand-mark{display:block;height:var(--logo-h);width:calc(var(--logo-h) * .33);fill:currentColor;flex:none}
+.brand-word span{display:block;text-align:center;font-size:calc(var(--logo-h) * .39);font-weight:600;line-height:1.08;text-transform:uppercase;letter-spacing:.34em;margin-right:-.34em}
 .menu-btn{width:44px;height:44px;border-radius:12px;border:1px solid var(--edge);background:var(--paper);cursor:pointer;display:grid;place-items:center;padding:0;transition:background-color .3s,border-color .3s}
 .js .nav.over .menu-btn{background:color-mix(in srgb,var(--scrim) 50%,transparent);border-color:color-mix(in srgb,var(--on-dark) 70%,transparent);--menu-ink:var(--on-dark)}
 .menu-btn i,.menu-btn i::before,.menu-btn i::after{display:block;width:18px;height:1.8px;border-radius:2px;background:var(--menu-ink,var(--ink));transition:transform .25s var(--ease),background-color .2s}
@@ -596,7 +598,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
 @media (min-width:880px){
   :root{--nav-h:76px}
   .menu-btn{display:none}
-  .brand img{height:40px}
+  .brand{--logo-h:40px}
   .nav-links{position:static;flex-direction:row;align-items:center;gap:14px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;opacity:1;visibility:visible;transform:none;transition:none;--focus:inherit}
   .nav-links li:not(:last-child):not(:nth-last-child(2)){border:0}
   .nav-links a{white-space:nowrap}
@@ -698,8 +700,8 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
 <header class="nav over" id="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Lighthouse Prep, back to top">
-      <picture class="logo-navy"><source type="image/webp" srcset="brand/logo-horizontal-navy.webp 1x, brand/logo-horizontal-navy@2x.webp 2x"><img src="brand/logo-horizontal-navy.png" srcset="brand/logo-horizontal-navy@2x.png 2x" alt="Lighthouse Prep" width="177" height="40"></picture>
-      <picture class="logo-rev"><source type="image/webp" srcset="brand/logo-horizontal-reverse.webp 1x, brand/logo-horizontal-reverse@2x.webp 2x"><img src="brand/logo-horizontal-reverse.png" srcset="brand/logo-horizontal-reverse@2x.png 2x" alt="" width="177" height="40"></picture>
+      <svg class="brand-mark" viewBox="0 0 218.79 663.41" aria-hidden="true"><path d="M7.89 117.54 185.73 0 185.51 107.09 7.55 224.2Z M0.32 335.19 205.34 201.72 204.94 314.41 0.04 444.87Z M0.47 551.84 218.79 418.08 218.49 549.88 0 663.41Z"/></svg>
+      <span class="brand-word"><span>Lighthouse</span><span>Prep</span></span>
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks"><i aria-hidden="true"></i><span class="sr" id="menuTxt">Menu</span></button>
     <ul class="nav-links" id="navLinks">
