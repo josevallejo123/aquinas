@@ -12,7 +12,7 @@ Single-file site: [index.html](index.html) — inline `<style>`, no build step, 
 
 ## Signature & conventions
 - **The arch** is the brand motif (collegiate window): hero photo uses `--arch` with a 1px gold `outline` offset; founder portraits use the same arch shape. Reuse it for any new hero-level image; don't add other decorative shapes.
-- **Favicon**: lighthouse in mist with a gold lantern and fading gold beams, on a teal arch-shaped tile (`favicon.svg`). `apple-touch-icon.svg` is the full-bleed square version for iOS. The PNGs (`favicon-32.png`, `apple-touch-icon.png`) are rendered from those SVGs, so regenerate them if the SVGs change.
+- **Favicon**: the logo's three-stripe lighthouse symbol, traced as polygons, in mist `#F2F4F1` on a navy `#10273E` rounded tile (`favicon.svg`). `favicon-32.png`, `favicon.ico` (16/32/48) and the full-bleed square `apple-touch-icon.png` (180; iOS rounds it) are rendered from the same trace by `website-revamp/tools/brand.py` (project root), so re-run that script if the symbol or its colours change.
 - **Gold diamond** (7px rotated square) is the only list/marker glyph: eyebrows, hero meta, credential strip, tier bullets.
 - Eyebrows are **sentence case** (no uppercase/tracking anywhere on the site) — the same applies to small labels, badges and card headings.
 - Newsreader: `font-variation-settings:"opsz" 72` (axis max) for display, `"opsz" 24–36` for small serif text. Vary opsz, not weight. It sets larger than Fraunces did, so size headings down rather than up.
