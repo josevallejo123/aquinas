@@ -147,6 +147,8 @@ section{padding:64px 0}
 /* pause/play for the looping video (WCAG 2.2.2); shown once JS can drive it */
 .hero-toggle{position:absolute;z-index:2;top:calc(var(--nav-h) + 12px);right:max(var(--gutter),env(safe-area-inset-right));width:44px;height:44px;padding:0;border-radius:50%;border:1px solid color-mix(in srgb,var(--on-dark) 85%,transparent);background:color-mix(in srgb,var(--scrim) 75%,transparent);color:var(--on-dark);cursor:pointer;display:none;place-items:center;transition:background-color .2s}
 .js .hero-toggle{display:grid}
+/* focus over the video: the brass ring sits on a navy halo, so it reads on any frame */
+.hero-stage :focus-visible,.js .nav.over .wrap > :focus-visible,.js .nav.over .nav-links a:focus-visible{box-shadow:0 0 0 8px color-mix(in srgb,var(--scrim) 85%,transparent)}
 .hero-toggle:hover{background:var(--scrim)}
 .hero-toggle svg{width:16px;height:16px;fill:currentColor}
 .hero-toggle .i-play,.hero-toggle.paused .i-pause{display:none}
