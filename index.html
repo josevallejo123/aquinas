@@ -143,10 +143,8 @@ section{padding:64px 0}
 .sc h2{margin-bottom:18px}
 .sc .lead{margin:0}
 .earn{border-top:1px solid var(--line)}
-.sc-ref{font-size:.62em;font-weight:600;line-height:0;vertical-align:super;margin-left:1px}
-.sc h2 .sc-ref{font-family:var(--sans);font-size:.36em;margin-left:3px}
-.sc-fig{margin:0 -8px;padding:18px 14px 4px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg)}
-.sc-fig figcaption{margin-bottom:14px}
+.sc-fig{position:relative;margin:0 -8px;padding:18px 14px 4px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg)}
+.sc-fig figcaption{margin-bottom:14px;padding-right:84px}
 .sc-fig figcaption b{display:block;font-size:15px;font-weight:600;line-height:1.35}
 .sc-fig figcaption > span{display:block;font-size:13.5px;line-height:1.45;color:var(--ink-3);margin-top:3px}
 .sc-chart{display:block;width:100%;height:auto;overflow:visible}
@@ -156,10 +154,14 @@ section{padding:64px 0}
 .sc-chart .bar.hi{fill:var(--teal)}
 .sc-chart .base{stroke:var(--line-2);stroke-width:1}
 .sc-chart .brk{fill:none;stroke:var(--teal-d);stroke-width:1.5}
+.sc-chart .up{fill:var(--teal)}
+.sc-chart .tot{fill:var(--teal-d)}
+.sc-chart .v.up{fill:var(--ink-2);font-weight:600}
+.sc-chart .v.hi.tot,.sc-chart .v.tot{fill:var(--ink);font-weight:600;font-size:13.5px}
+.sc-chart .link{stroke:var(--line-2);stroke-width:1}
+.sc-chart .ref{stroke:var(--gold);stroke-width:2;stroke-dasharray:2 5;stroke-linecap:round}
+.sc-chart .ref-lbl{fill:var(--ink-2);font-weight:600}
 .sc-chart .brk-lbl{font-family:var(--serif);font-size:22px;font-weight:500;font-variation-settings:"opsz" 36;fill:var(--teal-d)}
-.sc-chart .ref,.sc-key line{stroke:var(--gold);stroke-width:2;stroke-dasharray:2 5;stroke-linecap:round}
-.sc-key{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.45;color:var(--ink-2);margin:14px 0 0}
-.sc-key > svg{flex:none;margin-top:8px}
 .sc-cap{font-size:13.5px;line-height:1.45;color:var(--ink-3);margin:10px 0 0}
 .sc-table{margin-top:10px;border-top:1px solid var(--line)}
 .sc-table summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;cursor:pointer;list-style:none;font-size:14.5px;font-weight:600;color:var(--teal)}
@@ -172,36 +174,26 @@ section{padding:64px 0}
 .sc-table th:last-child,.sc-table td:last-child{padding-right:0}
 .sc-table .n{text-align:right;white-space:nowrap}
 .sc-table tr.hi td{color:var(--ink);font-weight:600}
-.sc .stat-row{grid-template-columns:minmax(0,1fr);margin-top:0}
 .sc-bridge{color:var(--ink-2);margin:0 0 16px}
 .sc-find{padding:18px 18px 16px;border-radius:var(--r);background:var(--teal-l)}
 .sc-find p{font-family:var(--serif);font-size:19px;font-variation-settings:"opsz" 24;line-height:1.4;color:var(--ink);margin:0 0 10px}
 .sc-find > span{display:block;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
 .sc-link{display:inline-flex;align-items:center;min-height:44px;margin-top:10px;font-weight:600;color:var(--teal);text-underline-offset:3px}
 .sc-link:hover{color:var(--teal-d)}
-/* sources: one line each; method details open on hover, keyboard focus or a tap on the number */
-.sc-src{border-top:1px solid var(--line);padding-top:14px;font-size:13px;line-height:1.45}
-.sc-src-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 16px;margin-bottom:2px}
-.sc-src-h b{font-size:13.5px;font-weight:600;color:var(--ink-2)}
-.sc-src-h span{font-size:12.5px;color:var(--ink-3)}
-.sc-src ol{list-style:none;margin:0;padding:0;display:grid;justify-items:start}
-.sc-src li{position:relative;display:flex;align-items:center;gap:10px;max-width:100%}
-.sc-num{position:relative;flex:none;width:20px;height:20px;padding:0;border-radius:50%;border:1px solid var(--line-2);background:var(--paper);font:600 11px/1 var(--sans);color:var(--ink-2);cursor:pointer;display:grid;place-items:center;transition:background-color .15s,border-color .15s,color .15s}
-.sc-num::after{content:"";position:absolute;inset:-12px}
-.sc-src li > a{padding:12px 0;color:var(--ink-2);text-decoration-thickness:1px;text-underline-offset:2px;overflow-wrap:anywhere}
-.sc-src li > a:hover{color:var(--ink)}
-.sc-pop{position:absolute;left:0;bottom:calc(100% - 4px);z-index:5;width:min(460px,calc(100vw - 2 * var(--gutter)));padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:var(--shadow);color:var(--ink-2);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s var(--ease),visibility 0s .15s}
-.sc-pop::after{content:"";position:absolute;left:0;right:0;top:100%;height:12px}
+.sc-fig .sc-link{margin-top:6px;font-size:15px}
+/* sources: one small pill per chart; the details open on hover, keyboard focus or a tap */
+.sc-cite{position:absolute;top:14px;right:12px;z-index:4}
+.sc-cite-btn{position:relative;display:inline-flex;align-items:center;min-height:28px;padding:4px 11px;border-radius:999px;border:1px solid var(--line-2);background:var(--paper);font:600 12.5px/1.2 var(--sans);color:var(--ink-2);cursor:pointer;transition:border-color .15s,color .15s}
+.sc-cite-btn::after{content:"";position:absolute;inset:-9px -6px}
+.sc-pop{position:absolute;right:0;top:100%;z-index:5;width:min(440px,calc(100vw - 2 * var(--gutter)));padding-top:8px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .15s,transform .15s var(--ease),visibility 0s .15s}
+.sc-pop-in{max-height:min(62vh,440px);overflow:auto;overscroll-behavior:contain;padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:var(--shadow-lg);font-size:13px;line-height:1.5;color:var(--ink-2)}
 .sc-pop p{margin:0}
+.sc-pop p + p{margin-top:8px}
+.sc-pop b{color:var(--ink)}
 .sc-pop a{color:inherit;text-underline-offset:2px}
-.sc-src li.down .sc-pop{bottom:auto;top:calc(100% - 4px);transform:translateY(-4px)}
-.sc-src li.down .sc-pop::after{top:auto;bottom:100%}
-.sc-src li:is(:hover,.open,:has(:focus-visible)):not(.shut) .sc-num{background:var(--teal);border-color:var(--teal);color:#fff}
-.sc-src li:is(:hover,.open,:has(:focus-visible)):not(.shut) .sc-pop{opacity:1;visibility:visible;transform:none;transition:opacity .15s,transform .15s var(--ease)}
-.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
-.stat{padding:16px;border-radius:var(--r);background:var(--teal-l)}
-.stat b{font-family:var(--serif);font-size:27px;font-weight:500;font-variation-settings:"opsz" 72;color:var(--teal-d);display:block;line-height:1.1;margin-bottom:6px;letter-spacing:-.01em}
-.stat span{font-size:14px;color:var(--ink-2);line-height:1.45;display:block}
+.sc-cite.up .sc-pop{top:auto;bottom:100%;padding:0 0 8px;transform:translateY(4px)}
+.sc-cite:is(:hover,.open,:has(:focus-visible)):not(.shut) .sc-cite-btn{border-color:var(--teal);color:var(--teal)}
+.sc-cite:is(:hover,.open,:has(:focus-visible)):not(.shut) .sc-pop{opacity:1;visibility:visible;transform:none;transition:opacity .15s,transform .15s var(--ease)}
 
 /* ============ split ============ */
 .split{background:var(--paper);border-block:1px solid var(--line)}
@@ -491,13 +483,8 @@ footer .brand-name span{color:#8d9e9a}
   .creds li{font-size:19px}
   .sc-fig{margin-inline:0;padding:24px 24px 6px}
   .sc-chart text{font-size:12.5px}
-  .sc .stat-row{grid-template-columns:1fr 1fr}
   .sc-find{padding:22px 24px 20px}
   .sc-find p{font-size:21px}
-  .stat-row{gap:16px}
-  .stat{padding:20px 22px}
-  .stat b{font-size:34px}
-  .stat span{font-size:14.5px}
   .split-head{margin-bottom:48px}
   .split-grid{grid-template-columns:1fr 1fr;gap:24px}
   .lane{padding:34px 32px 34px 36px}
@@ -600,14 +587,13 @@ footer .brand-name span{color:#8d9e9a}
   .fc-proj b{font-size:26px}
   .hero-lead{margin-bottom:34px}
   .hero-ctas{margin-bottom:26px}
-  .sc-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-rows:auto 1fr auto;grid-template-areas:"head fig" "more fig" "src src";gap:32px 72px;align-items:start}
-  .earn .sc-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-rows:auto auto auto;grid-template-areas:"head head" "fig more" "src src";row-gap:44px}
+  .sc-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-rows:auto 1fr;grid-template-areas:"head fig" "more fig";gap:32px 72px;align-items:start}
+  .earn .sc-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-rows:auto auto;grid-template-areas:"head head" "fig more";row-gap:44px}
   .earn .sc-head{max-width:780px}
   .earn .sc-more{align-self:center}
   .sc-head{grid-area:head}
   .sc-fig{grid-area:fig}
   .sc-more{grid-area:more}
-  .sc-src{grid-area:src;margin-top:16px}
   .method-grid{grid-template-columns:.5fr 1.5fr;gap:64px;align-items:start;margin-top:48px}
   .steps{grid-template-columns:1fr;gap:6px}
   .steps::before{left:22px;right:auto;top:24px;bottom:24px;width:1.5px;height:auto}
@@ -648,8 +634,8 @@ footer .brand-name span{color:#8d9e9a}
 
 @media (hover:none){
   .btn:hover .arr{transform:none}
-  .sc-src li:hover:not(.open) .sc-num{background:var(--paper);border-color:var(--line-2);color:var(--ink-2)}
-  .sc-src li:hover:not(.open) .sc-pop{opacity:0;visibility:hidden;transform:translateY(4px)}
+  .sc-cite:hover:not(.open) .sc-cite-btn{border-color:var(--line-2);color:var(--ink-2)}
+  .sc-cite:hover:not(.open) .sc-pop{opacity:0;visibility:hidden;transform:translateY(-4px)}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -738,45 +724,30 @@ footer .brand-name span{color:#8d9e9a}
   <div class="wrap sc-grid">
     <div class="sc-head">
       <div class="eyebrow">Scores and scholarships</div>
-      <h2 id="aidH">120 SAT points can be worth $72,000 in scholarships.<sup class="sc-ref"><span class="sr">Source </span>1</sup></h2>
-      <p class="lead">Many colleges publish automatic merit awards tied to SAT scores. At the University of Alabama, an out-of-state student with a 3.5 GPA who scores 1420 in one sitting qualifies for $28,000 a year. At 1300, the award is $10,000 a year.<sup class="sc-ref"><span class="sr">Source </span>1</sup></p>
+      <h2 id="aidH">From 1200 to 1500, scholarships rise by an average of $19,200.</h2>
+      <p class="lead">Many universities publish automatic merit awards tied to SAT scores. We averaged the four-year awards at 11 nationally ranked universities for a student with a 3.8 GPA, from 1200 to 1500.</p>
     </div>
     <figure class="sc-fig">
-      <figcaption><b>University of Alabama automatic awards, four-year total</b><span>For out-of-state students entering in fall 2027 with at least a 3.5 GPA, by SAT score from one test date<sup class="sc-ref"><span class="sr">Source </span>1</sup></span></figcaption>
-      <div class="sc-plot"><svg class="sc-chart" id="aidChart" viewBox="0 0 340 236" role="img" aria-label="Bar chart of four-year automatic awards by SAT score: under 1200, none; 1200, $24,000; 1260, $32,000; 1300, $40,000; 1330, $60,000; 1360, $96,000; 1420, $112,000. The 1420 award is $72,000 more than the 1300 award. A dotted line marks $9,200, the price of our most complete program."></svg></div>
-      <p class="sc-key"><svg width="24" height="4" viewBox="0 0 24 4" aria-hidden="true"><line x1="2" x2="22" y1="2" y2="2"/></svg><span>The dotted line marks $9,200, the full price of our most complete program.<sup class="sc-ref"><span class="sr">Source </span>3</sup></span></p>
-      <p class="sc-cap">Awards also require admission and official scores sent by December 4, 2026. Keeping one takes a 3.0 college GPA, and no score guarantees an award.<sup class="sc-ref"><span class="sr">Source </span>1</sup></p>
+      <figcaption><b>Case study of 11 nationally ranked universities</b><span>Average four-year automatic scholarship by SAT score, for a student with a 3.8 GPA</span></figcaption>
+      <div class="sc-cite"><button class="sc-cite-btn" type="button" aria-expanded="false" aria-controls="aidSrc">Sources</button><div class="sc-pop" id="aidSrc"><div class="sc-pop-in"><p><b>Award schedules.</b> <a href="https://afford.ua.edu/scholarships/oos-international-freshman/" target="_blank" rel="noopener">University of Alabama<span class="sr"> (opens in a new tab)</span></a> (2027, out-of-state), <a href="https://olemiss.edu/finaid/types-of-aid/scholarships/non-resident/entering-freshman/awards-automatic-consideration/nr-freshman-merit/" target="_blank" rel="noopener">University of Mississippi<span class="sr"> (opens in a new tab)</span></a> (2026-27, nonresident; 2027-28 not yet posted), <a href="https://go.okstate.edu/scholarships-financial-aid/types-of-aid/scholarships-and-grants/freshman-scholarships/out-of-state-scholarships/" target="_blank" rel="noopener">Oklahoma State University<span class="sr"> (opens in a new tab)</span></a> (2027-28, out-of-state) and <a href="https://www.mtu.edu/admissions/national-scholars/requirements.html" target="_blank" rel="noopener">Michigan Tech<span class="sr"> (opens in a new tab)</span></a> (2027-28). For UF, Florida State, USF, FIU, UCF, Florida A&amp;M and Florida Atlantic: the <a href="https://www.floridastudentfinancialaidsg.org/PDF/BFHandbookChapter1.pdf" target="_blank" rel="noopener">Bright Futures handbook<span class="sr"> (opens in a new tab)</span></a> (2026-27), valued at each university&rsquo;s 2026-27 in-state tuition and fees from the <a href="https://www.flbog.edu/wp-content/uploads/2026/07/2026-2027-SUS-Tuition-and-Fees-Report.pdf" target="_blank" rel="noopener">Florida Board of Governors<span class="sr"> (opens in a new tab)</span></a>.</p><p><b>Method.</b> Four-year totals for a student with a 3.8 GPA: out-of-state at the first four universities, and a Florida resident with 100 service hours at the seven Florida universities, which share one state program. Each bar is the average of the 11 universities. Florida values are estimates over 120 credits. Awards also depend on admission and renewal, schedules change each year, and a higher score does not guarantee an award. Retrieved October 4, 2026.</p><p><b>Price line.</b> The dotted line is the full price of our Flagship Program, listed under <a href="#programs">Programs</a> on this page.</p><p><b>Rankings.</b> All 11 are ranked in <a href="https://www.usnews.com/best-colleges/rankings/national-universities" target="_blank" rel="noopener">U.S. News &amp; World Report&rsquo;s 2027 Best National Universities<span class="sr"> (opens in a new tab)</span></a>.</p></div></div></div>
+      <div class="sc-plot"><svg class="sc-chart" id="aidChart" viewBox="0 0 340 236" role="img" aria-label="Waterfall chart of the average four-year automatic scholarship at 11 nationally ranked universities, for a student with a 3.8 GPA. At 1200: $27,000. Reaching 1300 adds $4,000; 1400 adds $12,400; 1500 adds $2,800. Total at 1500: $46,200, which is $19,200 more than at 1200. A dotted line marks $7,600, the price of our Flagship Program."></svg></div>
+      <a class="sc-link" href="#programs">Learn more about our Flagship&nbsp;Program&nbsp;&rarr;</a>
       <details class="sc-table">
-        <summary>Show the award table</summary>
+        <summary>Show the table</summary>
         <table>
-          <caption class="sr">University of Alabama automatic awards for out-of-state students with a 3.5 GPA, fall 2027</caption>
-          <thead><tr><th scope="col">SAT score</th><th scope="col">Award</th><th scope="col" class="n">Per year</th><th scope="col" class="n">Four years</th></tr></thead>
+          <caption class="sr">Average four-year automatic scholarship at 11 nationally ranked universities, for a student with a 3.8 GPA</caption>
+          <thead><tr><th scope="col">SAT score</th><th scope="col" class="n">Average award</th><th scope="col" class="n">Change</th></tr></thead>
           <tbody>
-            <tr><td>Under 1200</td><td>None automatic</td><td class="n">$0</td><td class="n">$0</td></tr>
-            <tr><td>1200–1250</td><td>Crimson Legends</td><td class="n">$6,000</td><td class="n">$24,000</td></tr>
-            <tr><td>1260–1290</td><td>Capstone</td><td class="n">$8,000</td><td class="n">$32,000</td></tr>
-            <tr class="hi"><td>1300–1320</td><td>Collegiate</td><td class="n">$10,000</td><td class="n">$40,000</td></tr>
-            <tr><td>1330–1350</td><td>Foundation in Excellence</td><td class="n">$15,000</td><td class="n">$60,000</td></tr>
-            <tr><td>1360–1410</td><td>UA Scholar</td><td class="n">$24,000</td><td class="n">$96,000</td></tr>
-            <tr class="hi"><td>1420–1600</td><td>Presidential</td><td class="n">$28,000</td><td class="n">$112,000</td></tr>
+            <tr><td>1200</td><td class="n">$26,999</td><td class="n">&ndash;</td></tr>
+            <tr><td>1300</td><td class="n">$30,999</td><td class="n">+$4,000</td></tr>
+            <tr><td>1400</td><td class="n">$43,393</td><td class="n">+$12,394</td></tr>
+            <tr class="hi"><td>1500</td><td class="n">$46,226</td><td class="n">+$2,833</td></tr>
           </tbody>
         </table>
       </details>
     </figure>
     <div class="sc-more">
-      <div class="stat-row">
-        <div class="stat"><b>$18,000</b><span>a year separates Alabama's 1300 and 1420 awards. That is nearly twice the $9,200 price of our most complete program.<sup class="sc-ref"><span class="sr">Sources </span>1, 3</sup></span></div>
-        <div class="stat"><b>+$24,000</b><span>over four years at Oklahoma State with a 1420 or higher, compared with applying without a score. Out-of-state students with a 3.75 GPA, 2027-28 awards.<sup class="sc-ref"><span class="sr">Source </span>2</sup></span></div>
-      </div>
       <a class="sc-link" href="#programs">Compare the three programs and prices &rarr;</a>
-    </div>
-    <div class="sc-src">
-      <div class="sc-src-h"><b>Sources</b><span>Hover or tap a number for details</span></div>
-      <ol>
-        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src1" aria-label="Details for source 1">1</button><a href="https://afford.ua.edu/scholarships/out-of-state-freshman/" target="_blank" rel="noopener">University of Alabama, 2027 out-of-state automatic merit scholarships<span class="sr"> (opens in a new tab)</span></a><div class="sc-pop" id="src1"><p>For out-of-state students with a 3.5 GPA entering in fall 2027. Scores must come from one test date (no superscoring) and arrive by December 4, 2026. Four-year totals assume the award is kept for all eight semesters, which takes a 3.0 college GPA under the <a href="https://afford.ua.edu/scholarships/policies/" target="_blank" rel="noopener">renewal policies<span class="sr"> (opens in a new tab)</span></a>. Awards also depend on admission, and colleges change their rules each year. Retrieved October 3, 2026.</p></div></li>
-        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src2" aria-label="Details for source 2">2</button><a href="https://go.okstate.edu/scholarships-financial-aid/types-of-aid/scholarships-and-grants/freshman-scholarships/out-of-state-scholarships/" target="_blank" rel="noopener">Oklahoma State University, out-of-state scholarships 2027-28<span class="sr"> (opens in a new tab)</span></a><div class="sc-pop" id="src2"><p>University Assured awards for out-of-state students with a 3.75 GPA or higher: $9,000 a year with no score and $15,000 a year with a 1420 or higher. Some colleges base merit aid on GPA alone. Retrieved October 3, 2026.</p></div></li>
-        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src3" aria-label="Details for source 3">3</button><a href="#programs">Lighthouse Prep programs and prices</a><div class="sc-pop" id="src3"><p>All three programs are listed with full prices under Programs on this page.</p></div></li>
-      </ol>
     </div>
   </div>
 </section>
@@ -786,11 +757,12 @@ footer .brand-name span{color:#8d9e9a}
   <div class="wrap sc-grid">
     <div class="sc-head">
       <div class="eyebrow">Scores and earnings</div>
-      <h2 id="earnH">Ten years out, students from higher-SAT colleges earned about $28,000 more a year.<sup class="sc-ref"><span class="sr">Source </span>4</sup></h2>
-      <p class="lead">Students who started at colleges where admitted students average 1400 or higher on the SAT had median earnings of about $83,000 ten years later. At colleges averaging 1100 to 1199, the median was about $54,500.<sup class="sc-ref"><span class="sr">Source </span>4</sup></p>
+      <h2 id="earnH">Ten years out, students from higher-SAT colleges earned about $28,000 more a year.</h2>
+      <p class="lead">Students who started at colleges where admitted students average 1400 or higher on the SAT had median earnings of about $83,000 ten years later. At colleges averaging 1100 to 1199, the median was about $54,500.</p>
     </div>
     <figure class="sc-fig">
-      <figcaption><b>Median earnings ten years after starting college</b><span>954 four-year colleges, grouped by the average SAT of the students they admit, in 2022 dollars<sup class="sc-ref"><span class="sr">Source </span>4</sup></span></figcaption>
+      <figcaption><b>Median earnings ten years after starting college</b><span>954 four-year colleges, grouped by the average SAT of the students they admit, in 2022 dollars</span></figcaption>
+      <div class="sc-cite"><button class="sc-cite-btn" type="button" aria-expanded="false" aria-controls="earnSrc">Sources</button><div class="sc-pop" id="earnSrc"><div class="sc-pop-in"><p><b>Data.</b> <a href="https://collegescorecard.ed.gov/data/" target="_blank" rel="noopener">U.S. Department of Education, College Scorecard<span class="sr"> (opens in a new tab)</span></a>, updated June 10, 2026; Lighthouse Prep analysis of 954 four-year colleges. Each bar is the median of the colleges&rsquo; own median earnings, in 2022 dollars, for federally aided students who started in 2009-10 or 2010-11, measured ten years later and including students who did not graduate. Average SAT is for students admitted in fall 2024.</p><p><b>Caveats.</b> Higher-SAT colleges also enroll more students from higher-income families and more science and engineering majors; adjusting for those shrinks the gap by about 40%. Among students from families earning $30,000 or less, the medians are $50,000 vs. $78,208. Comparing similar applicants, <a href="https://www.nber.org/papers/w7322" target="_blank" rel="noopener">Dale and Krueger<span class="sr"> (opens in a new tab)</span></a> (2002 and <a href="https://www.nber.org/papers/w17159" target="_blank" rel="noopener">2014<span class="sr"> (opens in a new tab)</span></a>) found much of the gap reflects who enrolls.</p><p><b>Study.</b> <a href="https://opportunityinsights.org/paper/collegeadmissions/" target="_blank" rel="noopener">Chetty, Deming and Friedman<span class="sr"> (opens in a new tab)</span></a>, <i>Quarterly Journal of Economics</i>, 2026, covering applicants to Ivy-Plus colleges. Scores predict later outcomes; the study does not show that raising a score raises earnings.</p></div></div></div>
       <div class="sc-plot"><svg class="sc-chart" id="earnChart" viewBox="0 0 340 236" role="img" aria-label="Bar chart of median earnings ten years after starting college, by the college's average SAT: under 1100, $48,793; 1100 to 1199, $54,528; 1200 to 1299, $61,389; 1300 to 1399, $68,635; 1400 or higher, $82,860. The 1400-plus group is $28,332 a year higher than the 1100 to 1199 group."></svg></div>
       <p class="sc-cap">This compares colleges, not individual students.</p>
       <details class="sc-table">
@@ -809,20 +781,12 @@ footer .brand-name span{color:#8d9e9a}
       </details>
     </figure>
     <div class="sc-more">
-      <p class="sc-bridge">Much of that gap reflects who each college admits, not just what it adds.<sup class="sc-ref"><span class="sr">Source </span>5</sup> That is part of why a student's own score matters.</p>
+      <p class="sc-bridge">Much of that gap reflects who each college admits, not just what it adds. That is part of why a student's own score matters.</p>
       <div class="sc-find">
         <p>Among applicants to the most selective colleges, those with higher SAT or ACT scores went on to earn more and were more likely to reach top graduate schools and firms, even after accounting for which college they attended.</p>
-        <span>Chetty, Deming and Friedman, a 2026 study linking test scores to tax records<sup class="sc-ref"><span class="sr">Source </span>6</sup></span>
+        <span>Chetty, Deming and Friedman, a 2026 study linking test scores to tax records</span>
       </div>
       <a class="sc-link" href="#consult">Get a free review of your student's latest score &rarr;</a>
-    </div>
-    <div class="sc-src">
-      <div class="sc-src-h"><b>Sources</b><span>Hover or tap a number for details</span></div>
-      <ol start="4">
-        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src4" aria-label="Details for source 4">4</button><a href="https://collegescorecard.ed.gov/data/" target="_blank" rel="noopener">U.S. Department of Education, College Scorecard data<span class="sr"> (opens in a new tab)</span></a><div class="sc-pop" id="src4"><p>Updated June 10, 2026; Lighthouse Prep analysis of 954 four-year colleges. Each bar is the median of the colleges&rsquo; own median earnings. Average SAT is for students admitted in fall 2024. Earnings are for federally aided students who started in 2009-10 or 2010-11, measured in 2020 and 2021 among those working and not in school, including students who did not graduate, in 2022 dollars. Higher-SAT colleges also enroll more students from higher-income families and more science and engineering majors; adjusting for those shrinks the gap by about 40%. Among students from families earning $30,000 or less, the medians are $50,000 vs. $78,208.</p></div></li>
-        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src5" aria-label="Details for source 5">5</button><a href="https://www.nber.org/papers/w7322" target="_blank" rel="noopener">Dale and Krueger, <i>Quarterly Journal of Economics</i>, 2002<span class="sr"> (opens in a new tab)</span></a><div class="sc-pop" id="src5"><p>Among students admitted to similar colleges, the earnings premium for attending the higher-SAT college falls to about zero for most groups. A <a href="https://www.nber.org/papers/w17159" target="_blank" rel="noopener">2014 follow-up in the <i>Journal of Human Resources</i><span class="sr"> (opens in a new tab)</span></a> found the same pattern with later data.</p></div></li>
-        <li><button class="sc-num" type="button" aria-expanded="false" aria-controls="src6" aria-label="Details for source 6">6</button><a href="https://opportunityinsights.org/paper/collegeadmissions/" target="_blank" rel="noopener">Chetty, Deming and Friedman, <i>Quarterly Journal of Economics</i>, 2026<span class="sr"> (opens in a new tab)</span></a><div class="sc-pop" id="src6"><p>&ldquo;Diversifying Society&rsquo;s Leaders?&rdquo; Covers applicants to Ivy-Plus colleges, using tax records linked to SAT and ACT scores. Scores predict later outcomes; the study does not show that raising a score raises earnings.</p></div></li>
-      </ol>
     </div>
   </div>
 </section>
@@ -1448,12 +1412,9 @@ footer .brand-name span{color:#8d9e9a}
 })();
 </script>
 <script>
-/* scores sections (#aid, #earnings): bar charts drawn at the container's real pixel width so labels stay legible on phones */
+/* scores sections (#aid, #earnings): charts drawn at the container's real pixel width so labels stay legible on phones */
 (function(){
   const sets = [
-    {id:'aidChart', from:3, to:6, gap:'+$72,000', ref:9200, data:[
-      {x:['Under','1200'], v:0}, {x:['1200'], v:24000}, {x:['1260'], v:32000}, {x:['1300'], v:40000, hi:1},
-      {x:['1330'], v:60000}, {x:['1360'], v:96000}, {x:['1420'], v:112000, hi:1}]},
     {id:'earnChart', from:1, to:4, gap:'+$28,332', data:[
       {x:['Under 1100'], n:['Under','1100'], v:48793}, {x:['1100–1199'], n:['1100 to','1199'], v:54528, hi:1},
       {x:['1200–1299'], n:['1200 to','1299'], v:61389}, {x:['1300–1399'], n:['1300 to','1399'], v:68635},
@@ -1485,37 +1446,67 @@ footer .brand-name span{color:#8d9e9a}
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
     svg.innerHTML = g;
   }
-  sets.forEach(s => {
+  /* #aid waterfall: the average award at 1200, what each 100-point step adds, then the total */
+  const wf = {id:'aidChart', ref:7600, refLabel:'Flagship Program: $7,600', start:['1200'], startN:['1200'], base:26999, steps:[['1300',30999],['1400',43393],['1500',46226]], total:['Total','at 1500']};
+  const k = v => '$' + (v / 1000).toFixed(1) + 'K';
+  function drawWf(s){
+    const svg = s.svg, W = Math.round(svg.parentNode.clientWidth);
+    if (!W || W === s.w) return;
+    s.w = W;
+    const narrow = W < 460, H = narrow ? 250 : 276, T = narrow ? 44 : 30, B = narrow ? 46 : 42;
+    const vals = [s.base].concat(s.steps.map(d => d[1])), last = vals[vals.length - 1];
+    const n = vals.length + 1, slot = W / n, bw = Math.min(24, slot * .6), base = H - B;
+    const ys = v => T + (1 - v / last) * (base - T), cx = i => slot * (i + .5);
+    const bar = (cls, i, y0, y1) => { const x = cx(i) - bw / 2, r = Math.min(4, y0 - y1); return '<path class="bar' + cls + '" d="M' + x + ',' + y0 + 'V' + (y1 + r) + 'Q' + x + ',' + y1 + ' ' + (x + r) + ',' + y1 + 'H' + (x + bw - r) + 'Q' + (x + bw) + ',' + y1 + ' ' + (x + bw) + ',' + (y1 + r) + 'V' + y0 + 'Z"/>'; };
+    const val = (cls, i, y, t) => '<text class="v' + cls + '" x="' + cx(i) + '" y="' + (y - 7) + '" text-anchor="middle">' + t + '</text>';
+    const xl = (cls, i, lines) => '<text class="x' + cls + '" text-anchor="middle">' + lines.map((t, j) => '<tspan x="' + cx(i) + '" y="' + (base + 18 + j * 15) + '">' + t + '</tspan>').join('') + '</text>';
+    const link = (i, y) => '<line class="link" x1="' + (cx(i) + bw / 2) + '" x2="' + (cx(i + 1) - bw / 2) + '" y1="' + y + '" y2="' + y + '"/>';
+    let g = '<line class="base" x1="0" x2="' + W + '" y1="' + base + '" y2="' + base + '"/>';
+    g += bar('', 0, base, ys(vals[0])) + val('', 0, ys(vals[0]), k(vals[0])) + xl('', 0, narrow ? s.startN : s.start);
+    vals.slice(1).forEach((v, j) => {
+      g += link(j, ys(vals[j])) + bar(' up', j + 1, ys(vals[j]), ys(v)) + val(' up', j + 1, ys(v), '+' + k(v - vals[j])) + xl('', j + 1, [s.steps[j][0]]);
+    });
+    /* total: the 1200 level in gray, the gain above it in the dark accent */
+    g += link(n - 2, ys(last)) + '<rect class="bar" x="' + (cx(n - 1) - bw / 2) + '" y="' + ys(vals[0]) + '" width="' + bw + '" height="' + (base - ys(vals[0])) + '"/>' +
+      bar(' tot', n - 1, ys(vals[0]) - 2, ys(last)) + val(' tot', n - 1, ys(last) - (narrow ? 15 : 0), k(last)) + xl(' hi', n - 1, s.total);
+    /* price line: our Flagship Program, labeled in the empty band under the floating bars */
+    const ry = ys(s.ref);
+    g += '<line class="ref" x1="2" x2="' + (W - 2) + '" y1="' + ry + '" y2="' + ry + '"/><text class="ref-lbl" x="' + (cx(1) + cx(n - 2)) / 2 + '" y="' + (ry + 16) + '" text-anchor="middle">' + s.refLabel + '</text>';
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.innerHTML = g;
+  }
+  [...sets.map(s => [s, draw]), [wf, drawWf]].forEach(([s, fn]) => {
     s.svg = document.getElementById(s.id);
     if (!s.svg) return;
-    draw(s);
-    if ('ResizeObserver' in window) new ResizeObserver(() => draw(s)).observe(s.svg.parentNode);
-    else window.addEventListener('resize', () => draw(s));
+    fn(s);
+    if ('ResizeObserver' in window) new ResizeObserver(() => fn(s)).observe(s.svg.parentNode);
+    else window.addEventListener('resize', () => fn(s));
   });
 })();
 </script>
 <script>
-/* scores sections: source details open on hover, keyboard focus or a tap on the number; Escape closes */
+/* scores sections: each chart's sources open on hover, keyboard focus or a tap on the pill; Escape closes */
 (function(){
-  const items = [...document.querySelectorAll('.sc-src li')], nav = document.getElementById('nav');
-  function place(li){
-    const pop = li.querySelector('.sc-pop'), r = li.getBoundingClientRect(), above = r.top - nav.offsetHeight - 8;
-    li.classList.toggle('down', above < pop.offsetHeight && innerHeight - r.bottom > above);
+  const cites = [...document.querySelectorAll('.sc-cite')], nav = document.getElementById('nav'), mcta = document.getElementById('mcta');
+  function place(c){
+    const pop = c.querySelector('.sc-pop'), r = c.getBoundingClientRect();
+    const below = innerHeight - r.bottom - (mcta && mcta.classList.contains('show') ? mcta.offsetHeight : 0), above = r.top - nav.offsetHeight;
+    c.classList.toggle('up', below < pop.offsetHeight && above > below);
   }
-  function setOpen(li, open){ li.classList.toggle('open', open); li.querySelector('.sc-num').setAttribute('aria-expanded', open); }
-  items.forEach(li => {
-    li.addEventListener('mouseenter', () => place(li));
-    li.addEventListener('focusin', () => place(li));
-    li.addEventListener('mouseleave', () => li.classList.remove('shut'));
-    li.addEventListener('focusout', e => { if (!li.contains(e.relatedTarget)) { li.classList.remove('shut'); setOpen(li, false); } });
-    li.querySelector('.sc-num').addEventListener('click', () => {
-      const open = !li.classList.contains('open');
-      items.forEach(o => { if (o !== li) setOpen(o, false); });
-      place(li); li.classList.remove('shut'); setOpen(li, open);
+  function setOpen(c, open){ c.classList.toggle('open', open); c.querySelector('.sc-cite-btn').setAttribute('aria-expanded', open); }
+  cites.forEach(c => {
+    c.addEventListener('mouseenter', () => place(c));
+    c.addEventListener('focusin', () => place(c));
+    c.addEventListener('mouseleave', () => c.classList.remove('shut'));
+    c.addEventListener('focusout', e => { if (!c.contains(e.relatedTarget)) { c.classList.remove('shut'); setOpen(c, false); } });
+    c.querySelector('.sc-cite-btn').addEventListener('click', () => {
+      const open = !c.classList.contains('open');
+      cites.forEach(o => { if (o !== c) setOpen(o, false); });
+      place(c); c.classList.remove('shut'); setOpen(c, open);
     });
   });
-  document.addEventListener('click', e => { if (!e.target.closest('.sc-src li')) items.forEach(li => setOpen(li, false)); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') items.forEach(li => { if (li.matches('.open, :hover, :focus-within')) { setOpen(li, false); if (li.matches(':hover, :focus-within')) li.classList.add('shut'); } }); });
+  document.addEventListener('click', e => { if (!e.target.closest('.sc-cite')) cites.forEach(c => setOpen(c, false)); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') cites.forEach(c => { if (c.matches('.open, :hover, :focus-within')) { setOpen(c, false); if (c.matches(':hover, :focus-within')) c.classList.add('shut'); } }); });
 })();
 </script>
 </body>
