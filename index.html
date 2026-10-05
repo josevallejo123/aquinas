@@ -1428,8 +1428,8 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     g += '<line class="proj" x1="'+lx+'" y1="'+ly+'" x2="'+xs(6)+'" y2="'+ys(1460)+'"/>';
     g += '<g id="tgt"><line class="target" x1="'+L+'" x2="'+(W-R)+'" y1="0" y2="0"/><g class="target-lbl"><rect x="'+(L+6)+'" y="-10" width="88" height="20" rx="10"/><text x="'+(L+50)+'" y="4" text-anchor="middle" id="tgtTxt">Target 1470</text></g></g>';
     g += '<polyline class="line" points="'+tests.map((t,i)=>xs(i)+','+ys(t.v)).join(' ')+'"/>';
-    tests.forEach((t,i)=>{ g += '<circle class="pt" style="--i:'+i+'" cx="'+xs(i)+'" cy="'+ys(t.v)+'" r="5" tabindex="0" data-i="'+i+'" aria-label="'+t.label+', '+t.x+': '+t.v+'"/>'; });
-    g += '<circle class="pt" style="--i:6" cx="'+xs(6)+'" cy="'+ys(1460)+'" r="5" tabindex="0" data-i="p" aria-label="Projected on test day: 1440 to 1480"/>';
+    tests.forEach((t,i)=>{ g += '<circle class="pt" style="--i:'+i+'" cx="'+xs(i)+'" cy="'+ys(t.v)+'" r="5" tabindex="0" role="img" data-i="'+i+'" aria-label="'+t.label+', '+t.x+': '+t.v+'"/>'; });
+    g += '<circle class="pt" style="--i:6" cx="'+xs(6)+'" cy="'+ys(1460)+'" r="5" tabindex="0" role="img" data-i="p" aria-label="Projected on test day: 1440 to 1480"/>';
     svg.innerHTML = g;
     /* larger invisible touch targets behind each point */
     svg.querySelectorAll('.pt').forEach(c=>{
