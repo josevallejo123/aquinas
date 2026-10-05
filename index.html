@@ -180,7 +180,7 @@ section{padding:64px 0}
    button only fade, so they stay clickable throughout */
 .motion .hero .eyebrow,.motion .hero h1,.motion .hero-meta span,.motion .float-card{visibility:hidden}
 .motion .hero-ctas .btn,.motion .hero-toggle{opacity:0}
-.motion :is(.hero-poster,.hero-video){transform:scale(1.06)}
+.motion :is(.hero-poster,.hero-video){transform:scale(1.06);will-change:transform}
 /* SplitText's line masks clip at the line box; widen them sideways (layout unchanged) so italic overhang isn't cut */
 .hero h1 .hl-mask{margin-inline:-.25em;padding-inline:.25em}
 
@@ -1738,7 +1738,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!c.svg || c.state) return;
       if (c.svg.getBoundingClientRect().top < innerHeight) { c.state = 'done'; return; }
       arm(c);
-      ScrollTrigger.create({trigger: c.svg, start: 'top 75%', end: 'max', once: true, onEnter: () => play(c)});
+      ScrollTrigger.create({trigger: c.svg, start: 'top 75%', end: 'max', once: true, onEnter: st => { st.kill(); play(c); }});
     });
     return () => { chartsOn = false; charts.forEach(c => { if (c.tl) finish(c); }); };
   });
