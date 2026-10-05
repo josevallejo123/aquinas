@@ -14,7 +14,16 @@
 <link rel="preload" as="image" href="media/hero-desktop.webp" type="image/webp" fetchpriority="high" media="(min-aspect-ratio: 751/1000)">
 <link rel="preload" as="image" href="media/hero-phone.webp" type="image/webp" fetchpriority="high" media="(max-aspect-ratio: 3/4)">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js')</script>
+<script>
+/* .js turns on the script-driven styles. .motion holds the hero's parts in their pre-reveal state
+   until the GSAP timeline takes over (reduced motion never gets it); if the timeline hasn't
+   started 2.5 s from here (GSAP slow or blocked), the class goes and the hero shows as drawn */
+(function(h){h.classList.add('js');if(matchMedia('(prefers-reduced-motion: no-preference)').matches){h.classList.add('motion');setTimeout(function(){h.classList.remove('motion')},2500)}})(document.documentElement);
+</script>
+<script defer src="vendor/gsap/gsap.min.js"></script>
+<script defer src="vendor/gsap/ScrollTrigger.min.js"></script>
+<script defer src="vendor/gsap/SplitText.min.js"></script>
+<script defer src="vendor/gsap/DrawSVGPlugin.min.js"></script>
 <style>
 /* ============ tokens ============ */
 /* The logo's one ink (navy #10273E, hue 210) is the page's ink: text, primary buttons and every
@@ -115,6 +124,8 @@ section{padding:64px 0}
 .hero-stage{position:relative;isolation:isolate;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:calc(var(--nav-h) + 96px);color:var(--on-dark);--focus:var(--accent)}
 .hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--scrim)}
 .hero-media img,.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* the video stays clear over the poster until its first `playing` event, then fades in */
+.hero-video{opacity:0}
 /* the scrim, sized so every line over the video passes AA on both posters (numbers in DESIGN.md):
    a band under the nav and a light overall calm here, plus a shade that follows the copy block
    (.hero-grid::before), so it covers the text however many lines it wraps to */
@@ -165,6 +176,13 @@ section{padding:64px 0}
 .voice.both svg{margin-top:3px;fill:none;stroke-width:1.7}
 .voice.both .ring-a{stroke:var(--allan)}
 .voice.both .ring-j{stroke:var(--jon)}
+/* the reveal's starting state, only while html.motion is set (see <head>); the CTAs and the
+   button only fade, so they stay clickable throughout */
+.motion .hero .eyebrow,.motion .hero h1,.motion .hero-meta span,.motion .float-card{visibility:hidden}
+.motion .hero-ctas .btn,.motion .hero-toggle{opacity:0}
+.motion :is(.hero-poster,.hero-video){transform:scale(1.06)}
+/* SplitText's line masks clip at the line box; widen them sideways (layout unchanged) so italic overhang isn't cut */
+.hero h1 .hl-mask{margin-inline:-.25em;padding-inline:.25em}
 
 /* ============ credential strip ============ */
 .creds{background:var(--paper);border-block:1px solid var(--line)}
@@ -728,7 +746,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
         <source srcset="media/hero-desktop.webp" type="image/webp">
         <img class="hero-poster" src="media/hero-desktop.jpg" alt="" width="1920" height="1080" fetchpriority="high">
       </picture>
-      <video class="hero-video" id="heroVideo" muted playsinline loop autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
+      <video class="hero-video" id="heroVideo" muted playsinline loop preload="none" aria-hidden="true" tabindex="-1"></video>
     </div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
@@ -1266,21 +1284,63 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   mcta.inert = true;
   ctaWatch.forEach((v, el) => ctaIO.observe(el));
 
-  /* hero video. For now the source is picked by the viewport's shape (the phone file is a
-     portrait crop) and reduced motion skips autoplay; Prompt 3 replaces this with the full
-     loading strategy. The button pauses and plays the loop (WCAG 2.2.2). */
-  const heroVideo = document.getElementById('heroVideo'), heroToggle = document.getElementById('heroToggle');
-  const heroSrc = 'media/hero-' + (matchMedia('(max-aspect-ratio: 3/4)').matches ? 'phone' : 'desktop') + '.mp4';
+  /* hero video (D4). The poster paints first. The loop starts loading in idle time after the
+     window's load event, cropped for the viewport the page loaded at (the poster's own query),
+     as AV1 where the browser decodes it power-efficiently and H.264 otherwise. Reduced motion,
+     Save-Data and 2G get the poster and the play button instead. The video fades in over the
+     poster on its first `playing` event; it pauses while the stage is fully offscreen or the tab
+     is hidden, and comes back only if the visitor hadn't paused it. The button (WCAG 2.2.2)
+     follows the video's own play/pause events. */
+  const heroVideo = document.getElementById('heroVideo'), heroToggle = document.getElementById('heroToggle'), heroStage = document.querySelector('.hero-stage');
+  const net = navigator.connection || {}, crop = matchMedia('(max-aspect-ratio: 3/4)').matches ? 'phone' : 'desktop', mp4 = 'media/hero-' + crop + '.mp4';
+  let best = mp4, armed = false, onScreen = true, shown = false;
+  let held = reduce || !!net.saveData || /2g$/.test(net.effectiveType || '');   // true: stays on the poster until the button is pressed
+  const decided = new Promise(done => {
+    try {
+      navigator.mediaCapabilities.decodingInfo({type:'file', video: crop === 'phone'
+        ? {contentType:'video/mp4; codecs="av01.0.04M.08"', width:540, height:960, bitrate:7e5, framerate:30}
+        : {contentType:'video/mp4; codecs="av01.0.08M.08"', width:1920, height:1080, bitrate:2.1e6, framerate:30}})
+        .then(r => { if (r.supported && r.powerEfficient) best = 'media/hero-' + crop + '-av1.mp4'; }, () => {}).then(done);
+    } catch (e) { done(); }
+  });
   function setToggle(playing){
     heroToggle.classList.toggle('paused', !playing);
     heroToggle.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
   }
+  function syncVideo(){
+    if (!armed || held || !onScreen || document.hidden) { if (!heroVideo.paused) heroVideo.pause(); return; }
+    if (!heroVideo.getAttribute('src')) { heroVideo.preload = 'auto'; heroVideo.src = best; }
+    if (heroVideo.paused) heroVideo.play().catch(e => {
+      if (e.name === 'NotAllowedError') held = true;   // autoplay refused (iOS Low Power Mode): the play state shows
+      setToggle(!heroVideo.paused);
+    });
+  }
   heroVideo.addEventListener('play', () => setToggle(true));
   heroVideo.addEventListener('pause', () => setToggle(false));
-  if (reduce) heroVideo.removeAttribute('autoplay'); else heroVideo.src = heroSrc;
+  heroVideo.addEventListener('playing', () => {
+    if (shown) return;
+    shown = true;
+    if (window.gsap) gsap.to(heroVideo, {opacity:1, duration: reduce ? 0 : .8, ease:'power1.inOut'}); else heroVideo.style.opacity = 1;
+  });
+  heroVideo.addEventListener('error', () => {   // an AV1 file that won't decode after all falls back to H.264 once
+    if (heroVideo.getAttribute('src') === mp4) { held = true; setToggle(false); return; }
+    best = mp4; heroVideo.removeAttribute('src'); syncVideo();
+  });
   heroToggle.addEventListener('click', () => {
-    if (!heroVideo.getAttribute('src')) heroVideo.src = heroSrc;
-    if (heroVideo.paused) heroVideo.play().catch(() => setToggle(false)); else heroVideo.pause();
+    if (heroVideo.paused) { held = false; armed = true; syncVideo(); } else { held = true; heroVideo.pause(); }
+  });
+  document.addEventListener('visibilitychange', syncVideo);
+  function armVideo(){
+    const go = () => decided.then(() => { armed = true; syncVideo(); });
+    if (window.requestIdleCallback) requestIdleCallback(go, {timeout:1500}); else setTimeout(go, 300);
+  }
+  if (document.readyState === 'complete') armVideo(); else addEventListener('load', armVideo, {once:true});
+  /* offscreen: ScrollTrigger once GSAP has loaded (deferred), an IntersectionObserver if it never does */
+  document.addEventListener('DOMContentLoaded', () => {
+    const seen = on => { onScreen = on; syncVideo(); };
+    seen(heroStage.getBoundingClientRect().bottom > 0);
+    if (window.ScrollTrigger) ScrollTrigger.create({trigger:heroStage, start:'top bottom', end:'bottom top', onToggle:st => seen(st.isActive)});
+    else new IntersectionObserver(([e]) => seen(e.isIntersecting)).observe(heroStage);
   });
 
   /* method stepper */
@@ -1519,6 +1579,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     g += '<text class="brk-lbl" x="' + (xa + xb) / 2 + '" y="' + (top - 9) + '" text-anchor="middle">' + s.gap + '</text>';
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
     svg.innerHTML = g;
+    svg.dispatchEvent(new Event('chartdraw'));   // the motion script re-arms or finishes this chart
   }
   /* #aid waterfall: the average award at 1200, what each 100-point step adds, then the total */
   const wf = {id:'aidChart', ref:7600, refLabel:'Flagship Program: $7,600', start:['1200'], startN:['1200'], base:26999, steps:[['1300',30999],['1400',43393],['1500',46226]], total:['Total','at 1500']};
@@ -1548,6 +1609,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     g += '<line class="ref" x1="2" x2="' + (W - 2) + '" y1="' + ry + '" y2="' + ry + '"/><text class="ref-lbl" x="' + (cx(1) + cx(n - 2)) / 2 + '" y="' + (ry + 16) + '" text-anchor="middle">' + s.refLabel + '</text>';
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
     svg.innerHTML = g;
+    svg.dispatchEvent(new Event('chartdraw'));
   }
   [...sets.map(s => [s, draw]), [wf, drawWf]].forEach(([s, fn]) => {
     s.svg = document.getElementById(s.id);
@@ -1582,6 +1644,146 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   document.addEventListener('click', e => { if (!e.target.closest('.sc-cite')) cites.forEach(c => setOpen(c, false)); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') cites.forEach(c => { if (c.matches('.open, :hover, :focus-within')) { setOpen(c, false); if (c.matches(':hover, :focus-within')) c.classList.add('shut'); } }); });
 })();
+</script>
+<script>
+/* motion (GSAP, vendored in vendor/gsap/; DESIGN.md "Motion" has the inventory). Two things move:
+   the hero's reveal, once on load, and the two score charts, each once as it scrolls into view.
+   Reduced motion gets neither. GSAP loads deferred, so this waits for DOMContentLoaded; if it never
+   arrives, the head script's failsafe shows the hero and the charts stay as drawn. */
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.documentElement;
+  if (!window.gsap || !window.ScrollTrigger || !window.SplitText || !window.DrawSVGPlugin) { root.classList.remove('motion'); return; }
+  gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
+  const mm = gsap.matchMedia();
+  document.fonts.ready.then(() => ScrollTrigger.refresh());
+
+  /* hero: the page's one orchestrated moment, about 1.6 s. The poster (and the video, if it is
+     already up) settles from a slight zoom; the headline rises line by line out of its masks with
+     the eyebrow; then the CTAs, then the meta line, the cards and the pause button. It starts once
+     the headline's font is in (so the lines split where they will stay) and never waits on the
+     video. The CTAs and the button only fade, so they stay clickable throughout; focus anywhere in
+     the stage completes it at once. ≥1024 the cards drift in from the right, beside the copy;
+     below that they rise into place across the stage's bottom edge. */
+  const stage = document.querySelector('.hero-stage');
+  const headFont = Promise.all(['470 1em Newsreader', 'italic 470 1em Newsreader'].map(f => document.fonts.load(f))).catch(() => {});
+  let heroBegun = false;
+  mm.add({desk: '(min-width: 1024px)', ok: '(prefers-reduced-motion: no-preference)'}, ctx => {
+    if (!ctx.conditions.ok || heroBegun) return;
+    heroBegun = true;
+    let live = true;
+    headFont.then(() => {
+      if (live && root.classList.contains('motion')) ctx.add(() => heroReveal(ctx.conditions.desk));
+      else root.classList.remove('motion');   // the failsafe already showed it, or the breakpoint moved while the font loaded
+    });
+    return () => { live = false; };
+  });
+  function heroReveal(desk){
+    const q = s => stage.querySelectorAll(s);
+    const split = SplitText.create(stage.querySelector('h1'), {type: 'lines', mask: 'lines', linesClass: 'hl'});
+    root.classList.remove('motion');   // GSAP holds the starting state from here; nothing paints in between
+    const tl = gsap.timeline({defaults: {ease: 'power3.out'}, onComplete: () => {
+      split.revert();
+      stage.querySelectorAll('[style=""]').forEach(e => e.removeAttribute('style'));   // clearProps leaves the attributes empty
+      stage.removeEventListener('focusin', finish);
+      ScrollTrigger.refresh();
+    }});
+    const finish = () => tl.progress(1);
+    const shown = 'transform,opacity,visibility';
+    tl.from(q('.hero-poster, .hero-video'), {scale: 1.06, duration: 1.6, ease: 'power2.out', clearProps: 'transform'}, 0)
+      .from(q('.eyebrow'), {autoAlpha: 0, y: 10, duration: .5, clearProps: shown}, .05)
+      .from(split.lines, {yPercent: 105, duration: .85, stagger: {amount: .3}}, .1)
+      .from(q('.hero-ctas .btn'), {opacity: 0, y: 14, duration: .6, stagger: .08, clearProps: shown}, .55)
+      .from(q('.hero-meta span'), {autoAlpha: 0, y: 8, duration: .5, stagger: .06, clearProps: shown}, .8)
+      .from(q('.float-card'), {autoAlpha: 0, [desk ? 'x' : 'y']: 24, duration: .7, stagger: .1, clearProps: shown}, .85)
+      .from(q('.hero-toggle'), {opacity: 0, duration: .5, clearProps: 'opacity'}, 1);
+    stage.addEventListener('focusin', finish);
+  }
+
+  /* score charts: each plays once, when its top passes 75% of the viewport (no scrub, D9), and
+     tells its story in order. Every tween is a from() on the chart as drawn, and the timeline is
+     reverted when it ends, so the chart ends on exactly the static drawing. The chart script
+     redraws through innerHTML on resize and fires `chartdraw`: a chart still waiting is re-armed
+     on the new drawing; one that is playing or has played just stays as drawn (final). A chart
+     already in view or above it when this runs is left as drawn. */
+  const charts = [{id: 'aidChart', build: waterfall}, {id: 'earnChart', build: earnings}];
+  let chartsOn = false;
+  function arm(c){
+    if (c.tl) c.tl.kill();
+    c.tl = c.build(c.svg).eventCallback('onComplete', () => finish(c));
+  }
+  function play(c){
+    if (c.state || !c.tl) return;
+    c.state = 'playing';
+    if (c.svg.getBoundingClientRect().bottom < 0) finish(c); else c.tl.play();   // scrolled straight past it: no need to play it offscreen
+  }
+  function finish(c){   // at the end, or at any point if cut short: back to exactly what the chart script drew
+    const tl = c.tl;
+    c.tl = null;
+    c.state = 'done';
+    if (!tl) return;
+    tl.kill();
+    if (tl.data) tl.data();
+    c.svg.querySelectorAll('[style],[transform],[data-svg-origin]').forEach(e => ['style', 'transform', 'data-svg-origin'].forEach(a => e.removeAttribute(a)));
+  }
+  charts.forEach(c => {
+    c.svg = document.getElementById(c.id);
+    if (c.svg) c.svg.addEventListener('chartdraw', () => {
+      if (!chartsOn || c.state === 'done') return;
+      if (c.state === 'playing') { c.tl.kill(); c.tl = null; c.state = 'done'; } else arm(c);
+    });
+  });
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    chartsOn = true;
+    charts.forEach(c => {   // top to bottom: #aid, then #earnings
+      if (!c.svg || c.state) return;
+      if (c.svg.getBoundingClientRect().top < innerHeight) { c.state = 'done'; return; }
+      arm(c);
+      ScrollTrigger.create({trigger: c.svg, start: 'top 75%', end: 'max', once: true, onEnter: () => play(c)});
+    });
+    return () => { chartsOn = false; charts.forEach(c => { if (c.tl) finish(c); }); };
+  });
+
+  /* #aidChart: the 1200 bar rises from the baseline; each step rises from the previous level as its
+     link draws in; the total rises from the baseline; then the dotted Flagship price line is swept
+     in from the left (a clip, since DrawSVG would replace its dots) and its label appears. */
+  function waterfall(svg){
+    const q = s => svg.querySelectorAll(s), one = s => svg.querySelector(s);
+    const links = q('.link'), steps = q('path.bar.up'), vals = q('text.v'), ref = one('.ref'), vb = svg.viewBox.baseVal;
+    const NS = 'http://www.w3.org/2000/svg', clip = document.createElementNS(NS, 'clipPath'), sweep = document.createElementNS(NS, 'rect');
+    clip.id = svg.id + 'Sweep';
+    [['x', 0], ['y', 0], ['width', vb.width], ['height', vb.height]].forEach(([k, v]) => sweep.setAttribute(k, v));
+    clip.appendChild(sweep);
+    svg.appendChild(clip);
+    ref.setAttribute('clip-path', 'url(#' + clip.id + ')');
+    const rise = {scaleY: 0, transformOrigin: '50% 100%'}, fade = {autoAlpha: 0, y: 6, duration: .35};
+    const tl = gsap.timeline({paused: true, defaults: {ease: 'power2.out'}, data: () => { ref.removeAttribute('clip-path'); clip.remove(); }});
+    tl.from(one('path.bar'), {...rise, duration: .6}, 0)
+      .from(vals[0], fade, .35);
+    let t = .45;
+    steps.forEach((bar, j) => {
+      tl.from(links[j], {drawSVG: 0, duration: .25, ease: 'none'}, t)
+        .from(bar, {...rise, duration: .45}, t + .15)
+        .from(vals[j + 1], fade, t + .4);
+      t += .38;
+    });
+    tl.from(links[steps.length], {drawSVG: 0, duration: .25, ease: 'none'}, t)
+      .from(q('rect.bar, path.bar.tot'), {scaleY: 0, svgOrigin: '0 ' + one('.base').getAttribute('y1'), duration: .55}, t + .15)
+      .from(vals[vals.length - 1], fade, t + .5)
+      .from(sweep, {attr: {width: 0}, duration: .7, ease: 'power1.inOut'}, t + .75)
+      .from(one('.ref-lbl'), {autoAlpha: 0, y: 4, duration: .4}, t + 1.05);
+    return tl;
+  }
+  /* #earnChart: the bars rise from the baseline left to right with their values just behind,
+     then the bracket draws from the 1100–1199 bar to the 1400+ bar and "+$28,332" lands last. */
+  function earnings(svg){
+    const q = s => svg.querySelectorAll(s);
+    return gsap.timeline({paused: true, defaults: {ease: 'power2.out'}})
+      .from(q('.bar'), {scaleY: 0, transformOrigin: '50% 100%', duration: .7, stagger: .12}, 0)
+      .from(q('.v'), {autoAlpha: 0, y: 6, duration: .4, stagger: .12}, .4)
+      .from(q('.brk'), {drawSVG: 0, duration: .6, ease: 'power1.inOut'}, 1.15)
+      .from(q('.brk-lbl'), {autoAlpha: 0, y: -10, duration: .5, ease: 'power3.out'}, 1.65);
+  }
+});
 </script>
 </body>
 </html>
