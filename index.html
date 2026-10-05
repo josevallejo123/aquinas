@@ -1291,11 +1291,11 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   ctaWatch.forEach((v, el) => (el === heroCtas ? heroIO : ctaIO).observe(el));
 
   /* hero video (D4). The poster paints first. The loop starts loading in idle time after the
-     window's load event, in the crop the poster's own query picks (and the other crop if the
-     screen turns past 3:4), as AV1 where the browser decodes it power-efficiently and H.264 otherwise. Reduced motion,
-     Save-Data and 2G get the poster and the play button instead. The video fades in over the
-     poster on its first `playing` event; it pauses while the stage is fully offscreen or the tab
-     is hidden, and comes back only if the visitor hadn't paused it. The button (WCAG 2.2.2)
+     window's load event, in the crop the poster's own query picks (the other crop if the screen
+     turns past 3:4), as AV1 where the browser decodes it power-efficiently and H.264 otherwise.
+     Reduced motion, Save-Data and 2G get the poster and the play button instead. The video fades
+     in over the poster on its first `playing` event; it pauses while the stage is fully offscreen
+     or the tab is hidden, and comes back only if the visitor hadn't paused it. The button (WCAG 2.2.2)
      follows the video's own play/pause events. */
   const heroVideo = document.getElementById('heroVideo'), heroToggle = document.getElementById('heroToggle'), heroStage = document.querySelector('.hero-stage');
   const net = navigator.connection || {}, portrait = matchMedia('(max-aspect-ratio: 3/4)');
