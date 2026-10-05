@@ -111,9 +111,10 @@ section{padding:64px 0}
 .menu-btn[aria-expanded="true"] i{background:transparent}
 .menu-btn[aria-expanded="true"] i::before{transform:translateY(6px) rotate(45deg)}
 .menu-btn[aria-expanded="true"] i::after{transform:translateY(-6px) rotate(-45deg)}
-/* the sheet never runs past the screen (phone landscape): it scrolls instead */
-.nav-links{position:absolute;top:calc(100% + 8px);left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));display:flex;flex-direction:column;list-style:none;margin:0;padding:8px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);max-height:calc(100vh - var(--nav-h) - 16px - env(safe-area-inset-bottom));max-height:calc(100svh - var(--nav-h) - 16px - env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .2s var(--ease),visibility 0s .2s}
+.nav-links{position:absolute;top:calc(100% + 8px);left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));display:flex;flex-direction:column;list-style:none;margin:0;padding:8px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .2s var(--ease),visibility 0s .2s}
 .nav-links.open{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s var(--ease)}
+/* on a short screen (phone landscape) the sheet would run past the bottom: it scrolls instead */
+@media (max-height:600px){.nav-links{max-height:calc(100vh - var(--nav-h) - 16px - env(safe-area-inset-bottom));max-height:calc(100svh - var(--nav-h) - 16px - env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain}}
 .nav-links a:not(.btn){display:flex;align-items:center;min-height:52px;padding:0 14px;font-size:17px;font-weight:500;text-decoration:none;border-radius:10px}
 .nav-links a:not(.btn):active{background:var(--bg)}
 .nav-links li:not(:last-child):not(:nth-last-child(2)){border-bottom:1px solid var(--line)}
@@ -1313,14 +1314,17 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   }
   pickCrop();
   /* a phone or tablet turned past 3:4: the poster swaps by its own query, so the loop moves to the
-     other crop too, at the same point, rather than stretching the one it loaded with */
+     other crop too, at the same point, rather than stretching the one it loaded with. A video that
+     is paused, offscreen or in a hidden tab just drops its file; syncVideo loads the right one if it plays */
+  let seekTo = null;
+  heroVideo.addEventListener('loadedmetadata', () => { if (seekTo !== null) { heroVideo.currentTime = seekTo; seekTo = null; } });
   portrait.addEventListener('change', () => {
     pickCrop();
     if (!heroVideo.getAttribute('src')) return;
     decided.then(() => {
-      if (heroVideo.getAttribute('src') === best) return;
-      const t = heroVideo.currentTime;
-      heroVideo.addEventListener('loadedmetadata', () => { heroVideo.currentTime = t; }, {once:true});
+      if (!heroVideo.getAttribute('src') || heroVideo.getAttribute('src') === best) return;
+      if (held || !onScreen || document.hidden) { seekTo = null; heroVideo.removeAttribute('src'); heroVideo.load(); return; }
+      seekTo = heroVideo.currentTime;
       heroVideo.src = best;
       syncVideo();
     });
@@ -1357,13 +1361,8 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     if (window.requestIdleCallback) requestIdleCallback(go, {timeout:1500}); else setTimeout(go, 300);
   }
   if (document.readyState === 'complete') armVideo(); else addEventListener('load', armVideo, {once:true});
-  /* offscreen: ScrollTrigger once GSAP has loaded (deferred), an IntersectionObserver if it never does */
-  document.addEventListener('DOMContentLoaded', () => {
-    const seen = on => { onScreen = on; syncVideo(); };
-    seen(heroStage.getBoundingClientRect().bottom > 0);
-    if (window.ScrollTrigger) ScrollTrigger.create({trigger:heroStage, start:'top bottom', end:'bottom top', onToggle:st => seen(st.isActive)});
-    else new IntersectionObserver(([e]) => seen(e.isIntersecting)).observe(heroStage);
-  });
+  /* offscreen: paused while no part of the stage is in view */
+  new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; syncVideo(); }).observe(heroStage);
 
   /* method stepper */
   const steps = [
@@ -1668,6 +1667,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     });
   });
   document.addEventListener('click', e => { if (!e.target.closest('.sc-cite')) cites.forEach(c => setOpen(c, false)); });
+  addEventListener('scroll', () => cites.forEach(c => { if (c.matches('.open, :focus-within')) place(c); }), {passive:true});   // keep an open one inside the room it has
   document.addEventListener('keydown', e => { if (e.key === 'Escape') cites.forEach(c => { if (c.matches('.open, :hover, :focus-within')) { setOpen(c, false); if (c.matches(':hover, :focus-within')) c.classList.add('shut'); } }); });
 })();
 </script>
