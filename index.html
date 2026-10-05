@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F1F4F7">
 <title>Lighthouse Prep</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png?v=2" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <meta name="description" content="SAT preparation and college guidance for students applying to selective colleges. Online across the US, delivered by the coaches.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="media/hero-desktop.webp" type="image/webp" fetchpriority="high" media="(min-aspect-ratio: 751/1000)">
 <link rel="preload" as="image" href="media/hero-phone.webp" type="image/webp" fetchpriority="high" media="(max-aspect-ratio: 3/4)">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,72,470&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
 <script>
 /* .js turns on the script-driven styles. .motion holds the hero's parts in their pre-reveal state
    until the GSAP timeline takes over (reduced motion never gets it); if the timeline hasn't
@@ -104,7 +104,7 @@ section{padding:64px 0}
 .brand-word span{display:block;text-align:center;font-size:calc(var(--logo-h) * .39);font-weight:600;line-height:1.08;text-transform:uppercase;letter-spacing:.34em;margin-right:-.34em}
 .menu-btn{width:44px;height:44px;border-radius:12px;border:1px solid var(--edge);background:var(--paper);cursor:pointer;display:grid;place-items:center;padding:0;transition:background-color .3s,border-color .3s}
 .js .nav.over .menu-btn{background:color-mix(in srgb,var(--scrim) 50%,transparent);border-color:color-mix(in srgb,var(--on-dark) 70%,transparent);--menu-ink:var(--on-dark)}
-.menu-btn i,.menu-btn i::before,.menu-btn i::after{display:block;width:18px;height:1.8px;border-radius:2px;background:var(--menu-ink,var(--ink));transition:transform .25s var(--ease),background-color .2s}
+.menu-btn i,.menu-btn i::before,.menu-btn i::after{display:block;width:18px;height:1.8px;border-radius:2px;background:var(--menu-ink,var(--ink));transition:transform .2s var(--ease),background-color .2s}
 .menu-btn i{position:relative}
 .menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0}
 .menu-btn i::before{top:-6px}.menu-btn i::after{top:6px}
@@ -112,7 +112,7 @@ section{padding:64px 0}
 .menu-btn[aria-expanded="true"] i::before{transform:translateY(6px) rotate(45deg)}
 .menu-btn[aria-expanded="true"] i::after{transform:translateY(-6px) rotate(-45deg)}
 /* the sheet never runs past the screen (phone landscape): it scrolls instead */
-.nav-links{position:absolute;top:calc(100% + 8px);left:12px;right:12px;display:flex;flex-direction:column;list-style:none;margin:0;padding:8px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);max-height:calc(100vh - var(--nav-h) - 16px);max-height:calc(100svh - var(--nav-h) - 16px);overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .2s var(--ease),visibility 0s .2s}
+.nav-links{position:absolute;top:calc(100% + 8px);left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));display:flex;flex-direction:column;list-style:none;margin:0;padding:8px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);max-height:calc(100vh - var(--nav-h) - 16px - env(safe-area-inset-bottom));max-height:calc(100svh - var(--nav-h) - 16px - env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .2s var(--ease),visibility 0s .2s}
 .nav-links.open{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s var(--ease)}
 .nav-links a:not(.btn){display:flex;align-items:center;min-height:52px;padding:0 14px;font-size:17px;font-weight:500;text-decoration:none;border-radius:10px}
 .nav-links a:not(.btn):active{background:var(--bg)}
@@ -122,7 +122,7 @@ section{padding:64px 0}
 
 /* ============ hero: a full-bleed video stage, then the coaches' voices on fog ============ */
 .hero{padding:0}
-.hero-stage{position:relative;isolation:isolate;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:calc(var(--nav-h) + 96px);color:var(--on-dark);--focus:var(--accent)}
+.hero-stage{position:relative;isolation:isolate;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:calc(var(--nav-h) + 96px);color:var(--on-dark);--focus:var(--accent)}
 .hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--scrim)}
 .hero-media img,.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 /* the video stays clear over the poster until its first `playing` event, then fades in */
@@ -273,8 +273,8 @@ section{padding:64px 0}
 .steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:relative}
 .steps::before{content:"";position:absolute;left:10%;right:10%;top:22px;height:1.5px;background:var(--line-2)}
 .step-btn{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 0 4px;background:none;border:0;cursor:pointer;text-align:center;border-radius:12px;position:relative}
-.step-num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1.5px solid var(--line-2);font-family:var(--serif);font-size:18px;font-weight:500;transition:background-color .25s,border-color .25s,color .25s,box-shadow .25s;flex:none}
-.step-name{font-size:13px;font-weight:600;color:var(--ink-3);transition:color .25s}
+.step-num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1.5px solid var(--line-2);font-family:var(--serif);font-size:18px;font-weight:500;transition:background-color .2s,border-color .2s,color .2s,box-shadow .2s;flex:none}
+.step-name{font-size:13px;font-weight:600;color:var(--ink-3);transition:color .2s}
 .step-btn:hover .step-name{color:var(--ink)}
 .step-btn[aria-selected="true"] .step-num{background:var(--brand);border-color:var(--brand);color:var(--on-dark);box-shadow:0 0 0 5px var(--brand-tint)}
 .step-btn[aria-selected="true"] .step-name{color:var(--ink)}
@@ -412,7 +412,7 @@ section{padding:64px 0}
 .mx-row.brk{border-top-color:color-mix(in srgb,var(--brand) 20%,transparent)}
 .mx-row.hd{border-top:0;padding:0;align-items:stretch}
 .mx-corner{min-width:0}
-.mx-head{padding:24px 0 12px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;border-radius:var(--r-sm);outline:2.5px solid transparent;outline-offset:2px;transition:outline-color .3s}
+.mx-head{padding:24px 0 12px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;border-radius:var(--r-sm);outline:2.5px solid transparent;outline-offset:2px;transition:outline-color .2s}
 .mx-head h3{font-size:clamp(12px,3.4vw,13.5px);font-variation-settings:"opsz" 24;line-height:1.15;letter-spacing:-.01em}
 .mx-head p{display:none;margin:0;font-size:14px;line-height:1.45;color:var(--ink-3)}
 .mx-head.f{position:relative;margin-top:calc(var(--rise) * -1);padding-top:calc(24px + var(--rise));background:var(--brand);border-radius:50% 50% 0 0 / var(--arch-h) var(--arch-h) 0 0}
@@ -469,9 +469,9 @@ section{padding:64px 0}
 .acc{border-top:1px solid var(--line-2)}
 .acc-item{border-bottom:1px solid var(--line-2)}
 .acc-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;padding:16px 0;background:none;border:0;cursor:pointer;text-align:left;font-family:var(--serif);font-size:18.5px;font-variation-settings:"opsz" 24;font-weight:500;line-height:1.3}
-.acc-q .pm{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line-2);flex:none;position:relative;transition:background-color .3s,border-color .3s}
+.acc-q .pm{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line-2);flex:none;position:relative;transition:background-color .2s,border-color .2s}
 .acc-q .pm::before,.acc-q .pm::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.5px;background:var(--ink);transform:translate(-50%,-50%)}
-.acc-q .pm::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .3s}
+.acc-q .pm::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .2s}
 .acc-q[aria-expanded="true"] .pm{background:var(--brand);border-color:var(--brand)}
 .acc-q[aria-expanded="true"] .pm::before,.acc-q[aria-expanded="true"] .pm::after{background:var(--on-dark)}
 .acc-q[aria-expanded="true"] .pm::after{transform:translate(-50%,-50%) rotate(0)}
@@ -514,7 +514,8 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
 .foot-top{display:grid;gap:24px;padding-bottom:28px;border-bottom:1px solid color-mix(in srgb,var(--on-dark) 12%,transparent)}
 .foot-logo img{width:auto;height:96px}
 .foot-links{display:flex;gap:4px 24px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
-.foot-links a{text-decoration:none;color:var(--on-dark-2);display:inline-flex;align-items:center;min-height:44px}
+.foot-links a{position:relative;text-decoration:none;color:var(--on-dark-2);display:inline-flex;align-items:center;min-height:44px}
+.foot-links a::after{content:"";position:absolute;inset:0 -10px}
 .foot-links a:hover{color:var(--on-dark)}
 .foot-tag{margin:18px 0 0;max-width:38ch}
 .legalese{padding-top:24px;font-size:12.5px;color:var(--on-dark-3);display:grid;gap:8px}
@@ -621,8 +622,8 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   .nav-links{position:static;flex-direction:row;align-items:center;gap:14px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;max-height:none;overflow:visible;opacity:1;visibility:visible;transform:none;transition:none;--focus:inherit}
   .nav-links li:not(:last-child):not(:nth-last-child(2)){border:0}
   .nav-links a{white-space:nowrap}
-  .nav-links a:not(.btn){min-height:auto;padding:6px 0;font-size:15.5px;color:var(--ink-2);position:relative;border-radius:0;transition:color .3s}
-  .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+  .nav-links a:not(.btn){min-height:auto;padding:6px 0;font-size:15.5px;color:var(--ink-2);position:relative;border-radius:0;transition:color .2s}
+  .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .2s}
   .nav-links a:not(.btn):hover{color:var(--ink)}
   .js .nav.over .nav-links a:not(.btn),.js .nav.over .nav-links a:not(.btn):hover{color:var(--on-dark)}
   .js .nav.over .nav-links .btn-primary{background:var(--accent);color:var(--brand);box-shadow:none}
@@ -1707,7 +1708,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const split = SplitText.create(stage.querySelector('h1'), {type: 'lines', mask: 'lines', linesClass: 'hl'});
     root.classList.remove('motion');   // GSAP holds the starting state from here; nothing paints in between
     const tl = gsap.timeline({defaults: {ease: 'power3.out'}, onComplete: () => {
-      split.revert();
       stage.querySelectorAll('[style=""]').forEach(e => e.removeAttribute('style'));   // clearProps leaves the attributes empty
       stage.removeEventListener('focusin', finish);
       ScrollTrigger.refresh();
@@ -1717,6 +1717,9 @@ document.addEventListener('DOMContentLoaded', () => {
     tl.from(q('.hero-poster, .hero-video'), {scale: 1.06, duration: 1.6, ease: 'power2.out', clearProps: 'transform'}, 0)
       .from(q('.eyebrow'), {autoAlpha: 0, y: 10, duration: .5, clearProps: shown}, .05)
       .from(split.lines, {yPercent: 105, duration: .85, stagger: {amount: .3}}, .1)
+      // the lines have landed: back to the plain <h1> now, not at the end. Its repaint is the page's
+      // LCP (the full-bleed poster counts as background), so this brings LCP 0.4 s sooner
+      .call(() => split.revert(), null, '>')
       .from(q('.hero-ctas .btn'), {opacity: 0, y: 14, duration: .6, stagger: .08, clearProps: shown}, .55)
       .from(q('.hero-meta span'), {autoAlpha: 0, y: 8, duration: .5, stagger: .06, clearProps: shown}, .8)
       .from(q('.float-card'), {autoAlpha: 0, [desk ? 'x' : 'y']: 24, duration: .7, stagger: .1, clearProps: shown}, .85)
@@ -1757,7 +1760,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (c.state === 'playing') { c.tl.kill(); c.tl = null; c.state = 'done'; } else arm(c);
     });
   });
-  mm.add('(prefers-reduced-motion: no-preference)', () => {
+  /* armed in idle time: building the two timelines is most of this handler's work (about 90 ms on a
+     mid-range phone), and both charts sit far below the fold */
+  const armCharts = () => mm.add('(prefers-reduced-motion: no-preference)', () => {
     chartsOn = true;
     charts.forEach(c => {   // top to bottom: #aid, then #earnings
       if (!c.svg || c.state) return;
@@ -1767,6 +1772,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     return () => { chartsOn = false; charts.forEach(c => { if (c.tl) finish(c); }); };
   });
+  if (window.requestIdleCallback) requestIdleCallback(armCharts, {timeout: 2000}); else setTimeout(armCharts, 300);
 
   /* #aidChart: the 1200 bar rises from the baseline; each step rises from the previous level as its
      link draws in; the total rises from the baseline; then the dotted Flagship price line is swept
