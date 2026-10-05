@@ -73,7 +73,7 @@ section{padding:64px 0}
 .mono{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:20px;font-weight:500;color:var(--on-dark);background:var(--allan);flex:none;line-height:1}
 .mono.j,.jon .mono{background:var(--jon)}
 /* check glyph: a mask, so its colour stays a token */
-.ticks li::after,.yes::after,.std h4 i::after{content:"";position:absolute;background:var(--chk,var(--brand-2));-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/var(--chk-s,13px) no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/var(--chk-s,13px) no-repeat}
+.ticks li::after,.yes::after,.std h3 i::after{content:"";position:absolute;background:var(--chk,var(--brand-2));-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/var(--chk-s,13px) no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/var(--chk-s,13px) no-repeat}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:16px;line-height:1.2;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s,box-shadow .2s}
@@ -111,7 +111,8 @@ section{padding:64px 0}
 .menu-btn[aria-expanded="true"] i{background:transparent}
 .menu-btn[aria-expanded="true"] i::before{transform:translateY(6px) rotate(45deg)}
 .menu-btn[aria-expanded="true"] i::after{transform:translateY(-6px) rotate(-45deg)}
-.nav-links{position:absolute;top:calc(100% + 8px);left:12px;right:12px;display:flex;flex-direction:column;list-style:none;margin:0;padding:8px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .2s var(--ease),visibility 0s .2s}
+/* the sheet never runs past the screen (phone landscape): it scrolls instead */
+.nav-links{position:absolute;top:calc(100% + 8px);left:12px;right:12px;display:flex;flex-direction:column;list-style:none;margin:0;padding:8px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);max-height:calc(100vh - var(--nav-h) - 16px);max-height:calc(100svh - var(--nav-h) - 16px);overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .2s var(--ease),visibility 0s .2s}
 .nav-links.open{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s var(--ease)}
 .nav-links a:not(.btn){display:flex;align-items:center;min-height:52px;padding:0 14px;font-size:17px;font-weight:500;text-decoration:none;border-radius:10px}
 .nav-links a:not(.btn):active{background:var(--bg)}
@@ -133,7 +134,7 @@ section{padding:64px 0}
   linear-gradient(180deg,color-mix(in srgb,var(--scrim) 70%,transparent),color-mix(in srgb,var(--scrim) 58%,transparent) var(--nav-h),transparent calc(var(--nav-h) + 80px)),
   linear-gradient(color-mix(in srgb,var(--scrim) 14%,transparent),color-mix(in srgb,var(--scrim) 14%,transparent))}
 .hero-grid{position:relative;width:100%;display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"copy" "ctas" "meta" "cards"}
-.hero-grid::before{content:"";position:absolute;z-index:-1;top:-180px;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);background:linear-gradient(0deg,color-mix(in srgb,var(--scrim) 84%,transparent),color-mix(in srgb,var(--scrim) 76%,transparent) calc(100% - 180px),transparent);pointer-events:none}
+.hero-grid::before{content:"";position:absolute;z-index:-1;top:-180px;bottom:0;left:0;right:0;background:linear-gradient(0deg,color-mix(in srgb,var(--scrim) 84%,transparent),color-mix(in srgb,var(--scrim) 76%,transparent) calc(100% - 180px),transparent);pointer-events:none}
 .hero-copy{grid-area:copy;margin-bottom:26px}
 .hero .eyebrow{color:var(--on-dark)}
 .hero h1{font-size:var(--fs-h1);font-weight:470;font-variation-settings:"opsz" 72;line-height:1.04;letter-spacing:-.022em;max-width:15em;text-shadow:0 1px 28px color-mix(in srgb,var(--scrim) 45%,transparent)}
@@ -239,7 +240,7 @@ section{padding:64px 0}
 .sc-cite-btn{position:relative;display:inline-flex;align-items:center;min-height:28px;padding:4px 11px;border-radius:999px;border:1px solid var(--line-2);background:var(--paper);font:600 12.5px/1.2 var(--sans);color:var(--ink-2);cursor:pointer;transition:border-color .15s,color .15s}
 .sc-cite-btn::after{content:"";position:absolute;inset:-9px -6px}
 .sc-pop{position:absolute;right:0;top:100%;z-index:5;width:min(440px,calc(100vw - 2 * var(--gutter)));padding-top:8px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .15s,transform .15s var(--ease),visibility 0s .15s}
-.sc-pop-in{max-height:min(62vh,440px);overflow:auto;overscroll-behavior:contain;padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:var(--shadow-lg);font-size:13px;line-height:1.5;color:var(--ink-2)}
+.sc-pop-in{max-height:min(62vh,440px,var(--room,440px));overflow:auto;overscroll-behavior:contain;padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:var(--shadow-lg);font-size:13px;line-height:1.5;color:var(--ink-2)}
 .sc-pop p{margin:0}
 .sc-pop p + p{margin-top:8px}
 .sc-pop b{color:var(--ink)}
@@ -456,9 +457,9 @@ section{padding:64px 0}
 /* ============ standards ============ */
 .standards-grid{display:grid;gap:32px}
 .std-list{display:grid;gap:24px}
-.std h4{font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:0;margin-bottom:6px;display:flex;align-items:center;gap:12px}
-.std h4 i{position:relative;width:28px;height:28px;border-radius:8px;flex:none;font-size:0;background:var(--brand-tint);--chk-s:16px}
-.std h4 i::after{inset:0}
+.std h3{font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:0;margin-bottom:6px;display:flex;align-items:center;gap:12px}
+.std h3 i{position:relative;width:28px;height:28px;border-radius:8px;flex:none;font-size:0;background:var(--brand-tint);--chk-s:16px}
+.std h3 i::after{inset:0}
 .std p{font-size:15.5px;color:var(--ink-2);margin:0 0 0 40px}
 
 /* ============ faq ============ */
@@ -617,7 +618,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   :root{--nav-h:76px}
   .menu-btn{display:none}
   .brand{--logo-h:40px}
-  .nav-links{position:static;flex-direction:row;align-items:center;gap:14px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;opacity:1;visibility:visible;transform:none;transition:none;--focus:inherit}
+  .nav-links{position:static;flex-direction:row;align-items:center;gap:14px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;max-height:none;overflow:visible;opacity:1;visibility:visible;transform:none;transition:none;--focus:inherit}
   .nav-links li:not(:last-child):not(:nth-last-child(2)){border:0}
   .nav-links a{white-space:nowrap}
   .nav-links a:not(.btn){min-height:auto;padding:6px 0;font-size:15.5px;color:var(--ink-2);position:relative;border-radius:0;transition:color .3s}
@@ -900,11 +901,11 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     <h2>A clear sequence, from the first practice test to the last interview.</h2>
     <div class="method-grid">
       <ol class="steps" role="tablist" aria-label="Method steps">
-        <li><button class="step-btn" role="tab" aria-selected="true" aria-controls="stepPanel" data-step="0"><span class="step-num">1</span><span class="step-name">Diagnose</span></button></li>
-        <li><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="1"><span class="step-num">2</span><span class="step-name">Plan</span></button></li>
-        <li><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="2"><span class="step-num">3</span><span class="step-name">Train</span></button></li>
-        <li><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="3"><span class="step-num">4</span><span class="step-name">Prove</span></button></li>
-        <li><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="4"><span class="step-num">5</span><span class="step-name">Present</span></button></li>
+        <li role="presentation"><button class="step-btn" role="tab" aria-selected="true" aria-controls="stepPanel" data-step="0"><span class="step-num">1</span><span class="step-name">Diagnose</span></button></li>
+        <li role="presentation"><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="1"><span class="step-num">2</span><span class="step-name">Plan</span></button></li>
+        <li role="presentation"><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="2"><span class="step-num">3</span><span class="step-name">Train</span></button></li>
+        <li role="presentation"><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="3"><span class="step-num">4</span><span class="step-name">Prove</span></button></li>
+        <li role="presentation"><button class="step-btn" role="tab" aria-selected="false" aria-controls="stepPanel" data-step="4"><span class="step-num">5</span><span class="step-name">Present</span></button></li>
       </ol>
       <div class="step-panel" id="stepPanel" role="tabpanel" aria-live="polite"></div>
     </div>
@@ -1156,11 +1157,11 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
       <h2>What families can count on from us.</h2>
     </div>
     <div class="std-list">
-      <div class="std"><h4><i aria-hidden="true">1</i>The student's own words</h4><p>We never write essays or interview answers. We help students find what they want to say and give honest feedback on their drafts.</p></div>
-      <div class="std"><h4><i aria-hidden="true">2</i>Honest claims</h4><p>We do not guarantee admission, and any results we publish come with a clear explanation of how they were measured.</p></div>
-      <div class="std"><h4><i aria-hidden="true">3</i>Prices in the open</h4><p>Every program price is listed on this page. Discounts are rare and always stated in writing.</p></div>
-      <div class="std"><h4><i aria-hidden="true">4</i>Coaches do the work</h4><p>Allan and Jon teach every session themselves. Your student is never handed off to someone you have not met.</p></div>
-      <div class="std"><h4><i aria-hidden="true">5</i>Parents stay in control</h4><p>Accounts belong to parents, sessions are recorded only with consent, and there are no public profiles or student feeds.</p></div>    </div>
+      <div class="std"><h3><i aria-hidden="true">1</i>The student's own words</h3><p>We never write essays or interview answers. We help students find what they want to say and give honest feedback on their drafts.</p></div>
+      <div class="std"><h3><i aria-hidden="true">2</i>Honest claims</h3><p>We do not guarantee admission, and any results we publish come with a clear explanation of how they were measured.</p></div>
+      <div class="std"><h3><i aria-hidden="true">3</i>Prices in the open</h3><p>Every program price is listed on this page. Discounts are rare and always stated in writing.</p></div>
+      <div class="std"><h3><i aria-hidden="true">4</i>Coaches do the work</h3><p>Allan and Jon teach every session themselves. Your student is never handed off to someone you have not met.</p></div>
+      <div class="std"><h3><i aria-hidden="true">5</i>Parents stay in control</h3><p>Accounts belong to parents, sessions are recorded only with consent, and there are no public profiles or student feeds.</p></div>    </div>
   </div>
 </section>
 
@@ -1272,36 +1273,56 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && links.classList.contains('open')) { setMenu(false); menuBtn.focus(); } });
   document.addEventListener('click', e => { if (links.classList.contains('open') && !nav.contains(e.target)) setMenu(false); });
 
-  /* mobile sticky CTA: shown once the hero buttons scroll away, hidden near the form */
-  const mcta = document.getElementById('mcta');
-  const ctaWatch = new Map([[document.querySelector('.hero-ctas'), true], [document.getElementById('consult'), false], [document.getElementById('footer'), false]]);
-  const ctaIO = new IntersectionObserver(es => {
+  /* mobile sticky CTA: shown once the hero buttons scroll away, hidden near the form. The hero
+     buttons' observer stretches the viewport far downwards, so buttons still below the fold (a phone
+     in landscape) count as not yet passed and the bar never covers the headline */
+  const mcta = document.getElementById('mcta'), heroCtas = document.querySelector('.hero-ctas');
+  const ctaWatch = new Map([[heroCtas, true], [document.getElementById('consult'), false], [document.getElementById('footer'), false]]);
+  const ctaSeen = es => {
     es.forEach(e => ctaWatch.set(e.target, e.isIntersecting));
     const show = ![...ctaWatch.values()].some(Boolean);
     mcta.classList.toggle('show', show);
     mcta.inert = !show;
-  }, {threshold:0});
+  };
+  const ctaIO = new IntersectionObserver(ctaSeen), heroIO = new IntersectionObserver(ctaSeen, {rootMargin:'0px 0px 100000px 0px'});
   mcta.inert = true;
-  ctaWatch.forEach((v, el) => ctaIO.observe(el));
+  ctaWatch.forEach((v, el) => (el === heroCtas ? heroIO : ctaIO).observe(el));
 
   /* hero video (D4). The poster paints first. The loop starts loading in idle time after the
-     window's load event, cropped for the viewport the page loaded at (the poster's own query),
-     as AV1 where the browser decodes it power-efficiently and H.264 otherwise. Reduced motion,
+     window's load event, in the crop the poster's own query picks (and the other crop if the
+     screen turns past 3:4), as AV1 where the browser decodes it power-efficiently and H.264 otherwise. Reduced motion,
      Save-Data and 2G get the poster and the play button instead. The video fades in over the
      poster on its first `playing` event; it pauses while the stage is fully offscreen or the tab
      is hidden, and comes back only if the visitor hadn't paused it. The button (WCAG 2.2.2)
      follows the video's own play/pause events. */
   const heroVideo = document.getElementById('heroVideo'), heroToggle = document.getElementById('heroToggle'), heroStage = document.querySelector('.hero-stage');
-  const net = navigator.connection || {}, crop = matchMedia('(max-aspect-ratio: 3/4)').matches ? 'phone' : 'desktop', mp4 = 'media/hero-' + crop + '.mp4';
-  let best = mp4, armed = false, onScreen = true, shown = false;
+  const net = navigator.connection || {}, portrait = matchMedia('(max-aspect-ratio: 3/4)');
+  let mp4, best, decided, armed = false, onScreen = true, shown = false;
   let held = reduce || !!net.saveData || /2g$/.test(net.effectiveType || '');   // true: stays on the poster until the button is pressed
-  const decided = new Promise(done => {
-    try {
-      navigator.mediaCapabilities.decodingInfo({type:'file', video: crop === 'phone'
-        ? {contentType:'video/mp4; codecs="av01.0.04M.08"', width:540, height:960, bitrate:7e5, framerate:30}
-        : {contentType:'video/mp4; codecs="av01.0.08M.08"', width:1920, height:1080, bitrate:2.1e6, framerate:30}})
-        .then(r => { if (r.supported && r.powerEfficient) best = 'media/hero-' + crop + '-av1.mp4'; }, () => {}).then(done);
-    } catch (e) { done(); }
+  function pickCrop(){
+    const crop = portrait.matches ? 'phone' : 'desktop', want = mp4 = best = 'media/hero-' + crop + '.mp4';
+    decided = new Promise(done => {
+      try {
+        navigator.mediaCapabilities.decodingInfo({type:'file', video: crop === 'phone'
+          ? {contentType:'video/mp4; codecs="av01.0.04M.08"', width:540, height:960, bitrate:7e5, framerate:30}
+          : {contentType:'video/mp4; codecs="av01.0.08M.08"', width:1920, height:1080, bitrate:2.1e6, framerate:30}})
+          .then(r => { if (r.supported && r.powerEfficient && mp4 === want) best = 'media/hero-' + crop + '-av1.mp4'; }, () => {}).then(done);
+      } catch (e) { done(); }
+    });
+  }
+  pickCrop();
+  /* a phone or tablet turned past 3:4: the poster swaps by its own query, so the loop moves to the
+     other crop too, at the same point, rather than stretching the one it loaded with */
+  portrait.addEventListener('change', () => {
+    pickCrop();
+    if (!heroVideo.getAttribute('src')) return;
+    decided.then(() => {
+      if (heroVideo.getAttribute('src') === best) return;
+      const t = heroVideo.currentTime;
+      heroVideo.addEventListener('loadedmetadata', () => { heroVideo.currentTime = t; }, {once:true});
+      heroVideo.src = best;
+      syncVideo();
+    });
   });
   function setToggle(playing){
     heroToggle.classList.toggle('paused', !playing);
@@ -1627,7 +1648,11 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   function place(c){
     const pop = c.querySelector('.sc-pop'), r = c.getBoundingClientRect();
     const below = innerHeight - r.bottom - (mcta && mcta.classList.contains('show') ? mcta.offsetHeight : 0), above = r.top - nav.offsetHeight;
-    c.classList.toggle('up', below < pop.offsetHeight && above > below);
+    pop.style.removeProperty('--room');
+    const up = below < pop.offsetHeight && above > below;
+    c.classList.toggle('up', up);
+    /* never taller than the room on its side, so no line hides under the nav or off screen; the box scrolls instead */
+    pop.style.setProperty('--room', Math.max(120, (up ? above : below) - 16) + 'px');
   }
   function setOpen(c, open){ c.classList.toggle('open', open); c.querySelector('.sc-cite-btn').setAttribute('aria-expanded', open); }
   cites.forEach(c => {
