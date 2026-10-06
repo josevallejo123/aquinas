@@ -21,8 +21,9 @@
   const local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
 
   /* ---- GA4, no GTM. Production hosts only, so local previews never reach the property, and off
-     when the browser sends Global Privacy Control. gtag.js loads after the page's load event, in
-     idle time, so it never competes with the hero; events wait in dataLayer until it arrives. */
+     when the browser sends Global Privacy Control. gtag.js is big (about 170 KB on the wire, a
+     250-300 ms task on a mid-range phone), so it loads 2 s after the page's load event, in idle
+     time: never inside the hero's 1.65 s reveal and never before LCP. Events wait in dataLayer. */
   const gaOn = (CONFIG.liveHosts.includes(location.hostname) || testing) && navigator.globalPrivacyControl !== true;
   const sent = new Set();
   window.dataLayer = window.dataLayer || [];
@@ -45,7 +46,7 @@
       s.src = 'https://www.googletagmanager.com/gtag/js?id=' + CONFIG.ga4;
       document.head.appendChild(s);
     };
-    const idle = () => window.requestIdleCallback ? requestIdleCallback(load, {timeout: 3000}) : setTimeout(load, 1000);
+    const idle = () => setTimeout(() => window.requestIdleCallback ? requestIdleCallback(load, {timeout: 3000}) : load(), 2000);
     if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, {once: true});
   }
   window.lpTrack = track;
