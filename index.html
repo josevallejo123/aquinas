@@ -24,6 +24,7 @@
 <script defer src="vendor/gsap/ScrollTrigger.min.js"></script>
 <script defer src="vendor/gsap/SplitText.min.js"></script>
 <script defer src="vendor/gsap/DrawSVGPlugin.min.js"></script>
+<script defer src="assets/consult-form.js"></script>
 <style>
 /* ============ tokens ============ */
 /* The logo's one ink (navy #10273E, hue 210) is the page's ink: text, primary buttons and every
@@ -500,15 +501,30 @@ form.cf{background:var(--paper);color:var(--ink);border-radius:var(--r-lg);paddi
 .field select{padding-right:36px}
 .field textarea{resize:vertical;min-height:96px}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px var(--brand-tint);background-color:var(--paper)}
+/* a field in error keeps a red edge (focused too) and says what's wrong in text below it */
+.field :is(input,select,textarea)[aria-invalid="true"]{border-color:var(--red)}
+.field .err{margin:0;font-size:13.5px;font-weight:600;color:var(--red)}
 .field .opt{font-weight:400;color:var(--ink-3)}
+/* newsletter opt-in (D7): the dashboard's checkbox, rebuilt here so #dash stays untouched (D8) */
+.cf .check{display:flex;gap:12px;align-items:flex-start;min-height:44px;padding:4px 0;font-size:14.5px;line-height:1.45;color:var(--ink-2);cursor:pointer}
+.cf .check input{appearance:none;-webkit-appearance:none;width:20px;height:20px;margin:1px 0 0;flex:none;border:1.5px solid var(--edge);border-radius:6px;background:var(--paper);display:grid;place-items:center;cursor:pointer;transition:background-color .2s,border-color .2s}
+.cf .check input:checked{background:var(--brand-2);border-color:var(--brand-2)}
+.cf .check input:checked::after{content:"";width:9px;height:5px;border:2px solid var(--on-dark);border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
+/* honeypot: off-screen, out of the tab order and hidden from assistive tech */
+.cf .hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+.cf-fail{margin:0;padding:12px 14px;border-radius:var(--r-sm);background:var(--red-l);color:var(--red);font-size:14.5px;font-weight:600;overflow-wrap:anywhere}
+.cf-fail a{color:inherit}
 .cf .btn{width:100%;min-height:52px}
+.cf .btn[disabled]{opacity:.75;cursor:progress}
 .cf .legal{font-size:12.5px;color:var(--ink-3);margin:0;text-align:center}
-.thanks{position:absolute;inset:0;background:var(--paper);border-radius:var(--r-lg);display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:32px}
+.thanks{position:absolute;inset:0;background:var(--paper);border-radius:var(--r-lg);display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:32px;overflow-y:auto}
 .thanks.show{display:flex;animation:swap .4s ease}
 .thanks .seal{width:64px;height:64px;border-radius:50%;background:var(--brand-tint);color:var(--brand-2);display:grid;place-items:center;margin-bottom:18px}
 .thanks h3{font-size:28px;margin-bottom:10px}
 .thanks p{color:var(--ink-2);max-width:40ch}
-.thanks small{color:var(--ink-3);font-size:12.5px}
+.thanks .book{margin:6px 0 12px;font-weight:600;color:var(--ink)}
+.thanks .btn{width:auto}
+.thanks small{color:var(--ink-3);font-size:12.5px;max-width:40ch;margin-top:18px}
 
 /* ============ footer ============ */
 footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(96px + env(safe-area-inset-bottom));font-size:14.5px;--focus:var(--accent)}
@@ -610,7 +626,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   .consult-intro{padding:0}
   .consult-box .lead{font-size:17.5px}
   form.cf{grid-template-columns:1fr 1fr;padding:30px;gap:16px}
-  .field.full,.cf .btn,.cf .legal{grid-column:1/-1}
+  .field.full,.cf .check,.cf-fail,.cf .btn,.cf .legal,.cf noscript{grid-column:1/-1}
   footer{padding:64px 0 40px}
   .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
 }
@@ -732,7 +748,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
       <li><a href="#founders">Coaches</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="https://portal.thelighthouseprep.com">Log in</a></li>
-      <li><a class="btn btn-primary" href="#consult">Book a consult</a></li>
+      <li><a class="btn btn-primary" href="#consult" data-cta="nav">Book a consult</a></li>
     </ul>
   </div>
 </header>
@@ -757,7 +773,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
         <h1>Careful SAT prep and college guidance from two coaches who know your student <em class="accent">by name.</em></h1>
       </div>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="#consult">Book a free consult <span class="arr" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-primary" href="#consult" data-cta="hero">Book a free consult <span class="arr" aria-hidden="true">&rarr;</span></a>
         <a class="btn btn-ghost" href="#dashboard">Try the parent dashboard</a>
       </div>
       <div class="hero-meta">
@@ -860,7 +876,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
         <p>Among applicants to the most selective colleges, those with higher SAT or ACT scores went on to earn more and were more likely to reach top graduate schools and firms, even after accounting for which college they attended.</p>
         <span>Chetty, Deming and Friedman, a 2026 study linking test scores to tax records</span>
       </div>
-      <a class="sc-link" href="#consult">Get a free review of your student's latest score &rarr;</a>
+      <a class="sc-link" href="#consult" data-cta="scores">Get a free review of your student's latest score &rarr;</a>
     </div>
   </div>
 </section>
@@ -994,7 +1010,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     </div>
     <div class="dash-foot">
       <span>Parents also receive a one-screen summary every Friday.</span>
-      <a href="#consult">Ask us for a live walkthrough &rarr;</a>
+      <a href="#consult" data-cta="dashboard">Ask us for a live walkthrough &rarr;</a>
     </div>
   </div>
 </section>
@@ -1108,9 +1124,9 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
       </div>
       <div class="mx-row ft" role="row">
         <div class="mx-cell" role="cell"></div>
-        <div class="mx-cell" role="cell"><a class="btn btn-ghost" href="#consult" aria-label="Book a consult about the SAT Accelerator">Book a consult</a></div>
-        <div class="mx-cell f" role="cell"><a class="btn btn-primary" href="#consult" aria-label="Book a consult about the Flagship Program">Book a consult</a></div>
-        <div class="mx-cell" role="cell"><a class="btn btn-ghost" href="#consult" aria-label="Book a consult about the Premier Program">Book a consult</a></div>
+        <div class="mx-cell" role="cell"><a class="btn btn-ghost" href="#consult" data-cta="programs" aria-label="Book a consult about the SAT Accelerator">Book a consult</a></div>
+        <div class="mx-cell f" role="cell"><a class="btn btn-primary" href="#consult" data-cta="programs" aria-label="Book a consult about the Flagship Program">Book a consult</a></div>
+        <div class="mx-cell" role="cell"><a class="btn btn-ghost" href="#consult" data-cta="programs" aria-label="Book a consult about the Premier Program">Book a consult</a></div>
       </div>
     </div>
 
@@ -1199,21 +1215,30 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
           <li><b>3</b><span>A written plan within 24 hours of the review</span></li>
         </ul>
       </div>
-      <form class="cf" id="cf" novalidate>
+      <!-- sent by assets/consult-form.js (HubSpot); select values are the HubSpot properties' internal values -->
+      <form class="cf" id="cf" data-form-location="home" method="post" novalidate>
         <div class="field"><label for="fName">Parent name</label><input id="fName" name="name" autocomplete="name" required></div>
         <div class="field"><label for="fEmail">Email</label><input id="fEmail" name="email" type="email" inputmode="email" autocomplete="email" required></div>
         <div class="field"><label for="fGrade">Student's grade</label>
-          <select id="fGrade" name="grade"><option>9th</option><option>10th</option><option selected>11th</option><option>12th</option></select></div>
+          <select id="fGrade" name="grade" required><option value="">Choose one</option><option value="9th">9th</option><option value="10th">10th</option><option value="11th">11th</option><option value="12th">12th</option></select></div>
         <div class="field"><label for="fGoal">Main goal</label>
-          <select id="fGoal" name="goal"><option>Admission minimum</option><option>Scholarship cutoff</option><option selected>Selective colleges</option><option>Interview preparation</option><option>Not sure yet</option></select></div>
-        <div class="field full"><label for="fMsg">Anything we should know? <span class="opt">(optional)</span></label><textarea id="fMsg" name="msg" placeholder="Recent scores, target colleges, test dates"></textarea></div>
+          <select id="fGoal" name="goal" required><option value="">Choose one</option><option value="admission_minimum">Admission minimum</option><option value="scholarship_cutoff">Scholarship cutoff</option><option value="national_merit">National Merit</option><option value="selective_colleges">Selective colleges</option><option value="essays_applications">Essays and applications</option><option value="interview_prep">Interview preparation</option><option value="not_sure">Not sure yet</option></select></div>
+        <div class="field full"><label for="fHeard">How did you hear about us?</label>
+          <select id="fHeard" name="heard" required><option value="">Choose one</option><option value="word_of_mouth">A friend or another family</option><option value="founder">Allan or Jon told me</option><option value="video">A video (TikTok, YouTube, Instagram or Facebook)</option><option value="social_post">An Instagram or Facebook post</option><option value="search_ai">A search engine or AI assistant</option><option value="counselor">A counselor, consultant or teacher</option><option value="press">An article, podcast or newsletter</option><option value="talk">A talk or webinar</option><option value="other">Other, or I don't remember</option></select></div>
+        <div class="field full"><label for="fMsg">Anything we should know? <span class="opt">(optional)</span></label><textarea id="fMsg" name="msg" placeholder="Recent scores, target colleges or test dates help us prepare."></textarea></div>
+        <label class="check"><input type="checkbox" name="newsletter" value="yes"><span>Send me a short monthly email with SAT dates and planning tips. Unsubscribe anytime.</span></label>
+        <div class="hp" aria-hidden="true"><label for="fWebsite">Leave this field empty</label><input id="fWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+        <p class="cf-fail" role="alert" hidden>We couldn't send your request. Please try again, or email us at <a href="mailto:hello@thelighthouseprep.com">hello@thelighthouseprep.com</a>.</p>
         <button class="btn btn-primary" type="submit">Request a consult <span class="arr" aria-hidden="true">&rarr;</span></button>
         <p class="legal">Our services are for students 13 and older, with a parent's consent. We only use your details to reply to you.</p>
-        <div class="thanks" id="thanks" role="status">
+        <noscript><p class="legal">This form needs JavaScript. You can email us at <a href="mailto:hello@thelighthouseprep.com">hello@thelighthouseprep.com</a> instead.</p></noscript>
+        <div class="thanks" id="thanks">
           <div class="seal"><svg width="28" height="28" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3 id="thanksH">Thank you.</h3>
           <p>We will be in touch within one business day to set up a time that works for your family.</p>
-          <small>Preview only: this form is not yet connected, so nothing was sent.</small>
+          <p class="book">Prefer to pick a time now?</p>
+          <a class="btn btn-ghost" href="https://meetings-na2.hubspot.com/jon-daniel" target="_blank" rel="noopener" data-booking="thank_you">Book a 20-minute call with Jon<span class="sr"> (opens in a new tab)</span></a>
+          <small>If you have a recent PSAT, SAT or practice-test report, keep it handy for the call.</small>
         </div>
       </form>
     </div>
@@ -1247,13 +1272,15 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
 </footer>
 
 <div class="mcta" id="mcta">
-  <a class="btn btn-primary" href="#consult">Book a free consult <span class="arr" aria-hidden="true">&rarr;</span></a>
+  <a class="btn btn-primary" href="#consult" data-cta="sticky">Book a free consult <span class="arr" aria-hidden="true">&rarr;</span></a>
 </div>
 
 <script>
 (function(){
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.getElementById('yr').textContent = new Date().getFullYear();
+  /* GA4 events go through assets/consult-form.js (window.lpTrack); until it has run they queue */
+  const track = (...a) => window.lpTrack ? window.lpTrack(...a) : (window.lpq = window.lpq || []).push(a);
 
   /* nav: transparent with the light logo while the hero's video is under it, solid once the
      stage's bottom edge passes under the nav (or while the menu is open) */
@@ -1529,6 +1556,13 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   }
   boxes.forEach(b=>b.addEventListener('change',updRing)); updRing();
 
+  /* dashboard_demo_use: the first click or change on the demo's controls or chart points, heard
+     from outside #dash (capture, because the points stop propagation), so the demo is untouched (D8) */
+  const dash = document.getElementById('dash');
+  const dashUse = e => { if (e.target.closest('button, input, label, .pt, .hit')) track('dashboard_demo_use', {}, true); };
+  dash.addEventListener('click', dashUse, true);
+  dash.addEventListener('change', dashUse, true);
+
   /* program fit helper */
   const fitGrade = document.getElementById('fitGrade'), fitGoal = document.getElementById('fitGoal'), fitOut = document.getElementById('fitOut');
   const progNames = {acc:'the SAT Accelerator',aq:'the Flagship Program',pre:'the Premier Program'};
@@ -1544,6 +1578,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     else { k='pre'; why='It includes career guidance with Jon and an introduction to a professional in a field your student is exploring.'; }
     document.querySelectorAll('[data-prog="'+k+'"]').forEach(el=>el.classList.add('match'));
     fitOut.innerHTML = 'Most families in your position start with <b>'+progNames[k]+'</b>. '+why;
+    track('fit_helper_use', {grade_band: gr === '9' ? '9-10' : gr, need: go}, true);   // the helper's two choices only
   }
   fitGrade.addEventListener('change',fit); fitGoal.addEventListener('change',fit);
 
@@ -1552,17 +1587,13 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     q.setAttribute('aria-expanded', q.getAttribute('aria-expanded')!=='true');
   }));
 
-  /* form */
+  /* form: assets/consult-form.js sends it and sets window.lpForm. If that file never ran, show the
+     failure state with the email link instead of letting the browser post the form */
   const cf = document.getElementById('cf');
-  cf.addEventListener('submit',e=>{
+  cf.addEventListener('submit', e => {
+    if (window.lpForm) return;
     e.preventDefault();
-    const fName = document.getElementById('fName'), fEmail = document.getElementById('fEmail');
-    const name = fName.value.trim(), email = fEmail.value.trim();
-    let bad = null;
-    if(!name) bad = fName; else if(!/^\S+@\S+\.\S+$/.test(email)) bad = fEmail;
-    if(bad){ bad.focus(); bad.style.borderColor='var(--red)'; bad.setAttribute('aria-invalid','true'); setTimeout(()=>{bad.style.borderColor='';bad.removeAttribute('aria-invalid');},1600); return; }
-    document.getElementById('thanksH').textContent = 'Thank you, '+name.split(' ')[0]+'.';
-    document.getElementById('thanks').classList.add('show');
+    cf.querySelector('.cf-fail').hidden = false;
   });
 })();
 </script>
