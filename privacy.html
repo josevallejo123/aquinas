@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1F4F7">
+<title>Privacy policy | Lighthouse Prep</title>
+<meta name="description" content="How Lighthouse Prep handles the details you send through our consult form, how we use Google Analytics and cookies, how long we keep information, and how to ask us to delete it.">
+<link rel="canonical" href="https://thelighthouseprep.com/privacy.html">
+<link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png?v=2" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,72,470&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<script defer src="assets/consult-form.js"></script>
+<style>
+/* Self-contained (D15): the home page's tokens and type, its nav logo and its footer; DESIGN.md "Privacy page" */
+:root{
+  --brand:#10273E; --brand-deep:#0A1828; --brand-2:#285F9C;
+  --ink:var(--brand); --ink-2:#38506A; --ink-3:#51657B;
+  --on-dark:#FFFFFF; --on-dark-2:#C5D2DF; --on-dark-3:#A3B3C3;
+  --bg:#F1F4F7; --paper:#FFFFFF; --line:#D8E0E8;
+  --accent:#DDB15A;
+  --focus:var(--brand-2);
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --fs-h1:clamp(36px,3vw + 24px,64px);
+  --r-lg:20px;
+  --wrap:1200px; --gutter:20px; --nav-h:64px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--brand-2);text-underline-offset:.18em}
+h1,h2{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 72;letter-spacing:-.018em;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0 0 1em;text-wrap:pretty}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 max(var(--gutter),env(safe-area-inset-right)) 0 max(var(--gutter),env(safe-area-inset-left))}
+.eyebrow{font-size:15px;font-weight:600;color:var(--ink-2);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow::before,.doc li::before{content:"";width:7px;height:7px;background:var(--accent);transform:rotate(45deg);flex:none}
+:focus-visible{outline:2.5px solid var(--focus);outline-offset:3px;border-radius:6px}
+
+/* nav: the home page's solid state, logo only */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{height:var(--nav-h);display:flex;align-items:center}
+.brand{--logo-h:36px;display:flex;align-items:center;gap:calc(var(--logo-h) * .36);min-height:44px;text-decoration:none;color:var(--ink)}
+.brand-mark{display:block;height:var(--logo-h);width:calc(var(--logo-h) * .33);fill:currentColor;flex:none}
+.brand-word span{display:block;text-align:center;font-size:calc(var(--logo-h) * .39);font-weight:600;line-height:1.08;text-transform:uppercase;letter-spacing:.34em;margin-right:-.34em}
+
+/* the policy */
+.doc{padding:48px 0 72px}
+.doc .col{max-width:68ch}
+.doc h1{font-size:var(--fs-h1);margin-bottom:14px}
+.updated{color:var(--ink-3);font-size:15px;margin-bottom:28px}
+.lead{font-size:17.5px;color:var(--ink-2)}
+.doc section{margin-top:44px;padding-top:30px;border-top:1px solid var(--line)}
+.doc h2{font-size:clamp(26px,1.2vw + 20px,34px);line-height:1.15;margin-bottom:16px}
+.doc ul{list-style:none;margin:0 0 1em;padding:0;display:grid;gap:10px}
+.doc li{display:flex;gap:14px;align-items:baseline}
+.doc li::before{position:relative;top:-.15em}
+.doc b{font-weight:600}
+
+/* footer: the home page's */
+footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(56px + env(safe-area-inset-bottom));font-size:14.5px;--focus:var(--accent)}
+.foot-top{display:grid;gap:24px;padding-bottom:28px;border-bottom:1px solid color-mix(in srgb,var(--on-dark) 12%,transparent)}
+.foot-logo img{width:auto;height:96px}
+.foot-links{display:flex;gap:4px 24px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.foot-links a{position:relative;text-decoration:none;color:var(--on-dark-2);display:inline-flex;align-items:center;min-height:44px}
+.foot-links a::after{content:"";position:absolute;inset:0 -10px}
+.foot-links a:hover,.foot-links a[aria-current]{color:var(--on-dark)}
+.foot-tag{margin:18px 0 0;max-width:38ch}
+.legalese{padding-top:24px;font-size:12.5px;color:var(--on-dark-3);display:grid;gap:8px}
+.legalese p{margin:0}
+
+@media (min-width:720px){
+  :root{--gutter:32px}
+  body{font-size:17px}
+  .doc{padding:72px 0 104px}
+  footer{padding:64px 0 40px}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+}
+@media (min-width:880px){
+  :root{--nav-h:76px}
+  .brand{--logo-h:40px}
+}
+@media (min-width:1024px){
+  body{font-size:17.5px}
+  .lead{font-size:19px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Lighthouse Prep, home">
+      <svg class="brand-mark" viewBox="0 0 218.79 663.41" aria-hidden="true"><path d="M7.89 117.54 185.73 0 185.51 107.09 7.55 224.2Z M0.32 335.19 205.34 201.72 204.94 314.41 0.04 444.87Z M0.47 551.84 218.79 418.08 218.49 549.88 0 663.41Z"/></svg>
+      <span class="brand-word"><span>Lighthouse</span><span>Prep</span></span>
+    </a>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="wrap"><div class="col">
+    <div class="eyebrow">Privacy policy</div>
+    <h1>How we handle the details you share with us.</h1>
+    <p class="updated">Last updated October 6, 2026</p>
+    <p class="lead">Lighthouse Prep is a small company run by its two founders, Jon and Allan. This page explains what this website collects, why, who helps us handle it, how long we keep it and how to ask us to delete it. If anything is unclear, email us at <a href="mailto:hello@thelighthouseprep.com">hello@thelighthouseprep.com</a>.</p>
+
+    <section aria-labelledby="collect">
+      <h2 id="collect">What we collect</h2>
+      <p><b>When you request a consult.</b> The form asks for your name and email, your student's grade, your main goal and how you heard about us, plus anything you choose to add. You can also tick a box to get our monthly email.</p>
+      <p>With the form we also send three details about how you first found our site, which your browser keeps for 30 days: the campaign tags on the link you followed (for example, which post or video it came from), the first page you visited, and the website that sent you (only its address, such as google.com). They describe the link, not you, and they leave your browser only if you send the form.</p>
+      <p><b>When you browse.</b> Google Analytics records the pages you view and a few actions, such as tapping &ldquo;Book a consult&rdquo; or sending the form, along with your type of device and browser, your approximate location (such as your city or region) and how you arrived. It never receives what you type into the form. Google Analytics doesn't log or store IP addresses.</p>
+      <p><b>When you book a call or email us.</b> What you send us: your name, email and the time you choose on our booking page, and anything you write.</p>
+    </section>
+
+    <section aria-labelledby="use">
+      <h2 id="use">How we use it</h2>
+      <ul>
+        <li><span>To reply to you within one business day, arrange the consult and keep a record of our conversation.</span></li>
+        <li><span>To count, without names, which grades, goals and channels bring families to us, so we know where our time helps most.</span></li>
+        <li><span>To send the monthly email with SAT dates and planning tips, only if you tick the box. Asking for a consult never signs you up, and every email has an unsubscribe link.</span></li>
+      </ul>
+      <p>We don't sell your information, share it for advertising, or use advertising pixels.</p>
+    </section>
+
+    <section aria-labelledby="who">
+      <h2 id="who">Who helps us</h2>
+      <ul>
+        <li><span><b>HubSpot</b> keeps our contact records, receives the form, sends the monthly email and runs the booking page. It stores your details in its data center in the United States.</span></li>
+        <li><span><b>Google</b> provides Google Analytics, our email (Google Workspace), and the calendar and video link for consults (Google Calendar and Meet).</span></li>
+        <li><span><b>Cloudflare</b> hosts this website. Like any web host, it processes technical details such as IP addresses to deliver pages and block attacks.</span></li>
+        <li><span><b>Anthropic</b>, whose AI assistant Claude helps us prepare internal reports, such as weekly counts of inquiries by grade and channel, under our own account. People, not AI, reply to every family.</span></li>
+      </ul>
+      <p>Each works on our behalf under its own terms: see the privacy policies of <a href="https://legal.hubspot.com/privacy-policy">HubSpot</a>, <a href="https://policies.google.com/privacy">Google</a> (and <a href="https://policies.google.com/technologies/partner-sites">how Google uses data from sites like ours</a>), <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a> and <a href="https://www.anthropic.com/legal/privacy">Anthropic</a>.</p>
+    </section>
+
+    <section aria-labelledby="cookies">
+      <h2 id="cookies">Cookies and your browser</h2>
+      <ul>
+        <li><span>Google Analytics sets two cookies, <b>_ga</b> and <b>_ga_G13HV1FBTM</b>, that tell one visit from another. They expire 13 months after your last visit. We don't use advertising cookies.</span></li>
+        <li><span>Our site keeps the first-visit details described above in your browser's local storage for 30 days.</span></li>
+        <li><span>If your browser sends a <a href="https://globalprivacycontrol.org/">Global Privacy Control</a> signal, we don't load Google Analytics at all. You can also block cookies in your browser's settings or install <a href="https://tools.google.com/dlpage/gaoptout">Google's opt-out add-on</a>. The older Do Not Track setting doesn't change anything on this site.</span></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="keep">
+      <h2 id="keep">How long we keep it</h2>
+      <ul>
+        <li><span><b>Inquiries:</b> in HubSpot for up to two years after our last conversation if your family doesn't enroll, then deleted.</span></li>
+        <li><span><b>Families who enroll:</b> for as long as we work together, and up to three years after for our business and tax records.</span></li>
+        <li><span><b>The monthly email:</b> until you unsubscribe. After that we keep only your address and the fact that you unsubscribed, so we never email you again by mistake.</span></li>
+        <li><span><b>Google Analytics:</b> 14 months, then deleted automatically.</span></li>
+        <li><span><b>First-visit details in your browser:</b> 30 days.</span></li>
+        <li><span><b>Test and spam submissions:</b> deleted within one business day.</span></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="choices">
+      <h2 id="choices">Your choices</h2>
+      <ul>
+        <li><span><b>See, correct or delete your details.</b> Email <a href="mailto:hello@thelighthouseprep.com">hello@thelighthouseprep.com</a> from the address you used, or tell us which one, and we'll do it within 30 days. We keep only what the law requires us to keep, such as a record of a payment.</span></li>
+        <li><span><b>Stop the monthly email</b> with the unsubscribe link at the bottom of any email.</span></li>
+        <li><span><b>Turn off analytics</b> with Global Privacy Control, your browser's cookie settings or Google's opt-out add-on.</span></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="children">
+      <h2 id="children">Students and children</h2>
+      <p>This website and the consult form are for parents and guardians. Our services are for students 13 and older, with a parent's consent. We don't knowingly collect personal information from anyone under 13. If you think a child under 13 has sent us information, email us and we'll delete it.</p>
+    </section>
+
+    <section aria-labelledby="safe">
+      <h2 id="safe">Keeping it safe</h2>
+      <p>The site runs over HTTPS, only the two founders' accounts can see inquiries, and we use the security features of the services above. No system is perfectly secure, so if something ever goes wrong that affects your details, we'll tell you promptly.</p>
+    </section>
+
+    <section aria-labelledby="changes">
+      <h2 id="changes">Changes and questions</h2>
+      <p>If we change how we handle your details, we'll update this page and the date at the top. Questions go to <a href="mailto:hello@thelighthouseprep.com">hello@thelighthouseprep.com</a>.</p>
+    </section>
+  </div></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <picture class="foot-logo"><source type="image/webp" srcset="brand/logo-stacked-reverse.webp 1x, brand/logo-stacked-reverse@2x.webp 2x"><img src="brand/logo-stacked-reverse.png" srcset="brand/logo-stacked-reverse@2x.png 2x" alt="Lighthouse Prep" width="122" height="120" loading="lazy"></picture>
+        <p class="foot-tag">SAT preparation and college guidance for students across the United States.</p>
+      </div>
+      <ul class="foot-links">
+        <li><a href="/#method">Method</a></li>
+        <li><a href="/#dashboard">Dashboard</a></li>
+        <li><a href="/#programs">Programs</a></li>
+        <li><a href="/#founders">Coaches</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="https://portal.thelighthouseprep.com">Log in</a></li>
+        <li><a href="privacy.html" aria-current="page">Privacy</a></li>
+      </ul>
+    </div>
+    <div class="legalese">
+      <p>SAT&reg; is a trademark registered by the College Board, which is not affiliated with, and does not endorse, this website. ACT&reg; is a registered trademark of ACT Education Corp.</p>
+      <p>Lighthouse Prep is not affiliated with or endorsed by McKinsey &amp; Company, the University of Pennsylvania or the US Navy. Credentials are listed for background only.</p>
+      <p>Lighthouse Prep is not affiliated with or endorsed by any college, university or scholarship program shown in our videos or named in our examples and sample data.</p>
+      <p>&copy; <span id="yr">2026</span> Lighthouse Prep. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
