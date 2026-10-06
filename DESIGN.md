@@ -202,7 +202,7 @@ Inline code reports through `window.lpTrack(name, params, once)`; calls made bef
 - No verification meta tags: Search Console and Bing are verified through DNS.
 
 ## Privacy page
-[privacy.html](privacy.html) is self-contained in the design system: the tokens it uses, the same font request, the nav's live logo linking home, and the home page's footer with "Privacy" marked `aria-current`. It loads `assets/consult-form.js` for GA4 and the first touch. It covers the form and HubSpot, GA4 and its cookies, local storage, Global Privacy Control, the services that handle data (HubSpot, Google, Cloudflare, Anthropic), retention, deletion requests, and services for students 13 and over with a parent's consent. **Keep it true:** when tracking, a service, a cookie or a retention period changes, update the page and its "Last updated" date in the same commit.
+[privacy.html](privacy.html) is self-contained in the design system: the tokens it uses, the same font request, the nav's live logo linking home, and the home page's footer with "Privacy" marked `aria-current`. It loads `assets/consult-form.js` for GA4 and the first touch. It covers the form and HubSpot, GA4, local storage, Global Privacy Control, retention, deletion requests, and services for students 13 and over with a parent's consent. The owner removed the list of services, the cookie names and the test-submission line before Gate 3 (Oct 6 2026). **Keep it true:** when tracking, a service, a cookie or a retention period changes, update the page and its "Last updated" date in the same commit.
 
 ## When editing
 - Match existing patterns above before inventing new colors, fonts, radii, or shadows.
