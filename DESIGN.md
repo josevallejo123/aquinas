@@ -1,6 +1,6 @@
 # Website Design & Architecture Reference
 
-Single-file site: [index.html](index.html) — inline `<style>`, no build step, no framework yet (CLAUDE.md's Next.js stack is the future rebuild target, not current state).
+Single-file site: [index.html](index.html) — inline `<style>`, no build step, no framework yet (CLAUDE.md's Next.js stack is the future rebuild target, not current state). Two exceptions, both from the launch campaign (P3, Oct 2026): the consult form's logic lives in one shared script, [assets/consult-form.js](assets/consult-form.js), because the guides embed the same form (see **Consult form and tracking**), and [privacy.html](privacy.html) is a second self-contained page.
 
 **CSS is mobile-first.** Base styles target phones (~375px); enhancements layer on at `min-width:720px` (tablet), `880px` (full nav appears, sticky mobile CTA hides) and `1024px` (desktop two-column layouts). Add new rules in that order — never reintroduce `max-width` overrides.
 
@@ -9,7 +9,7 @@ Oct 2026 revamp: the palette is built from the logo's one ink, navy **#10273E** 
 - **Navy (brand):** `--brand` #10273E (the logo's navy: all text via `--ink`, primary buttons, dark sections: dashboard, consult box, Flagship head) · `--brand-deep` #0A1828 (footer; `--scrim` over the video) · `--brand-hover` #1B3753 · `--brand-2` #285F9C (harbour blue: links, selected states, focus on light, chart highlight) · `--brand-3` #5E97D8 (second chart series, projected band) · `--brand-tint` #E0E8F0 (tinted panels, Flagship band).
 - **Neutrals (cool fog):** `--bg` #F1F4F7 (page) · `--paper` #FFF (cards, alternate sections) · `--wash` #E4EAF0 (tracks, segmented control) · `--line` #D8E0E8 / `--line-2` #BCC8D4 (decorative rules only) · `--edge` #71849A (every UI boundary that must read: inputs, selects, checkboxes, selected segment, "not included" dash). Cool, not warm: they continue the Sept refresh's "mist, not cream", take their tint from the navy so the page reads as one ink, and leave the golden-hour video as the only warm field.
 - **Text:** `--ink` (= `--brand`), `--ink-2` #38506A, `--ink-3` #51657B; on navy `--on-dark` #FFF, `--on-dark-2` #C5D2DF, `--on-dark-3` #A3B3C3.
-- **Accent (the only one): brass.** `--accent` #DDB15A is the lamp: diamond markers, eyebrows and numerals on navy, the keystone badge, focus rings on navy and over the video, the primary button on navy or video (`.on-dark .btn-primary`, navy text). `--accent-d` #94671A is the same brass dark enough for light surfaces: the price line, the dashboard target line and label, the fit-helper match outline. Never body text on light.
+- **Accent (the only one): brass.** `--accent` #DDB15A is the lamp: diamond markers, eyebrows and numerals on navy, the keystone badge, focus rings on navy and over the video, the primary button on navy or video (`.on-dark .btn-primary`, navy text). `--accent-d` #94671A is the same brass dark enough for light surfaces: the dashboard target line and label, the fit-helper match outline. (The scholarship chart's dotted Flagship price line used it until D23 removed the line, Oct 2026.) Never body text on light.
 - **Coaches (D10, placeholders until the photos go in):** `--allan` (= `--brand-2`) with `--allan-l`; `--jon` #8E3B34 claret with `--jon-l`.
 - **Status (meanings unchanged):** `--green`/`--green-l` on track, `--amber`/`--amber-l` close, `--red`/`--red-l` stretch; red also marks the dashboard's priority badges, timing figure and form errors.
 - **Charts:** `--chart-hi` (= `--brand-2`), `--chart-2` (= `--brand-3`), `--chart-total` (= `--brand`), `--chart-muted` #A7B5C4 (context bars), `--chart-ref` (= `--accent-d`). Checked with the dataviz validator: harbour vs brass ΔE 22.3, Math vs Reading and Writing ΔE 18.5 (both clear the CVD target 8 and the normal-vision floor 15); the waterfall's gain → total pair passes as a one-hue ordinal ramp.
@@ -48,14 +48,14 @@ Three things move on their own: the hero's reveal (the page's one orchestrated m
 | **Hero reveal**, one timeline: the poster (and video) settle from a 1.06× zoom; the eyebrow fades up as the headline rises line by line out of its masks; then the CTAs; then the meta line, the float cards (from the right ≥1024, from below under that) and the pause button | Once on load, as soon as GSAP and the headline's font are in. Never waits on the video | 1.65 s. The CTAs and the button only fade, so they're clickable throughout; focus anywhere in the stage completes it at once | Not played: everything as drawn from the first paint |
 | **Video fade-in** over the poster | The video's first `playing` event, never a timer | 0.8 s | The video doesn't load (D4). If the visitor presses play, it appears without a fade |
 | **Video playback** | Starts in idle time after `load`; pauses when the stage is fully offscreen or the tab is hidden; resumes only if the visitor hadn't paused it | Loop 26.2 s | Poster and play button (Save-Data and 2G too) |
-| **`#aidChart`** (waterfall): the 1200 bar rises; each step rises from the previous level as its link draws in; the total column rises from the baseline; then the dotted Flagship price line sweeps in from the left with its label | Once, when the chart's top passes 75% of the viewport (ScrollTrigger, no scrub) | 3.0 s | Drawn final |
+| **`#aidChart`** (waterfall): the 1200 bar rises; each step rises from the previous level as its link draws in; then the total column rises from the baseline and its value lands. (D23 removed the dotted Flagship price line and its sweep, Oct 2026) | Once, when the chart's top passes 75% of the viewport (ScrollTrigger, no scrub) | 2.4 s | Drawn final |
 | **`#earnChart`**: the bars rise left to right with their values just behind; the bracket draws from the 1100–1199 bar to the 1400+ bar; "+$28,332" lands last | The same | 2.2 s | Drawn final |
 | **Dashboard** (`#dash`): the line chart draws and the skill bars fill. Unchanged: IntersectionObserver plus CSS, no GSAP inside `#dash` (D8) | In view | As before | The global CSS rule |
 | **UI transitions**: nav state, menu sheet, sticky CTA, source popovers, FAQ, method stepper | Interaction or scroll position | 0.15–0.35 s | Off (the global `prefers-reduced-motion` rule) |
 
 How it holds together:
 - **Loading and safety.** GSAP loads with `defer` in `<head>`. The motion script is the last inline script in `<body>` and runs on `DOMContentLoaded`, once the deferred files have run. The hero's pre-reveal state (hidden copy, zoomed media) exists only under `html.motion`, which the head script sets when reduced motion isn't requested. The timeline removes the class the moment it takes over. A failsafe removes it 2.5 s after the head script if the timeline hasn't started (GSAP slow or blocked), and the hero then simply shows as drawn, with no late animation. Without JS nothing is ever hidden. If GSAP never arrives, the video still works and the charts stay as drawn.
-- **Charts end on the static drawing.** Every chart tween is a `from()` on the freshly drawn SVG, with the transform origin at the bar's foot: the baseline, or the previous level for a waterfall step. When the timeline ends, or is cut short, it is killed and GSAP's leftovers (`style`, `transform`, `data-svg-origin`) are stripped, so the SVG is byte-identical to what the chart script drew. The chart script fires `chartdraw` after each innerHTML redraw (on resize). A chart still waiting is re-armed on the new drawing; one that is playing or has played just stays final. A chart already in view, or above it, when the script runs is left as drawn. Labels never change text: there are no count-ups. DrawSVG draws the bracket and the links; the dotted price line is revealed by a sweeping clip instead, because DrawSVG would replace its dots.
+- **Charts end on the static drawing.** Every chart tween is a `from()` on the freshly drawn SVG, with the transform origin at the bar's foot: the baseline, or the previous level for a waterfall step. When the timeline ends, or is cut short, it is killed and GSAP's leftovers (`style`, `transform`, `data-svg-origin`) are stripped, so the SVG is byte-identical to what the chart script drew. The chart script fires `chartdraw` after each innerHTML redraw (on resize). A chart still waiting is re-armed on the new drawing; one that is playing or has played just stays final. A chart already in view, or above it, when the script runs is left as drawn. Labels never change text: there are no count-ups. DrawSVG draws the bracket and the links.
 - **SplitText** splits the headline by lines only, masked (`mask: "lines"`, class `hl`, masks `hl-mask`). It splits after the headline's Newsreader faces load, so the breaks match the static `text-wrap: balance` layout, and it reverts as soon as the last line lands (1.25 s into the reveal, not at its end): the `<h1>` gets its original markup back, and its temporary `aria-label` goes too. Reverting early matters for LCP, see Performance. The masks are widened sideways so italic overhang isn't cut. Newsreader's ascent and descent fit the 1.04 line height, so they need no vertical room.
 - **`gsap.matchMedia()`.** `(prefers-reduced-motion: no-preference)` gates the charts. The hero handler also takes `(min-width: 1024px)` to choose the cards' direction. 880 needs no motion change, because the nav never animates. If the breakpoint or the preference changes mid-reveal, the reveal reverts to its final state; it never replays.
 - **Performance.** On HTML, only transforms and opacity animate. On SVG it's transforms, stroke-dash (DrawSVG) and one clip rect: paint only, on small elements. `will-change: transform` sits on the poster and video only while `.motion` holds them zoomed. There's one ScrollTrigger per chart, killed once it fires; the video's offscreen pause is a plain IntersectionObserver. The charts are armed in idle time (`requestIdleCallback`, 2 s timeout): building both timelines was about 90 ms of the `DOMContentLoaded` task on a 4× throttled phone. `ScrollTrigger.refresh()` runs after `document.fonts.ready` and after the reveal. Measured in headless Edge: GSAP's four files evaluate in one ~55 ms task before `DOMContentLoaded`, and the reveal builds in ~10 ms.
@@ -121,18 +121,19 @@ Targets: 4.5:1 for text, 3:1 for large text (≥24px, or ≥18.66px bold) and fo
 | `--on-dark-3` #A3B3C3 | `--brand-deep` #0A1828 | 8.34 | 4.5 | Footer text and legalese |
 | `--green` #2C6A49 | `--green-l` #E1EFE6 | 5.42 | 4.5 | Pill: on track |
 | `--amber` #7F5512 | `--amber-l` #F6EBD3 | 5.53 | 4.5 | Pill: close |
-| `--red` #A13328 | `--red-l` #F7E3DF | 5.63 | 4.5 | Pill: stretch, priority badges |
-| `--red` #A13328 | `--paper` #FFFFFF | 6.95 | 4.5 | Timing figure |
+| `--red` #A13328 | `--red-l` #F7E3DF | 5.63 | 4.5 | Pill: stretch, priority badges; the form's failure box and its email link (underlined) |
+| `--red` #A13328 | `--paper` #FFFFFF | 6.95 | 4.5 | Timing figure; form error text under a field |
 | `--edge` #71849A | `--bg` #F1F4F7 | 3.48 | 3 | UI: input, select and textarea borders on fog |
 | `--edge` #71849A | `--paper` #FFFFFF | 3.84 | 3 | UI: checkbox and select borders on cards |
 | `--edge` #71849A | `--wash` #E4EAF0 | 3.17 | 3 | UI: selected segment ring |
 | `--edge` #71849A | `--brand-tint` #E0E8F0 | 3.10 | 3 | UI: "not included" dash on the Flagship band |
+| `--red` #A13328 | `--bg` #F1F4F7 | 6.30 | 3 | UI: the edge of a form field in error (on `--paper` once focused: 6.95) |
 | `--brand-2` #285F9C | `--bg` #F1F4F7 | 5.93 | 3 | UI: focus ring on fog |
 | `--brand-2` #285F9C | `--paper` #FFFFFF | 6.55 | 3 | UI: focus ring on paper, checked box |
 | `--brand-2` #285F9C | `--brand-tint` #E0E8F0 | 5.29 | 3 | UI: selected skill ring |
 | `--accent` #DDB15A | `--brand` #10273E | 7.61 | 3 | UI: focus ring on navy |
 | `--accent` #DDB15A | `--brand-deep` #0A1828 | 8.95 | 3 | UI: focus ring in the footer |
-| `--accent-d` #94671A | `--paper` #FFFFFF | 4.98 | 3 | UI: fit-helper match outline; chart price line |
+| `--accent-d` #94671A | `--paper` #FFFFFF | 4.98 | 3 | UI: fit-helper match outline |
 | `--accent-d` #94671A | `--brand-tint` #E0E8F0 | 4.03 | 3 | UI: match outline over the Flagship band |
 | `--accent-d` #94671A | `--bg` #F1F4F7 | 4.51 | 3 | Chart: dashboard target line |
 | `--brand-2` #285F9C | `--paper` #FFFFFF | 6.55 | 3 | Chart: highlight bars, line, Math skills |
@@ -157,9 +158,56 @@ Text over the video is white; the brass button's text is navy on solid brass (7.
 
 **axe** (WCAG 2.0–2.2 A/AA plus best practice, at 320, 375, 768, 1024, 1440 and 812×375): no WCAG violations. One best-practice item is left inside `#dash` under D8: its card headings are `<h4>` under the section's `<h2>`. The chart's six points carry `role="img"` with their `aria-label` (the owner's one approved exception to D8, Oct 4 2026; it changes nothing visible). The method stepper's list items are `role="presentation"` so the tablist owns its tabs, and the Standards headings are `<h3>`.
 
+## Consult form and tracking (P3, Oct 2026)
+Every guide embeds the same form as the home page (marketing/STRATEGY.md §7), so its logic lives once in [assets/consult-form.js](assets/consult-form.js) (deferred after GSAP; 4.5 KB gzipped) and each page carries only markup. Everything that names an account sits in the script's `CONFIG`: the HubSpot submit URL (portal 247619141, form "Website consult request"), the "Parent newsletter" subscription type, the GA4 ID, the live hosts, the first-touch key and its 30 days, the 3 s minimum fill time and the 15 s timeout.
+
+**Sending.** `form.cf[data-form-location]` (`home`, or `guide-<slug>`) posts JSON to HubSpot's unauthenticated Forms API v3 (`api.hsforms.com/submissions/v3/integration/submit/<portal>/<form>`, CORS-enabled; checked against HubSpot's docs and the live form's definition on Oct 6 2026). Fields: `email`; `firstname` and `lastname` (the parent name split at the first space); `student_grade`, `main_goal`, `how_heard` (the select values are the HubSpot properties' internal values: change both together); `message`; the six `first_*` hidden fields. Empty values are left out. `legalConsentOptions.consent` sends implicit consent to process with the `.legal` line's text, and the newsletter box as a communication with its label's text and `value` true or false. The honeypot and the checkbox are never sent as fields.
+
+| State | What the parent sees | Notes |
+|---|---|---|
+| Idle | The fields; every select starts on "Choose one" | No preselected grade or goal: a default would skew the audience split (marketing/MEASUREMENT.md §1) |
+| Invalid | A red edge and a line of text under each field in error; focus on the first | `aria-invalid` and `aria-describedby`; each error clears as its field is fixed. Required: name, email, grade, goal, how heard |
+| Sending | Button disabled, "Sending…" | A second click or Enter can't send twice |
+| Sent (2xx only) | The thank-you panel over the form: "Thank you, {first name}.", the reply promise, "Prefer to pick a time now?" with Jon's meeting link (new tab, D4), the test-report tip | Focus moves to the heading; everything behind the panel is `inert`; `generate_lead` fires |
+| Failed | `.cf-fail` (role `alert`): "We couldn't send your request…" with a mailto link to hello@ | The answers stay and the button comes back. HubSpot's `INVALID_EMAIL` or `BLOCKED_EMAIL` also marks the email field |
+| Bot | The failed state; nothing is sent | A filled honeypot (`.hp`: off-screen, `aria-hidden`, `tabindex=-1`) or a submit within 3 s of the page opening. A person caught by mistake can retry or use the email link |
+| Local preview | The failed state, nothing sent, a console note | localhost and 127.0.0.1 never send a real inquiry unless a test sets `window.lpTest` (and mocks HubSpot) |
+| Script missing | The failed state | The page's inline fallback, when `window.lpForm` is unset. With JS off, `method="post"` keeps answers out of the URL and a `<noscript>` line gives the email address |
+
+**First touch.** On the first visit to any page with the script, localStorage `lp_first_touch` stores utm_source, utm_medium, utm_campaign and utm_content (trimmed, at most 200 characters each), the landing page (origin and path, no query) and the referring site (origin only, and only from another host). It's kept 30 days, never overwritten by later visits inside that window, and sent only with the form. Every storage access is in try/catch: with storage blocked, the current visit counts as the first.
+
+**GA4** (`G-G13HV1FBTM`, D5, no GTM). It loads only on thelighthouseprep.com (and www), never for a browser that sends Global Privacy Control, and 2 s after the page's load event, in idle time: gtag.js is about 170 KB on the wire (507 KB decoded) and ran as a 250–300 ms task at 4× CPU, which had landed inside the hero's reveal. Measured Oct 6 2026 on a throttled phone: LCP unchanged within noise. So visits shorter than about 5 s aren't counted. `page_location` keeps only the `utm_*` parameters; the tag also turns off Google signals and ad personalization; the cookies (`_ga`, `_ga_G13HV1FBTM`) last 13 months from the last visit. Enhanced measurement's form interactions stay off in GA4 (they would duplicate `consult_form_start`).
+
+| Event | Fires | Params | Hook |
+|---|---|---|---|
+| `cta_click` | Every click on a consult link | `location`: nav, hero, scores, dashboard, programs, sticky (guides: guide) | `data-cta` on the link |
+| `consult_form_start` | The first input or change in a field, once | `form_location` | The form |
+| `generate_lead` | HubSpot answered 2xx, once | `form_location` | The form |
+| `booking_link_click` | The meeting link, once | `location`: thank_you, guide | `data-booking` |
+| `fit_helper_use` | The fit helper's first result, once | `grade_band` (9-10, 11, 12), `need` | Inline, in the helper |
+| `dashboard_demo_use` | The first click or change on the demo's controls or chart points, once | — | Inline: a capture listener on `#dash`, added from outside, so the demo itself is untouched (D8) |
+| `guide_cta_click` | A guide's link to the form, once | `guide_slug` | `data-guide-cta` |
+
+Inline code reports through `window.lpTrack(name, params, once)`; calls made before the script has run wait in `window.lpq`. No event ever carries form values.
+
+**For the guides (P5).** Copy the form block under `<!-- CONSULT -->` unchanged (IDs only need to be unique on the page), set `data-form-location="guide-<slug>"`, load `assets/consult-form.js` with `defer`, and keep the inline fallback (the `/* form: */` block at the end of the home page's main script). Links to the form get `data-guide-cta="<slug>"`; a booking link outside the form gets `data-booking="guide"`.
+
+**Tests.** `node website-revamp/tools/consult-form-test.mjs` against `aquinas-site` (22 tests: success; server error; network failure; HubSpot rejecting an email; validation; honeypot; minimum fill time; double click; attribution and its expiry; every GA4 event once and none carrying form data; GA4 off locally and under GPC; the missing-script fallback; keyboard and labels at 375, 768 and 1440; axe on every form state and the privacy page; search basics). HubSpot, GA4 and the meeting page are mocked.
+
+## Search basics
+- Canonical URLs: `https://thelighthouseprep.com/` and `https://thelighthouseprep.com/privacy`. Cloudflare Pages redirects `*.html` to the extensionless path, so the canonical and the sitemap use `/privacy`, while links keep `privacy.html` (the local python server has no such rewrite).
+- Open Graph and X tags reuse the page's title and description. The card is `media/og-image.png` (1200×630, 76 KB), rendered from the brand files by `website-revamp/tools/og-image.mjs`: re-run it if the logo, palette or hero headline changes.
+- JSON-LD at the end of `<body>`: the Organization (logo `apple-touch-icon.png`) and the FAQ, word for word from `#acc`. Change both together; the test compares them.
+- `robots.txt` allows everything and names `sitemap.xml`. Add each guide to the sitemap with its `lastmod`.
+- No verification meta tags: Search Console and Bing are verified through DNS.
+
+## Privacy page
+[privacy.html](privacy.html) is self-contained in the design system: the tokens it uses, the same font request, the nav's live logo linking home, and the home page's footer with "Privacy" marked `aria-current`. It loads `assets/consult-form.js` for GA4 and the first touch. It covers the form and HubSpot, GA4 and its cookies, local storage, Global Privacy Control, the services that handle data (HubSpot, Google, Cloudflare, Anthropic), retention, deletion requests, and services for students 13 and over with a parent's consent. **Keep it true:** when tracking, a service, a cookie or a retention period changes, update the page and its "Last updated" date in the same commit.
+
 ## When editing
 - Match existing patterns above before inventing new colors, fonts, radii, or shadows.
-- Keep everything inline in `index.html` unless the user asks to split into a real build (Next.js migration is a separate, larger task — confirm before restructuring).
+- Keep everything inline in `index.html` except the shared form script above; new pages (the guides, the privacy page) are self-contained HTML files. Splitting further into a real build (the Next.js migration) is a separate, larger task — confirm before restructuring.
+- Never submit the consult form for real from a local server or a test: the live endpoint creates a HubSpot contact and emails Jon. The script refuses on localhost, and the tests mock HubSpot.
 - Verify at 375 / 768 / 1440 widths before shipping.
 
 ## Copy conventions
