@@ -1745,6 +1745,39 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
 })();
 </script>
 <script>
+/* links into the page. A visitor who arrives on a link ending in #consult (every post's link does)
+   lands on that section at once: the root's smooth scrolling would take about 1.5 s to cross the
+   page, and ScrollTrigger's refresh (on load, once the fonts are in, at the end of the hero's
+   reveal) scrolls to the top to measure and then back to wherever the page was, which stops a
+   smooth scroll mid-way. The same refresh would strand a tap on a consult button made while the
+   page is still loading. So until the visitor scrolls, taps or types, the page returns to the
+   section they asked for after each refresh, and once the fonts and the page have loaded (for
+   browsers that don't hold the scroll position while text reflows). Taps keep their smooth scroll. */
+(function(){
+  const root = document.documentElement;
+  let goal = null;
+  function land(){   // at once, never smooth
+    if (!goal) return;
+    const s = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    goal.scrollIntoView();
+    root.style.scrollBehavior = s;
+  }
+  function find(hash){ try { return hash.length > 1 ? document.getElementById(decodeURIComponent(hash.slice(1))) : null; } catch (e) { return null; } }
+  /* arriving with a #section, unless the browser is about to put back the position of a reload or Back */
+  const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  if (!(nav && nav.type !== 'navigate' && history.scrollRestoration === 'auto')) { goal = find(location.hash); land(); }
+  ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(t => addEventListener(t, () => { goal = null; }, {capture: true, passive: true}));
+  document.addEventListener('click', e => {   // a link to a section of this page sets the new goal; the browser does the scrolling
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a && !e.defaultPrevented) goal = find(a.hash);
+  });
+  addEventListener('load', land);
+  if (document.fonts) document.fonts.ready.then(land);
+  document.addEventListener('DOMContentLoaded', () => { if (window.ScrollTrigger) ScrollTrigger.addEventListener('refresh', land); });
+})();
+</script>
+<script>
 /* motion (GSAP, vendored in vendor/gsap/; DESIGN.md "Motion" has the inventory). Two things move:
    the hero's reveal, once on load, and the two score charts, each once as it scrolls into view.
    Reduced motion gets neither. GSAP loads deferred, so this waits for DOMContentLoaded; if it never
