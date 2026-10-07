@@ -87,7 +87,10 @@ section{padding:64px 0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 :focus-visible{outline:2.5px solid var(--focus);outline-offset:3px;border-radius:6px}
 .mono{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:20px;font-weight:500;color:var(--on-dark);background:var(--allan);flex:none;line-height:1}
-.mono.j,.jon .mono{background:var(--jon)}
+/* a coach's round photo: a thin ring in the coach's colour, set off from the photo by a gap of the surface */
+.coach-av{display:block;flex:none;width:48px;height:48px;margin:4px;border-radius:50%;background:var(--wash);box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--allan)}
+.jon .coach-av{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--jon)}
+.coach-av img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 /* check glyph: a mask, so its colour stays a token */
 .ticks li::after,.yes::after,.std h3 i::after{content:"";position:absolute;background:var(--chk,var(--brand-2));-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/var(--chk-s,13px) no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/var(--chk-s,13px) no-repeat}
 
@@ -187,8 +190,9 @@ section{padding:64px 0}
 /* sentinel: the stage minus the nav's height; it leaves the viewport when the stage's bottom edge passes under the nav */
 .hero-end{position:absolute;left:0;top:0;bottom:var(--nav-h);width:1px;pointer-events:none}
 .hero-lead{display:grid;gap:18px;padding-top:calc(58px + 34px);padding-bottom:56px}
-.voice{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;align-items:start;align-content:start}
-.voice .mono{width:34px;height:34px;font-size:16px;margin-top:2px}
+.voice{display:grid;gap:12px;align-items:start;align-content:start;border-top:2px solid var(--allan);padding-top:14px}
+.voice.jon{border-top-color:var(--jon)}
+.voice.both{grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--line-2)}
 .voice p{margin:0;color:var(--ink-2)}
 .voice.both p{color:var(--ink);font-weight:500}
 .voice.both svg{margin-top:3px;fill:none;stroke-width:1.7}
@@ -458,11 +462,12 @@ section{padding:64px 0}
 .founders{background:var(--paper);border-block:1px solid var(--line)}
 .founders h2{max-width:720px}
 .founders-grid{display:grid;gap:14px;margin-top:32px}
-.bio{display:grid;grid-template-columns:60px minmax(0,1fr);column-gap:16px;padding:22px 20px;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--bg)}
-.bio > div:not(.portrait){display:contents}
-.portrait{grid-column:1;grid-row:1 / span 2;width:60px;height:76px;border-radius:50% 50% 10px 10px / 40% 40% 10px 10px;display:grid;place-items:center;font-family:var(--serif);font-size:28px;font-weight:400;color:var(--on-dark);background:linear-gradient(160deg,var(--allan),var(--brand));position:relative;overflow:hidden;padding-top:6px}
-.jon-b .portrait{background:linear-gradient(160deg,var(--jon),color-mix(in srgb,var(--jon) 60%,var(--brand)))}
-.portrait::after{content:"";position:absolute;inset:5px;border:1px solid color-mix(in srgb,var(--on-dark) 30%,transparent);border-radius:inherit}
+.bio{display:grid;grid-template-columns:96px minmax(0,1fr);column-gap:18px;padding:22px 20px;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--bg)}
+.bio > div{display:contents}
+/* the coach's photo in the arch (4:5); the inner rule is the window's frame */
+.portrait{grid-column:1;grid-row:1 / span 2;display:block;width:96px;height:120px;border-radius:50% 50% 10px 10px / 40% 40% 10px 10px;background:var(--wash);position:relative;overflow:hidden}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.portrait::after{content:"";position:absolute;inset:6px;border:1px solid color-mix(in srgb,var(--on-dark) 30%,transparent);border-radius:inherit}
 .bio h3{grid-column:2;grid-row:1;align-self:end;font-size:26px;margin-bottom:2px}
 .bio .role{grid-column:2;grid-row:2;align-self:start;font-size:14px;font-weight:600;color:var(--allan)}
 .jon-b .role{color:var(--jon)}
@@ -570,9 +575,8 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   .float-card{padding:14px 16px}
   .hero-toggle{top:auto;bottom:24px}
   .hero-lead{grid-template-columns:1fr 1fr;column-gap:28px;row-gap:22px;padding-top:calc(58px + 48px);padding-bottom:72px}
-  .voice{grid-template-columns:1fr;gap:12px;border-top:2px solid var(--allan);padding-top:16px}
-  .voice.jon{border-top-color:var(--jon)}
-  .voice.both{grid-column:1/-1;grid-template-columns:34px minmax(0,1fr);gap:14px;border-top:1px solid var(--line-2)}
+  .voice{padding-top:16px}
+  .voice.both{grid-column:1/-1}
   .creds ul{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 56px;padding-block:22px}
   .creds li{font-size:19px}
   .sc-fig{margin-inline:0;padding:24px 24px 6px}
@@ -626,9 +630,9 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   .mx-row.ft{display:grid;border-top:0;padding:8px 0 4px}
   .fine{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:40px}
   .founders-grid{margin-top:48px}
-  .bio{grid-template-columns:110px minmax(0,1fr);gap:28px;padding:32px}
-  .bio > div:not(.portrait){display:block}
-  .portrait{grid-row:auto;width:110px;height:140px;font-size:50px;padding-top:12px}
+  .bio{grid-template-columns:168px minmax(0,1fr);gap:28px;padding:32px}
+  .bio > div{display:block}
+  .portrait{grid-row:auto;width:168px;height:210px}
   .portrait::after{inset:8px}
   .bio h3{font-size:28px}
   .bio .role{margin-bottom:16px}
@@ -728,6 +732,12 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   .keystone{font-size:13px;padding:5px 13px}
   .mx-row.ft{padding:12px 0 6px}
   .founders-grid{grid-template-columns:1fr 1fr;gap:24px}
+  /* two cards side by side: the arch sits beside the name, and the story runs the card's full width */
+  .bio{grid-template-columns:144px minmax(0,1fr);gap:0 24px}
+  .bio > div{display:contents}
+  .portrait{grid-row:1 / span 2;width:144px;height:180px}
+  .bio .role{margin-bottom:0}
+  .bio .role + p{margin-top:24px}
   .standards-grid{grid-template-columns:.8fr 1.2fr;gap:72px}
   .faq{padding-top:40px}
   .faq-grid{grid-template-columns:.8fr 1.2fr;gap:72px}
@@ -813,8 +823,8 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     <span class="hero-end" aria-hidden="true"></span>
   </div>
   <div class="wrap hero-lead">
-    <div class="voice"><span class="mono" aria-hidden="true">A</span><p>Allan has taught the SAT and ACT for more than ten years and has coached over 200 students with a proven lesson plan he built himself. It teaches the material the test covers and the strategy for handling it under the clock.</p></div>
-    <div class="voice jon"><span class="mono j" aria-hidden="true">J</span><p>Jon is an ex-McKinsey consultant, Wharton graduate, and veteran US Navy officer who guides students through future career paths, essays and interviews.</p></div>
+    <div class="voice"><p>Allan has taught the SAT and ACT for more than ten years and has coached over 200 students with a proven lesson plan he built himself. It teaches the material the test covers and the strategy for handling it under the clock.</p></div>
+    <div class="voice jon"><p>Jon is an ex-McKinsey consultant, Wharton graduate, and veteran US Navy officer who guides students through future career paths, essays and interviews.</p></div>
     <div class="voice both"><svg width="34" height="22" viewBox="0 0 34 22" aria-hidden="true"><circle class="ring-a" cx="12" cy="11" r="8.5"/><circle class="ring-j" cx="22" cy="11" r="8.5"/></svg><p>Every family works with both of them on one shared plan, and parents can see progress every week.</p></div>
   </div>
 </section>
@@ -906,7 +916,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     </div>
     <div class="split-grid">
       <article class="lane">
-        <div class="lane-top"><div class="mono">A</div><div><small>The SAT</small><h3>Allan</h3></div></div>
+        <div class="lane-top"><picture class="coach-av"><source type="image/webp" srcset="media/coaches/allan-avatar-48w.webp 48w, media/coaches/allan-avatar-96w.webp 96w, media/coaches/allan-avatar-144w.webp 144w" sizes="48px"><img src="media/coaches/allan-avatar-96w.jpg" srcset="media/coaches/allan-avatar-48w.jpg 48w, media/coaches/allan-avatar-96w.jpg 96w, media/coaches/allan-avatar-144w.jpg 144w" sizes="48px" width="48" height="48" alt="" loading="lazy" decoding="async"></picture><div><small>The SAT</small><h3>Allan</h3></div></div>
         <ul class="ticks">
           <li>A diagnostic practice test that shows which question types cost points and how long each one takes</li>
           <li>One-hour sessions that open with a few strategy lessons and then focus on weekly review of real test questions</li>
@@ -915,7 +925,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
         </ul>
       </article>
       <article class="lane jon">
-        <div class="lane-top"><div class="mono">J</div><div><small>The application &amp; the future</small><h3>Jon</h3></div></div>
+        <div class="lane-top"><picture class="coach-av"><source type="image/webp" srcset="media/coaches/jon-avatar-48w.webp 48w, media/coaches/jon-avatar-96w.webp 96w, media/coaches/jon-avatar-144w.webp 144w" sizes="48px"><img src="media/coaches/jon-avatar-96w.jpg" srcset="media/coaches/jon-avatar-48w.jpg 48w, media/coaches/jon-avatar-96w.jpg 96w, media/coaches/jon-avatar-144w.jpg 144w" sizes="48px" width="48" height="48" alt="" loading="lazy" decoding="async"></picture><div><small>The application &amp; the future</small><h3>Jon</h3></div></div>
         <ul class="ticks">
           <li>Mock interviews for alumni, scholarship, honors college and service academy panels</li>
           <li>Essay ideation exercises and reviews, always in the student's own words</li>
@@ -1159,7 +1169,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     <h2>You work directly with the two of us, not a rotating bench of tutors.</h2>
     <div class="founders-grid">
       <article class="bio">
-        <div class="portrait" aria-hidden="true">A</div>
+        <picture class="portrait"><source type="image/webp" srcset="media/coaches/allan-portrait-96w.webp 96w, media/coaches/allan-portrait-144w.webp 144w, media/coaches/allan-portrait-168w.webp 168w, media/coaches/allan-portrait-192w.webp 192w, media/coaches/allan-portrait-288w.webp 288w, media/coaches/allan-portrait-336w.webp 336w, media/coaches/allan-portrait-432w.webp 432w, media/coaches/allan-portrait-504w.webp 504w" sizes="(min-width:1024px) 144px, (min-width:720px) 168px, 96px"><img src="media/coaches/allan-portrait-288w.jpg" srcset="media/coaches/allan-portrait-96w.jpg 96w, media/coaches/allan-portrait-144w.jpg 144w, media/coaches/allan-portrait-168w.jpg 168w, media/coaches/allan-portrait-192w.jpg 192w, media/coaches/allan-portrait-288w.jpg 288w, media/coaches/allan-portrait-336w.jpg 336w, media/coaches/allan-portrait-432w.jpg 432w, media/coaches/allan-portrait-504w.jpg 504w" sizes="(min-width:1024px) 144px, (min-width:720px) 168px, 96px" width="168" height="210" alt="Allan, co-founder and SAT coach" loading="lazy" decoding="async"></picture>
         <div>
           <h3>Allan</h3>
           <div class="role">Co-founder, test prep lead</div>
@@ -1169,7 +1179,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
         </div>
       </article>
       <article class="bio jon-b">
-        <div class="portrait" aria-hidden="true">J</div>
+        <picture class="portrait"><source type="image/webp" srcset="media/coaches/jon-portrait-96w.webp 96w, media/coaches/jon-portrait-144w.webp 144w, media/coaches/jon-portrait-168w.webp 168w, media/coaches/jon-portrait-192w.webp 192w, media/coaches/jon-portrait-288w.webp 288w, media/coaches/jon-portrait-336w.webp 336w, media/coaches/jon-portrait-432w.webp 432w, media/coaches/jon-portrait-504w.webp 504w" sizes="(min-width:1024px) 144px, (min-width:720px) 168px, 96px"><img src="media/coaches/jon-portrait-288w.jpg" srcset="media/coaches/jon-portrait-96w.jpg 96w, media/coaches/jon-portrait-144w.jpg 144w, media/coaches/jon-portrait-168w.jpg 168w, media/coaches/jon-portrait-192w.jpg 192w, media/coaches/jon-portrait-288w.jpg 288w, media/coaches/jon-portrait-336w.jpg 336w, media/coaches/jon-portrait-432w.jpg 432w, media/coaches/jon-portrait-504w.jpg 504w" sizes="(min-width:1024px) 144px, (min-width:720px) 168px, 96px" width="168" height="210" alt="Jon, co-founder and college and career coach" loading="lazy" decoding="async"></picture>
         <div>
           <h3>Jon</h3>
           <div class="role">Co-founder, college and career lead</div>
