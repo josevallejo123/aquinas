@@ -10,7 +10,7 @@ Oct 2026 revamp: the palette is built from the logo's one ink, navy **#10273E** 
 - **Neutrals (cool fog):** `--bg` #F1F4F7 (page) · `--paper` #FFF (cards, alternate sections) · `--wash` #E4EAF0 (tracks, segmented control) · `--line` #D8E0E8 / `--line-2` #BCC8D4 (decorative rules only) · `--edge` #71849A (every UI boundary that must read: inputs, selects, checkboxes, selected segment, "not included" dash). Cool, not warm: they continue the Sept refresh's "mist, not cream", take their tint from the navy so the page reads as one ink, and leave the golden-hour video as the only warm field.
 - **Text:** `--ink` (= `--brand`), `--ink-2` #38506A, `--ink-3` #51657B; on navy `--on-dark` #FFF, `--on-dark-2` #C5D2DF, `--on-dark-3` #A3B3C3.
 - **Accent (the only one): brass.** `--accent` #DDB15A is the lamp: diamond markers, eyebrows and numerals on navy, the keystone badge, focus rings on navy and over the video, the primary button on navy or video (`.on-dark .btn-primary`, navy text). `--accent-d` #94671A is the same brass dark enough for light surfaces: the price line, the dashboard target line and label, the fit-helper match outline. Never body text on light.
-- **Coaches (D10, placeholders until the photos go in):** `--allan` (= `--brand-2`) with `--allan-l`; `--jon` #8E3B34 claret with `--jon-l`.
+- **Coaches (kept once the photos went in, marketing D33):** `--allan` (= `--brand-2`) with `--allan-l`; `--jon` #8E3B34 claret with `--jon-l`.
 - **Status (meanings unchanged):** `--green`/`--green-l` on track, `--amber`/`--amber-l` close, `--red`/`--red-l` stretch; red also marks the dashboard's priority badges, timing figure and form errors.
 - **Charts:** `--chart-hi` (= `--brand-2`), `--chart-2` (= `--brand-3`), `--chart-total` (= `--brand`), `--chart-muted` #A7B5C4 (context bars), `--chart-ref` (= `--accent-d`). Checked with the dataviz validator: harbour vs brass ΔE 22.3, Math vs Reading and Writing ΔE 18.5 (both clear the CVD target 8 and the normal-vision floor 15); the waterfall's gain → total pair passes as a one-hue ordinal ramp.
 - `--focus` is set per surface: `--brand-2` on light, `--accent` on navy, the footer and over the video.
@@ -25,7 +25,8 @@ Oct 2026 revamp: the palette is built from the logo's one ink, navy **#10273E** 
 - **Brass diamond** (7px rotated square) is the only list/marker glyph: eyebrows, hero meta, credential strip.
 - Eyebrows are **sentence case** (no uppercase or tracking anywhere on the site except the logo's wordmark): `--ink-2` on light, brass on navy, white over the video.
 - Newsreader: `font-variation-settings:"opsz" 72` (axis max) for display, `"opsz" 24–36` for small serif text. Vary opsz, not weight. It sets larger than Fraunces did, so size headings down rather than up.
-- Two-coach colour coding: **`--allan` (harbour blue) = Allan**, **`--jon` (claret) = Jon**: monograms, lane rules, tick circles, "With Allan/Jon" labels, roles, portraits, the voice rules. Placeholders until the coaches' photos go in (D10). Hero voices are `.voice` blocks (A / J monograms + shared-plan line with the two-ring icon, rings coloured by `.ring-a`/`.ring-j`) — keep that structure if hero copy changes.
+- Two-coach colour coding: **`--allan` (harbour blue) = Allan**, **`--jon` (claret) = Jon**: the thin rings around the lanes' photo avatars, lane rules, tick circles, "With Allan/Jon" labels, roles, the voice rules and the two-ring icon. The revamp's placeholders (D10), kept when the photos went in (marketing D33, Oct 2026). Hero voices are `.voice` blocks: each coach's line under a 2px rule in his colour (every width), then the shared-plan line with the two-ring icon (`.ring-a`/`.ring-j`) under a `--line-2` rule. No initials there: the owner removed them (Oct 2026). Keep that structure if hero copy changes.
+- **Coach photos** (see **Coach photos** below) appear in exactly two places: the arch portraits in the coaches section and the round avatars in the approach lanes. Nowhere else on the page without the owner's call; the dashboard demo's sample student keeps its "M" (D8).
 - Buttons: pill (`999px`), min-height 48px. `.btn-primary` is navy on light and brass with navy text on navy or over the video (`.on-dark` ancestor; the nav's button turns brass while the nav is over the hero). `.btn-ghost` is a navy outline on light and a white outline on a light scrim over the video. No new shapes.
 - Sections: `padding` 64 → 88 → 112px by breakpoint; content in `.wrap`. Anchored sections clear the fixed nav via `scroll-padding-top`. Rhythm: video stage → fog → paper strip → fog … → navy dashboard → fog → paper → fog → navy consult box → deep-navy footer.
 - Status pills (`.pill.green/.amber/.red`) are the only semantic colour usage.
@@ -80,6 +81,19 @@ How it holds together:
 - All touch targets ≥44px (the short footer links get a wider hit area from an `::after`); form inputs/selects are 16px to prevent iOS zoom. Inside `#dash` (D8, unchanged) the chart points have 36px hit circles and the goal buttons are 40px tall from 720px.
 - Feedback transitions (hover, press, selection) stay within 0.2 s; only the FAQ panel (0.35 s, a `grid-template-rows` reveal) and scroll-driven state (nav, sticky CTA, 0.3 s) run longer.
 
+## Coach photos (P4.5, Oct 2026)
+Real phone photos of Allan and Jon, matched by `marketing/assets/photos/process.py` (level, crop, scale, white balance, one shared grade, background softening through a mask; never retouched or generated; its README has the method). The script writes every file in [media/coaches/](media/coaches/): `{allan|jon}-{portrait|avatar}-{width}w.{webp|jpg}`, sRGB, no metadata. Re-run it rather than editing a file by hand: `python marketing/assets/photos/process.py --web website/media/coaches` from the project root.
+
+| Where | Element | Shown at (CSS px) | Files (widths) | Bytes (WebP) |
+|---|---|---|---|---|
+| Coaches section (`.bio`) | `<picture class="portrait">` in the arch (`border-radius:50% 50% 10px 10px / 40% 40% 10px 10px`, inner 1px rule at 30% white) | 96×120 on phones; 168×210 at 720–1023 (single card, the arch in its own column); 144×180 from 1024 (two cards: the arch beside the name and role, the story at the card's full width) | 4:5 portrait crop: 96, 144, 168, 192, 288, 336, 432, 504 | 4–32 KB each; ≤18 KB for what a phone loads (288w at 3×) |
+| Approach lanes (`.lane-top`) | `<picture class="coach-av">`, round, ring: 2px `--bg` gap then 2px coach colour (`box-shadow`, so no layout change) | 48×48 (56 with the ring) | 1:1 square crop: 48, 96, 144 | 1–7 KB each |
+
+- Markup: `<source type="image/webp">` plus a JPG `<img>` fallback, both with `srcset` (w descriptors) and `sizes`; the portrait's `sizes` is `(min-width:1024px) 144px, (min-width:720px) 168px, 96px`. `width`/`height` set the aspect ratio and the containers have fixed sizes, so nothing shifts. Both sections are below the fold at every width: `loading="lazy"` and `decoding="async"`. The hero stage is untouched, so the LCP element and its timing are too.
+- Alt text: the portraits say who and what ("Allan, co-founder and SAT coach"; "Jon, co-founder and college and career coach"), without repeating the heading beside them word for word. The lane avatars are `alt=""`: the heading beside them names the coach, and the portrait carries the description.
+- While a photo loads (or if it fails) the shape shows `--wash`. The arch keeps its inner rule as the window's frame; there's no shadow or ring on the portraits.
+- The crops leave room for the shapes: in the portrait the hair top sits at 17% of the height and the face's widest point well inside the arch; in the square, hair top at 14% and the chin at 77%, so the circle cuts only the shoulders.
+
 ## Content/UX rules
 - Prices are always visible per [CLAUDE.md](../CLAUDE.md) rule 3 — never gate behind "call for pricing".
 - No outcome guarantees in copy (CLAUDE.md rule 1) — check any new headline/testimonial copy against this.
@@ -109,8 +123,7 @@ Targets: 4.5:1 for text, 3:1 for large text (≥24px, or ≥18.66px bold) and fo
 | `--jon` #8E3B34 | `--bg` #F1F4F7 | 6.73 | 4.5 | Jon role on bio card |
 | `--on-dark` #FFFFFF | `--brand` #10273E | 15.20 | 4.5 | Primary button, headings on navy, Flagship head |
 | `--on-dark` #FFFFFF | `--brand-hover` #1B3753 | 12.22 | 4.5 | Primary button hover |
-| `--on-dark` #FFFFFF | `--brand-2` #285F9C | 6.55 | 4.5 | Mono A, checked box tick |
-| `--on-dark` #FFFFFF | `--jon` #8E3B34 | 7.43 | 4.5 | Mono J, Jon portrait |
+| `--on-dark` #FFFFFF | `--brand-2` #285F9C | 6.55 | 4.5 | Checked box tick |
 | `--on-dark` #FFFFFF | `--ink-3` #51657B | 6.00 | 4.5 | Mono M (dashboard student) |
 | `--on-dark` #FFFFFF | `--accent-d` #94671A | 4.98 | 4.5 | Dashboard target label |
 | `--brand` #10273E | `--accent` #DDB15A | 7.61 | 4.5 | Brass button, keystone badge |
@@ -131,6 +144,8 @@ Targets: 4.5:1 for text, 3:1 for large text (≥24px, or ≥18.66px bold) and fo
 | `--brand-2` #285F9C | `--bg` #F1F4F7 | 5.93 | 3 | UI: focus ring on fog |
 | `--brand-2` #285F9C | `--paper` #FFFFFF | 6.55 | 3 | UI: focus ring on paper, checked box |
 | `--brand-2` #285F9C | `--brand-tint` #E0E8F0 | 5.29 | 3 | UI: selected skill ring |
+| `--allan` #285F9C | `--bg` #F1F4F7 | 5.93 | 3 | Allan's avatar ring and voice rule (identification only: his name sits beside both) |
+| `--jon` #8E3B34 | `--bg` #F1F4F7 | 6.73 | 3 | Jon's avatar ring and voice rule (the same) |
 | `--accent` #DDB15A | `--brand` #10273E | 7.61 | 3 | UI: focus ring on navy |
 | `--accent` #DDB15A | `--brand-deep` #0A1828 | 8.95 | 3 | UI: focus ring in the footer |
 | `--accent-d` #94671A | `--paper` #FFFFFF | 4.98 | 3 | UI: fit-helper match outline; chart price line |
