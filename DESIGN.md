@@ -1,6 +1,6 @@
 # Website Design & Architecture Reference
 
-Single-file site: [index.html](index.html) — inline `<style>`, no build step, no framework yet (CLAUDE.md's Next.js stack is the future rebuild target, not current state). Two exceptions, both from the launch campaign (P3, Oct 2026): the consult form's logic lives in one shared script, [assets/consult-form.js](assets/consult-form.js), because the guides embed the same form (see **Consult form and tracking**), and [privacy.html](privacy.html) is a second self-contained page.
+Single-file site: [index.html](index.html) — inline `<style>`, no build step, no framework yet (CLAUDE.md's Next.js stack is the future rebuild target, not current state). Exceptions, all from the launch campaign (Oct 2026): the consult form's logic lives in one shared script, [assets/consult-form.js](assets/consult-form.js), because the guides embed the same form (see **Consult form and tracking**); [privacy.html](privacy.html) (P3) and the guides under [guides/](guides/) (P5, see **Guides**) are self-contained pages; [llms.txt](llms.txt) is a plain summary for AI tools.
 
 **CSS is mobile-first.** Base styles target phones (~375px); enhancements layer on at `min-width:720px` (tablet), `880px` (full nav appears, sticky mobile CTA hides) and `1024px` (desktop two-column layouts). Add new rules in that order — never reintroduce `max-width` overrides.
 
@@ -201,23 +201,53 @@ Every guide embeds the same form as the home page (marketing/STRATEGY.md §7), s
 | `booking_link_click` | The meeting link, once | `location`: thank_you, guide | `data-booking` |
 | `fit_helper_use` | The fit helper's first result, once | `grade_band` (9-10, 11, 12), `need` | Inline, in the helper |
 | `dashboard_demo_use` | The first click or change on the demo's controls or chart points, once | — | Inline: a capture listener on `#dash`, added from outside, so the demo itself is untouched (D8) |
-| `guide_cta_click` | A guide's link to the form, once | `guide_slug` | `data-guide-cta` |
+| `guide_cta_click` | A guide's link to the home page's form, once (only where the form isn't on that page; no page uses it yet) | `guide_slug` | `data-guide-cta` |
+| `share_to_parent` | "Send this page to a parent" is used on a guide, once | `guide_slug`; `method`: share, email, copy | Inline, in the guide (see **Guides**) |
 
 Inline code reports through `window.lpTrack(name, params, once)`; calls made before the script has run wait in `window.lpq`. No event ever carries form values.
 
-**For the guides (P5).** Copy the form block under `<!-- CONSULT -->` unchanged (IDs only need to be unique on the page), set `data-form-location="guide-<slug>"`, load `assets/consult-form.js` with `defer`, and keep the inline fallback (the `/* form: */` block at the end of the home page's main script). Links to the form get `data-guide-cta="<slug>"`; a booking link outside the form gets `data-booking="guide"`.
+**For the guides (P5, as built).** Each guide copies the form block under `<!-- CONSULT -->` unchanged (IDs only need to be unique on the page), with `data-form-location="guide-<slug>"`, loads `/assets/consult-form.js` with `defer`, and keeps the inline fallback (the `/* form: */` block). The form is on the page, so the guide's links to it are ordinary placements: `data-cta` `nav`, `guide` (the article's button) and `sticky`, all sending `cta_click`. Internal links never carry UTMs (marketing/MEASUREMENT.md §4: they would restart the session and overwrite the real source); HubSpot still learns the guide from the submission's `pageUri` and, on a first visit, `first_landing_page`.
 
 **Tests.** `node website-revamp/tools/consult-form-test.mjs` against `aquinas-site` (22 tests: success; server error; network failure; HubSpot rejecting an email; validation; honeypot; minimum fill time; double click; attribution and its expiry; every GA4 event once and none carrying form data; GA4 off locally and under GPC; the missing-script fallback; keyboard and labels at 375, 768 and 1440; axe on every form state and the privacy page; search basics). HubSpot, GA4 and the meeting page are mocked.
 
 ## Search basics
-- Canonical URLs: `https://thelighthouseprep.com/` and `https://thelighthouseprep.com/privacy`. Cloudflare Pages redirects `*.html` to the extensionless path, so the canonical and the sitemap use `/privacy`, while links keep `privacy.html` (the local python server has no such rewrite).
+- Canonical URLs: `https://thelighthouseprep.com/`, `https://thelighthouseprep.com/privacy`, `https://thelighthouseprep.com/guides/` and each guide's `https://thelighthouseprep.com/guides/<slug>/` (trailing slash: Cloudflare Pages serves a folder's `index.html` there). Cloudflare Pages redirects `*.html` to the extensionless path, so the canonical and the sitemap use `/privacy`, while links keep `privacy.html` (the local python server has no such rewrite).
 - Open Graph and X tags reuse the page's title and description. The card is `media/og-image.png` (1200×630, 76 KB), rendered from the brand files by `website-revamp/tools/og-image.mjs`: re-run it if the logo, palette or hero headline changes.
 - JSON-LD at the end of `<body>`: the Organization (logo `apple-touch-icon.png`) and the FAQ, word for word from `#acc`. Change both together; the test compares them.
 - `robots.txt` allows everything and names `sitemap.xml`. Add each guide to the sitemap with its `lastmod`.
 - No verification meta tags: Search Console and Bing are verified through DNS.
+- [llms.txt](llms.txt) (llmstxt.org): a plain summary for AI tools: who we are, the programs and prices with the promise's terms, who teaches, the consult, the guides and the pages. Its words come only from the site and the approved guides; update it with any price, program or new guide.
+- Every footer (home, privacy, guides) links to `/guides/`.
 
 ## Privacy page
 [privacy.html](privacy.html) is self-contained in the design system: the tokens it uses, the same font request, the nav's live logo linking home, and the home page's footer with "Privacy" marked `aria-current`. It loads `assets/consult-form.js` for GA4 and the first touch. It covers the form and HubSpot, GA4, local storage, Global Privacy Control, retention, deletion requests, and services for students 13 and over with a parent's consent. The owner removed the list of services, the cookie names and the test-submission line before Gate 3 (Oct 6 2026). **Keep it true:** when tracking, a service, a cookie or a retention period changes, update the page and its "Last updated" date in the same commit.
+
+## Guides (P5, Oct 2026)
+Each guide is one self-contained file, [guides/&lt;slug&gt;/index.html](guides/what-your-psat-score-means/index.html), at `/guides/<slug>/`; [guides/index.html](guides/index.html) lists them (newest first). The first is the PSAT guide (G1, marketing asset A-202641-04). Paths are root-relative (`/assets/…`, `/brand/…`) because the pages sit two folders deep. A guide carries the home page's tokens it uses, its fonts request (no italic is set, so Newsreader's italic file is never fetched), the nav in its solid state (sticky, no video under it), the footer, the sticky CTA and the consult section word for word.
+
+**Words.** Only the approved text from the guide's Markdown in marketing/content/guides/ (approval recorded in marketing/MARKETING-PLAN.md's Approval register). Formatting may change: list numbers are drawn by CSS, the H1 takes the site's closing period, the reviewers' [ALLAN CHECK]/[JON CHECK] markers go, source URLs become link targets. New interface words are kept to labels ("In this guide", "Send this page to a parent", "Email the link", "Copy the link", "Link copied.", the breadcrumb).
+
+**Anatomy, top to bottom.**
+- Breadcrumb (Home / Guides / short title; `aria-current` on the last), matched by the BreadcrumbList JSON-LD.
+- H1; byline ("By Allan and Jon…", the names linking to `#authors`, "Last reviewed" in a `<time>`); the share control.
+- The short answer (`.answer`): the guide's one large passage, Newsreader 20–23px on `--brand-tint`, its "The short answer." label set as a sans eyebrow with the brass diamond. It is the LCP element.
+- Contents (`nav.toc` > `<details>`): a closed disclosure below 1024px; from 1024 open (script), sticky in a 200–260px column beside the 46rem article. The section being read gets the brass diamond and `aria-current` (an IntersectionObserver band at 25–35% of the viewport). The diamond hangs in the margin so items line up with the label.
+- Sections: `h2` with ids (the contents link to them; `scroll-padding-top` clears the nav). Ordered lists hang serif numerals in `--brand-2`.
+- Tables: rules only, no boxes, tabular numbers. The wide one (`table.stack`) stacks each row into a block below 720px (row header in the serif, value in 600 weight, explanation in `--ink-2`). Chromium keeps a block-displayed table's semantics (checked: identical accessibility tree at 375 and 1440); don't add ARIA table roles, the HTML spec forbids them on real table parts.
+- FAQ (`#qa`): every answer visible (`h3` + `p`), word for word in the FAQPage JSON-LD.
+- About the authors: text only (the owner's rule keeps coach photos to the home page, marketing D36), each coach under a 2px rule in his colour, as in the hero voices; the names link to `/#founders`.
+- Sources: numbered, external links in a new tab with `rel="noopener"` and a screen-reader "(opens in a new tab)"; then the trademark notice (13.5px `--ink-3`).
+- The consult section, unchanged from the home page, with `data-form-location="guide-<slug>"`.
+
+**Send this page to a parent** (marketing experiment X-2, `share_to_parent`). With JS it is a button: the device's share sheet (`navigator.share`, the guide's title and canonical URL, no tags) where there is one; elsewhere a disclosure with "Email the link" (a `mailto:` with the title and URL) and "Copy the link" (clipboard; "Link copied.", or the URL itself if the clipboard is refused). Without JS, a plain `mailto:` link shows instead (`.share-mail`; the `.js` class from `<head>` swaps them). The event fires once per page, with `method` share, email or copy; closing the share sheet sends nothing, and nothing reaches us but the event.
+
+**Head and structured data.** Title and description from the guide's notes; canonical; Open Graph `article` with the link preview (`media/guides/<slug>.png`, 1200×630, a 256-colour PNG downscaled from the 2× render in marketing/content/guides/), `article:published_time`/`modified_time`; the X card. One JSON-LD `@graph` at the end of `<body>`: the Organization (the home page's `@id`), the Article (headline = the H1 without its period, description = the meta description, image = the preview, the two Person authors with `jobTitle` "SAT tutor" and "College counselor", `worksFor` and `publisher` the Organization), the FAQPage and the BreadcrumbList. validator.schema.org: 0 errors, 0 warnings (Oct 7 2026); Google's Rich Results Test now needs a Google sign-in, so it runs on the live URL. **When a date or policy is re-checked**, change "Last reviewed", `dateModified`, `article:modified_time` and the sitemap's `lastmod` together.
+
+**Adding a guide.** Copy the folder to the new slug; change the head, the `SLUG` and share title in the script, the share links, the contents, `data-form-location` and the JSON-LD; replace the article; add its card to guides/index.html, a `<url>` to sitemap.xml and a line to llms.txt; export its preview image; extend `website-revamp/tools/guide-test.mjs` (its `SLUG`) and run it.
+
+**Measured** (Oct 7 2026, cold, compressed local server, median of 3): a phone at 375 on Fast 4G (150 ms, 9 Mbps) with a 4× CPU: FCP and LCP 0.75 s (the short answer), CLS 0, TBT 118 ms; desktop LCP 0.28 s. Before the load event: 180 KB (HTML 17 KB compressed, fonts 159 KB, consult-form.js 4 KB, no images). On the live site gtag.js follows 2 s after load, as on every page.
+
+**Tests.** `node website-revamp/tools/guide-test.mjs [--shots <dir>]` against `aquinas-site` (12 tests): head and search tags; structured data against the visible page (headline, authors, every FAQ word, the breadcrumb trail); every link (internal answers 200, home-page anchors exist, no UTMs; external in a new tab); sitemap, robots and llms.txt; GA4 events once and free of form data; the form sending from the guide with its first touch; the share sheet, its fallback and no-JS; layout, contents, sticky bar, targets and axe at 375, 768 and 1440, for the guide and the index. HubSpot, GA4 and the meeting page are mocked.
 
 ## When editing
 - Match existing patterns above before inventing new colors, fonts, radii, or shadows.
