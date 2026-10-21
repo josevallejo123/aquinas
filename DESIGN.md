@@ -2,6 +2,8 @@
 
 Single-file site: [index.html](index.html) — inline `<style>`, no build step, no framework yet (CLAUDE.md's Next.js stack is the future rebuild target, not current state). Exceptions, all from the launch campaign (Oct 2026): the consult form's logic lives in one shared script, [assets/consult-form.js](assets/consult-form.js), because the guides embed the same form (see **Consult form and tracking**); [privacy.html](privacy.html) (P3) and the guides under [guides/](guides/) (P5, see **Guides**) are self-contained pages; [llms.txt](llms.txt) is a plain summary for AI tools.
 
+**Hosting.** The site is the Worker `lighthouseprep`, deployed by Workers Builds on every push to `main` (`npx wrangler deploy` at the repo root, live in about 30 s) from the committed [wrangler.jsonc](wrangler.jsonc): static assets, plus a small Worker, [_worker/index.js](_worker/index.js), that runs first for `/media/*` only and serves byte ranges (HTTP 206), because the assets server answers every `Range` request with the whole file, and Safari won't play a video without ranges (seeking needs them everywhere). Every other path is served by the assets server. [.assetsignore](.assetsignore) keeps `.git`, this file, the Worker's source and the config off the public site (until Oct 21 2026 the deploy published them). Keep all three; check `curl -r 0-1` on a `/media/*.mp4` answers 206 after any hosting change.
+
 **CSS is mobile-first.** Base styles target phones (~375px); enhancements layer on at `min-width:720px` (tablet), `880px` (full nav appears, sticky mobile CTA hides) and `1024px` (desktop two-column layouts). Add new rules in that order — never reintroduce `max-width` overrides.
 
 ## Tokens (CSS vars in `:root`)
