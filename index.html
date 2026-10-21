@@ -213,11 +213,65 @@ section{padding:64px 0}
 .creds li::before{content:"";width:7px;height:7px;background:var(--accent);transform:rotate(45deg);flex:none;margin-top:.62em}
 .creds li b{font-weight:600;color:var(--brand-2)}
 
+/* ============ how it works (#how-it-works): the video tour ============ */
+/* Click to play, with sound. Before play the frame is one cover button (the dashboard picture, a scrim,
+   the brass play disc and the label). Phones in portrait (the cover's <source media> query) get a 4:5
+   cover edge to edge, then the 9:16 version on play, full screen where the browser allows it;
+   everything else (tablets, phones in landscape) gets the 16:9 version in the wrap. The frame is never
+   taller than the screen under the nav. Without JS it is a plain <video controls> of the 16:9 file */
+.hiw-head{max-width:760px;margin-bottom:28px}
+.hiw-head h2{margin-bottom:16px}
+.hiw-head .lead{margin:0}
+.hiw-player{padding-inline:0}
+.hiw-frame{--ar:16/9;--focus:var(--accent);position:relative;aspect-ratio:var(--ar);width:min(100%,(100vh - var(--nav-h) - 24px) * var(--ar));width:min(100%,(100svh - var(--nav-h) - 24px) * var(--ar));margin-inline:auto;background:var(--brand)}
+/* the navy stands in only until the cover or the video's first frame is in (.lit): two opaque layers
+   under one rounded edge leave a dark fringe at the corners */
+.hiw-frame.lit{background:none}
+.js .hiw-frame{--ar:4/5}
+.js .hiw-frame.on{--ar:9/16}
+.hiw-video,.hiw-cover,.hiw-poster,.hiw-poster img{position:absolute;inset:0;width:100%;height:100%;border-radius:inherit}
+.hiw-video{object-fit:contain}
+.hiw-video:fullscreen{border-radius:0}
+/* focus on the playing video, as over the hero's: the brass ring on a navy halo */
+.hiw-video:focus-visible{box-shadow:0 0 0 8px color-mix(in srgb,var(--scrim) 85%,transparent)}
+.hiw-cover{display:none;padding:0;border:0;background:none;color:var(--on-dark);text-align:left;cursor:pointer;overflow:hidden}
+.js .hiw-cover{display:block}
+.hiw-frame.on .hiw-cover{display:none}
+.hiw-poster img{object-fit:cover}
+.hiw-scrim{position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--brand-deep) 62%,transparent) 50%,color-mix(in srgb,var(--brand-deep) 85%,transparent))}
+.hiw-disc{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;background:var(--accent);color:var(--brand);display:grid;place-items:center;box-shadow:0 12px 28px -10px color-mix(in srgb,var(--brand-deep) 75%,transparent);transition:background-color .2s}
+.hiw-disc svg{width:30px;height:30px;margin-left:4px;fill:currentColor}
+.hiw-cover:hover .hiw-disc{background:color-mix(in srgb,var(--accent) 86%,var(--on-dark))}
+.hiw-cover:active .hiw-disc{background:color-mix(in srgb,var(--accent) 84%,var(--brand))}
+/* the ring goes on the disc, the part that reads as the button */
+.hiw-cover:focus-visible{outline:none}
+.hiw-cover:focus-visible .hiw-disc{outline:2.5px solid var(--accent);outline-offset:3px;box-shadow:0 0 0 8px color-mix(in srgb,var(--scrim) 85%,transparent)}
+.hiw-label{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.hiw-title{font-size:17px;font-weight:600;line-height:1.25}
+.hiw-dur{padding:5px 9px;border-radius:999px;background:color-mix(in srgb,var(--brand-deep) 60%,transparent);font-size:13px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+/* chapters: one rail under the player on phones, running to the screen's edges; wrapped from 720px */
+.hiw-ch{display:none;align-items:center;gap:8px;margin:16px calc(-1 * max(var(--gutter),env(safe-area-inset-right))) 0 calc(-1 * max(var(--gutter),env(safe-area-inset-left)));padding:2px max(var(--gutter),env(safe-area-inset-right)) 6px max(var(--gutter),env(safe-area-inset-left));overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:max(var(--gutter),env(safe-area-inset-left));overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.js .hiw-ch{display:flex}
+.hiw-ch::-webkit-scrollbar{display:none}
+.hiw-ch-l{flex:none;font-size:14px;font-weight:600;color:var(--ink-2);scroll-snap-align:start}
+.hiw-chap{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);background:var(--paper);color:var(--ink);font-size:14px;font-weight:600;line-height:1.2;white-space:nowrap;cursor:pointer;scroll-snap-align:start;transition:background-color .2s,border-color .2s,color .2s}
+.hiw-chap:not([aria-current]):hover{border-color:var(--edge)}
+.hiw-cn{display:grid;place-items:center;width:22px;height:22px;margin-left:-6px;border-radius:50%;background:var(--wash);font-size:12px;font-weight:700;line-height:1;transition:background-color .2s,color .2s}
+.hiw-ct{font-weight:500;color:var(--ink-3);font-variant-numeric:tabular-nums;transition:color .2s}
+.hiw-chap[aria-current="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-dark)}
+.hiw-chap[aria-current="true"] .hiw-cn{background:var(--accent);color:var(--brand)}
+.hiw-chap[aria-current="true"] .hiw-ct{color:var(--on-dark-2)}
+.hiw-more .sc-link{margin-top:8px}
+.hiw-tx{max-width:46rem;margin-top:6px;border-top:1px solid var(--line)}
+.hiw-tx-body{padding:4px 0 6px}
+.hiw-tx-body p{color:var(--ink-2)}
+.hiw-tx-body .hiw-note{font-size:14.5px;color:var(--ink-3)}
+
 /* ============ scores: aid (#aid) and earnings (#earnings) ============ */
 .sc-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
 .sc h2{margin-bottom:18px}
 .sc .lead{margin:0}
-.earn{border-top:1px solid var(--line)}
+.aid,.earn{border-top:1px solid var(--line)}
 .sc-fig{position:relative;margin:0 -8px;padding:18px 14px 4px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg)}
 .sc-fig figcaption{margin-bottom:14px;padding-right:84px}
 .sc-fig figcaption b{display:block;font-size:15px;font-weight:600;line-height:1.35}
@@ -239,10 +293,10 @@ section{padding:64px 0}
 .sc-chart .brk-lbl{font-family:var(--serif);font-size:22px;font-weight:500;font-variation-settings:"opsz" 36;fill:var(--ink)}
 .sc-cap{font-size:13.5px;line-height:1.45;color:var(--ink-3);margin:10px 0 0}
 .sc-table{margin-top:10px;border-top:1px solid var(--line)}
-.sc-table summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;cursor:pointer;list-style:none;font-size:14.5px;font-weight:600;color:var(--brand-2)}
-.sc-table summary::-webkit-details-marker{display:none}
-.sc-table summary::after{content:"";width:11px;height:8px;flex:none;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center/11px no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center/11px no-repeat;transition:transform .2s}
-.sc-table[open] summary::after{transform:rotate(180deg)}
+.sc-table summary,.hiw-tx summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;cursor:pointer;list-style:none;font-size:14.5px;font-weight:600;color:var(--brand-2)}
+.sc-table summary::-webkit-details-marker,.hiw-tx summary::-webkit-details-marker{display:none}
+.sc-table summary::after,.hiw-tx summary::after{content:"";width:11px;height:8px;flex:none;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center/11px no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center/11px no-repeat;transition:transform .2s}
+.sc-table[open] summary::after,.hiw-tx[open] summary::after{transform:rotate(180deg)}
 .sc-table table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.35;font-variant-numeric:tabular-nums;margin-bottom:12px}
 .sc-table th{font-size:12.5px;font-weight:600;color:var(--ink-3);text-align:left;vertical-align:bottom;padding:0 6px 8px 0}
 .sc-table td{padding:9px 6px 9px 0;border-top:1px solid var(--line);color:var(--ink-2);vertical-align:top}
@@ -564,6 +618,14 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
 .mcta .btn{width:100%}
 .menu-open .mcta{transform:translateY(110%)}
 
+/* ============ ≥ 720px or landscape: the How it works player's 16:9 version, in the wrap ============ */
+/* the complement of the phone version's query, (max-width: 719px) and (orientation: portrait) */
+@media (min-width:720px),(orientation:landscape){
+  .hiw-player{padding-left:max(var(--gutter),env(safe-area-inset-left));padding-right:max(var(--gutter),env(safe-area-inset-right))}
+  .js .hiw-frame,.js .hiw-frame.on{--ar:16/9}
+  .hiw-frame{margin-inline:0;border-radius:var(--r-lg);box-shadow:var(--shadow-lg)}
+}
+
 /* ============ ≥ 720px (large phones landscape / tablets) ============ */
 @media (min-width:720px){
   :root{--gutter:32px;--arch:50% 50% 20px 20px / 40% 40% 20px 20px}
@@ -579,6 +641,14 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   .voice.both{grid-column:1/-1}
   .creds ul{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 56px;padding-block:22px}
   .creds li{font-size:19px}
+  .hiw-head{margin-bottom:40px}
+  .hiw-disc{width:88px;height:88px}
+  .hiw-disc svg{width:36px;height:36px;margin-left:5px}
+  .hiw-label{left:24px;right:24px;bottom:24px}
+  .hiw-title{font-size:20px}
+  .hiw-dur{font-size:14px}
+  .hiw-ch{flex-wrap:wrap;gap:8px 6px;margin:20px 0 0;padding:0;overflow:visible;scroll-snap-type:none}
+  .hiw-ch-l{margin-right:4px}
   .sc-fig{margin-inline:0;padding:24px 24px 6px}
   .sc-chart text{font-size:12.5px}
   .sc-find{padding:22px 24px 20px}
@@ -746,6 +816,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
 
 @media (hover:none){
   .btn:hover .arr{transform:none}
+  .hiw-chap:not([aria-current]):hover{border-color:var(--line-2)}
   .sc-cite:hover:not(.open) .sc-cite-btn{border-color:var(--line-2);color:var(--ink-2)}
   .sc-cite:hover:not(.open) .sc-pop{opacity:0;visibility:hidden;transform:translateY(-4px)}
 }
@@ -836,6 +907,64 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
     <li><span>Average jump of <b>+350 points</b> per student</span></li>
   </ul>
 </div>
+
+<!-- HOW IT WORKS (the video tour; DESIGN.md "How it works video"). The cover picture sits in a
+     <template> that the script puts into the cover button once the player nears the screen; the video
+     loads only on a press of the cover or a chapter -->
+<section class="hiw" id="how-it-works" aria-labelledby="hiwH">
+  <div class="wrap">
+    <div class="hiw-head">
+      <div class="eyebrow">How it works</div>
+      <h2 id="hiwH">See how it works, from the first practice test to the parent dashboard.</h2>
+      <p class="lead">A short tour of the portal itself: the diagnostic, the review with your coach, the lesson plan, the sessions, the homework and what parents see each week.</p>
+    </div>
+  </div>
+  <div class="wrap hiw-player">
+    <div class="hiw-frame" id="hiwFrame">
+      <video class="hiw-video" id="hiwVideo" src="media/how-it-works-desktop.mp4" controls preload="none" playsinline>
+        <track kind="captions" src="media/how-it-works.en.vtt" srclang="en" label="English">
+      </video>
+      <button class="hiw-cover" id="hiwPlay" type="button" aria-label="Watch how it works: play the video, 2 minutes 42 seconds">
+        <span class="hiw-scrim"></span>
+        <span class="hiw-disc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span>
+        <span class="hiw-label"><span class="hiw-title">Watch how it works</span><span class="hiw-dur">2:42</span></span>
+      </button>
+      <template id="hiwPosterTpl"><picture class="hiw-poster"><source media="(max-width: 719px) and (orientation: portrait)" srcset="media/how-it-works-phone.webp" type="image/webp" width="1080" height="1350"><source media="(max-width: 719px) and (orientation: portrait)" srcset="media/how-it-works-phone.jpg" width="1080" height="1350"><source srcset="media/how-it-works-desktop.webp" type="image/webp"><img src="media/how-it-works-desktop.jpg" alt="" width="1920" height="1080" loading="lazy"></picture></template>
+    </div>
+  </div>
+  <div class="wrap hiw-more">
+    <div class="hiw-ch" id="hiwCh" role="group" aria-labelledby="hiwChL">
+      <span class="hiw-ch-l" id="hiwChL">Chapters</span>
+      <button class="hiw-chap" type="button" data-chapter="diagnostic" data-t="20.6"><span class="hiw-cn">1</span> Diagnostic <span class="hiw-ct">0:21</span></button>
+      <button class="hiw-chap" type="button" data-chapter="review" data-t="38.4"><span class="hiw-cn">2</span> Review <span class="hiw-ct">0:38</span></button>
+      <button class="hiw-chap" type="button" data-chapter="plan" data-t="61.3"><span class="hiw-cn">3</span> Plan <span class="hiw-ct">1:01</span></button>
+      <button class="hiw-chap" type="button" data-chapter="session" data-t="72.1"><span class="hiw-cn">4</span> Session <span class="hiw-ct">1:12</span></button>
+      <button class="hiw-chap" type="button" data-chapter="homework" data-t="98"><span class="hiw-cn">5</span> Homework <span class="hiw-ct">1:38</span></button>
+      <button class="hiw-chap" type="button" data-chapter="progress" data-t="122.8"><span class="hiw-cn">6</span> Progress <span class="hiw-ct">2:03</span></button>
+      <button class="hiw-chap" type="button" data-chapter="parents" data-t="130.9">What parents see <span class="hiw-ct">2:11</span></button>
+    </div>
+    <a class="sc-link" href="#consult" data-cta="video">Book a free consult &rarr;</a>
+    <details class="hiw-tx">
+      <summary>Read the transcript</summary>
+      <div class="hiw-tx-body">
+        <p>Most SAT prep comes down to a tutor, a stack of practice tests, and hoping it's working. At Lighthouse Prep, you don't have to hope. You can see it.</p>
+        <p>Lighthouse Prep is one-on-one SAT coaching, built around a portal that follows every step of your student's progress. Here's how it works.</p>
+        <p>It starts with a full-length diagnostic, taken right in the portal. It's built like the real digital SAT. Timed, adaptive modules, a built-in graphing calculator, the reference sheet, even highlighting and notes. And every answer saves as they go, so nothing is ever lost.</p>
+        <p>When the test is done, the results go to your coach first. They walk through them with your student, one-on-one, so every number arrives with an explanation.</p>
+        <p>Then the portal turns every answer into a clear picture: an SAT-equivalent score range, and a map of all 29 skills the SAT tests, ranked by where your student has the most points to gain.</p>
+        <p>Every lesson is built around your student. The portal suggests what each session should focus on, based on their latest work. Your coach reviews it, adjusts it, and makes the call.</p>
+        <p>And in every session, your coach teaches the tips and tricks that actually move scores. How to spot the trap answer. When the graphing calculator can solve a problem in seconds. How to pace a module, so time never runs out. All aimed squarely at the skills where your student is struggling.</p>
+        <p>Before the lesson ends, your coach can send a few fresh questions straight to your student's screen, to make sure the new strategy really sticks.</p>
+        <p>After every session comes targeted homework: 20 questions on exactly what they just worked on. In the next session, coach and student go over it together, and tag why each miss happened. Was it the content? A careless slip? Timing? Or misreading the question?</p>
+        <p>A skill only moves on once it's mastered. If it's still a struggle, it stays the focus, until it clicks.</p>
+        <p>Along the way, full-length practice tests, on a steady schedule, measure real progress under real test conditions.</p>
+        <p>And as a parent, you see all of it. Your dashboard shows the current score, the target, the days until test day, and whether your student is on track. You'll see this week's focus, every homework set, and whether it was done on time, with email reminders along the way. No guessing, no surprises.</p>
+        <p>A coach who teaches, a plan that adapts, and a portal that shows you everything. Lighthouse Prep.</p>
+        <p class="hiw-note">On screen at the end: &ldquo;Screens show a sample student with illustrative data. Scores are estimates, not guarantees.&rdquo;</p>
+      </div>
+    </details>
+  </div>
+</section>
 
 <!-- SCORES AND SCHOLARSHIPS -->
 <section class="sc aid" id="aid" aria-labelledby="aidH">
@@ -1302,7 +1431,8 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   <a class="btn btn-primary" href="#consult" data-cta="sticky">Book a free consult <span class="arr" aria-hidden="true">&rarr;</span></a>
 </div>
 
-<!-- structured data: the FAQ is word for word the #acc section above; change both together -->
+<!-- structured data: the FAQ is word for word the #acc section above, and the video's transcript word for
+     word the #how-it-works transcript (without its on-screen line); change each pair together -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"Organization","@id":"https://thelighthouseprep.com/#organization","name":"Lighthouse Prep","url":"https://thelighthouseprep.com/","logo":"https://thelighthouseprep.com/apple-touch-icon.png","image":"https://thelighthouseprep.com/media/og-image.png","description":"SAT preparation and college guidance for students applying to selective colleges. Online across the US, delivered by the coaches.","email":"hello@thelighthouseprep.com","areaServed":{"@type":"Country","name":"United States"}},
@@ -1313,7 +1443,9 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   {"@type":"Question","name":"Do you guarantee admission or a specific result?","acceptedAnswer":{"@type":"Answer","text":"No, and we would be cautious of anyone who does. We promise a clear plan, expert time and honest progress reports. Every program includes the +100 point promise, with its full terms listed under Programs."}},
   {"@type":"Question","name":"Do you help with the ACT?","acceptedAnswer":{"@type":"Answer","text":"Yes. Allan has taught the ACT for more than ten years. Most of our students take the digital SAT, but if the diagnostic suggests the ACT would suit your student better, we will tell you and build the plan around it."}},
   {"@type":"Question","name":"How does payment work?","acceptedAnswer":{"@type":"Answer","text":"You can pay in full and save 5%, or split any program into three payments."}}
- ]}
+ ]},
+ {"@type":"VideoObject","@id":"https://thelighthouseprep.com/#how-it-works-video","name":"How Lighthouse Prep works","description":"A short tour of the Lighthouse Prep portal: the diagnostic, the review with your coach, the lesson plan, the sessions, the homework and what parents see each week.","thumbnailUrl":["https://thelighthouseprep.com/media/how-it-works-desktop.jpg","https://thelighthouseprep.com/media/how-it-works-desktop.webp"],"uploadDate":"2026-10-21T00:00:00-05:00","duration":"PT2M42S","contentUrl":"https://thelighthouseprep.com/media/how-it-works-desktop.mp4","inLanguage":"en","publisher":{"@id":"https://thelighthouseprep.com/#organization"},
+  "transcript":"Most SAT prep comes down to a tutor, a stack of practice tests, and hoping it's working. At Lighthouse Prep, you don't have to hope. You can see it. Lighthouse Prep is one-on-one SAT coaching, built around a portal that follows every step of your student's progress. Here's how it works. It starts with a full-length diagnostic, taken right in the portal. It's built like the real digital SAT. Timed, adaptive modules, a built-in graphing calculator, the reference sheet, even highlighting and notes. And every answer saves as they go, so nothing is ever lost. When the test is done, the results go to your coach first. They walk through them with your student, one-on-one, so every number arrives with an explanation. Then the portal turns every answer into a clear picture: an SAT-equivalent score range, and a map of all 29 skills the SAT tests, ranked by where your student has the most points to gain. Every lesson is built around your student. The portal suggests what each session should focus on, based on their latest work. Your coach reviews it, adjusts it, and makes the call. And in every session, your coach teaches the tips and tricks that actually move scores. How to spot the trap answer. When the graphing calculator can solve a problem in seconds. How to pace a module, so time never runs out. All aimed squarely at the skills where your student is struggling. Before the lesson ends, your coach can send a few fresh questions straight to your student's screen, to make sure the new strategy really sticks. After every session comes targeted homework: 20 questions on exactly what they just worked on. In the next session, coach and student go over it together, and tag why each miss happened. Was it the content? A careless slip? Timing? Or misreading the question? A skill only moves on once it's mastered. If it's still a struggle, it stays the focus, until it clicks. Along the way, full-length practice tests, on a steady schedule, measure real progress under real test conditions. And as a parent, you see all of it. Your dashboard shows the current score, the target, the days until test day, and whether your student is on track. You'll see this week's focus, every homework set, and whether it was done on time, with email reminders along the way. No guessing, no surprises. A coach who teaches, a plan that adapts, and a portal that shows you everything. Lighthouse Prep."}
 ]}
 </script>
 
@@ -1344,20 +1476,21 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && links.classList.contains('open')) { setMenu(false); menuBtn.focus(); } });
   document.addEventListener('click', e => { if (links.classList.contains('open') && !nav.contains(e.target)) setMenu(false); });
 
-  /* mobile sticky CTA: shown once the hero buttons scroll away, hidden near the form. The hero
-     buttons' observer stretches the viewport far downwards, so buttons still below the fold (a phone
-     in landscape) count as not yet passed and the bar never covers the headline */
-  const mcta = document.getElementById('mcta'), heroCtas = document.querySelector('.hero-ctas');
-  const ctaWatch = new Map([[heroCtas, true], [document.getElementById('consult'), false], [document.getElementById('footer'), false]]);
+  /* mobile sticky CTA: shown once the hero buttons scroll away, hidden near the form and while at
+     least half of the How it works player is on screen (it would cover the video's controls). The
+     hero buttons' observer stretches the viewport far downwards, so buttons still below the fold (a
+     phone in landscape) count as not yet passed and the bar never covers the headline */
+  const mcta = document.getElementById('mcta'), heroCtas = document.querySelector('.hero-ctas'), hiwFrame = document.getElementById('hiwFrame');
+  const ctaWatch = new Map([[heroCtas, true], [document.getElementById('consult'), false], [document.getElementById('footer'), false], [hiwFrame, false]]);
   const ctaSeen = es => {
-    es.forEach(e => ctaWatch.set(e.target, e.isIntersecting));
+    es.forEach(e => ctaWatch.set(e.target, e.isIntersecting && (e.target !== hiwFrame || e.intersectionRatio >= .5)));
     const show = ![...ctaWatch.values()].some(Boolean);
     mcta.classList.toggle('show', show);
     mcta.inert = !show;
   };
-  const ctaIO = new IntersectionObserver(ctaSeen), heroIO = new IntersectionObserver(ctaSeen, {rootMargin:'0px 0px 100000px 0px'});
+  const ctaIO = new IntersectionObserver(ctaSeen), heroIO = new IntersectionObserver(ctaSeen, {rootMargin:'0px 0px 100000px 0px'}), hiwIO = new IntersectionObserver(ctaSeen, {threshold:.5});
   mcta.inert = true;
-  ctaWatch.forEach((v, el) => (el === heroCtas ? heroIO : ctaIO).observe(el));
+  ctaWatch.forEach((v, el) => (el === heroCtas ? heroIO : el === hiwFrame ? hiwIO : ctaIO).observe(el));
 
   /* hero video (D4). The poster paints first. The loop starts loading in idle time after the
      window's load event, in the crop the poster's own query picks (the other crop if the screen
@@ -1432,6 +1565,106 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   if (document.readyState === 'complete') armVideo(); else addEventListener('load', armVideo, {once:true});
   /* offscreen: paused while no part of the stage is in view */
   new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; syncVideo(); }).observe(heroStage);
+
+  /* how it works video (#how-it-works). Click to play, with sound: nothing autoplays and nothing loads
+     early. The cover picture comes out of its <template> once the player is within half a screen of
+     the viewport; the video file loads only on a press of the cover or a chapter, and the captions
+     only if the visitor turns them on. Phones in portrait (the query of the cover's <source media>
+     and of the frame's aspect ratio) see a 4:5 cover, then play the 9:16 version, asking for full
+     screen in the same tap (requestFullscreen, or webkitEnterFullscreen on an iPhone); refused or
+     unavailable, the inline 9:16 player is the fallback, and it is what stays after full screen ends.
+     Everything else plays the 16:9 version inline. If the query flips while the video is loaded (a
+     turned phone, a resized window), it moves to the other file at the same point, playing or paused
+     as it was, as the hero's loop moves between crops. Without JS the markup is a plain
+     <video controls> of the 16:9 file. GA4: video_start, video_progress at 25, 50 and 75% and
+     video_complete, each once per page; video_chapter_click on every chapter press */
+  const hiwVideo = document.getElementById('hiwVideo'), hiwPlay = document.getElementById('hiwPlay'), hiwChaps = [...document.querySelectorAll('#hiwCh .hiw-chap')];
+  const hiwPhone = matchMedia('(max-width: 719px) and (orientation: portrait)'), hiwFile = v => 'media/how-it-works-' + v + '.mp4';
+  let hiwVersion = hiwPhone.matches ? 'phone' : 'desktop', hiwSeek = null, hiwRate = 1, hiwFullAgain = false;
+  hiwVideo.controls = false;   // the enhanced state: the cover until the first press
+  const hiwLit = lit => hiwFrame.classList.toggle('lit', lit);   // the cover's picture or the video's frames are in: the navy stand-in goes
+  const hiwNear = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    hiwNear.disconnect();
+    hiwPlay.prepend(document.getElementById('hiwPosterTpl').content.cloneNode(true));
+    const img = hiwPlay.querySelector('.hiw-poster img');
+    if (img.complete && img.naturalWidth) hiwLit(true);
+    else img.addEventListener('load', () => { if (!hiwFrame.classList.contains('on')) hiwLit(true); }, {once: true});
+  }, {rootMargin: '0px 0px 50% 0px'});
+  hiwNear.observe(hiwFrame);
+  hiwVideo.addEventListener('loadeddata', () => hiwLit(true));
+  hiwVideo.addEventListener('emptied', () => hiwLit(false));   // a new file (the other version) is on its way
+  function hiwFull(){   // phones, in the tap that starts or jumps: the 9:16 file full screen where the browser allows it
+    if (document.fullscreenElement === hiwVideo || hiwVideo.webkitDisplayingFullscreen) return;
+    try {
+      // an iPhone has no element full screen (fullscreenEnabled is false there), only the video's own
+      if (hiwVideo.requestFullscreen && document.fullscreenEnabled) { const p = hiwVideo.requestFullscreen(); if (p && p.catch) p.catch(() => {}); }
+      else if (hiwVideo.webkitEnterFullscreen) {
+        try { hiwVideo.webkitEnterFullscreen(); } catch (e) { hiwFullAgain = true; }   // an iPhone refuses until the file's metadata is in: once more then
+      }
+    } catch (e) {}
+  }
+  /* the cover (t null) and the chapters (t = their start): load on the first press, jump, play */
+  function hiwStart(t, fromCover){
+    const first = !hiwFrame.classList.contains('on');
+    if (first) {
+      hiwNear.disconnect();
+      hiwLit(false);
+      if (hiwVideo.getAttribute('src') !== hiwFile(hiwVersion)) hiwVideo.src = hiwFile(hiwVersion);
+      hiwVideo.preload = 'auto';   // after the file is set: on the HTML's 16:9 file it would wake that one's download
+      hiwVideo.controls = true;
+      hiwFrame.classList.add('on');
+      if (fromCover) hiwVideo.focus({preventScroll: true});   // the cover is gone: keyboard users land on the video and its controls
+    }
+    if (t !== null) { if (hiwVideo.readyState) hiwVideo.currentTime = t; else hiwSeek = t; }
+    hiwVideo.play().catch(() => {});
+    if (hiwVersion === 'phone') hiwFull();
+    hiwMark();
+  }
+  hiwPlay.addEventListener('click', () => hiwStart(null, true));
+  hiwChaps.forEach(b => b.addEventListener('click', () => {
+    track('video_chapter_click', {chapter: b.dataset.chapter});   // every press
+    hiwStart(+b.dataset.t, false);
+  }));
+  /* the chapter being played is marked (aria-current and the video's active-pill look), from the
+     position, so it follows the native controls' scrubbing too */
+  function hiwMark(){
+    const on = hiwFrame.classList.contains('on'), t = hiwSeek !== null ? hiwSeek : hiwVideo.currentTime;
+    let cur = -1;
+    if (on) hiwChaps.forEach((b, i) => { if (t >= +b.dataset.t - .25) cur = i; });
+    hiwChaps.forEach((b, i) => { if (i === cur) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+  }
+  ['timeupdate', 'seeking', 'seeked'].forEach(ev => hiwVideo.addEventListener(ev, hiwMark));   // seeking: the target is known before its data is
+  hiwVideo.addEventListener('loadedmetadata', () => {
+    if (hiwFullAgain) { hiwFullAgain = false; try { hiwVideo.webkitEnterFullscreen(); } catch (e) {} }
+    if (hiwSeek === null) return;
+    hiwVideo.currentTime = hiwSeek;
+    hiwVideo.playbackRate = hiwRate;   // a new file starts at the default speed
+    hiwSeek = null;
+  });
+  hiwPhone.addEventListener('change', () => {
+    const want = hiwPhone.matches ? 'phone' : 'desktop';
+    if (want === hiwVersion) return;
+    hiwVersion = want;
+    if (!hiwFrame.classList.contains('on')) return;   // not pressed yet: the press loads the right file
+    const playing = !hiwVideo.paused && !hiwVideo.ended;
+    if (hiwSeek === null) { hiwSeek = hiwVideo.currentTime; hiwRate = hiwVideo.playbackRate; }   // turned again before the new file loaded: keep the first point
+    hiwVideo.src = hiwFile(want);
+    if (playing) hiwVideo.play().catch(() => {});
+  });
+  const hiwSent = new Set();
+  function hiwTrack(name, key, extra){   // each once per page; the params are fixed values, never anything the visitor typed
+    if (hiwSent.has(key)) return;
+    hiwSent.add(key);
+    track(name, Object.assign({video_title: 'How it works', video_version: hiwVersion}, extra));
+  }
+  hiwVideo.addEventListener('playing', () => hiwTrack('video_start', 'start'));
+  hiwVideo.addEventListener('timeupdate', () => {
+    const d = hiwVideo.duration;
+    if (hiwVideo.paused || !(d > 0) || d === Infinity) return;
+    [25, 50, 75].forEach(p => { if (hiwVideo.currentTime >= d * p / 100) hiwTrack('video_progress', p, {video_percent: p}); });
+  });
+  hiwVideo.addEventListener('ended', () => hiwTrack('video_complete', 'complete'));
 
   /* method stepper */
   const steps = [

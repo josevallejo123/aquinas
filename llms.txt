@@ -31,6 +31,7 @@ We don't guarantee admission or a specific result. Every program includes the +1
 ## Pages
 
 - [Home](https://thelighthouseprep.com/): the programs and prices, the coaches, the method, a sample of the parent dashboard, common questions and the consult form
+- [How it works](https://thelighthouseprep.com/#how-it-works): a 2:42 video, a short tour of the portal itself: the diagnostic, the review with your coach, the lesson plan, the sessions, the homework and what parents see each week. The transcript is on the page.
 - [Guides](https://thelighthouseprep.com/guides/): every guide for parents
 - [Privacy policy](https://thelighthouseprep.com/privacy): what the consult form and the site collect, and how to ask us to delete it
 
