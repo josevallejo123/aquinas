@@ -1,0 +1,17 @@
+// Deployed by Workers Builds on every push to main (`npx wrangler deploy` at the repo root). Without this
+// file Wrangler auto-configured a static site with these same settings; the additions are the small
+// Worker for /media/* (byte ranges, see _worker/index.js) and .assetsignore, which keeps the repo's
+// internals (.git, this file, the Worker's source, DESIGN.md) off the public site.
+{
+  "name": "lighthouseprep",
+  "main": "_worker/index.js",
+  "compatibility_date": "2026-10-19",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": ["/media/*"]
+  }
+}
