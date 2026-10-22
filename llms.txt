@@ -12,7 +12,15 @@ We don't guarantee admission or a specific result. Every program includes the +1
 - Flagship Program (recommended): $7,600. 40 coaching hours. SAT preparation with Allan; essay review, interview preparation and career guidance with Jon; 1 recorded mock interview with written feedback. For juniors and rising seniors applying to selective colleges.
 - Premier Program: $9,200. 50 coaching hours. SAT preparation with Allan; essay review, interview preparation and career guidance with Jon; 3 recorded mock interviews with written feedback; an introduction to an industry professional in a field your student is exploring. For families who want the most time with both coaches.
 - All three include the parent and student dashboard (weekly plans and progress) and the +100 point promise: if your student completes the full plan and improves by fewer than 100 points from the diagnostic to an official SAT, we add 8 hours of tutoring at no cost.
-- Payment: pay in full and save 5%, or split any program into three payments.
+- Payment: pay in full and save 5% ($4,180, $7,220 or $8,740), or split any program into three monthly payments ($1,466.66, $2,533.33 or $3,066.66 a month for three months, then nothing more).
+
+## Enrolling
+
+- You can enroll directly from the programs on the [home page](https://thelighthouseprep.com/#programs): each program has an Enroll button. Choose to pay in full and save 5%, or three monthly payments: the first today, then the same day of the next two months.
+- Payment runs through Stripe's secure checkout, so we never see your card number. Your portal invitation arrives by email within minutes of paying; a bank payment takes up to four business days to clear first.
+- After paying: set your password from the invitation, tell us about your student on the portal's first screen (two minutes), and we get in touch within one business day to schedule the diagnostic and the first session.
+- [Enrollment terms](https://thelighthouseprep.com/terms/): what you're buying, paying, changing your mind (tell us after the first two sessions, before the third, and we refund everything you've paid beyond those two sessions), recordings and your student's account.
+- Prefer to talk first? Book a free consult (below).
 
 ## Who teaches
 
@@ -33,6 +41,7 @@ We don't guarantee admission or a specific result. Every program includes the +1
 - [Home](https://thelighthouseprep.com/): the programs and prices, the coaches, the method, a sample of the parent dashboard, common questions and the consult form
 - [How it works](https://thelighthouseprep.com/#how-it-works): a 2:42 video, a short tour of the portal itself: the diagnostic, the review with your coach, the lesson plan, the sessions, the homework and what parents see each week. The transcript is on the page.
 - [Guides](https://thelighthouseprep.com/guides/): every guide for parents
-- [Privacy policy](https://thelighthouseprep.com/privacy): what the consult form and the site collect, and how to ask us to delete it
+- [Enrollment terms](https://thelighthouseprep.com/terms/): the terms a family accepts when enrolling and paying online
+- [Privacy policy](https://thelighthouseprep.com/privacy): what the consult form, the checkout and the site collect, and how to ask us to delete it
 
 SAT® is a trademark registered by College Board, which is not affiliated with, and does not endorse, this site.
