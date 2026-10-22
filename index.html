@@ -508,11 +508,13 @@ section{padding:64px 0}
 .yes::after{inset:0}
 .mx-cell.f .yes{background:var(--brand);--chk:var(--on-dark)}
 .no{width:14px;height:2px;border-radius:2px;background:var(--edge)}
-/* the footer row: each program's Enroll button (it opens the pay chooser, #enroll) and, from 720px,
-   "or book a consult" under it. Phones show the buttons only: the sticky bar carries the consult there */
+/* the footer row: each program's Enroll button (it opens the pay chooser, #enroll) and "or book a consult"
+   under it. On phones the link takes two lines, "or book / a consult" (the markup's &nbsp; keeps "a consult"
+   together; at 320 it is 53px wide in a 58px column), in a 44px target as wide as its column */
 .mx-row.ft{border-top:0;padding:10px 0 2px}
 .mx-row.ft .btn{width:100%;min-height:44px;padding:8px 2px;font-size:14px}
-.mx-alt{display:none}
+.mx-alt{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:44px;font-size:clamp(12.5px,3.6vw,13.5px);font-weight:600;line-height:1.25;color:var(--brand-2);text-underline-offset:3px}
+.mx-alt:hover{color:var(--brand)}
 .fine{margin-top:32px;display:grid;gap:4px;font-size:14.5px;color:var(--ink-3)}
 .fine b{color:var(--ink-2)}
 .fine a{color:var(--brand-2);text-underline-offset:3px}
@@ -742,8 +744,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   .mx-row.pr .mx-num{font-size:30px}
   .mx-row.ft{padding:8px 0 4px}
   .mx-row.ft .btn{min-height:48px;padding:12px;font-size:15px}
-  .mx-alt{display:inline-flex;align-items:center;min-height:44px;font-size:14.5px;font-weight:600;color:var(--brand-2);text-underline-offset:3px}
-  .mx-alt:hover{color:var(--brand)}
+  .mx-alt{width:auto;font-size:14.5px;line-height:inherit}
   .fine{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:40px}
   .enroll{width:min(520px,100% - 64px);max-height:calc(100% - 64px);margin:auto;padding:36px 36px 28px;border-radius:var(--r-lg)}
   .enroll-x{top:16px;right:16px}
@@ -1327,9 +1328,9 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
       </div>
       <div class="mx-row ft" role="row">
         <div class="mx-cell" role="cell"></div>
-        <div class="mx-cell" role="cell"><button class="btn btn-ghost" type="button" data-enroll="accelerator" commandfor="enroll" command="show-modal" aria-haspopup="dialog">Enroll<span class="sr"> in the SAT Accelerator</span></button><a class="mx-alt" href="#consult" data-cta="programs">or book a consult<span class="sr"> about the SAT Accelerator</span></a></div>
-        <div class="mx-cell f" role="cell"><button class="btn btn-primary" type="button" data-enroll="flagship" commandfor="enroll" command="show-modal" aria-haspopup="dialog">Enroll<span class="sr"> in the Flagship Program</span></button><a class="mx-alt" href="#consult" data-cta="programs">or book a consult<span class="sr"> about the Flagship Program</span></a></div>
-        <div class="mx-cell" role="cell"><button class="btn btn-ghost" type="button" data-enroll="premier" commandfor="enroll" command="show-modal" aria-haspopup="dialog">Enroll<span class="sr"> in the Premier Program</span></button><a class="mx-alt" href="#consult" data-cta="programs">or book a consult<span class="sr"> about the Premier Program</span></a></div>
+        <div class="mx-cell" role="cell"><button class="btn btn-ghost" type="button" data-enroll="accelerator" commandfor="enroll" command="show-modal" aria-haspopup="dialog">Enroll<span class="sr"> in the SAT Accelerator</span></button><a class="mx-alt" href="#consult" data-cta="programs">or book a&nbsp;consult<span class="sr"> about the SAT Accelerator</span></a></div>
+        <div class="mx-cell f" role="cell"><button class="btn btn-primary" type="button" data-enroll="flagship" commandfor="enroll" command="show-modal" aria-haspopup="dialog">Enroll<span class="sr"> in the Flagship Program</span></button><a class="mx-alt" href="#consult" data-cta="programs">or book a&nbsp;consult<span class="sr"> about the Flagship Program</span></a></div>
+        <div class="mx-cell" role="cell"><button class="btn btn-ghost" type="button" data-enroll="premier" commandfor="enroll" command="show-modal" aria-haspopup="dialog">Enroll<span class="sr"> in the Premier Program</span></button><a class="mx-alt" href="#consult" data-cta="programs">or book a&nbsp;consult<span class="sr"> about the Premier Program</span></a></div>
       </div>
     </div>
 
