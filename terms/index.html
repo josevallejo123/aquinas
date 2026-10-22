@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1F4F7">
+<title>Enrollment terms | Lighthouse Prep</title>
+<meta name="description" content="The terms for enrolling in a Lighthouse Prep program: what you're buying, how paying in full or in three monthly payments works, the +100 point promise, refunds, recordings and your student's account.">
+<link rel="canonical" href="https://thelighthouseprep.com/terms/">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png?v=2" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,72,470&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<script defer src="/assets/consult-form.js"></script>
+<style>
+/* Self-contained, like the privacy page: the home page's tokens and type, the nav's solid state and the
+   footer. Enrollment §3.6 and EN-7; DESIGN.md "Enrollment" */
+:root{
+  --brand:#10273E; --brand-deep:#0A1828; --brand-2:#285F9C;
+  --ink:var(--brand); --ink-2:#38506A; --ink-3:#51657B;
+  --on-dark:#FFFFFF; --on-dark-2:#C5D2DF; --on-dark-3:#A3B3C3;
+  --bg:#F1F4F7; --paper:#FFFFFF; --line:#D8E0E8;
+  --accent:#DDB15A;
+  --focus:var(--brand-2);
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --fs-h1:clamp(36px,3vw + 24px,64px);
+  --r-lg:20px;
+  --wrap:1200px; --gutter:20px; --nav-h:64px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--brand-2);text-underline-offset:.18em}
+h1,h2{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 72;letter-spacing:-.018em;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0 0 1em;text-wrap:pretty}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 max(var(--gutter),env(safe-area-inset-right)) 0 max(var(--gutter),env(safe-area-inset-left))}
+.doc li::before{content:"";width:7px;height:7px;background:var(--accent);transform:rotate(45deg);flex:none}
+:focus-visible{outline:2.5px solid var(--focus);outline-offset:3px;border-radius:6px}
+
+/* nav: the home page's solid state, logo only */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{height:var(--nav-h);display:flex;align-items:center}
+.brand{--logo-h:36px;display:flex;align-items:center;gap:calc(var(--logo-h) * .36);min-height:44px;text-decoration:none;color:var(--ink)}
+.brand-mark{display:block;height:var(--logo-h);width:calc(var(--logo-h) * .33);fill:currentColor;flex:none}
+.brand-word span{display:block;text-align:center;font-size:calc(var(--logo-h) * .39);font-weight:600;line-height:1.08;text-transform:uppercase;letter-spacing:.34em;margin-right:-.34em}
+
+/* the terms: the privacy page's layout */
+.doc{padding:48px 0 72px}
+.doc .col{max-width:68ch}
+.doc h1{font-size:var(--fs-h1);margin-bottom:14px}
+.updated{color:var(--ink-3);font-size:15px;margin-bottom:28px}
+.lead{font-size:17.5px;color:var(--ink-2)}
+.doc section{margin-top:44px;padding-top:30px;border-top:1px solid var(--line)}
+.doc h2{font-size:clamp(26px,1.2vw + 20px,34px);line-height:1.15;margin-bottom:16px}
+.doc ul{list-style:none;margin:0 0 1em;padding:0;display:grid;gap:10px}
+.doc li{display:flex;gap:14px;align-items:baseline}
+.doc li::before{position:relative;top:-.15em}
+.doc b{font-weight:600}
+
+/* footer: the home page's */
+footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(56px + env(safe-area-inset-bottom));font-size:14.5px;--focus:var(--accent)}
+.foot-top{display:grid;gap:24px;padding-bottom:28px;border-bottom:1px solid color-mix(in srgb,var(--on-dark) 12%,transparent)}
+.foot-logo img{width:auto;height:96px}
+.foot-links{display:flex;gap:4px 24px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.foot-links a{position:relative;text-decoration:none;color:var(--on-dark-2);display:inline-flex;align-items:center;min-height:44px}
+.foot-links a::after{content:"";position:absolute;inset:0 -10px}
+.foot-links a:hover,.foot-links a[aria-current]{color:var(--on-dark)}
+.foot-tag{margin:18px 0 0;max-width:38ch}
+.legalese{padding-top:24px;font-size:12.5px;color:var(--on-dark-3);display:grid;gap:8px}
+.legalese p{margin:0}
+
+@media (min-width:720px){
+  :root{--gutter:32px}
+  body{font-size:17px}
+  .doc{padding:72px 0 104px}
+  footer{padding:64px 0 40px}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+}
+@media (min-width:880px){
+  :root{--nav-h:76px}
+  .brand{--logo-h:40px}
+}
+@media (min-width:1024px){
+  body{font-size:17.5px}
+  .lead{font-size:19px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Lighthouse Prep, home">
+      <svg class="brand-mark" viewBox="0 0 218.79 663.41" aria-hidden="true"><path d="M7.89 117.54 185.73 0 185.51 107.09 7.55 224.2Z M0.32 335.19 205.34 201.72 204.94 314.41 0.04 444.87Z M0.47 551.84 218.79 418.08 218.49 549.88 0 663.41Z"/></svg>
+      <span class="brand-word"><span>Lighthouse</span><span>Prep</span></span>
+    </a>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="wrap"><div class="col">
+    <h1>Enrollment terms</h1>
+    <p class="updated">Last updated October 22, 2026</p>
+    <p class="lead">These terms apply when you enroll your student in a Lighthouse Prep program. We've kept them short and in plain words. If anything is unclear, email us at <a href="mailto:support@thelighthouseprep.com">support@thelighthouseprep.com</a>.</p>
+
+    <section aria-labelledby="buying">
+      <h2 id="buying">What you're buying</h2>
+      <p>Each program is a set number of hours of one-on-one coaching for one student, online, with the coaches themselves:</p>
+      <ul>
+        <li><span><b>SAT Accelerator:</b> 20 coaching hours of SAT preparation with Allan. $4,400, or $4,180 paid in full.</span></li>
+        <li><span><b>Flagship Program:</b> 40 coaching hours with both coaches: SAT preparation with Allan, and essay review, interview preparation and career guidance with Jon, including one recorded mock interview with written feedback. $7,600, or $7,220 paid in full.</span></li>
+        <li><span><b>Premier Program:</b> 50 coaching hours: everything in the Flagship Program, with three recorded mock interviews instead of one and an introduction to an industry professional in a field your student is exploring. $9,200, or $8,740 paid in full.</span></li>
+      </ul>
+      <p>Every program includes the parent and student dashboard and the +100 point promise below. A program is for one student; for a second child, enroll again. Your student's hours are theirs to use within 12 months of their first session. Sessions are online and one-on-one, and you schedule them with the coaches.</p>
+    </section>
+
+    <section aria-labelledby="paying">
+      <h2 id="paying">Paying</h2>
+      <ul>
+        <li><span><b>Pay in full and save 5%,</b> or <b>pay in three monthly payments</b> of $1,466.66 for the SAT Accelerator, $2,533.33 for the Flagship Program or $3,066.66 for the Premier Program.</span></li>
+        <li><span>The three payments are charged to the same payment method on the same day of three months in a row, the first on the day you enroll. Then they stop.</span></li>
+        <li><span>Your program continues while the payments are made. If a payment doesn't go through, Stripe emails you and tries again, and sessions pause until it's paid.</span></li>
+        <li><span>A payment from a bank account can take up to four business days to clear. Your portal invitation follows once it does.</span></li>
+        <li><span>Stripe, our payment processor, handles every payment, so we never see your card number.</span></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="promise">
+      <h2 id="promise">The +100 point promise</h2>
+      <p>Every program includes it. If your student completes the full plan and improves by fewer than 100 points from the diagnostic to an official SAT, we add 8 hours of tutoring at no cost.</p>
+    </section>
+
+    <section aria-labelledby="refunds">
+      <h2 id="refunds">Changing your mind</h2>
+      <p>If you decide after the first two sessions that we aren't the right fit, tell us before the third and we'll refund everything you've paid beyond those two sessions, at the hourly rate you paid. That rate is your program's price divided by its hours: $220 an hour for the SAT Accelerator, $190 for the Flagship Program and $184 for the Premier Program, or 5% less if you paid in full. If you chose three payments, any still to come are cancelled.</p>
+      <p>To ask, email <a href="mailto:support@thelighthouseprep.com">support@thelighthouseprep.com</a> from the address you enrolled with.</p>
+    </section>
+
+    <section aria-labelledby="recordings">
+      <h2 id="recordings">Sessions and recordings</h2>
+      <p>A session is recorded only with the parent's and the student's consent, so the coaches can review it. Recordings aren't shared with anyone outside Lighthouse Prep.</p>
+    </section>
+
+    <section aria-labelledby="account">
+      <h2 id="account">Your student's account</h2>
+      <p>Our programs are for students 13 and older, with a parent's consent. Your family's portal account belongs to you, the parent, and your student can have their own login with your consent. Our <a href="/privacy.html">privacy policy</a> covers the rest: what we keep, for how long, and how to ask us to delete it.</p>
+    </section>
+
+    <section aria-labelledby="contact">
+      <h2 id="contact">Contact</h2>
+      <p>Questions about these terms or your enrollment go to <a href="mailto:support@thelighthouseprep.com">support@thelighthouseprep.com</a>.</p>
+    </section>
+  </div></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <picture class="foot-logo"><source type="image/webp" srcset="/brand/logo-stacked-reverse.webp 1x, /brand/logo-stacked-reverse@2x.webp 2x"><img src="/brand/logo-stacked-reverse.png" srcset="/brand/logo-stacked-reverse@2x.png 2x" alt="Lighthouse Prep" width="122" height="120" loading="lazy"></picture>
+        <p class="foot-tag">SAT preparation and college guidance for students across the United States.</p>
+      </div>
+      <ul class="foot-links">
+        <li><a href="/#method">Method</a></li>
+        <li><a href="/#dashboard">Dashboard</a></li>
+        <li><a href="/#programs">Programs</a></li>
+        <li><a href="/#founders">Coaches</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="https://portal.thelighthouseprep.com">Log in</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms/" aria-current="page">Terms</a></li>
+      </ul>
+    </div>
+    <div class="legalese">
+      <p>SAT&reg; is a trademark registered by the College Board, which is not affiliated with, and does not endorse, this website. ACT&reg; is a registered trademark of ACT Education Corp.</p>
+      <p>Lighthouse Prep is not affiliated with or endorsed by McKinsey &amp; Company, the University of Pennsylvania or the US Navy. Credentials are listed for background only.</p>
+      <p>Lighthouse Prep is not affiliated with or endorsed by any college, university or scholarship program shown in our videos or named in our examples and sample data.</p>
+      <p>&copy; <span id="yr">2026</span> Lighthouse Prep. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

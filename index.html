@@ -40,6 +40,7 @@
 <script defer src="vendor/gsap/SplitText.min.js"></script>
 <script defer src="vendor/gsap/DrawSVGPlugin.min.js"></script>
 <script defer src="assets/consult-form.js"></script>
+<script defer src="assets/enroll.js"></script>
 <style>
 /* ============ tokens ============ */
 /* The logo's one ink (navy #10273E, hue 210) is the page's ink: text, primary buttons and every
@@ -507,10 +508,52 @@ section{padding:64px 0}
 .yes::after{inset:0}
 .mx-cell.f .yes{background:var(--brand);--chk:var(--on-dark)}
 .no{width:14px;height:2px;border-radius:2px;background:var(--edge)}
-.mx-row.ft{display:none}
-.mx-row.ft .btn{width:100%;padding-inline:12px;font-size:15px}
+/* the footer row: each program's Enroll button (it opens the pay chooser, #enroll) and, from 720px,
+   "or book a consult" under it. Phones show the buttons only: the sticky bar carries the consult there */
+.mx-row.ft{border-top:0;padding:10px 0 2px}
+.mx-row.ft .btn{width:100%;min-height:44px;padding:8px 2px;font-size:14px}
+.mx-alt{display:none}
 .fine{margin-top:32px;display:grid;gap:4px;font-size:14.5px;color:var(--ink-3)}
 .fine b{color:var(--ink-2)}
+.fine a{color:var(--brand-2);text-underline-offset:3px}
+
+/* ============ enroll: the pay chooser (#enroll), one native <dialog> for the three programs ============ */
+/* A sheet from the bottom edge on phones, a card in the middle from 720px. enroll.js shows the chosen
+   program's two options (.one); without it the buttons open the dialog natively (commandfor) and it
+   lists all three programs. The options are links to Stripe's checkout */
+.enroll{--focus:var(--brand-2);width:100%;max-width:none;max-height:calc(100% - 12px);margin:auto 0 0;padding:24px max(20px,env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));border:0;border-radius:var(--r-lg) var(--r-lg) 0 0;background:var(--paper);color:var(--ink);box-shadow:var(--shadow-lg);overflow-y:auto;overscroll-behavior:contain}
+.enroll[open]{animation:swap .25s var(--ease)}
+.enroll::backdrop{background:color-mix(in srgb,var(--brand-deep) 62%,transparent)}
+.enroll[open]::backdrop{animation:dim .25s ease}
+@keyframes dim{from{opacity:0}}
+/* the page behind holds still; the scrollbar's gutter stays (no shift) and takes the dimmed page's colour */
+html:has(.enroll:modal){overflow:hidden;scrollbar-gutter:stable;background:color-mix(in srgb,var(--brand-deep) 62%,var(--bg))}
+.enroll-x{position:absolute;top:12px;right:max(12px,env(safe-area-inset-right));width:44px;height:44px;padding:0;border-radius:12px;border:1px solid var(--edge);background:var(--paper);cursor:pointer;display:grid;place-items:center;transition:background-color .2s}
+.enroll-x i,.enroll-x i::before{display:block;width:18px;height:1.8px;border-radius:2px;background:var(--ink)}
+.enroll-x i{position:relative;transform:rotate(45deg)}
+.enroll-x i::before{content:"";position:absolute;inset:0;transform:rotate(90deg)}
+.enroll h2{font-size:28px;margin:6px 56px 0 0}
+.eg{display:grid;gap:10px;margin-top:22px}
+.eg[hidden]{display:none}
+.eg h3{font-size:21px}
+.enroll.one .eg h3{display:none}
+.eg-hrs{margin:0 0 4px;font-size:15.5px;color:var(--ink-2)}
+.enroll.one .eg{margin-top:6px}
+.eo{display:grid;gap:3px;padding:14px 16px 15px;border:1.5px solid var(--edge);border-radius:var(--r);background:var(--paper);color:var(--ink);text-decoration:none;transition:background-color .2s,border-color .2s}
+/* hover only where there is one: on a phone the tap that opens the sheet would leave an option looking chosen */
+@media (hover:hover){
+  .eo:hover{border-color:var(--brand);background:var(--bg)}
+  .enroll-x:hover{background:var(--bg)}
+}
+.eo:active{background:var(--bg)}
+.eo-t{font-size:16.5px;font-weight:600;line-height:1.35}
+.eo-t b{font-family:var(--serif);font-size:23px;font-weight:500;font-variation-settings:"opsz" 36;letter-spacing:-.01em;line-height:1.1;white-space:nowrap;font-variant-numeric:lining-nums}
+.eo-s{font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.enroll-foot{margin-top:18px;display:grid;font-size:14.5px;line-height:1.45;color:var(--ink-3)}
+.enroll-foot p{margin:0}
+.enroll-foot p:first-child{margin-bottom:6px}
+.enroll-foot a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--brand-2);text-underline-offset:3px}
+.enroll-foot a:hover{color:var(--brand)}
 
 /* ============ founders ============ */
 .founders{background:var(--paper);border-block:1px solid var(--line)}
@@ -697,8 +740,14 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   .yes{width:24px;height:24px;background-size:16px}
   .mx-num{font-size:24px}
   .mx-row.pr .mx-num{font-size:30px}
-  .mx-row.ft{display:grid;border-top:0;padding:8px 0 4px}
+  .mx-row.ft{padding:8px 0 4px}
+  .mx-row.ft .btn{min-height:48px;padding:12px;font-size:15px}
+  .mx-alt{display:inline-flex;align-items:center;min-height:44px;font-size:14.5px;font-weight:600;color:var(--brand-2);text-underline-offset:3px}
+  .mx-alt:hover{color:var(--brand)}
   .fine{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:40px}
+  .enroll{width:min(520px,100% - 64px);max-height:calc(100% - 64px);margin:auto;padding:36px 36px 28px;border-radius:var(--r-lg)}
+  .enroll-x{top:16px;right:16px}
+  .enroll h2{font-size:32px;margin-top:4px}
   .founders-grid{margin-top:48px}
   .bio{grid-template-columns:168px minmax(0,1fr);gap:28px;padding:32px}
   .bio > div{display:block}
@@ -1278,16 +1327,47 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
       </div>
       <div class="mx-row ft" role="row">
         <div class="mx-cell" role="cell"></div>
-        <div class="mx-cell" role="cell"><a class="btn btn-ghost" href="#consult" data-cta="programs" aria-label="Book a consult about the SAT Accelerator">Book a consult</a></div>
-        <div class="mx-cell f" role="cell"><a class="btn btn-primary" href="#consult" data-cta="programs" aria-label="Book a consult about the Flagship Program">Book a consult</a></div>
-        <div class="mx-cell" role="cell"><a class="btn btn-ghost" href="#consult" data-cta="programs" aria-label="Book a consult about the Premier Program">Book a consult</a></div>
+        <div class="mx-cell" role="cell"><button class="btn btn-ghost" type="button" data-enroll="accelerator" commandfor="enroll" command="show-modal" aria-haspopup="dialog">Enroll<span class="sr"> in the SAT Accelerator</span></button><a class="mx-alt" href="#consult" data-cta="programs">or book a consult<span class="sr"> about the SAT Accelerator</span></a></div>
+        <div class="mx-cell f" role="cell"><button class="btn btn-primary" type="button" data-enroll="flagship" commandfor="enroll" command="show-modal" aria-haspopup="dialog">Enroll<span class="sr"> in the Flagship Program</span></button><a class="mx-alt" href="#consult" data-cta="programs">or book a consult<span class="sr"> about the Flagship Program</span></a></div>
+        <div class="mx-cell" role="cell"><button class="btn btn-ghost" type="button" data-enroll="premier" commandfor="enroll" command="show-modal" aria-haspopup="dialog">Enroll<span class="sr"> in the Premier Program</span></button><a class="mx-alt" href="#consult" data-cta="programs">or book a consult<span class="sr"> about the Premier Program</span></a></div>
       </div>
     </div>
 
     <div class="fine">
       <p><b>The +100 point promise.</b> Every program includes it. If your student completes the full plan and improves by fewer than 100 points from the diagnostic to an official SAT, we add 8 hours of tutoring at no cost.</p>
-      <p><b>Payment.</b> Pay in full and save 5%, or split any program into three payments.</p>
+      <p><b>Payment.</b> Pay in full and save 5%, or split any program into three monthly payments. Enroll online through Stripe's secure checkout; the <a href="/terms/">enrollment terms</a> explain what's included and how refunds work.</p>
     </div>
+
+    <!-- the pay chooser: one dialog for the three programs. The options link straight to Stripe (the same
+         URLs as LINKS in assets/enroll.js: change both together). enroll.js shows the chosen program's
+         two options and adds client_reference_id; without it, the Enroll buttons open this as it stands -->
+    <dialog class="enroll" id="enroll" aria-labelledby="enrollH" closedby="any">
+      <form method="dialog"><button class="enroll-x" aria-label="Close"><i aria-hidden="true"></i></button></form>
+      <h2 id="enrollH">Enroll online.</h2>
+      <div class="eg" data-program="accelerator">
+        <h3>SAT Accelerator</h3>
+        <p class="eg-hrs">20 coaching hours, one-on-one and online.</p>
+        <a class="eo" data-pay="full" href="https://buy.stripe.com/00wfZgdgz9mEeUubIfdMI00"><span class="eo-t">Pay in full: <b>$4,180</b></span><span class="eo-s">Saves $220</span></a>
+        <a class="eo" data-pay="three" href="https://buy.stripe.com/00w6oG4K3aqI6nY27FdMI01"><span class="eo-t">Three monthly payments of <b>$1,466.66</b></span><span class="eo-s">First payment today, then the same day of the next two months. Nothing after that.</span></a>
+      </div>
+      <div class="eg" data-program="flagship">
+        <h3>Flagship Program</h3>
+        <p class="eg-hrs">40 coaching hours, one-on-one and online.</p>
+        <a class="eo" data-pay="full" href="https://buy.stripe.com/9B6cN42BVcyQaEefYvdMI02"><span class="eo-t">Pay in full: <b>$7,220</b></span><span class="eo-s">Saves $380</span></a>
+        <a class="eo" data-pay="three" href="https://buy.stripe.com/8x24gy0tN42k9Aa7rZdMI03"><span class="eo-t">Three monthly payments of <b>$2,533.33</b></span><span class="eo-s">First payment today, then the same day of the next two months. Nothing after that.</span></a>
+      </div>
+      <div class="eg" data-program="premier">
+        <h3>Premier Program</h3>
+        <p class="eg-hrs">50 coaching hours, one-on-one and online.</p>
+        <a class="eo" data-pay="full" href="https://buy.stripe.com/cNibJ02BVeGYbIi5jRdMI04"><span class="eo-t">Pay in full: <b>$8,740</b></span><span class="eo-s">Saves $460</span></a>
+        <a class="eo" data-pay="three" href="https://buy.stripe.com/3cI7sK90j6ascMm5jRdMI05"><span class="eo-t">Three monthly payments of <b>$3,066.66</b></span><span class="eo-s">First payment today, then the same day of the next two months. Nothing after that.</span></a>
+      </div>
+      <div class="enroll-foot">
+        <p>You'll pay on Stripe's secure checkout. Your portal invitation arrives by email within minutes.</p>
+        <p><a href="/terms/" target="_blank" rel="noopener">Enrollment terms<span class="sr"> (opens in a new tab)</span></a></p>
+        <p>Prefer to talk first? <a href="#cf" data-cta="programs">Book a free consult.</a></p>
+      </div>
+    </dialog>
   </div>
 </section>
 
@@ -1350,7 +1430,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
       <div class="acc-item"><button class="acc-q" aria-expanded="false">How long is each session?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>SAT sessions with Allan run one hour. Jon's strategy and interview sessions usually run 45 to 60 minutes.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false">When should my student start?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Our programs are designed to begin 12 weeks before your student's first test. We can adjust them to fit a shorter or longer window, depending on what your student needs.</p></div></div></div>
       <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you guarantee admission or a specific result?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>No, and we would be cautious of anyone who does. We promise a clear plan, expert time and honest progress reports. Every program includes the +100 point promise, with its full terms listed under Programs.</p></div></div></div>
-      <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you help with the ACT?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Yes. Allan has taught the ACT for more than ten years. Most of our students take the digital SAT, but if the diagnostic suggests the ACT would suit your student better, we will tell you and build the plan around it.</p></div></div></div>      <div class="acc-item"><button class="acc-q" aria-expanded="false">How does payment work?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>You can pay in full and save 5%, or split any program into three payments.</p></div></div></div>
+      <div class="acc-item"><button class="acc-q" aria-expanded="false">Do you help with the ACT?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>Yes. Allan has taught the ACT for more than ten years. Most of our students take the digital SAT, but if the diagnostic suggests the ACT would suit your student better, we will tell you and build the plan around it.</p></div></div></div>      <div class="acc-item"><button class="acc-q" aria-expanded="false">How does payment work?<span class="pm" aria-hidden="true"></span></button><div class="acc-a"><div><p>You can enroll directly from the programs above. Pay in full and save 5%, or split any program into three monthly payments. Payment runs through Stripe, so we never see your card number. Your portal invitation arrives by email within minutes of paying. Prefer to talk first? Book a free consult.</p></div></div></div>
     </div>
   </div>
 </section>
@@ -1416,6 +1496,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
         <li><a href="/guides/">Guides</a></li>
         <li><a href="https://portal.thelighthouseprep.com">Log in</a></li>
         <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="/terms/">Terms</a></li>
       </ul>
     </div>
     <div class="legalese">
@@ -1442,7 +1523,7 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   {"@type":"Question","name":"When should my student start?","acceptedAnswer":{"@type":"Answer","text":"Our programs are designed to begin 12 weeks before your student's first test. We can adjust them to fit a shorter or longer window, depending on what your student needs."}},
   {"@type":"Question","name":"Do you guarantee admission or a specific result?","acceptedAnswer":{"@type":"Answer","text":"No, and we would be cautious of anyone who does. We promise a clear plan, expert time and honest progress reports. Every program includes the +100 point promise, with its full terms listed under Programs."}},
   {"@type":"Question","name":"Do you help with the ACT?","acceptedAnswer":{"@type":"Answer","text":"Yes. Allan has taught the ACT for more than ten years. Most of our students take the digital SAT, but if the diagnostic suggests the ACT would suit your student better, we will tell you and build the plan around it."}},
-  {"@type":"Question","name":"How does payment work?","acceptedAnswer":{"@type":"Answer","text":"You can pay in full and save 5%, or split any program into three payments."}}
+  {"@type":"Question","name":"How does payment work?","acceptedAnswer":{"@type":"Answer","text":"You can enroll directly from the programs above. Pay in full and save 5%, or split any program into three monthly payments. Payment runs through Stripe, so we never see your card number. Your portal invitation arrives by email within minutes of paying. Prefer to talk first? Book a free consult."}}
  ]},
  {"@type":"VideoObject","@id":"https://thelighthouseprep.com/#how-it-works-video","name":"How Lighthouse Prep works","description":"A short tour of the Lighthouse Prep portal: the diagnostic, the review with your coach, the lesson plan, the sessions, the homework and what parents see each week.","thumbnailUrl":["https://thelighthouseprep.com/media/how-it-works-desktop.jpg","https://thelighthouseprep.com/media/how-it-works-desktop.webp"],"uploadDate":"2026-10-21T00:00:00-05:00","duration":"PT2M42S","contentUrl":"https://thelighthouseprep.com/media/how-it-works-desktop.mp4","inLanguage":"en","publisher":{"@id":"https://thelighthouseprep.com/#organization"},
   "transcript":"Most SAT prep comes down to a tutor, a stack of practice tests, and hoping it's working. At Lighthouse Prep, you don't have to hope. You can see it. Lighthouse Prep is one-on-one SAT coaching, built around a portal that follows every step of your student's progress. Here's how it works. It starts with a full-length diagnostic, taken right in the portal. It's built like the real digital SAT. Timed, adaptive modules, a built-in graphing calculator, the reference sheet, even highlighting and notes. And every answer saves as they go, so nothing is ever lost. When the test is done, the results go to your coach first. They walk through them with your student, one-on-one, so every number arrives with an explanation. Then the portal turns every answer into a clear picture: an SAT-equivalent score range, and a map of all 29 skills the SAT tests, ranked by where your student has the most points to gain. Every lesson is built around your student. The portal suggests what each session should focus on, based on their latest work. Your coach reviews it, adjusts it, and makes the call. And in every session, your coach teaches the tips and tricks that actually move scores. How to spot the trap answer. When the graphing calculator can solve a problem in seconds. How to pace a module, so time never runs out. All aimed squarely at the skills where your student is struggling. Before the lesson ends, your coach can send a few fresh questions straight to your student's screen, to make sure the new strategy really sticks. After every session comes targeted homework: 20 questions on exactly what they just worked on. In the next session, coach and student go over it together, and tag why each miss happened. Was it the content? A careless slip? Timing? Or misreading the question? A skill only moves on once it's mastered. If it's still a struggle, it stays the focus, until it clicks. Along the way, full-length practice tests, on a steady schedule, measure real progress under real test conditions. And as a parent, you see all of it. Your dashboard shows the current score, the target, the days until test day, and whether your student is on track. You'll see this week's focus, every homework set, and whether it was done on time, with email reminders along the way. No guessing, no surprises. A coach who teaches, a plan that adapts, and a portal that shows you everything. Lighthouse Prep."}
