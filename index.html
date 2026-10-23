@@ -1939,6 +1939,49 @@ footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(9
   }
   fitGrade.addEventListener('change',fit); fitGoal.addEventListener('change',fit);
 
+  /* how far a visit gets (marketing/MEASUREMENT.md §3): nothing on screen changes. track()'s own
+     once-flag goes by event name, so these keep their own lists and fire each value once */
+  const depths = [25, 50, 75];   // GA4's enhanced measurement sends 90 itself (its "scroll" event)
+  const depth = () => {
+    const seen = (scrollY + innerHeight) / document.documentElement.scrollHeight * 100;
+    while (depths.length && seen >= depths[0]) track('scroll_depth', {percent: depths.shift()});
+    if (!depths.length) removeEventListener('scroll', depth);
+  };
+  addEventListener('scroll', depth, {passive: true});
+  addEventListener('load', depth, {once: true});   // not at parse time: reading the height there forces a layout
+
+  /* section_view: the first time half a section is in view, or half the screen for one taller than it */
+  const sections = {hero: '#hero', creds: '.creds', 'how-it-works': '#how-it-works', aid: '#aid', earnings: '#earnings',
+    approach: '#approach', method: '#method', dashboard: '#dashboard', programs: '#programs', coaches: '#founders',
+    standards: '#standards', faq: '#faq', consult: '#consult'};
+  const secSlug = new Map();
+  const secIO = new IntersectionObserver(es => es.forEach(e => {
+    const room = Math.min(e.boundingClientRect.height, e.rootBounds ? e.rootBounds.height : innerHeight);
+    if (e.isIntersecting && e.intersectionRect.height >= room / 2 - 1) {
+      track('section_view', {section: secSlug.get(e.target)});
+      secIO.unobserve(e.target);
+    }
+  }), {threshold: Array.from({length: 21}, (_, i) => i / 20)});
+  addEventListener('load', () => Object.entries(sections).forEach(([slug, sel]) => {   // once a #link has landed
+    const el = document.querySelector(sel);
+    if (el) { secSlug.set(el, slug); secIO.observe(el); }
+  }), {once: true});
+
+  /* time_on_page: 5, 15, 30 and 60 s of time with the tab visible (the clock stops while it's hidden) */
+  const marks = [5, 15, 30, 60];
+  let spent = 0, from = document.hidden ? null : performance.now(), clock;
+  const onPage = () => spent + (from === null ? 0 : (performance.now() - from) / 1000);
+  function timePlan() {
+    clearTimeout(clock);
+    while (marks.length && onPage() >= marks[0] - 0.05) track('time_on_page', {seconds: marks.shift()});
+    if (from !== null && marks.length) clock = setTimeout(timePlan, (marks[0] - onPage()) * 1000);
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { spent = onPage(); from = null; } else if (from === null) from = performance.now();
+    timePlan();
+  });
+  timePlan();
+
   /* accordion */
   document.querySelectorAll('.acc-q').forEach(q=>q.addEventListener('click',()=>{
     q.setAttribute('aria-expanded', q.getAttribute('aria-expanded')!=='true');

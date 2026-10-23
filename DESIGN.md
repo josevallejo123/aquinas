@@ -244,6 +244,9 @@ Every guide embeds the same form as the home page (marketing/STRATEGY.md §7), s
 | `video_progress` | The video plays past 25, 50 and 75% of its length, each once | the same, and `video_percent`: 25, 50, 75 | The same |
 | `video_complete` | The video's `ended`, once | `video_title`, `video_version` | The same |
 | `video_chapter_click` | Every press on a chapter under the player | `chapter`: diagnostic, review, plan, session, homework, progress, parents | The same |
+| `scroll_depth` | The home page scrolled past 25, 50 and 75% of its height, each once (GA4's enhanced measurement sends 90 as `scroll`) | `percent` | Inline, the "how far a visit gets" block |
+| `section_view` | A home-page section first at least half in view, or covering half the screen if it is taller than the screen; each once, observed from `load` (after a `#section` link has landed) | `section`: hero, creds, how-it-works, aid, earnings, approach, method, dashboard, programs, coaches (`#founders`), standards, faq, consult | The same (one IntersectionObserver; add a new section's slug to its list) |
+| `time_on_page` | 5, 15, 30 and 60 s with the tab visible, each once (the clock stops while hidden) | `seconds` | The same |
 | `begin_checkout` | Every press on an option in the pay chooser (a family may come back from Stripe and choose the other), middle clicks included | `program`: accelerator, flagship, premier; `pay_mode`: full, three; `value`: what the family pays in all (4180, 7220, 8740 in full; 4399.98, 7599.99, 9199.98 for three payments); `currency` USD; `items`: one item, `item_id` the Stripe lookup key (`flagship_full`), `item_name`, `price` = `value`, `quantity` 1 | `assets/enroll.js` |
 | `purchase` | `/thanks/` with a known program and pay and a Checkout Session id, once (the id then leaves the address bar, so a reload doesn't repeat it) | The same, plus `transaction_id`: the Checkout Session id (GA4 also drops a repeated one) | `assets/enroll.js` |
 
