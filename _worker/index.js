@@ -1,12 +1,16 @@
-// The site is static assets; this Worker runs first only for /media/* (wrangler.jsonc, run_worker_first).
+// The site is static assets; this Worker runs first only for /media/* and /api/* (wrangler.jsonc,
+// run_worker_first). /api/meta-event is the server copy of the consult form's Lead for Meta (meta.js).
 // Workers static assets answer a Range request with the whole file (200), and Safari will not play a
 // <video> without byte ranges (206); seeking (the How it works chapters) needs them everywhere too. So
 // for /media/* this serves the requested range of the asset, and passes every other response through.
 
+import { metaEvent } from './meta.js';
+
 const sizes = new Map();   // path|ETag -> bytes, for this instance
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
+    if (new URL(request.url).pathname === '/api/meta-event') return metaEvent(request, env, ctx);
     const res = await env.ASSETS.fetch(request);
     const range = request.headers.get('Range');
     // already partial (should the assets server ever answer ranges itself), an error, or a plain request

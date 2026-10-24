@@ -1,7 +1,8 @@
 // Deployed by Workers Builds on every push to main (`npx wrangler deploy` at the repo root). Without this
 // file Wrangler auto-configured a static site with these same settings; the additions are the small
-// Worker for /media/* (byte ranges, see _worker/index.js) and .assetsignore, which keeps the repo's
-// internals (.git, this file, the Worker's source, DESIGN.md) off the public site.
+// Worker for /media/* (byte ranges, see _worker/index.js) and /api/meta-event (Meta's Conversions API,
+// see _worker/meta.js), and .assetsignore, which keeps the repo's internals (.git, this file, the
+// Worker's source, DESIGN.md) off the public site.
 {
   "name": "lighthouseprep",
   "main": "_worker/index.js",
@@ -12,6 +13,11 @@
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
-    "run_worker_first": ["/media/*"]
+    "run_worker_first": ["/media/*", "/api/*"]
+  },
+  // the Meta dataset "Lighthouse Prep website" (not a secret: it is in assets/consult-form.js too). Its
+  // Conversions API token is the secret META_CAPI_TOKEN, set in the dashboard: never in a file
+  "vars": {
+    "META_PIXEL_ID": "1446939640735109"
   }
 }
