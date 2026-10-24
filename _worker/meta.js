@@ -2,8 +2,9 @@
 // (marketing/paid/meta-round2-2026-10, §3.4). The browser sends the event id, the page and the
 // parent's email and name, normalized but not hashed. This adds the visitor's IP address, browser
 // and Meta's _fbp/_fbc cookies, hashes every identifier (SHA-256) and posts the event to Meta after
-// answering. It answers 204 whatever Meta says (400 only for a body it can't use), and never logs,
-// stores or returns what it was sent. Without the pixel ID (wrangler.jsonc vars) or the token (the
+// answering. It answers 204 whatever Meta says (400 only for a body it can't use; 405 for anything
+// but POST), and never logs, stores or returns what it was sent. A request from another site's page
+// (its Origin or Sec-Fetch-Site says so) gets 204 and sends nothing. Without the pixel ID (wrangler.jsonc vars) or the token (the
 // secret META_CAPI_TOKEN, set in the dashboard) it sends nothing.
 
 // Meta's Marketing API versions expire (v24.0 on Nov 10 2026, v25.0 on Feb 23 2027; see its
@@ -18,8 +19,10 @@ const MAX_BODY = 4096;            // a Lead is about 600 bytes
 // Meta's normalization as the pixel applies it, so this copy and the browser's hash alike: the email
 // trimmed and lower-case; a name lower-case without spaces or punctuation; an id without spaces
 const name = (v) => v.toLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '').normalize('NFC');
+// the pixel's own email pattern (fbevents.js): an address it drops, this copy drops too
+const EMAIL = /^[\w!#$%&'*+/=?^`{|}~-]+(?:\.[\w!#$%&'*+/=?^`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
 export const normalize = {
-  em: (v) => v.trim().toLowerCase(),
+  em: (v) => { const e = v.trim().toLowerCase(); return EMAIL.test(e) || HASHED.test(e) ? e : ''; },
   fn: name,
   ln: name,
   external_id: (v) => v.replace(/\s+/g, '').toLowerCase(),
@@ -37,7 +40,10 @@ export async function metaEvent(request, env, ctx) {
   if (!page || body.event_name !== 'Lead' || typeof body.event_id !== 'string' || !UUID.test(body.event_id)) {
     return new Response(null, { status: 400 });
   }
-  if (env.META_PIXEL_ID && env.META_CAPI_TOKEN) {
+  // another site's page can't make a visitor's browser send a Lead: it would carry that site's Origin
+  const origin = request.headers.get('Origin');
+  const sameSite = (!origin || origin === new URL(request.url).origin) && /^(same-origin)?$/.test(request.headers.get('Sec-Fetch-Site') || '');
+  if (env.META_PIXEL_ID && env.META_CAPI_TOKEN && sameSite) {
     const h = request.headers;
     ctx.waitUntil(send(env, body, page, { ip: h.get('CF-Connecting-IP'), ua: h.get('User-Agent'), cookie: h.get('Cookie') }));
   }
