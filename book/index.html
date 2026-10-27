@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1F4F7">
+<title>Book a call | Lighthouse Prep</title>
+<meta name="description" content="Set up a free 20-minute call with Lighthouse Prep: pick a time, and the invitation with a Google Meet link follows by email.">
+<link rel="canonical" href="https://thelighthouseprep.com/book/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lighthouse Prep">
+<meta property="og:title" content="Book a call | Lighthouse Prep">
+<meta property="og:description" content="Set up a free 20-minute call with Lighthouse Prep: pick a time, and the invitation with a Google Meet link follows by email.">
+<meta property="og:url" content="https://thelighthouseprep.com/book/">
+<meta property="og:image" content="https://thelighthouseprep.com/media/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lighthouse Prep: careful SAT prep and college guidance from two coaches who know your student by name.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Book a call | Lighthouse Prep">
+<meta name="twitter:description" content="Set up a free 20-minute call with Lighthouse Prep: pick a time, and the invitation with a Google Meet link follows by email.">
+<meta name="twitter:image" content="https://thelighthouseprep.com/media/og-image.png">
+<meta name="twitter:image:alt" content="Lighthouse Prep: careful SAT prep and college guidance from two coaches who know your student by name.">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png?v=2" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://static.hsappstatic.net">
+<link rel="preconnect" href="https://meetings-na2.hubspot.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,72,470&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/assets/consult-form.js"></script>
+<script>
+/* The booking signal (booking round 1, BK-6; DESIGN.md "Booking page"). HubSpot's scheduler, in the
+   iframe below, posts a message to this page when a family books. Only the message's origin and two
+   flags are checked; nothing else in it (the family's name, email and time) is read, kept or sent.
+   Once per page: GA4 book_consult (a key event) through lpTrack, which waits in lpq until
+   assets/consult-form.js has run, and Meta Schedule through lpMeta, which that script defines only
+   once the pixel's gates have passed (live hosts, no Global Privacy Control, loaded after load). */
+(function () {
+  var HUBSPOT = 'https://meetings-na2.hubspot.com', done = false;
+  window.addEventListener('message', function (e) {
+    if (e.origin !== HUBSPOT) return;
+    var d = e.data;
+    if (!d || typeof d !== 'object') return;
+    /* the scheduler's height: HubSpot's embed script sizes the iframe from these messages, but only
+       from the origins on its own list, which has no na2 host (read in MeetingsEmbedCode.js, Oct 27
+       2026), so the page does it: the frame follows the calendar, the slots and the confirmation */
+    if (typeof d.height === 'number' && d.height >= 300 && d.height <= 4000) {
+      var box = document.querySelector('.sched'), frame = box && box.querySelector('iframe');
+      if (frame) { frame.style.height = Math.ceil(d.height) + 'px'; box.classList.add('sized'); }
+    }
+    if (done || !(d.meetingBookSucceeded || d.eventName === 'meetingBooked')) return;
+    done = true;
+    var ga = ['book_consult', {location: 'book'}, true];
+    if (window.lpTrack) window.lpTrack.apply(null, ga); else (window.lpq = window.lpq || []).push(ga);
+    if (window.lpMeta) window.lpMeta('Schedule', {});
+  });
+})();
+</script>
+<style>
+/* Self-contained, like the privacy page: the home page's tokens and type, the nav's solid state and the
+   footer. HubSpot's scheduler sits in the iframe its embed script appends to .meetings-iframe-container
+   at the load event, resized by HubSpot's own messages. DESIGN.md "Booking page" */
+:root{
+  --brand:#10273E; --brand-deep:#0A1828; --brand-2:#285F9C; --brand-tint:#E0E8F0;
+  --ink:var(--brand); --ink-2:#38506A; --ink-3:#51657B;
+  --on-dark:#FFFFFF; --on-dark-2:#C5D2DF; --on-dark-3:#A3B3C3;
+  --bg:#F1F4F7; --paper:#FFFFFF; --line:#D8E0E8;
+  --accent:#DDB15A;
+  --focus:var(--brand-2);
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --fs-h1:clamp(36px,3vw + 24px,64px);
+  --r:14px; --r-lg:20px;
+  --wrap:1200px; --gutter:20px; --nav-h:64px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--brand-2);text-underline-offset:.18em}
+h1,h2{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 72;letter-spacing:-.018em;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0 0 1em;text-wrap:pretty}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 max(var(--gutter),env(safe-area-inset-right)) 0 max(var(--gutter),env(safe-area-inset-left))}
+.eyebrow{font-size:15px;font-weight:600;color:var(--ink-2);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow::before{content:"";width:7px;height:7px;background:var(--accent);transform:rotate(45deg);flex:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2.5px solid var(--focus);outline-offset:3px;border-radius:6px}
+
+/* nav: the home page's solid state, logo only */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{height:var(--nav-h);display:flex;align-items:center}
+.brand{--logo-h:36px;display:flex;align-items:center;gap:calc(var(--logo-h) * .36);min-height:44px;text-decoration:none;color:var(--ink)}
+.brand-mark{display:block;height:var(--logo-h);width:calc(var(--logo-h) * .33);fill:currentColor;flex:none}
+.brand-word span{display:block;text-align:center;font-size:calc(var(--logo-h) * .39);font-weight:600;line-height:1.08;text-transform:uppercase;letter-spacing:.34em;margin-right:-.34em}
+
+/* the page: heading and lead, the scheduler, then what the call includes and the small print */
+.doc{padding:40px 0 72px}
+.doc .col{max-width:68ch}
+.doc h1{font-size:var(--fs-h1);margin-bottom:16px}
+.nb{white-space:nowrap}   /* "20-minute" never breaks at its hyphen */
+.lead{font-size:17.5px;color:var(--ink-2);margin-bottom:24px}
+/* HubSpot's iframe arrives at the load event, 756px tall until HubSpot sizes it: the box keeps its
+   height from the first paint so the page never jumps. The iframe asks for 312px at least */
+.sched{max-width:880px;min-height:700px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.sched.sized{min-height:0}   /* once HubSpot has sized its frame, the box follows it */
+.sched iframe{display:block}
+.fallback{margin:14px 0 0;font-size:15px;color:var(--ink-3)}
+.doc h2{font-size:clamp(26px,1.2vw + 20px,34px);line-height:1.15;margin:44px 0 18px;padding-top:30px;border-top:1px solid var(--line)}
+.what{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:14px}
+.what li{position:relative;padding-left:40px}
+.what li b{position:absolute;left:0;top:-.12em;width:24px;text-align:right;font-family:var(--serif);font-size:24px;font-variation-settings:"opsz" 36;font-weight:500;line-height:1.5;color:var(--brand-2)}
+.after p{color:var(--ink-2)}
+.legal{margin-top:24px;font-size:14px;color:var(--ink-3)}
+
+/* footer: the home page's */
+footer{background:var(--brand-deep);color:var(--on-dark-3);padding:56px 0 calc(56px + env(safe-area-inset-bottom));font-size:14.5px;--focus:var(--accent)}
+.foot-top{display:grid;gap:24px;padding-bottom:28px;border-bottom:1px solid color-mix(in srgb,var(--on-dark) 12%,transparent)}
+.foot-logo img{width:auto;height:96px}
+.foot-links{display:flex;gap:4px 24px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.foot-links a{position:relative;text-decoration:none;color:var(--on-dark-2);display:inline-flex;align-items:center;min-height:44px}
+.foot-links a::after{content:"";position:absolute;inset:0 -10px}
+.foot-links a:hover{color:var(--on-dark)}
+.foot-tag{margin:18px 0 0;max-width:38ch}
+.legalese{padding-top:24px;font-size:12.5px;color:var(--on-dark-3);display:grid;gap:8px}
+.legalese p{margin:0}
+
+@media (min-width:720px){
+  :root{--gutter:32px}
+  body{font-size:17px}
+  .doc{padding:64px 0 104px}
+  .lead{margin-bottom:30px}
+  footer{padding:64px 0 40px}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+}
+@media (min-width:880px){
+  :root{--nav-h:76px}
+  .brand{--logo-h:40px}
+}
+@media (min-width:1024px){
+  body{font-size:17.5px}
+  .lead{font-size:19px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Lighthouse Prep, home">
+      <svg class="brand-mark" viewBox="0 0 218.79 663.41" aria-hidden="true"><path d="M7.89 117.54 185.73 0 185.51 107.09 7.55 224.2Z M0.32 335.19 205.34 201.72 204.94 314.41 0.04 444.87Z M0.47 551.84 218.79 418.08 218.49 549.88 0 663.41Z"/></svg>
+      <span class="brand-word"><span>Lighthouse</span><span>Prep</span></span>
+    </a>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="wrap">
+    <div class="col">
+      <div class="eyebrow">Set up a call</div>
+      <h1>Set up a free <span class="nb">20-minute</span> call with Lighthouse Prep.</h1>
+      <p class="lead">Pick a time that suits you. The invitation and a Google Meet link follow by email, and we come ready to talk about your student's goals and timeline.</p>
+    </div>
+
+    <!-- HubSpot's scheduler (BK-3): its embed script appends the iframe here at the load event -->
+    <div class="sched meetings-iframe-container" data-src="https://meetings-na2.hubspot.com/jon-daniel?embed=true" data-title="Pick a time for your call"></div>
+    <script src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js" defer></script>
+    <p class="fallback">Trouble loading the calendar? <a href="https://meetings-na2.hubspot.com/jon-daniel" target="_blank" rel="noopener">Open it in a new tab<span class="sr"> (opens in a new tab)</span></a>.</p>
+    <noscript><p class="fallback">The calendar needs JavaScript. <a href="https://meetings-na2.hubspot.com/jon-daniel" target="_blank" rel="noopener">Open it in a new tab<span class="sr"> (opens in a new tab)</span></a> to pick a time.</p></noscript>
+
+    <div class="col">
+      <h2>What the call includes.</h2>
+      <ul class="what">
+        <li><b>1</b><span>A short call about your student's goals and timeline</span></li>
+        <li><b>2</b><span>A free review of a recent PSAT, SAT or practice test</span></li>
+        <li><b>3</b><span>A written plan within 24 hours of the review</span></li>
+      </ul>
+      <div class="after">
+        <p>Prefer to write first? <a href="/#consult">Send us a note</a> and we reply within one business day.</p>
+        <p>Your student is welcome to join the call.</p>
+      </div>
+      <p class="legal">Our services are for students 13 and older, with a parent's consent.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <picture class="foot-logo"><source type="image/webp" srcset="/brand/logo-stacked-reverse.webp 1x, /brand/logo-stacked-reverse@2x.webp 2x"><img src="/brand/logo-stacked-reverse.png" srcset="/brand/logo-stacked-reverse@2x.png 2x" alt="Lighthouse Prep" width="122" height="120" loading="lazy"></picture>
+        <p class="foot-tag">SAT preparation and college guidance for students across the United States.</p>
+      </div>
+      <ul class="foot-links">
+        <li><a href="/#method">Method</a></li>
+        <li><a href="/#dashboard">Dashboard</a></li>
+        <li><a href="/#programs">Programs</a></li>
+        <li><a href="/#founders">Coaches</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="https://portal.thelighthouseprep.com">Log in</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms/">Terms</a></li>
+      </ul>
+    </div>
+    <div class="legalese">
+      <p>SAT&reg; is a trademark registered by the College Board, which is not affiliated with, and does not endorse, this website. ACT&reg; is a registered trademark of ACT Education Corp.</p>
+      <p>Lighthouse Prep is not affiliated with or endorsed by McKinsey &amp; Company, the University of Pennsylvania or the US Navy. Credentials are listed for background only.</p>
+      <p>Lighthouse Prep is not affiliated with or endorsed by any college, university or scholarship program shown in our videos or named in our examples and sample data.</p>
+      <p>&copy; <span id="yr">2026</span> Lighthouse Prep. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
