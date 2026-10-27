@@ -82,6 +82,10 @@
     fbq('track', 'PageView');
     later('https://connect.facebook.net/en_US/fbevents.js');
   }
+  /* a page's own Meta event, under the pixel's gates (fbq exists only once they passed): /book/ sends
+     Schedule when HubSpot's scheduler reports a booking (booking round 1, BK-6). Browser only, no
+     server copy; params never carry anything about the family */
+  window.lpMeta = (name, params) => { if (fbq) fbq('track', name, params || {}); };
   const uuid = () => crypto.randomUUID ? crypto.randomUUID()
     : '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
   // the id Meta gets as external_id: made at this browser's first Lead and kept, like the first touch
